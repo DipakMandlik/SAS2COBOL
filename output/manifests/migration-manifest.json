@@ -1,0 +1,557 @@
+{
+  "packageId": "PKG-SAS-COBOL-20260917-V1",
+  "timestamp": "2026-09-17T18:02:49.573Z",
+  "artifacts": [
+    {
+      "path": "output/cobol/CBLSL001.cbl",
+      "category": "COBOL",
+      "sha256": "16c99fd627b9537011b7b693ee68e4f029d6d65f5dc6a6ed3bdd3e31482159a8"
+    },
+    {
+      "path": "output/cobol/CBLSL002.cbl",
+      "category": "COBOL",
+      "sha256": "117d344bb6c270bb0b969670fb4845d318979fe27a389bf94143e3bad9a8cfa9"
+    },
+    {
+      "path": "output/cobol/CBLSL003.cbl",
+      "category": "COBOL",
+      "sha256": "3129e854992cd90c734b01c63bc3ce42396435d158e53c8a53fa98e37b61aac4"
+    },
+    {
+      "path": "output/cobol/CBLSL004.cbl",
+      "category": "COBOL",
+      "sha256": "ac6989c01a94a6519e5736d19689ef0566e4de99224b9d4074efdbe3daacb82c"
+    },
+    {
+      "path": "output/cobol/CBLSL005.cbl",
+      "category": "COBOL",
+      "sha256": "870ebd175be781e2bc0342f1cb232590e44f9ecbf15c4a676724f702a1735b8d"
+    },
+    {
+      "path": "output/cobol/CBLSL006.cbl",
+      "category": "COBOL",
+      "sha256": "4263781b51f5d211ad79d2b777fd1f396c2869b6f87d61014310128c94a7db49"
+    },
+    {
+      "path": "output/cobol/CBLSL007.cbl",
+      "category": "COBOL",
+      "sha256": "7efc29c815968faf1c3e52509a66a2898c812291d549dad56630e2590e9950e8"
+    },
+    {
+      "path": "output/cobol/CBLSL008.cbl",
+      "category": "COBOL",
+      "sha256": "38b28aeed76f9e20accee41c8e8ad35a4950f78b6f267a53d38e6ba1015aa081"
+    },
+    {
+      "path": "output/cobol/CBLSL009.cbl",
+      "category": "COBOL",
+      "sha256": "55747b9d3b5fbe4247e8e9664916f13c4cbe2fdd43f5c2382611687afee1e0a3"
+    },
+    {
+      "path": "output/cobol/CBLSL010.cbl",
+      "category": "COBOL",
+      "sha256": "c90bc50ac854c8f9401c66c0c21a74b6dff5db25877d0b82e4bb58482f97cfc6"
+    },
+    {
+      "path": "output/cobol/CBLSL011.cbl",
+      "category": "COBOL",
+      "sha256": "ef7a7eda48a70e6b5c417793f0d6195a20d99c8e483084269256719af0b5fc72"
+    },
+    {
+      "path": "output/cobol/CBLSL012.cbl",
+      "category": "COBOL",
+      "sha256": "f82fe688e26a8219a3576285c5ee83f5a600a124466480fd98e034a27c0862d6"
+    },
+    {
+      "path": "output/copybooks/CPACTI04.cpy",
+      "category": "COPYBOOK",
+      "sha256": "e3d512d85d4c3635cbce00f3b19972927b4e239a4f7a0986b641f21d42c14d06"
+    },
+    {
+      "path": "output/copybooks/CPACTI05.cpy",
+      "category": "COPYBOOK",
+      "sha256": "33cdef818be26f8ddc8354be7210072a60ad16d7d8d955c21473f3c5f69fa7af"
+    },
+    {
+      "path": "output/copybooks/CPAUDI06.cpy",
+      "category": "COPYBOOK",
+      "sha256": "86a80c8818a1c6457d6a6dda76369095cc67f6e3e9f8947df4ea738ebd7cbb0e"
+    },
+    {
+      "path": "output/copybooks/CPCATE07.cpy",
+      "category": "COPYBOOK",
+      "sha256": "97098685de3682a462cb54dcbc6907b6f1216a43db6042a35049f4a5cd0df8a1"
+    },
+    {
+      "path": "output/copybooks/CPCATE08.cpy",
+      "category": "COPYBOOK",
+      "sha256": "253a58a3ebbb9ffee97e72a5c59aa7f642bbf2d93183b71dcbb9e314a004bcf9"
+    },
+    {
+      "path": "output/copybooks/CPCHAN09.cpy",
+      "category": "COPYBOOK",
+      "sha256": "6a9c1f144d0268dd87be46eea25737ecb829db4c18e00fd3a88a463aea4e36ac"
+    },
+    {
+      "path": "output/copybooks/CPCOMM01.cpy",
+      "category": "COPYBOOK",
+      "sha256": "afb2626ba85e96e1ec6468b386413c6f7283b2b5c6f6bf1edab640dce7888ee4"
+    },
+    {
+      "path": "output/copybooks/CPCUST01.cpy",
+      "category": "COPYBOOK",
+      "sha256": "9c469696f7fdc8c8294df22d54c21ceb3acb66e1dcfe63c2ab7646bf0b52f937"
+    },
+    {
+      "path": "output/copybooks/CPCUST10.cpy",
+      "category": "COPYBOOK",
+      "sha256": "10598692427cd0c14557e414b097c9da702c4b6b4f84d612cc951ec5d9800df9"
+    },
+    {
+      "path": "output/copybooks/CPCUST11.cpy",
+      "category": "COPYBOOK",
+      "sha256": "b9192364e3368597737cebf752f5f6d976ff0fd9f5d901d1cabc4af1b0bc6def"
+    },
+    {
+      "path": "output/copybooks/CPCUST12.cpy",
+      "category": "COPYBOOK",
+      "sha256": "47db1cc22518d7858e9af1f246e2a4bc0546c5dbe18170772b1a51df0c3eb15c"
+    },
+    {
+      "path": "output/copybooks/CPCUST13.cpy",
+      "category": "COPYBOOK",
+      "sha256": "9f6e10e675d7dca31570246ec71f88644d575a40e66805bc92b6f638bfe8adee"
+    },
+    {
+      "path": "output/copybooks/CPCUST14.cpy",
+      "category": "COPYBOOK",
+      "sha256": "de9c3994be4c6182f899b1d55e2ad1afe421c2e85a70989e99a415a7f858e1db"
+    },
+    {
+      "path": "output/copybooks/CPCUST15.cpy",
+      "category": "COPYBOOK",
+      "sha256": "9b5dd3de8c25dc1bbd415268474f1fdcccd9b7bf12dcb7a4efc62d07cc5774de"
+    },
+    {
+      "path": "output/copybooks/CPCUST16.cpy",
+      "category": "COPYBOOK",
+      "sha256": "5869fb433c9945bde7185497281028ffee498d035fdd6625d08a4f577df101d7"
+    },
+    {
+      "path": "output/copybooks/CPCUST17.cpy",
+      "category": "COPYBOOK",
+      "sha256": "76ad54c3cb71f234f6303042611932e22571fb97f2d4150ba7f03727f15275b5"
+    },
+    {
+      "path": "output/copybooks/CPCUST18.cpy",
+      "category": "COPYBOOK",
+      "sha256": "632625ecfa002e5d39ef3aa833d57594626a2f08c96e82b2ce579b930f689c88"
+    },
+    {
+      "path": "output/copybooks/CPCUST19.cpy",
+      "category": "COPYBOOK",
+      "sha256": "a13f72a4432fb3558b222103dd20f9fd0e200abbe3c9e2ddf9779af9f04639cb"
+    },
+    {
+      "path": "output/copybooks/CPCUST20.cpy",
+      "category": "COPYBOOK",
+      "sha256": "c17cff30c3eb697907264a9c66e04de10a0afffc4105a2f63e778ae0f9638b20"
+    },
+    {
+      "path": "output/copybooks/CPCUST21.cpy",
+      "category": "COPYBOOK",
+      "sha256": "1f29db39eb78812ba15097ca9043304c6361f16e4de6064968f2384fb4cbf0a5"
+    },
+    {
+      "path": "output/copybooks/CPCUST22.cpy",
+      "category": "COPYBOOK",
+      "sha256": "17919433e4b12c9e40cbe447d1aabe9dd80b4dc6910227a187e159b8d10e8e4e"
+    },
+    {
+      "path": "output/copybooks/CPDAIL23.cpy",
+      "category": "COPYBOOK",
+      "sha256": "b717f9b498e05788eacac1cd5c5c1a5539cea82468f341fefd7ebddc8413ab12"
+    },
+    {
+      "path": "output/copybooks/CPDAIL24.cpy",
+      "category": "COPYBOOK",
+      "sha256": "bf79e69ee479260126e477641bd05aa244773b032165f0dc72b043936b74c792"
+    },
+    {
+      "path": "output/copybooks/CPDAIL25.cpy",
+      "category": "COPYBOOK",
+      "sha256": "52b904da85a59b16690150290c2e22a5111403923da17d99fa65d3e207f74c86"
+    },
+    {
+      "path": "output/copybooks/CPDATES0.cpy",
+      "category": "COPYBOOK",
+      "sha256": "526d9a673f42ef4cc4846648f911b84b43198fd991757a2acf7529c728879f4e"
+    },
+    {
+      "path": "output/copybooks/CPDELI26.cpy",
+      "category": "COPYBOOK",
+      "sha256": "3b3e10efadd8743b4e29aae1d853acabfd59400760818b96ea148bef1bcd9bb5"
+    },
+    {
+      "path": "output/copybooks/CPENGA27.cpy",
+      "category": "COPYBOOK",
+      "sha256": "060248aad165013ac0e650371c58242b9ea5debb5a0e0d78c3f0bcf44d2701a3"
+    },
+    {
+      "path": "output/copybooks/CPENRI28.cpy",
+      "category": "COPYBOOK",
+      "sha256": "0ddfaee79cdac6c8a594b83f850f2ae5517f866ae6dbe8792b058823e3485f84"
+    },
+    {
+      "path": "output/copybooks/CPEXCE29.cpy",
+      "category": "COPYBOOK",
+      "sha256": "bf00eb983230d04fc2caf57a1455817db87108ed3f30946e6b50aacdbc4d109f"
+    },
+    {
+      "path": "output/copybooks/CPEXCE30.cpy",
+      "category": "COPYBOOK",
+      "sha256": "ce29671c49b4aa4a465a0ae77be6da58a3ba7c62c07441c217de6d5861acac75"
+    },
+    {
+      "path": "output/copybooks/CPEXCE31.cpy",
+      "category": "COPYBOOK",
+      "sha256": "fca1e20398791db0f3dcc5ecd9ccb8846603ecb8972648464e3804723c51becf"
+    },
+    {
+      "path": "output/copybooks/CPFINA32.cpy",
+      "category": "COPYBOOK",
+      "sha256": "bacde9f7a9bb55be227ee3f84dadcafa3d71850afff460e1b02ec87695350ec2"
+    },
+    {
+      "path": "output/copybooks/CPFINA33.cpy",
+      "category": "COPYBOOK",
+      "sha256": "f8c69f704371b770dc6af45ea6812bb55d48418e9d9882d67d25502497ac26e6"
+    },
+    {
+      "path": "output/copybooks/CPFINA34.cpy",
+      "category": "COPYBOOK",
+      "sha256": "08fe16e8f93cb1078fa9f60dd51fb86beb7ff70a6bf8db94106b09715378d0f5"
+    },
+    {
+      "path": "output/copybooks/CPFINA35.cpy",
+      "category": "COPYBOOK",
+      "sha256": "e5c77849c90a57d05a3e8fc9c8e3094eee3114a0e3db2125213b62a91500800c"
+    },
+    {
+      "path": "output/copybooks/CPHIGH36.cpy",
+      "category": "COPYBOOK",
+      "sha256": "3b1e3444a6751ab7a07aa428d5cee6294313b8aae260a1970b112a290629fe9a"
+    },
+    {
+      "path": "output/copybooks/CPHIGH37.cpy",
+      "category": "COPYBOOK",
+      "sha256": "d5e394f72e6d7424adf298ee590c2fd1667c92c9b48f6d323889276fc0f9d7f5"
+    },
+    {
+      "path": "output/copybooks/CPLOOK38.cpy",
+      "category": "COPYBOOK",
+      "sha256": "e8cf094e2c6c48fb43c48833257a0aebd4b5eea2bd00953678e62dd0f96298f3"
+    },
+    {
+      "path": "output/copybooks/CPMANA39.cpy",
+      "category": "COPYBOOK",
+      "sha256": "dc70c024091398192273aa8794f6baefdcabe3d59b06252f3b8f3552ab586de4"
+    },
+    {
+      "path": "output/copybooks/CPMETA40.cpy",
+      "category": "COPYBOOK",
+      "sha256": "345950fd0c6543666a0597d2cbdba79d0d8a9c227f00a53a7dcbfd00ed614f43"
+    },
+    {
+      "path": "output/copybooks/CPMONT41.cpy",
+      "category": "COPYBOOK",
+      "sha256": "16afd3691bb6fe66cc946a4de6b4f7dc48aacbb8b47800e1d31cfc57391482ab"
+    },
+    {
+      "path": "output/copybooks/CPMONT42.cpy",
+      "category": "COPYBOOK",
+      "sha256": "ccb96205892c088c047195701369f27dc475f5fc83f5dbd62ae198fd2a80cfae"
+    },
+    {
+      "path": "output/copybooks/CPOPER43.cpy",
+      "category": "COPYBOOK",
+      "sha256": "aaaf3c839db8bc03dbabdd62ae7234c3c62ea5bbf871aca9c8a41bf19328b947"
+    },
+    {
+      "path": "output/copybooks/CPPROD02.cpy",
+      "category": "COPYBOOK",
+      "sha256": "97bad6d3ce8806835de53cd2c762f09d33f2970d36418eecb820c06f3241f6c0"
+    },
+    {
+      "path": "output/copybooks/CPPROD44.cpy",
+      "category": "COPYBOOK",
+      "sha256": "7e30cbc506006d9652149f1b816bbb49d41a1396c4ab6af6e39520a53cdfcb9b"
+    },
+    {
+      "path": "output/copybooks/CPPROD45.cpy",
+      "category": "COPYBOOK",
+      "sha256": "9948bbad640270a480800c0c4fee6d805d3d55eb7149778bfed8ff6d609a59b5"
+    },
+    {
+      "path": "output/copybooks/CPPROD46.cpy",
+      "category": "COPYBOOK",
+      "sha256": "dc5b1d951df92ef3f6a4c828493ed3a547ac5e22367a9446b25d75ff062aa244"
+    },
+    {
+      "path": "output/copybooks/CPPROD47.cpy",
+      "category": "COPYBOOK",
+      "sha256": "db7ebf979cf3ccb3f114e4772ea4fe4deb4842e6bfd1f8823f751bd9fee1576b"
+    },
+    {
+      "path": "output/copybooks/CPQUAL48.cpy",
+      "category": "COPYBOOK",
+      "sha256": "3dfcb0aab87370502240cba10129ad93dede54174690e23f6d2206e85444c3d5"
+    },
+    {
+      "path": "output/copybooks/CPQUAR49.cpy",
+      "category": "COPYBOOK",
+      "sha256": "568794c765a0d658085790e5a2ee87a95102ecb45e6de0da9001cec080e7efb4"
+    },
+    {
+      "path": "output/copybooks/CPRECO50.cpy",
+      "category": "COPYBOOK",
+      "sha256": "8867684d86e36c06ad7b88af0ebcd6461e455a682d4664fddbe747f7481dd372"
+    },
+    {
+      "path": "output/copybooks/CPRECON0.cpy",
+      "category": "COPYBOOK",
+      "sha256": "d050e015600e15263ed9e93814be7e27a4fbdf22855ca3e9c302fdcb2dd06b2f"
+    },
+    {
+      "path": "output/copybooks/CPREGI51.cpy",
+      "category": "COPYBOOK",
+      "sha256": "7ddc290bf3f8557d607d069c6548dfc746f615a53de0153a90763c45637c659d"
+    },
+    {
+      "path": "output/copybooks/CPREGI52.cpy",
+      "category": "COPYBOOK",
+      "sha256": "ef03fb67f67d383987ccf481495dda20f4ed3cb4946fe02df69077120255198b"
+    },
+    {
+      "path": "output/copybooks/CPREGI53.cpy",
+      "category": "COPYBOOK",
+      "sha256": "53c938b950d7e644c10602054c8f0e7ec759b9800f9ff4c3b9dc7ca47c34ac26"
+    },
+    {
+      "path": "output/copybooks/CPREGI54.cpy",
+      "category": "COPYBOOK",
+      "sha256": "b95541e2f87cc72e626633b7d0a0b32f9e9cdd8cd26e95b760bd0ef84c03a258"
+    },
+    {
+      "path": "output/copybooks/CPREGI55.cpy",
+      "category": "COPYBOOK",
+      "sha256": "95b7e6d1117a54ac60bb7e028bc09572aa4bc7e730825868a7e5e9a860d191c7"
+    },
+    {
+      "path": "output/copybooks/CPREGI56.cpy",
+      "category": "COPYBOOK",
+      "sha256": "ac66d3b9ddfc2a50be67bc0e6d72248c4bb2c37f96b9b7cc74a9474940435011"
+    },
+    {
+      "path": "output/copybooks/CPREGI57.cpy",
+      "category": "COPYBOOK",
+      "sha256": "b1456b4685a5b20310a6e9d97caaf0ba7b82bd117c9cc570cfe41a9678619297"
+    },
+    {
+      "path": "output/copybooks/CPREGI58.cpy",
+      "category": "COPYBOOK",
+      "sha256": "bc35ea6d713fbf3d49f2460b68872935f732043b570654b8d3a5c5f05a007901"
+    },
+    {
+      "path": "output/copybooks/CPREGI59.cpy",
+      "category": "COPYBOOK",
+      "sha256": "4d1de1234ea6977b7b1bed77b1b0a8e702f6ca17bde1ce8ac78d02c1ab03220c"
+    },
+    {
+      "path": "output/copybooks/CPREGI60.cpy",
+      "category": "COPYBOOK",
+      "sha256": "8524ba34f514a07da9d99b3002ef6bc7cd2ff1727ab52f450c1fbd64bbc5d98c"
+    },
+    {
+      "path": "output/copybooks/CPREGI61.cpy",
+      "category": "COPYBOOK",
+      "sha256": "b7155d537b1d98f8300e9c88f2e71ae2940bbd79967b0714dad5eb79dd167052"
+    },
+    {
+      "path": "output/copybooks/CPREGI62.cpy",
+      "category": "COPYBOOK",
+      "sha256": "5795dbacfbdd98f627994df3de568fbdb10d9d7d0364a4ad411eecb4f3f12748"
+    },
+    {
+      "path": "output/copybooks/CPREGI63.cpy",
+      "category": "COPYBOOK",
+      "sha256": "82bc53e99ebfed1923a3f164bbdcb5e4e64c1c57cbe6efe2411615eed8f40eae"
+    },
+    {
+      "path": "output/copybooks/CPREGI64.cpy",
+      "category": "COPYBOOK",
+      "sha256": "27370fe529093dc29f6bf5e9444922e25c153e9a7cb2b2715043e01b694d4dd5"
+    },
+    {
+      "path": "output/copybooks/CPREVI65.cpy",
+      "category": "COPYBOOK",
+      "sha256": "00782574641e9440fe194e1503a81d8e40653540a8e5a6e4e4293b15be5be7a9"
+    },
+    {
+      "path": "output/copybooks/CPREVI66.cpy",
+      "category": "COPYBOOK",
+      "sha256": "bfffa292d96e0e91a254becc46c4fd07489facf8fb1e38f8bbc9ad23a8b825cd"
+    },
+    {
+      "path": "output/copybooks/CPSALE03.cpy",
+      "category": "COPYBOOK",
+      "sha256": "382505377d3eaf5e7edad8528f30ab3ca6f3ee4c56549e5e06ca8b56d41d7420"
+    },
+    {
+      "path": "output/copybooks/CPSALE67.cpy",
+      "category": "COPYBOOK",
+      "sha256": "13ef1608da6cab7592e05527cabb9719f5cf4d4d9ea3a3211ce1c91221c236e6"
+    },
+    {
+      "path": "output/copybooks/CPSALE68.cpy",
+      "category": "COPYBOOK",
+      "sha256": "de149eb80b133a2b4a2a518df22225e09679a9b6b1171d07b01f03d6b6ab40fc"
+    },
+    {
+      "path": "output/copybooks/CPSALE69.cpy",
+      "category": "COPYBOOK",
+      "sha256": "f6600433432490f8ee81520e4cc820a7dd8bf34ad7b4995db468cd3c72c35edf"
+    },
+    {
+      "path": "output/copybooks/CPSALE70.cpy",
+      "category": "COPYBOOK",
+      "sha256": "a8291d4e8f1c1d1b44e2a8af30d21409fd37664fae69bb2264ffa14c9339b4fe"
+    },
+    {
+      "path": "output/copybooks/CPSALE71.cpy",
+      "category": "COPYBOOK",
+      "sha256": "198290925bc27f569a68bf5ddcb06fd69566f37ec860d545bef7021d6bb7760a"
+    },
+    {
+      "path": "output/copybooks/CPSALE72.cpy",
+      "category": "COPYBOOK",
+      "sha256": "52fcfc6ef4500fadc30bcfae50771b8e6642d37d8db7172811b641c0d62f96e9"
+    },
+    {
+      "path": "output/copybooks/CPSALE73.cpy",
+      "category": "COPYBOOK",
+      "sha256": "725bfc6162990777c03a75ace954c23ffe53975d4789a73609472ded63662186"
+    },
+    {
+      "path": "output/copybooks/CPSALE74.cpy",
+      "category": "COPYBOOK",
+      "sha256": "8d0af15fb861cca95def3b5b40492a0dc3d09394ecd2daedcf9ab3a840f062dc"
+    },
+    {
+      "path": "output/copybooks/CPSALE75.cpy",
+      "category": "COPYBOOK",
+      "sha256": "1d94d8736324730b7dc489f77a647bf3782429b9738b3027ed41c41463848779"
+    },
+    {
+      "path": "output/copybooks/CPSCOR76.cpy",
+      "category": "COPYBOOK",
+      "sha256": "7019a8985ad64c9f2f91fd576535c73eded6a8fc30fd4fc6f41596ad7adb66d7"
+    },
+    {
+      "path": "output/copybooks/CPSCOR77.cpy",
+      "category": "COPYBOOK",
+      "sha256": "74ac25ae11f65e8d2c781a6bad7cfa0b5b19553a9d7063225062787e417982ff"
+    },
+    {
+      "path": "output/copybooks/CPSEGM78.cpy",
+      "category": "COPYBOOK",
+      "sha256": "e78067a7947f35d573efd1da4bdc2a534e42a563f5360fdd686e552eb6e8697e"
+    },
+    {
+      "path": "output/copybooks/CPSEGM79.cpy",
+      "category": "COPYBOOK",
+      "sha256": "b43c52eed820f745a8aec5ab637a583d2526a53aaf08d0173c02536b54d42487"
+    },
+    {
+      "path": "output/copybooks/CPSEGM80.cpy",
+      "category": "COPYBOOK",
+      "sha256": "f5a5e178957675622b317680f2ae24c1f767d6c67ab36ed9be7357485fc61229"
+    },
+    {
+      "path": "output/copybooks/CPSEMA81.cpy",
+      "category": "COPYBOOK",
+      "sha256": "546eb3f1b324af623ef05d6c4075cfd4d2524d4e091c4b82703aeffc52e9fb02"
+    },
+    {
+      "path": "output/copybooks/CPSEMA82.cpy",
+      "category": "COPYBOOK",
+      "sha256": "4082b0372a3f73aa97ab56e9a60ea74bef617451dbd8d212869cee0402e1e3c5"
+    },
+    {
+      "path": "output/copybooks/CPTIER83.cpy",
+      "category": "COPYBOOK",
+      "sha256": "11d587113cff1e09f5a476eafc49991d94679b6449945a28bcde42bc02cbbe81"
+    },
+    {
+      "path": "output/copybooks/CPTIER84.cpy",
+      "category": "COPYBOOK",
+      "sha256": "0915846d0275608aa14e02110ebe2aa89caf3b996dbadfb931983e5157c43bf6"
+    },
+    {
+      "path": "output/copybooks/CPTRAP88.cpy",
+      "category": "COPYBOOK",
+      "sha256": "b01b1df4a08110a752056d9af922caf1eb5367213fc18bbe1a21df7277818115"
+    },
+    {
+      "path": "output/jcl/JCLSLMOD.jcl",
+      "category": "JCL",
+      "sha256": "634ebec8c44a100d42fc503cb9a2005375d402769507864a0452c9cc21a9d049"
+    },
+    {
+      "path": "output/sql/AGGRPTS.sql",
+      "category": "SQL",
+      "sha256": "637637101ac1aa2bc113d999a8d35877bf0a0e219cb174ad933005f91ad62b95"
+    },
+    {
+      "path": "output/sql/CRTTBLS.sql",
+      "category": "SQL",
+      "sha256": "e5bab37aaa9171a47a1fbad1701c04d3470b50ec953a64f66740d6aa308eef61"
+    },
+    {
+      "path": "output/data/file-layouts.json",
+      "category": "DATA",
+      "sha256": "11d1fbe5363f14833c33cf8e8af9c850f1073a4179b77c8f857fdd967753d14c"
+    },
+    {
+      "path": "output/documentation/migration-guide.md",
+      "category": "DOCUMENTATION",
+      "sha256": "138de67f29f9987fe978b92588dc56b716e48de8f678ea7788f9e088e69f89b6"
+    },
+    {
+      "path": "output/traceability/traceability-matrix.json",
+      "category": "TRACEABILITY",
+      "sha256": "8256afda5dd368c75015ab93a2812e96823e74f206298340f1bed94f0381a059"
+    },
+    {
+      "path": "output/review/orphan-detection.json",
+      "category": "REVIEW",
+      "sha256": "60a56cf629141ec75ce9f59caebaad86a54bbf7768b1f1368062290c10acd020"
+    },
+    {
+      "path": "output/review/semantic-review.json",
+      "category": "REVIEW",
+      "sha256": "c9dba824aceceb3a5dec7088ff8d9c10e70cf4dbb1ac294c759ec5a3173869b6"
+    },
+    {
+      "path": "output/review/static-analysis.json",
+      "category": "REVIEW",
+      "sha256": "671e18494421730777d119d86573f78d02cc124643079bac14ddae2e57618b13"
+    }
+  ],
+  "certification": {
+    "gate1": "PASSED",
+    "gate2": "PASSED",
+    "gate3": "PASSED",
+    "certifiedBy": "Lead Mainframe Systems & COBOL Engineer"
+  }
+}

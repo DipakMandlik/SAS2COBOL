@@ -1,0 +1,7 @@
+000100 * COPYBOOK: CPHIGH36 - FOR WORKLIB.HIGH_VALUE_CUSTOMER           
+000200 01  HIGH-VALUE-CUSTOMER-RECORD.                                  
+000300     05  HIGHV-CUSTOMER-ID              PIC S9(9) COMP-3.         
+000400     05  HIGHV-CUSTOMER-NAME            PIC X(80).                
+000500     05  HIGHV-CUSTOMER-REGION          PIC X(20).                
+000600     05  HIGHV-HIGH-VALUE-SALES         PIC S9(9)V99 COMP-3.      
+000700     05  HIGHV-HIGH-VALUE-ORDERS        PIC S9(9)V99 COMP-3.      

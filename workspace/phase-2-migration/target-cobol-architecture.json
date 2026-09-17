@@ -1,0 +1,459 @@
+{
+  "programs": [
+    {
+      "programId": "CBLSL001",
+      "programType": "BATCH_MAIN",
+      "description": "Master Ingestion & Data Hygiene: Ingests RAW.customers, RAW.products, and RAW.sales, cleanses string fields, validates ranges, and derives base financials.",
+      "assignedPUs": [
+        "PU-ING-001",
+        "PU-ING-002",
+        "PU-ING-003",
+        "PU-ING-004"
+      ],
+      "usedCopybooks": [
+        "CPCOMM01",
+        "CPTRAP88",
+        "CPRAW01",
+        "CPRAW02",
+        "CPRAW03",
+        "CPCUST01",
+        "CPPROD01",
+        "CPSALE01"
+      ]
+    },
+    {
+      "programId": "CBLSL002",
+      "programType": "BATCH_MAIN",
+      "description": "Customer Sales Consolidation: Two-file match-merge of customers and sales transactions with explicit rightmost overwrite semantics and monthly control-break aggregation.",
+      "assignedPUs": [
+        "PU-CBL-002",
+        "PU-CBL-003"
+      ],
+      "usedCopybooks": [
+        "CPCOMM01",
+        "CPTRAP88",
+        "CPCUST02",
+        "CPSALE02",
+        "CPCSAL01",
+        "CPCMON01"
+      ]
+    },
+    {
+      "programId": "CBLSL003",
+      "programType": "BATCH_MAIN",
+      "description": "Base Statistical Aggregation & Pivot: Computes multi-level sales summaries, regional means, channel crosstabs, and transposes summary metrics into wide OCCURS format.",
+      "assignedPUs": [
+        "PU-AGG-001",
+        "PU-AGG-002",
+        "PU-AGG-003",
+        "PU-PIV-001"
+      ],
+      "usedCopybooks": [
+        "CPCOMM01",
+        "CPSALE02",
+        "CPRSUM01",
+        "CPRMEA01",
+        "CPRFREQ1",
+        "CPRWID01"
+      ]
+    },
+    {
+      "programId": "CBLSL004",
+      "programType": "BATCH_MAIN",
+      "description": "Relational Sales Enrichment & Business Rules: Joins sales, customers, and products; evaluates tiered pricing and risk rules (BR-001/BR-002); outputs review queue.",
+      "assignedPUs": [
+        "PU-ENR-001",
+        "PU-ENR-002",
+        "PU-ENR-003",
+        "PU-ENR-004",
+        "PU-ENR-005"
+      ],
+      "usedCopybooks": [
+        "CPCOMM01",
+        "CPTRAP88",
+        "CPENRS01",
+        "CPRULE01",
+        "CPREVQ01",
+        "CPCATSUM",
+        "CPSUBCAT"
+      ]
+    },
+    {
+      "programId": "CBLSL005",
+      "programType": "BATCH_MAIN",
+      "description": "Temporal Tracking & Daily Sales Analysis: Classifies customer lifetime loyalty tiers; computes daily sales totals with pre-sort guard; pivots daily metrics.",
+      "assignedPUs": [
+        "PU-DLY-001",
+        "PU-DLY-002",
+        "PU-PIV-002",
+        "PU-DLY-003",
+        "PU-DLY-004",
+        "PU-DLY-005"
+      ],
+      "usedCopybooks": [
+        "CPCOMM01",
+        "CPTIER01",
+        "CPDSAL01",
+        "CPDWID01",
+        "CPCFLG01",
+        "CPRCHSUM",
+        "CPCHFREQ"
+      ]
+    },
+    {
+      "programId": "CBLSL006",
+      "programType": "BATCH_MAIN",
+      "description": "Regional Reporting & Reconciliation Ledger: Filters regional extracts, merges channel summaries with key alignment, generates audit trails, and balances controls (SAR-001 fix).",
+      "assignedPUs": [
+        "PU-RPT-001",
+        "PU-RPT-002",
+        "PU-RPT-003",
+        "PU-RPT-004",
+        "PU-RPT-005",
+        "PU-RPT-006"
+      ],
+      "usedCopybooks": [
+        "CPCOMM01",
+        "CPRECON0",
+        "CPRPTIN1",
+        "CPRPTIN2",
+        "CPREGRPT",
+        "CPFEXT01",
+        "CPAUDT01",
+        "CPCTRL01",
+        "CPRECL01"
+      ]
+    },
+    {
+      "programId": "CBLSL007",
+      "programType": "BATCH_MAIN",
+      "description": "Segmentation & Logistics Dispatch: Computes segment rollups, applies deterministic row ranking (SAR-010 fix), extracts exceptions, and produces delivery manifest.",
+      "assignedPUs": [
+        "PU-SEG-001",
+        "PU-SEG-002",
+        "PU-SEG-003",
+        "PU-SEG-004",
+        "PU-SEG-005",
+        "PU-SEG-006",
+        "PU-SEG-007"
+      ],
+      "usedCopybooks": [
+        "CPCOMM01",
+        "CPSEGR01",
+        "CPSEGRK1",
+        "CPEXCP01",
+        "CPEXCF01",
+        "CPEXCS01",
+        "CPMANI01"
+      ]
+    },
+    {
+      "programId": "CBLSL008",
+      "programType": "BATCH_MAIN",
+      "description": "Multidimensional Customer Scoring Engine: Filters high-value transactions, builds customer profiles, evaluates multi-factor scoring model, and benchmarks regional scores.",
+      "assignedPUs": [
+        "PU-SCR-001",
+        "PU-SCR-002",
+        "PU-SCR-003",
+        "PU-SCR-004",
+        "PU-SCR-005",
+        "PU-SCR-006",
+        "PU-SCR-007",
+        "PU-SCR-008",
+        "PU-SCR-009",
+        "PU-SCR-010",
+        "PU-SCR-011",
+        "PU-SCR-012"
+      ],
+      "usedCopybooks": [
+        "CPCOMM01",
+        "CPTRAP88",
+        "CPHVSD01",
+        "CPHVSC01",
+        "CPCPRF01",
+        "CPCPRS01",
+        "CPCSCR01",
+        "CPSCRS01",
+        "CPRSCB01",
+        "CPRSFL01"
+      ]
+    },
+    {
+      "programId": "CBLSL009",
+      "programType": "BATCH_MAIN",
+      "description": "Product Performance & Seasonality Evaluation: Computes product margin metrics, evaluates quarterly seasonality and holiday indicators, and analyzes revenue variance.",
+      "assignedPUs": [
+        "PU-PRD-001",
+        "PU-PRD-002",
+        "PU-PRD-003",
+        "PU-PRD-004",
+        "PU-PRD-005",
+        "PU-PRD-006",
+        "PU-PRD-007",
+        "PU-PRD-008"
+      ],
+      "usedCopybooks": [
+        "CPCOMM01",
+        "CPPPRF01",
+        "CPPCAT01",
+        "CPSEAS01",
+        "CPQTRSUM",
+        "CPHOLSUM",
+        "CPVAR01"
+      ]
+    },
+    {
+      "programId": "CBLSL010",
+      "programType": "BATCH_MAIN",
+      "description": "Data Quality Sentinel Engine: Evaluates numeric and categorical quality metrics with explicit 88-level sentinels to avoid SAS negative missing value anomalies (SAR-009).",
+      "assignedPUs": [
+        "PU-QAL-002",
+        "PU-QAL-003",
+        "PU-QAL-010"
+      ],
+      "usedCopybooks": [
+        "CPCOMM01",
+        "CPTRAP88",
+        "CPSQAL01",
+        "CPQFRQ01",
+        "CPQSUM01"
+      ]
+    },
+    {
+      "programId": "CBLSL011",
+      "programType": "BATCH_MAIN",
+      "description": "Customer Lifecycle & Running Sales Volatility: Evaluates RFM activity status, regional control thresholds, and computes running sales totals and period deltas.",
+      "assignedPUs": [
+        "PU-ACT-001",
+        "PU-ACT-002",
+        "PU-ACT-003",
+        "PU-ACT-004",
+        "PU-ACT-005",
+        "PU-ACT-006",
+        "PU-ACT-007",
+        "PU-ACT-008",
+        "PU-ACT-009",
+        "PU-ACT-010"
+      ],
+      "usedCopybooks": [
+        "CPCOMM01",
+        "CPCACT01",
+        "CPASUM01",
+        "CPCTRL02",
+        "CPRUNS01",
+        "CPRUND01",
+        "CPRUNM01"
+      ]
+    },
+    {
+      "programId": "CBLSL012",
+      "programType": "BATCH_MAIN",
+      "description": "Operational Reconciliation Dashboard & Reporting: Consolidates metrics from all subsystems, validates semantic boundary edge cases, and prints operational dashboard.",
+      "assignedPUs": [
+        "PU-FIN-001",
+        "PU-FIN-002",
+        "PU-FIN-003",
+        "PU-FIN-004",
+        "PU-FIN-005",
+        "PU-FIN-006",
+        "PU-FIN-007",
+        "PU-FIN-008"
+      ],
+      "usedCopybooks": [
+        "CPCOMM01",
+        "CPRECON0",
+        "CPLOOK01",
+        "CPLKFRQ1",
+        "CPEDGE01",
+        "CPEDGFR1",
+        "CPDASH01"
+      ]
+    },
+    {
+      "programId": "SORT",
+      "programType": "DFSORT_CONTROL",
+      "description": "Standard Mainframe DFSORT Utility: High-throughput block sorting, record deduplication with exception routing (NODUPKEY / XSUM), and key sequence reordering.",
+      "assignedPUs": [
+        "PU-SRT-001",
+        "PU-SRT-002",
+        "PU-SRT-003",
+        "PU-SRT-004",
+        "PU-SRT-005",
+        "PU-SRT-006",
+        "PU-SRT-007",
+        "PU-SRT-008",
+        "PU-SRT-009",
+        "PU-SRT-010",
+        "PU-SRT-011",
+        "PU-SRT-012",
+        "PU-SRT-013",
+        "PU-SRT-014",
+        "PU-SRT-015",
+        "PU-SRT-016",
+        "PU-QAL-001",
+        "PU-SRT-017",
+        "PU-SRT-018"
+      ],
+      "usedCopybooks": []
+    },
+    {
+      "programId": "IEFBR14",
+      "programType": "DFSORT_CONTROL",
+      "description": "Mainframe Catalog & File Management Utility: Allocates and deletes intermediate temporary dataset GDGs and work files.",
+      "assignedPUs": [
+        "PU-UTL-001"
+      ],
+      "usedCopybooks": []
+    }
+  ],
+  "sharedCopybooks": [
+    {
+      "copybookName": "CPCOMM01",
+      "purpose": "Standard Enterprise COBOL return codes, ABEND error handling routines, and file status evaluations."
+    },
+    {
+      "copybookName": "CPTRAP88",
+      "purpose": "Condition 88-level definitions for SAS system missing values (LOW-VALUES/HIGH-VALUES sentinels) and data hygiene flags."
+    },
+    {
+      "copybookName": "CPDATES0",
+      "purpose": "Gregorian YYYYMMDD to SAS epoch date offset conversion routines and fiscal calendar boundaries."
+    },
+    {
+      "copybookName": "CPRECON0",
+      "purpose": "Cross-system dual-run reconciliation record layouts, hash total accumulators, and tolerance check metrics."
+    }
+  ],
+  "jclJobs": [
+    {
+      "jobName": "JCLSLMOD",
+      "steps": [
+        {
+          "stepNumber": 1,
+          "stepName": "STEP010_INGEST",
+          "programOrUtility": "CBLSL001"
+        },
+        {
+          "stepNumber": 2,
+          "stepName": "STEP020_SRTCUST",
+          "programOrUtility": "SORT"
+        },
+        {
+          "stepNumber": 3,
+          "stepName": "STEP030_SRTPROD",
+          "programOrUtility": "SORT"
+        },
+        {
+          "stepNumber": 4,
+          "stepName": "STEP040_SRTSALE",
+          "programOrUtility": "SORT"
+        },
+        {
+          "stepNumber": 5,
+          "stepName": "STEP050_MRGCUST",
+          "programOrUtility": "CBLSL002"
+        },
+        {
+          "stepNumber": 6,
+          "stepName": "STEP060_SRTCSAL",
+          "programOrUtility": "SORT"
+        },
+        {
+          "stepNumber": 7,
+          "stepName": "STEP070_AGGREG1",
+          "programOrUtility": "CBLSL003"
+        },
+        {
+          "stepNumber": 8,
+          "stepName": "STEP080_ENRICH",
+          "programOrUtility": "CBLSL004"
+        },
+        {
+          "stepNumber": 9,
+          "stepName": "STEP090_SRTRULE",
+          "programOrUtility": "SORT"
+        },
+        {
+          "stepNumber": 10,
+          "stepName": "STEP100_DAILYTR",
+          "programOrUtility": "CBLSL005"
+        },
+        {
+          "stepNumber": 11,
+          "stepName": "STEP110_SRTDLY",
+          "programOrUtility": "SORT"
+        },
+        {
+          "stepNumber": 12,
+          "stepName": "STEP120_REGRPT",
+          "programOrUtility": "CBLSL006"
+        },
+        {
+          "stepNumber": 13,
+          "stepName": "STEP130_SRTRPT",
+          "programOrUtility": "SORT"
+        },
+        {
+          "stepNumber": 14,
+          "stepName": "STEP140_CLEANUP",
+          "programOrUtility": "IEFBR14"
+        },
+        {
+          "stepNumber": 15,
+          "stepName": "STEP150_SEGMENT",
+          "programOrUtility": "CBLSL007"
+        },
+        {
+          "stepNumber": 16,
+          "stepName": "STEP160_SRTSEG",
+          "programOrUtility": "SORT"
+        },
+        {
+          "stepNumber": 17,
+          "stepName": "STEP170_SCORING",
+          "programOrUtility": "CBLSL008"
+        },
+        {
+          "stepNumber": 18,
+          "stepName": "STEP180_SRTSCR",
+          "programOrUtility": "SORT"
+        },
+        {
+          "stepNumber": 19,
+          "stepName": "STEP190_PRODUCT",
+          "programOrUtility": "CBLSL009"
+        },
+        {
+          "stepNumber": 20,
+          "stepName": "STEP200_SRTPRD",
+          "programOrUtility": "SORT"
+        },
+        {
+          "stepNumber": 21,
+          "stepName": "STEP210_DEDUP",
+          "programOrUtility": "SORT"
+        },
+        {
+          "stepNumber": 22,
+          "stepName": "STEP220_QUALITY",
+          "programOrUtility": "CBLSL010"
+        },
+        {
+          "stepNumber": 23,
+          "stepName": "STEP230_ACTIVTY",
+          "programOrUtility": "CBLSL011"
+        },
+        {
+          "stepNumber": 24,
+          "stepName": "STEP240_SRTACT",
+          "programOrUtility": "SORT"
+        },
+        {
+          "stepNumber": 25,
+          "stepName": "STEP250_DASHBRD",
+          "programOrUtility": "CBLSL012"
+        }
+      ]
+    }
+  ]
+}

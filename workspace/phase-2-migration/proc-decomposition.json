@@ -1,0 +1,1650 @@
+{
+  "decompositions": [
+    {
+      "stepId": "STEP-007",
+      "procName": "SORT",
+      "targetPattern": "DFSORT_STEP",
+      "stages": [
+        {
+          "stageOrder": 1,
+          "stageName": "Sort Key Extraction",
+          "operation": "Extract sort fields for customer_id",
+          "intermediateFile": "&&SORTCNTL",
+          "targetArtifact": "JCL SYSIN Control Card"
+        },
+        {
+          "stageOrder": 2,
+          "stageName": "DFSORT Execution",
+          "operation": "Execute DFSORT sequential sort utility with high-performance block sorting",
+          "intermediateFile": "WORKLIB.CUSTOMER_SORTED",
+          "targetArtifact": "DFSORT Utility"
+        }
+      ]
+    },
+    {
+      "stepId": "STEP-009",
+      "procName": "SORT",
+      "targetPattern": "DFSORT_STEP",
+      "stages": [
+        {
+          "stageOrder": 1,
+          "stageName": "Sort Key Extraction",
+          "operation": "Extract sort fields for product_id",
+          "intermediateFile": "&&SORTCNTL",
+          "targetArtifact": "JCL SYSIN Control Card"
+        },
+        {
+          "stageOrder": 2,
+          "stageName": "DFSORT Execution",
+          "operation": "Execute DFSORT sequential sort utility with high-performance block sorting",
+          "intermediateFile": "WORKLIB.PRODUCT_SORTED",
+          "targetArtifact": "DFSORT Utility"
+        }
+      ]
+    },
+    {
+      "stepId": "STEP-011",
+      "procName": "SORT",
+      "targetPattern": "DFSORT_STEP",
+      "stages": [
+        {
+          "stageOrder": 1,
+          "stageName": "Sort Key Extraction",
+          "operation": "Extract sort fields for customer_id, sale_date, sale_id",
+          "intermediateFile": "&&SORTCNTL",
+          "targetArtifact": "JCL SYSIN Control Card"
+        },
+        {
+          "stageOrder": 2,
+          "stageName": "DFSORT Execution",
+          "operation": "Execute DFSORT sequential sort utility with high-performance block sorting",
+          "intermediateFile": "WORKLIB.SALES_SORTED",
+          "targetArtifact": "DFSORT Utility"
+        }
+      ]
+    },
+    {
+      "stepId": "STEP-013",
+      "procName": "SORT",
+      "targetPattern": "DFSORT_STEP",
+      "stages": [
+        {
+          "stageOrder": 1,
+          "stageName": "Sort Key Extraction",
+          "operation": "Extract sort fields for customer_id, sale_date",
+          "intermediateFile": "&&SORTCNTL",
+          "targetArtifact": "JCL SYSIN Control Card"
+        },
+        {
+          "stageOrder": 2,
+          "stageName": "DFSORT Execution",
+          "operation": "Execute DFSORT sequential sort utility with high-performance block sorting",
+          "intermediateFile": "WORKLIB.CUSTOMER_SALES_SORTED",
+          "targetArtifact": "DFSORT Utility"
+        }
+      ]
+    },
+    {
+      "stepId": "STEP-015",
+      "procName": "SUMMARY",
+      "targetPattern": "COBOL_CONTROL_BREAK",
+      "stages": [
+        {
+          "stageOrder": 1,
+          "stageName": "Input Ordering Validation",
+          "operation": "Verify input dataset is sorted by grouping keys: region, channel",
+          "intermediateFile": "&&PRE_SORTED",
+          "targetArtifact": "DFSORT / JCL Step"
+        },
+        {
+          "stageOrder": 2,
+          "stageName": "Control Break Detection",
+          "operation": "Compare current record key against previous record key in WORKING-STORAGE to trigger boundary processing",
+          "targetArtifact": "COBOL Paragraph 2200-EVALUATE-KEY-BREAK"
+        },
+        {
+          "stageOrder": 3,
+          "stageName": "Accumulator Management",
+          "operation": "Add metrics to packed decimal (COMP-3) accumulators; increment transaction counters",
+          "targetArtifact": "COBOL Paragraph 2300-ACCUMULATE-METRICS"
+        },
+        {
+          "stageOrder": 4,
+          "stageName": "Summary Record Writing",
+          "operation": "Format summary record with totals and computed means, then write to output file",
+          "intermediateFile": "WORKLIB.REGION_CHANNEL_SUMMARY",
+          "targetArtifact": "COBOL Paragraph 2400-WRITE-SUMMARY"
+        }
+      ]
+    },
+    {
+      "stepId": "STEP-016",
+      "procName": "MEANS",
+      "targetPattern": "COBOL_CONTROL_BREAK",
+      "stages": [
+        {
+          "stageOrder": 1,
+          "stageName": "Input Ordering Validation",
+          "operation": "Verify input dataset is sorted by grouping keys: region",
+          "intermediateFile": "&&PRE_SORTED",
+          "targetArtifact": "DFSORT / JCL Step"
+        },
+        {
+          "stageOrder": 2,
+          "stageName": "Control Break Detection",
+          "operation": "Compare current record key against previous record key in WORKING-STORAGE to trigger boundary processing",
+          "targetArtifact": "COBOL Paragraph 2200-EVALUATE-KEY-BREAK"
+        },
+        {
+          "stageOrder": 3,
+          "stageName": "Accumulator Management",
+          "operation": "Add metrics to packed decimal (COMP-3) accumulators; increment transaction counters",
+          "targetArtifact": "COBOL Paragraph 2300-ACCUMULATE-METRICS"
+        },
+        {
+          "stageOrder": 4,
+          "stageName": "Summary Record Writing",
+          "operation": "Format summary record with totals and computed means, then write to output file",
+          "intermediateFile": "WORKLIB.REGION_SUMMARY",
+          "targetArtifact": "COBOL Paragraph 2400-WRITE-SUMMARY"
+        }
+      ]
+    },
+    {
+      "stepId": "STEP-017",
+      "procName": "FREQ",
+      "targetPattern": "COBOL_CONTROL_BREAK",
+      "stages": [
+        {
+          "stageOrder": 1,
+          "stageName": "Category Sorting",
+          "operation": "Sort input stream by frequency dimension categories",
+          "intermediateFile": "&&FRQSORT",
+          "targetArtifact": "DFSORT Utility"
+        },
+        {
+          "stageOrder": 2,
+          "stageName": "Frequency Array Counting",
+          "operation": "Accumulate occurrence counts and calculate percentages in WORKING-STORAGE OCCURS table",
+          "targetArtifact": "COBOL Paragraph 2100-COUNT-FREQUENCY"
+        },
+        {
+          "stageOrder": 3,
+          "stageName": "Frequency Record Output",
+          "operation": "Emit formatted category frequency and cumulative percentage records",
+          "intermediateFile": "WORKLIB.REGION_CHANNEL_FREQ",
+          "targetArtifact": "COBOL Paragraph 2200-WRITE-FREQUENCY"
+        }
+      ]
+    },
+    {
+      "stepId": "STEP-018",
+      "procName": "TRANSPOSE",
+      "targetPattern": "COBOL_OCCURS_PIVOT",
+      "stages": [
+        {
+          "stageOrder": 1,
+          "stageName": "Pre-Sort by Pivot Keys",
+          "operation": "Sort input stream by BY-group and ID variables",
+          "intermediateFile": "&&PIVSORT",
+          "targetArtifact": "DFSORT Utility"
+        },
+        {
+          "stageOrder": 2,
+          "stageName": "OCCURS Table Pivoting",
+          "operation": "Populate fixed-length wide record OCCURS table slots from normalized vertical observations",
+          "targetArtifact": "COBOL Paragraph 2200-PIVOT-ROW-TO-COLUMNS"
+        },
+        {
+          "stageOrder": 3,
+          "stageName": "Wide Record Writing",
+          "operation": "Emit denormalized wide record upon BY-group boundary transition",
+          "intermediateFile": "WORKLIB.REGION_SUMMARY_WIDE",
+          "targetArtifact": "COBOL Paragraph 2300-WRITE-WIDE-RECORD"
+        }
+      ]
+    },
+    {
+      "stepId": "STEP-019",
+      "procName": "SQL",
+      "targetPattern": "SEQUENTIAL_MERGE",
+      "stages": [
+        {
+          "stageOrder": 1,
+          "stageName": "Input Dual-Stream Sorting",
+          "operation": "Ensure all joining datasets are sorted in ascending order by primary join keys",
+          "intermediateFile": "&&SQLSORT",
+          "targetArtifact": "DFSORT Utility Steps"
+        },
+        {
+          "stageOrder": 2,
+          "stageName": "Sequential Match-Merge Loop",
+          "operation": "Traverse primary and lookup files using HIGH-VALUES EOF sentinels to emulate relational join semantics",
+          "targetArtifact": "COBOL Paragraph 2000-PROCESS-MATCH-MERGE"
+        },
+        {
+          "stageOrder": 3,
+          "stageName": "Projection & Filter Evaluation",
+          "operation": "Evaluate WHERE clauses, computed columns, and aggregate functions",
+          "targetArtifact": "COBOL Paragraph 2100-PROJECT-COLUMNS"
+        },
+        {
+          "stageOrder": 4,
+          "stageName": "Output Table Generation",
+          "operation": "Write joined and projected records to target QSAM file",
+          "intermediateFile": "WORKLIB.ENRICHED_SALES",
+          "targetArtifact": "COBOL File Output"
+        }
+      ]
+    },
+    {
+      "stepId": "STEP-021",
+      "procName": "SORT",
+      "targetPattern": "DFSORT_STEP",
+      "stages": [
+        {
+          "stageOrder": 1,
+          "stageName": "Sort Key Extraction",
+          "operation": "Extract sort fields for descending net_amount, customer_id, sale_date",
+          "intermediateFile": "&&SORTCNTL",
+          "targetArtifact": "JCL SYSIN Control Card"
+        },
+        {
+          "stageOrder": 2,
+          "stageName": "DFSORT Execution",
+          "operation": "Execute DFSORT sequential sort utility with high-performance block sorting",
+          "intermediateFile": "WORKLIB.REVIEW_QUEUE",
+          "targetArtifact": "DFSORT Utility"
+        }
+      ]
+    },
+    {
+      "stepId": "STEP-023",
+      "procName": "SQL",
+      "targetPattern": "SEQUENTIAL_MERGE",
+      "stages": [
+        {
+          "stageOrder": 1,
+          "stageName": "Input Dual-Stream Sorting",
+          "operation": "Ensure all joining datasets are sorted in ascending order by primary join keys",
+          "intermediateFile": "&&SQLSORT",
+          "targetArtifact": "DFSORT Utility Steps"
+        },
+        {
+          "stageOrder": 2,
+          "stageName": "Sequential Match-Merge Loop",
+          "operation": "Traverse primary and lookup files using HIGH-VALUES EOF sentinels to emulate relational join semantics",
+          "targetArtifact": "COBOL Paragraph 2000-PROCESS-MATCH-MERGE"
+        },
+        {
+          "stageOrder": 3,
+          "stageName": "Projection & Filter Evaluation",
+          "operation": "Evaluate WHERE clauses, computed columns, and aggregate functions",
+          "targetArtifact": "COBOL Paragraph 2100-PROJECT-COLUMNS"
+        },
+        {
+          "stageOrder": 4,
+          "stageName": "Output Table Generation",
+          "operation": "Write joined and projected records to target QSAM file",
+          "intermediateFile": "WORKLIB.CUSTOMER_KPIS",
+          "targetArtifact": "COBOL File Output"
+        }
+      ]
+    },
+    {
+      "stepId": "STEP-024",
+      "procName": "SQL",
+      "targetPattern": "SEQUENTIAL_MERGE",
+      "stages": [
+        {
+          "stageOrder": 1,
+          "stageName": "Input Dual-Stream Sorting",
+          "operation": "Ensure all joining datasets are sorted in ascending order by primary join keys",
+          "intermediateFile": "&&SQLSORT",
+          "targetArtifact": "DFSORT Utility Steps"
+        },
+        {
+          "stageOrder": 2,
+          "stageName": "Sequential Match-Merge Loop",
+          "operation": "Traverse primary and lookup files using HIGH-VALUES EOF sentinels to emulate relational join semantics",
+          "targetArtifact": "COBOL Paragraph 2000-PROCESS-MATCH-MERGE"
+        },
+        {
+          "stageOrder": 3,
+          "stageName": "Projection & Filter Evaluation",
+          "operation": "Evaluate WHERE clauses, computed columns, and aggregate functions",
+          "targetArtifact": "COBOL Paragraph 2100-PROJECT-COLUMNS"
+        },
+        {
+          "stageOrder": 4,
+          "stageName": "Output Table Generation",
+          "operation": "Write joined and projected records to target QSAM file",
+          "intermediateFile": "WORKLIB.PRODUCT_KPIS",
+          "targetArtifact": "COBOL File Output"
+        }
+      ]
+    },
+    {
+      "stepId": "STEP-026",
+      "procName": "SORT",
+      "targetPattern": "DFSORT_STEP",
+      "stages": [
+        {
+          "stageOrder": 1,
+          "stageName": "Sort Key Extraction",
+          "operation": "Extract sort fields for descending total_sales, customer_id",
+          "intermediateFile": "&&SORTCNTL",
+          "targetArtifact": "JCL SYSIN Control Card"
+        },
+        {
+          "stageOrder": 2,
+          "stageName": "DFSORT Execution",
+          "operation": "Execute DFSORT sequential sort utility with high-performance block sorting",
+          "intermediateFile": "WORKLIB.CUSTOMER_TIER_SORTED",
+          "targetArtifact": "DFSORT Utility"
+        }
+      ]
+    },
+    {
+      "stepId": "STEP-028",
+      "procName": "SORT",
+      "targetPattern": "DFSORT_STEP",
+      "stages": [
+        {
+          "stageOrder": 1,
+          "stageName": "Sort Key Extraction",
+          "operation": "Extract sort fields for sale_date",
+          "intermediateFile": "&&SORTCNTL",
+          "targetArtifact": "JCL SYSIN Control Card"
+        },
+        {
+          "stageOrder": 2,
+          "stageName": "DFSORT Execution",
+          "operation": "Execute DFSORT sequential sort utility with high-performance block sorting",
+          "intermediateFile": "WORKLIB.DAILY_SALES_SORTED",
+          "targetArtifact": "DFSORT Utility"
+        }
+      ]
+    },
+    {
+      "stepId": "STEP-029",
+      "procName": "TRANSPOSE",
+      "targetPattern": "COBOL_OCCURS_PIVOT",
+      "stages": [
+        {
+          "stageOrder": 1,
+          "stageName": "Pre-Sort by Pivot Keys",
+          "operation": "Sort input stream by BY-group and ID variables",
+          "intermediateFile": "&&PIVSORT",
+          "targetArtifact": "DFSORT Utility"
+        },
+        {
+          "stageOrder": 2,
+          "stageName": "OCCURS Table Pivoting",
+          "operation": "Populate fixed-length wide record OCCURS table slots from normalized vertical observations",
+          "targetArtifact": "COBOL Paragraph 2200-PIVOT-ROW-TO-COLUMNS"
+        },
+        {
+          "stageOrder": 3,
+          "stageName": "Wide Record Writing",
+          "operation": "Emit denormalized wide record upon BY-group boundary transition",
+          "intermediateFile": "WORKLIB.DAILY_SALES_PIVOT",
+          "targetArtifact": "COBOL Paragraph 2300-WRITE-WIDE-RECORD"
+        }
+      ]
+    },
+    {
+      "stepId": "STEP-031",
+      "procName": "SORT",
+      "targetPattern": "DFSORT_STEP",
+      "stages": [
+        {
+          "stageOrder": 1,
+          "stageName": "Sort Key Extraction",
+          "operation": "Extract sort fields for region, customer_tier, descending total_sales",
+          "intermediateFile": "&&SORTCNTL",
+          "targetArtifact": "JCL SYSIN Control Card"
+        },
+        {
+          "stageOrder": 2,
+          "stageName": "DFSORT Execution",
+          "operation": "Execute DFSORT sequential sort utility with high-performance block sorting",
+          "intermediateFile": "WORKLIB.CUSTOMER_FLAGS_SORTED",
+          "targetArtifact": "DFSORT Utility"
+        }
+      ]
+    },
+    {
+      "stepId": "STEP-032",
+      "procName": "SUMMARY",
+      "targetPattern": "COBOL_CONTROL_BREAK",
+      "stages": [
+        {
+          "stageOrder": 1,
+          "stageName": "Input Ordering Validation",
+          "operation": "Verify input dataset is sorted by grouping keys: region, customer_tier",
+          "intermediateFile": "&&PRE_SORTED",
+          "targetArtifact": "DFSORT / JCL Step"
+        },
+        {
+          "stageOrder": 2,
+          "stageName": "Control Break Detection",
+          "operation": "Compare current record key against previous record key in WORKING-STORAGE to trigger boundary processing",
+          "targetArtifact": "COBOL Paragraph 2200-EVALUATE-KEY-BREAK"
+        },
+        {
+          "stageOrder": 3,
+          "stageName": "Accumulator Management",
+          "operation": "Add metrics to packed decimal (COMP-3) accumulators; increment transaction counters",
+          "targetArtifact": "COBOL Paragraph 2300-ACCUMULATE-METRICS"
+        },
+        {
+          "stageOrder": 4,
+          "stageName": "Summary Record Writing",
+          "operation": "Format summary record with totals and computed means, then write to output file",
+          "intermediateFile": "WORKLIB.TIER_SUMMARY",
+          "targetArtifact": "COBOL Paragraph 2400-WRITE-SUMMARY"
+        }
+      ]
+    },
+    {
+      "stepId": "STEP-033",
+      "procName": "FREQ",
+      "targetPattern": "COBOL_CONTROL_BREAK",
+      "stages": [
+        {
+          "stageOrder": 1,
+          "stageName": "Category Sorting",
+          "operation": "Sort input stream by frequency dimension categories",
+          "intermediateFile": "&&FRQSORT",
+          "targetArtifact": "DFSORT Utility"
+        },
+        {
+          "stageOrder": 2,
+          "stageName": "Frequency Array Counting",
+          "operation": "Accumulate occurrence counts and calculate percentages in WORKING-STORAGE OCCURS table",
+          "targetArtifact": "COBOL Paragraph 2100-COUNT-FREQUENCY"
+        },
+        {
+          "stageOrder": 3,
+          "stageName": "Frequency Record Output",
+          "operation": "Emit formatted category frequency and cumulative percentage records",
+          "intermediateFile": "WORKLIB.TIER_ACTIVITY_FREQ",
+          "targetArtifact": "COBOL Paragraph 2200-WRITE-FREQUENCY"
+        }
+      ]
+    },
+    {
+      "stepId": "STEP-038",
+      "procName": "SQL",
+      "targetPattern": "SEQUENTIAL_MERGE",
+      "stages": [
+        {
+          "stageOrder": 1,
+          "stageName": "Input Dual-Stream Sorting",
+          "operation": "Ensure all joining datasets are sorted in ascending order by primary join keys",
+          "intermediateFile": "&&SQLSORT",
+          "targetArtifact": "DFSORT Utility Steps"
+        },
+        {
+          "stageOrder": 2,
+          "stageName": "Sequential Match-Merge Loop",
+          "operation": "Traverse primary and lookup files using HIGH-VALUES EOF sentinels to emulate relational join semantics",
+          "targetArtifact": "COBOL Paragraph 2000-PROCESS-MATCH-MERGE"
+        },
+        {
+          "stageOrder": 3,
+          "stageName": "Projection & Filter Evaluation",
+          "operation": "Evaluate WHERE clauses, computed columns, and aggregate functions",
+          "targetArtifact": "COBOL Paragraph 2100-PROJECT-COLUMNS"
+        },
+        {
+          "stageOrder": 4,
+          "stageName": "Output Table Generation",
+          "operation": "Write joined and projected records to target QSAM file",
+          "intermediateFile": "WORKLIB.REGION_REPORT",
+          "targetArtifact": "COBOL File Output"
+        }
+      ]
+    },
+    {
+      "stepId": "STEP-040",
+      "procName": "SORT",
+      "targetPattern": "DFSORT_STEP",
+      "stages": [
+        {
+          "stageOrder": 1,
+          "stageName": "Sort Key Extraction",
+          "operation": "Extract sort fields for descending sales",
+          "intermediateFile": "&&SORTCNTL",
+          "targetArtifact": "JCL SYSIN Control Card"
+        },
+        {
+          "stageOrder": 2,
+          "stageName": "DFSORT Execution",
+          "operation": "Execute DFSORT sequential sort utility with high-performance block sorting",
+          "intermediateFile": "WORKLIB.FINAL_SALES_EXTRACT",
+          "targetArtifact": "DFSORT Utility"
+        }
+      ]
+    },
+    {
+      "stepId": "STEP-041",
+      "procName": "DATASETS",
+      "targetPattern": "DFSORT_STEP",
+      "stages": [
+        {
+          "stageOrder": 1,
+          "stageName": "Dataset Allocation & Scratch",
+          "operation": "Manage z/OS dataset catalog entries and temporary file disposal",
+          "targetArtifact": "Mainframe IEFBR14 / IDCAMS Utility"
+        }
+      ]
+    },
+    {
+      "stepId": "STEP-043",
+      "procName": "SQL",
+      "targetPattern": "SEQUENTIAL_MERGE",
+      "stages": [
+        {
+          "stageOrder": 1,
+          "stageName": "Input Dual-Stream Sorting",
+          "operation": "Ensure all joining datasets are sorted in ascending order by primary join keys",
+          "intermediateFile": "&&SQLSORT",
+          "targetArtifact": "DFSORT Utility Steps"
+        },
+        {
+          "stageOrder": 2,
+          "stageName": "Sequential Match-Merge Loop",
+          "operation": "Traverse primary and lookup files using HIGH-VALUES EOF sentinels to emulate relational join semantics",
+          "targetArtifact": "COBOL Paragraph 2000-PROCESS-MATCH-MERGE"
+        },
+        {
+          "stageOrder": 3,
+          "stageName": "Projection & Filter Evaluation",
+          "operation": "Evaluate WHERE clauses, computed columns, and aggregate functions",
+          "targetArtifact": "COBOL Paragraph 2100-PROJECT-COLUMNS"
+        },
+        {
+          "stageOrder": 4,
+          "stageName": "Output Table Generation",
+          "operation": "Write joined and projected records to target QSAM file",
+          "intermediateFile": "WORKLIB.FINAL_CONTROL_TOTALS",
+          "targetArtifact": "COBOL File Output"
+        }
+      ]
+    },
+    {
+      "stepId": "STEP-046",
+      "procName": "SORT",
+      "targetPattern": "DFSORT_STEP",
+      "stages": [
+        {
+          "stageOrder": 1,
+          "stageName": "Sort Key Extraction",
+          "operation": "Extract sort fields for region, descending segment_sales",
+          "intermediateFile": "&&SORTCNTL",
+          "targetArtifact": "JCL SYSIN Control Card"
+        },
+        {
+          "stageOrder": 2,
+          "stageName": "DFSORT Execution",
+          "operation": "Execute DFSORT sequential sort utility with high-performance block sorting",
+          "intermediateFile": "WORKLIB.SEGMENT_ROLLUP_SORTED",
+          "targetArtifact": "DFSORT Utility"
+        }
+      ]
+    },
+    {
+      "stepId": "STEP-047",
+      "procName": "SQL",
+      "targetPattern": "SEQUENTIAL_MERGE",
+      "stages": [
+        {
+          "stageOrder": 1,
+          "stageName": "Input Dual-Stream Sorting",
+          "operation": "Ensure all joining datasets are sorted in ascending order by primary join keys",
+          "intermediateFile": "&&SQLSORT",
+          "targetArtifact": "DFSORT Utility Steps"
+        },
+        {
+          "stageOrder": 2,
+          "stageName": "Sequential Match-Merge Loop",
+          "operation": "Traverse primary and lookup files using HIGH-VALUES EOF sentinels to emulate relational join semantics",
+          "targetArtifact": "COBOL Paragraph 2000-PROCESS-MATCH-MERGE"
+        },
+        {
+          "stageOrder": 3,
+          "stageName": "Projection & Filter Evaluation",
+          "operation": "Evaluate WHERE clauses, computed columns, and aggregate functions",
+          "targetArtifact": "COBOL Paragraph 2100-PROJECT-COLUMNS"
+        },
+        {
+          "stageOrder": 4,
+          "stageName": "Output Table Generation",
+          "operation": "Write joined and projected records to target QSAM file",
+          "intermediateFile": "WORKLIB.SEGMENT_RANKED",
+          "targetArtifact": "COBOL File Output"
+        }
+      ]
+    },
+    {
+      "stepId": "STEP-049",
+      "procName": "FREQ",
+      "targetPattern": "COBOL_CONTROL_BREAK",
+      "stages": [
+        {
+          "stageOrder": 1,
+          "stageName": "Category Sorting",
+          "operation": "Sort input stream by frequency dimension categories",
+          "intermediateFile": "&&FRQSORT",
+          "targetArtifact": "DFSORT Utility"
+        },
+        {
+          "stageOrder": 2,
+          "stageName": "Frequency Array Counting",
+          "operation": "Accumulate occurrence counts and calculate percentages in WORKING-STORAGE OCCURS table",
+          "targetArtifact": "COBOL Paragraph 2100-COUNT-FREQUENCY"
+        },
+        {
+          "stageOrder": 3,
+          "stageName": "Frequency Record Output",
+          "operation": "Emit formatted category frequency and cumulative percentage records",
+          "intermediateFile": "WORKLIB.EXCEPTION_COUNTS",
+          "targetArtifact": "COBOL Paragraph 2200-WRITE-FREQUENCY"
+        }
+      ]
+    },
+    {
+      "stepId": "STEP-051",
+      "procName": "SQL",
+      "targetPattern": "SEQUENTIAL_MERGE",
+      "stages": [
+        {
+          "stageOrder": 1,
+          "stageName": "Input Dual-Stream Sorting",
+          "operation": "Ensure all joining datasets are sorted in ascending order by primary join keys",
+          "intermediateFile": "&&SQLSORT",
+          "targetArtifact": "DFSORT Utility Steps"
+        },
+        {
+          "stageOrder": 2,
+          "stageName": "Sequential Match-Merge Loop",
+          "operation": "Traverse primary and lookup files using HIGH-VALUES EOF sentinels to emulate relational join semantics",
+          "targetArtifact": "COBOL Paragraph 2000-PROCESS-MATCH-MERGE"
+        },
+        {
+          "stageOrder": 3,
+          "stageName": "Projection & Filter Evaluation",
+          "operation": "Evaluate WHERE clauses, computed columns, and aggregate functions",
+          "targetArtifact": "COBOL Paragraph 2100-PROJECT-COLUMNS"
+        },
+        {
+          "stageOrder": 4,
+          "stageName": "Output Table Generation",
+          "operation": "Write joined and projected records to target QSAM file",
+          "intermediateFile": "WORKLIB.MANAGEMENT_SUMMARY",
+          "targetArtifact": "COBOL File Output"
+        }
+      ]
+    },
+    {
+      "stepId": "STEP-053",
+      "procName": "SORT",
+      "targetPattern": "DFSORT_STEP",
+      "stages": [
+        {
+          "stageOrder": 1,
+          "stageName": "Sort Key Extraction",
+          "operation": "Extract sort fields for delivery_status, region, descending tier_sales",
+          "intermediateFile": "&&SORTCNTL",
+          "targetArtifact": "JCL SYSIN Control Card"
+        },
+        {
+          "stageOrder": 2,
+          "stageName": "DFSORT Execution",
+          "operation": "Execute DFSORT sequential sort utility with high-performance block sorting",
+          "intermediateFile": "WORKLIB.DELIVERY_MANIFEST",
+          "targetArtifact": "DFSORT Utility"
+        }
+      ]
+    },
+    {
+      "stepId": "STEP-057",
+      "procName": "SQL",
+      "targetPattern": "SEQUENTIAL_MERGE",
+      "stages": [
+        {
+          "stageOrder": 1,
+          "stageName": "Input Dual-Stream Sorting",
+          "operation": "Ensure all joining datasets are sorted in ascending order by primary join keys",
+          "intermediateFile": "&&SQLSORT",
+          "targetArtifact": "DFSORT Utility Steps"
+        },
+        {
+          "stageOrder": 2,
+          "stageName": "Sequential Match-Merge Loop",
+          "operation": "Traverse primary and lookup files using HIGH-VALUES EOF sentinels to emulate relational join semantics",
+          "targetArtifact": "COBOL Paragraph 2000-PROCESS-MATCH-MERGE"
+        },
+        {
+          "stageOrder": 3,
+          "stageName": "Projection & Filter Evaluation",
+          "operation": "Evaluate WHERE clauses, computed columns, and aggregate functions",
+          "targetArtifact": "COBOL Paragraph 2100-PROJECT-COLUMNS"
+        },
+        {
+          "stageOrder": 4,
+          "stageName": "Output Table Generation",
+          "operation": "Write joined and projected records to target QSAM file",
+          "intermediateFile": "WORKLIB.HIGH_VALUE_CUSTOMER",
+          "targetArtifact": "COBOL File Output"
+        }
+      ]
+    },
+    {
+      "stepId": "STEP-059",
+      "procName": "SORT",
+      "targetPattern": "DFSORT_STEP",
+      "stages": [
+        {
+          "stageOrder": 1,
+          "stageName": "Sort Key Extraction",
+          "operation": "Extract sort fields for descending high_value_sales, customer_id",
+          "intermediateFile": "&&SORTCNTL",
+          "targetArtifact": "JCL SYSIN Control Card"
+        },
+        {
+          "stageOrder": 2,
+          "stageName": "DFSORT Execution",
+          "operation": "Execute DFSORT sequential sort utility with high-performance block sorting",
+          "intermediateFile": "WORKLIB.FINAL_CUSTOMER_PROFILE",
+          "targetArtifact": "DFSORT Utility"
+        }
+      ]
+    },
+    {
+      "stepId": "STEP-061",
+      "procName": "SUMMARY",
+      "targetPattern": "COBOL_CONTROL_BREAK",
+      "stages": [
+        {
+          "stageOrder": 1,
+          "stageName": "Input Ordering Validation",
+          "operation": "Verify input dataset is sorted by grouping keys: engagement_level",
+          "intermediateFile": "&&PRE_SORTED",
+          "targetArtifact": "DFSORT / JCL Step"
+        },
+        {
+          "stageOrder": 2,
+          "stageName": "Control Break Detection",
+          "operation": "Compare current record key against previous record key in WORKING-STORAGE to trigger boundary processing",
+          "targetArtifact": "COBOL Paragraph 2200-EVALUATE-KEY-BREAK"
+        },
+        {
+          "stageOrder": 3,
+          "stageName": "Accumulator Management",
+          "operation": "Add metrics to packed decimal (COMP-3) accumulators; increment transaction counters",
+          "targetArtifact": "COBOL Paragraph 2300-ACCUMULATE-METRICS"
+        },
+        {
+          "stageOrder": 4,
+          "stageName": "Summary Record Writing",
+          "operation": "Format summary record with totals and computed means, then write to output file",
+          "intermediateFile": "WORKLIB.ENGAGEMENT_SUMMARY",
+          "targetArtifact": "COBOL Paragraph 2400-WRITE-SUMMARY"
+        }
+      ]
+    },
+    {
+      "stepId": "STEP-062",
+      "procName": "SQL",
+      "targetPattern": "SEQUENTIAL_MERGE",
+      "stages": [
+        {
+          "stageOrder": 1,
+          "stageName": "Input Dual-Stream Sorting",
+          "operation": "Ensure all joining datasets are sorted in ascending order by primary join keys",
+          "intermediateFile": "&&SQLSORT",
+          "targetArtifact": "DFSORT Utility Steps"
+        },
+        {
+          "stageOrder": 2,
+          "stageName": "Sequential Match-Merge Loop",
+          "operation": "Traverse primary and lookup files using HIGH-VALUES EOF sentinels to emulate relational join semantics",
+          "targetArtifact": "COBOL Paragraph 2000-PROCESS-MATCH-MERGE"
+        },
+        {
+          "stageOrder": 3,
+          "stageName": "Projection & Filter Evaluation",
+          "operation": "Evaluate WHERE clauses, computed columns, and aggregate functions",
+          "targetArtifact": "COBOL Paragraph 2100-PROJECT-COLUMNS"
+        },
+        {
+          "stageOrder": 4,
+          "stageName": "Output Table Generation",
+          "operation": "Write joined and projected records to target QSAM file",
+          "intermediateFile": "WORKLIB.FINAL_CONTROL_REPORT",
+          "targetArtifact": "COBOL File Output"
+        }
+      ]
+    },
+    {
+      "stepId": "STEP-064",
+      "procName": "SORT",
+      "targetPattern": "DFSORT_STEP",
+      "stages": [
+        {
+          "stageOrder": 1,
+          "stageName": "Sort Key Extraction",
+          "operation": "Extract sort fields for score_band, descending score, customer_id",
+          "intermediateFile": "&&SORTCNTL",
+          "targetArtifact": "JCL SYSIN Control Card"
+        },
+        {
+          "stageOrder": 2,
+          "stageName": "DFSORT Execution",
+          "operation": "Execute DFSORT sequential sort utility with high-performance block sorting",
+          "intermediateFile": "WORKLIB.CUSTOMER_SCORING",
+          "targetArtifact": "DFSORT Utility"
+        }
+      ]
+    },
+    {
+      "stepId": "STEP-065",
+      "procName": "FREQ",
+      "targetPattern": "COBOL_CONTROL_BREAK",
+      "stages": [
+        {
+          "stageOrder": 1,
+          "stageName": "Category Sorting",
+          "operation": "Sort input stream by frequency dimension categories",
+          "intermediateFile": "&&FRQSORT",
+          "targetArtifact": "DFSORT Utility"
+        },
+        {
+          "stageOrder": 2,
+          "stageName": "Frequency Array Counting",
+          "operation": "Accumulate occurrence counts and calculate percentages in WORKING-STORAGE OCCURS table",
+          "targetArtifact": "COBOL Paragraph 2100-COUNT-FREQUENCY"
+        },
+        {
+          "stageOrder": 3,
+          "stageName": "Frequency Record Output",
+          "operation": "Emit formatted category frequency and cumulative percentage records",
+          "intermediateFile": "WORKLIB.SCORE_DISTRIBUTION",
+          "targetArtifact": "COBOL Paragraph 2200-WRITE-FREQUENCY"
+        }
+      ]
+    },
+    {
+      "stepId": "STEP-066",
+      "procName": "SUMMARY",
+      "targetPattern": "COBOL_CONTROL_BREAK",
+      "stages": [
+        {
+          "stageOrder": 1,
+          "stageName": "Input Ordering Validation",
+          "operation": "Verify input dataset is sorted by grouping keys: score_band",
+          "intermediateFile": "&&PRE_SORTED",
+          "targetArtifact": "DFSORT / JCL Step"
+        },
+        {
+          "stageOrder": 2,
+          "stageName": "Control Break Detection",
+          "operation": "Compare current record key against previous record key in WORKING-STORAGE to trigger boundary processing",
+          "targetArtifact": "COBOL Paragraph 2200-EVALUATE-KEY-BREAK"
+        },
+        {
+          "stageOrder": 3,
+          "stageName": "Accumulator Management",
+          "operation": "Add metrics to packed decimal (COMP-3) accumulators; increment transaction counters",
+          "targetArtifact": "COBOL Paragraph 2300-ACCUMULATE-METRICS"
+        },
+        {
+          "stageOrder": 4,
+          "stageName": "Summary Record Writing",
+          "operation": "Format summary record with totals and computed means, then write to output file",
+          "intermediateFile": "WORKLIB.SCORE_SUMMARY",
+          "targetArtifact": "COBOL Paragraph 2400-WRITE-SUMMARY"
+        }
+      ]
+    },
+    {
+      "stepId": "STEP-068",
+      "procName": "SQL",
+      "targetPattern": "SEQUENTIAL_MERGE",
+      "stages": [
+        {
+          "stageOrder": 1,
+          "stageName": "Input Dual-Stream Sorting",
+          "operation": "Ensure all joining datasets are sorted in ascending order by primary join keys",
+          "intermediateFile": "&&SQLSORT",
+          "targetArtifact": "DFSORT Utility Steps"
+        },
+        {
+          "stageOrder": 2,
+          "stageName": "Sequential Match-Merge Loop",
+          "operation": "Traverse primary and lookup files using HIGH-VALUES EOF sentinels to emulate relational join semantics",
+          "targetArtifact": "COBOL Paragraph 2000-PROCESS-MATCH-MERGE"
+        },
+        {
+          "stageOrder": 3,
+          "stageName": "Projection & Filter Evaluation",
+          "operation": "Evaluate WHERE clauses, computed columns, and aggregate functions",
+          "targetArtifact": "COBOL Paragraph 2100-PROJECT-COLUMNS"
+        },
+        {
+          "stageOrder": 4,
+          "stageName": "Output Table Generation",
+          "operation": "Write joined and projected records to target QSAM file",
+          "intermediateFile": "WORKLIB.REGION_CUSTOMER_SCORE",
+          "targetArtifact": "COBOL File Output"
+        }
+      ]
+    },
+    {
+      "stepId": "STEP-070",
+      "procName": "SORT",
+      "targetPattern": "DFSORT_STEP",
+      "stages": [
+        {
+          "stageOrder": 1,
+          "stageName": "Sort Key Extraction",
+          "operation": "Extract sort fields for region, action_flag, descending region_sales",
+          "intermediateFile": "&&SORTCNTL",
+          "targetArtifact": "JCL SYSIN Control Card"
+        },
+        {
+          "stageOrder": 2,
+          "stageName": "DFSORT Execution",
+          "operation": "Execute DFSORT sequential sort utility with high-performance block sorting",
+          "intermediateFile": "WORKLIB.REGION_CUSTOMER_SCORE_FLAGS",
+          "targetArtifact": "DFSORT Utility"
+        }
+      ]
+    },
+    {
+      "stepId": "STEP-071",
+      "procName": "SQL",
+      "targetPattern": "SEQUENTIAL_MERGE",
+      "stages": [
+        {
+          "stageOrder": 1,
+          "stageName": "Input Dual-Stream Sorting",
+          "operation": "Ensure all joining datasets are sorted in ascending order by primary join keys",
+          "intermediateFile": "&&SQLSORT",
+          "targetArtifact": "DFSORT Utility Steps"
+        },
+        {
+          "stageOrder": 2,
+          "stageName": "Sequential Match-Merge Loop",
+          "operation": "Traverse primary and lookup files using HIGH-VALUES EOF sentinels to emulate relational join semantics",
+          "targetArtifact": "COBOL Paragraph 2000-PROCESS-MATCH-MERGE"
+        },
+        {
+          "stageOrder": 3,
+          "stageName": "Projection & Filter Evaluation",
+          "operation": "Evaluate WHERE clauses, computed columns, and aggregate functions",
+          "targetArtifact": "COBOL Paragraph 2100-PROJECT-COLUMNS"
+        },
+        {
+          "stageOrder": 4,
+          "stageName": "Output Table Generation",
+          "operation": "Write joined and projected records to target QSAM file",
+          "intermediateFile": "WORKLIB.PRODUCT_PERFORMANCE",
+          "targetArtifact": "COBOL File Output"
+        }
+      ]
+    },
+    {
+      "stepId": "STEP-073",
+      "procName": "SORT",
+      "targetPattern": "DFSORT_STEP",
+      "stages": [
+        {
+          "stageOrder": 1,
+          "stageName": "Sort Key Extraction",
+          "operation": "Extract sort fields for category, descending sales, product_id",
+          "intermediateFile": "&&SORTCNTL",
+          "targetArtifact": "JCL SYSIN Control Card"
+        },
+        {
+          "stageOrder": 2,
+          "stageName": "DFSORT Execution",
+          "operation": "Execute DFSORT sequential sort utility with high-performance block sorting",
+          "intermediateFile": "WORKLIB.PRODUCT_PERFORMANCE",
+          "targetArtifact": "DFSORT Utility"
+        }
+      ]
+    },
+    {
+      "stepId": "STEP-074",
+      "procName": "SUMMARY",
+      "targetPattern": "COBOL_CONTROL_BREAK",
+      "stages": [
+        {
+          "stageOrder": 1,
+          "stageName": "Input Ordering Validation",
+          "operation": "Verify input dataset is sorted by grouping keys: category, demand_band",
+          "intermediateFile": "&&PRE_SORTED",
+          "targetArtifact": "DFSORT / JCL Step"
+        },
+        {
+          "stageOrder": 2,
+          "stageName": "Control Break Detection",
+          "operation": "Compare current record key against previous record key in WORKING-STORAGE to trigger boundary processing",
+          "targetArtifact": "COBOL Paragraph 2200-EVALUATE-KEY-BREAK"
+        },
+        {
+          "stageOrder": 3,
+          "stageName": "Accumulator Management",
+          "operation": "Add metrics to packed decimal (COMP-3) accumulators; increment transaction counters",
+          "targetArtifact": "COBOL Paragraph 2300-ACCUMULATE-METRICS"
+        },
+        {
+          "stageOrder": 4,
+          "stageName": "Summary Record Writing",
+          "operation": "Format summary record with totals and computed means, then write to output file",
+          "intermediateFile": "WORKLIB.CATEGORY_DEMAND_SUMMARY",
+          "targetArtifact": "COBOL Paragraph 2400-WRITE-SUMMARY"
+        }
+      ]
+    },
+    {
+      "stepId": "STEP-075",
+      "procName": "FREQ",
+      "targetPattern": "COBOL_CONTROL_BREAK",
+      "stages": [
+        {
+          "stageOrder": 1,
+          "stageName": "Category Sorting",
+          "operation": "Sort input stream by frequency dimension categories",
+          "intermediateFile": "&&FRQSORT",
+          "targetArtifact": "DFSORT Utility"
+        },
+        {
+          "stageOrder": 2,
+          "stageName": "Frequency Array Counting",
+          "operation": "Accumulate occurrence counts and calculate percentages in WORKING-STORAGE OCCURS table",
+          "targetArtifact": "COBOL Paragraph 2100-COUNT-FREQUENCY"
+        },
+        {
+          "stageOrder": 3,
+          "stageName": "Frequency Record Output",
+          "operation": "Emit formatted category frequency and cumulative percentage records",
+          "intermediateFile": "WORKLIB.CATEGORY_DEMAND_FREQ",
+          "targetArtifact": "COBOL Paragraph 2200-WRITE-FREQUENCY"
+        }
+      ]
+    },
+    {
+      "stepId": "STEP-077",
+      "procName": "SORT",
+      "targetPattern": "DFSORT_STEP",
+      "stages": [
+        {
+          "stageOrder": 1,
+          "stageName": "Sort Key Extraction",
+          "operation": "Extract sort fields for month_start, region, customer_id, sale_date",
+          "intermediateFile": "&&SORTCNTL",
+          "targetArtifact": "JCL SYSIN Control Card"
+        },
+        {
+          "stageOrder": 2,
+          "stageName": "DFSORT Execution",
+          "operation": "Execute DFSORT sequential sort utility with high-performance block sorting",
+          "intermediateFile": "WORKLIB.SALES_PERIOD_FLAGS",
+          "targetArtifact": "DFSORT Utility"
+        }
+      ]
+    },
+    {
+      "stepId": "STEP-078",
+      "procName": "SUMMARY",
+      "targetPattern": "COBOL_CONTROL_BREAK",
+      "stages": [
+        {
+          "stageOrder": 1,
+          "stageName": "Input Ordering Validation",
+          "operation": "Verify input dataset is sorted by grouping keys: month_start, region",
+          "intermediateFile": "&&PRE_SORTED",
+          "targetArtifact": "DFSORT / JCL Step"
+        },
+        {
+          "stageOrder": 2,
+          "stageName": "Control Break Detection",
+          "operation": "Compare current record key against previous record key in WORKING-STORAGE to trigger boundary processing",
+          "targetArtifact": "COBOL Paragraph 2200-EVALUATE-KEY-BREAK"
+        },
+        {
+          "stageOrder": 3,
+          "stageName": "Accumulator Management",
+          "operation": "Add metrics to packed decimal (COMP-3) accumulators; increment transaction counters",
+          "targetArtifact": "COBOL Paragraph 2300-ACCUMULATE-METRICS"
+        },
+        {
+          "stageOrder": 4,
+          "stageName": "Summary Record Writing",
+          "operation": "Format summary record with totals and computed means, then write to output file",
+          "intermediateFile": "WORKLIB.MONTH_REGION_SUMMARY",
+          "targetArtifact": "COBOL Paragraph 2400-WRITE-SUMMARY"
+        }
+      ]
+    },
+    {
+      "stepId": "STEP-079",
+      "procName": "SUMMARY",
+      "targetPattern": "COBOL_CONTROL_BREAK",
+      "stages": [
+        {
+          "stageOrder": 1,
+          "stageName": "Input Ordering Validation",
+          "operation": "Verify input dataset is sorted by grouping keys: quarter_start, region",
+          "intermediateFile": "&&PRE_SORTED",
+          "targetArtifact": "DFSORT / JCL Step"
+        },
+        {
+          "stageOrder": 2,
+          "stageName": "Control Break Detection",
+          "operation": "Compare current record key against previous record key in WORKING-STORAGE to trigger boundary processing",
+          "targetArtifact": "COBOL Paragraph 2200-EVALUATE-KEY-BREAK"
+        },
+        {
+          "stageOrder": 3,
+          "stageName": "Accumulator Management",
+          "operation": "Add metrics to packed decimal (COMP-3) accumulators; increment transaction counters",
+          "targetArtifact": "COBOL Paragraph 2300-ACCUMULATE-METRICS"
+        },
+        {
+          "stageOrder": 4,
+          "stageName": "Summary Record Writing",
+          "operation": "Format summary record with totals and computed means, then write to output file",
+          "intermediateFile": "WORKLIB.QUARTER_REGION_SUMMARY",
+          "targetArtifact": "COBOL Paragraph 2400-WRITE-SUMMARY"
+        }
+      ]
+    },
+    {
+      "stepId": "STEP-080",
+      "procName": "SQL",
+      "targetPattern": "SEQUENTIAL_MERGE",
+      "stages": [
+        {
+          "stageOrder": 1,
+          "stageName": "Input Dual-Stream Sorting",
+          "operation": "Ensure all joining datasets are sorted in ascending order by primary join keys",
+          "intermediateFile": "&&SQLSORT",
+          "targetArtifact": "DFSORT Utility Steps"
+        },
+        {
+          "stageOrder": 2,
+          "stageName": "Sequential Match-Merge Loop",
+          "operation": "Traverse primary and lookup files using HIGH-VALUES EOF sentinels to emulate relational join semantics",
+          "targetArtifact": "COBOL Paragraph 2000-PROCESS-MATCH-MERGE"
+        },
+        {
+          "stageOrder": 3,
+          "stageName": "Projection & Filter Evaluation",
+          "operation": "Evaluate WHERE clauses, computed columns, and aggregate functions",
+          "targetArtifact": "COBOL Paragraph 2100-PROJECT-COLUMNS"
+        },
+        {
+          "stageOrder": 4,
+          "stageName": "Output Table Generation",
+          "operation": "Write joined and projected records to target QSAM file",
+          "intermediateFile": "WORKLIB.MONTH_REGION_RANKED",
+          "targetArtifact": "COBOL File Output"
+        }
+      ]
+    },
+    {
+      "stepId": "STEP-081",
+      "procName": "SORT",
+      "targetPattern": "DFSORT_STEP",
+      "stages": [
+        {
+          "stageOrder": 1,
+          "stageName": "Sort Parameter Specification",
+          "operation": "Define DFSORT control cards SORT FIELDS=(1,8,CH,A) and SUM FIELDS=NONE",
+          "intermediateFile": "&&SORTCTL",
+          "targetArtifact": "JCL SYSIN"
+        },
+        {
+          "stageOrder": 2,
+          "stageName": "Duplicate Exception Split",
+          "operation": "Execute DFSORT routing unique records to SORTOUT and duplicate records to XSUM DD",
+          "intermediateFile": "WORKLIB.sales_duplicate_check",
+          "targetArtifact": "DFSORT Utility / JCL"
+        }
+      ]
+    },
+    {
+      "stepId": "STEP-083",
+      "procName": "FREQ",
+      "targetPattern": "COBOL_CONTROL_BREAK",
+      "stages": [
+        {
+          "stageOrder": 1,
+          "stageName": "Category Sorting",
+          "operation": "Sort input stream by frequency dimension categories",
+          "intermediateFile": "&&FRQSORT",
+          "targetArtifact": "DFSORT Utility"
+        },
+        {
+          "stageOrder": 2,
+          "stageName": "Frequency Array Counting",
+          "operation": "Accumulate occurrence counts and calculate percentages in WORKING-STORAGE OCCURS table",
+          "targetArtifact": "COBOL Paragraph 2100-COUNT-FREQUENCY"
+        },
+        {
+          "stageOrder": 3,
+          "stageName": "Frequency Record Output",
+          "operation": "Emit formatted category frequency and cumulative percentage records",
+          "intermediateFile": "WORKLIB.SALES_QUALITY_COUNTS",
+          "targetArtifact": "COBOL Paragraph 2200-WRITE-FREQUENCY"
+        }
+      ]
+    },
+    {
+      "stepId": "STEP-084",
+      "procName": "SQL",
+      "targetPattern": "SEQUENTIAL_MERGE",
+      "stages": [
+        {
+          "stageOrder": 1,
+          "stageName": "Input Dual-Stream Sorting",
+          "operation": "Ensure all joining datasets are sorted in ascending order by primary join keys",
+          "intermediateFile": "&&SQLSORT",
+          "targetArtifact": "DFSORT Utility Steps"
+        },
+        {
+          "stageOrder": 2,
+          "stageName": "Sequential Match-Merge Loop",
+          "operation": "Traverse primary and lookup files using HIGH-VALUES EOF sentinels to emulate relational join semantics",
+          "targetArtifact": "COBOL Paragraph 2000-PROCESS-MATCH-MERGE"
+        },
+        {
+          "stageOrder": 3,
+          "stageName": "Projection & Filter Evaluation",
+          "operation": "Evaluate WHERE clauses, computed columns, and aggregate functions",
+          "targetArtifact": "COBOL Paragraph 2100-PROJECT-COLUMNS"
+        },
+        {
+          "stageOrder": 4,
+          "stageName": "Output Table Generation",
+          "operation": "Write joined and projected records to target QSAM file",
+          "intermediateFile": "WORKLIB.QUALITY_CONTROL",
+          "targetArtifact": "COBOL File Output"
+        }
+      ]
+    },
+    {
+      "stepId": "STEP-085",
+      "procName": "SQL",
+      "targetPattern": "SEQUENTIAL_MERGE",
+      "stages": [
+        {
+          "stageOrder": 1,
+          "stageName": "Input Dual-Stream Sorting",
+          "operation": "Ensure all joining datasets are sorted in ascending order by primary join keys",
+          "intermediateFile": "&&SQLSORT",
+          "targetArtifact": "DFSORT Utility Steps"
+        },
+        {
+          "stageOrder": 2,
+          "stageName": "Sequential Match-Merge Loop",
+          "operation": "Traverse primary and lookup files using HIGH-VALUES EOF sentinels to emulate relational join semantics",
+          "targetArtifact": "COBOL Paragraph 2000-PROCESS-MATCH-MERGE"
+        },
+        {
+          "stageOrder": 3,
+          "stageName": "Projection & Filter Evaluation",
+          "operation": "Evaluate WHERE clauses, computed columns, and aggregate functions",
+          "targetArtifact": "COBOL Paragraph 2100-PROJECT-COLUMNS"
+        },
+        {
+          "stageOrder": 4,
+          "stageName": "Output Table Generation",
+          "operation": "Write joined and projected records to target QSAM file",
+          "intermediateFile": "WORKLIB.CUSTOMER_ACTIVITY",
+          "targetArtifact": "COBOL File Output"
+        }
+      ]
+    },
+    {
+      "stepId": "STEP-087",
+      "procName": "SORT",
+      "targetPattern": "DFSORT_STEP",
+      "stages": [
+        {
+          "stageOrder": 1,
+          "stageName": "Sort Key Extraction",
+          "operation": "Extract sort fields for recency_band, descending sales",
+          "intermediateFile": "&&SORTCNTL",
+          "targetArtifact": "JCL SYSIN Control Card"
+        },
+        {
+          "stageOrder": 2,
+          "stageName": "DFSORT Execution",
+          "operation": "Execute DFSORT sequential sort utility with high-performance block sorting",
+          "intermediateFile": "WORKLIB.CUSTOMER_ACTIVITY",
+          "targetArtifact": "DFSORT Utility"
+        }
+      ]
+    },
+    {
+      "stepId": "STEP-088",
+      "procName": "FREQ",
+      "targetPattern": "COBOL_CONTROL_BREAK",
+      "stages": [
+        {
+          "stageOrder": 1,
+          "stageName": "Category Sorting",
+          "operation": "Sort input stream by frequency dimension categories",
+          "intermediateFile": "&&FRQSORT",
+          "targetArtifact": "DFSORT Utility"
+        },
+        {
+          "stageOrder": 2,
+          "stageName": "Frequency Array Counting",
+          "operation": "Accumulate occurrence counts and calculate percentages in WORKING-STORAGE OCCURS table",
+          "targetArtifact": "COBOL Paragraph 2100-COUNT-FREQUENCY"
+        },
+        {
+          "stageOrder": 3,
+          "stageName": "Frequency Record Output",
+          "operation": "Emit formatted category frequency and cumulative percentage records",
+          "intermediateFile": "WORKLIB.ACTIVITY_MATRIX",
+          "targetArtifact": "COBOL Paragraph 2200-WRITE-FREQUENCY"
+        }
+      ]
+    },
+    {
+      "stepId": "STEP-089",
+      "procName": "SUMMARY",
+      "targetPattern": "COBOL_CONTROL_BREAK",
+      "stages": [
+        {
+          "stageOrder": 1,
+          "stageName": "Input Ordering Validation",
+          "operation": "Verify input dataset is sorted by grouping keys: activity_band, recency_band",
+          "intermediateFile": "&&PRE_SORTED",
+          "targetArtifact": "DFSORT / JCL Step"
+        },
+        {
+          "stageOrder": 2,
+          "stageName": "Control Break Detection",
+          "operation": "Compare current record key against previous record key in WORKING-STORAGE to trigger boundary processing",
+          "targetArtifact": "COBOL Paragraph 2200-EVALUATE-KEY-BREAK"
+        },
+        {
+          "stageOrder": 3,
+          "stageName": "Accumulator Management",
+          "operation": "Add metrics to packed decimal (COMP-3) accumulators; increment transaction counters",
+          "targetArtifact": "COBOL Paragraph 2300-ACCUMULATE-METRICS"
+        },
+        {
+          "stageOrder": 4,
+          "stageName": "Summary Record Writing",
+          "operation": "Format summary record with totals and computed means, then write to output file",
+          "intermediateFile": "WORKLIB.ACTIVITY_SUMMARY",
+          "targetArtifact": "COBOL Paragraph 2400-WRITE-SUMMARY"
+        }
+      ]
+    },
+    {
+      "stepId": "STEP-091",
+      "procName": "FREQ",
+      "targetPattern": "COBOL_CONTROL_BREAK",
+      "stages": [
+        {
+          "stageOrder": 1,
+          "stageName": "Category Sorting",
+          "operation": "Sort input stream by frequency dimension categories",
+          "intermediateFile": "&&FRQSORT",
+          "targetArtifact": "DFSORT Utility"
+        },
+        {
+          "stageOrder": 2,
+          "stageName": "Frequency Array Counting",
+          "operation": "Accumulate occurrence counts and calculate percentages in WORKING-STORAGE OCCURS table",
+          "targetArtifact": "COBOL Paragraph 2100-COUNT-FREQUENCY"
+        },
+        {
+          "stageOrder": 3,
+          "stageName": "Frequency Record Output",
+          "operation": "Emit formatted category frequency and cumulative percentage records",
+          "intermediateFile": "WORKLIB.REGION_CONTROL_COUNTS",
+          "targetArtifact": "COBOL Paragraph 2200-WRITE-FREQUENCY"
+        }
+      ]
+    },
+    {
+      "stepId": "STEP-092",
+      "procName": "SQL",
+      "targetPattern": "SEQUENTIAL_MERGE",
+      "stages": [
+        {
+          "stageOrder": 1,
+          "stageName": "Input Dual-Stream Sorting",
+          "operation": "Ensure all joining datasets are sorted in ascending order by primary join keys",
+          "intermediateFile": "&&SQLSORT",
+          "targetArtifact": "DFSORT Utility Steps"
+        },
+        {
+          "stageOrder": 2,
+          "stageName": "Sequential Match-Merge Loop",
+          "operation": "Traverse primary and lookup files using HIGH-VALUES EOF sentinels to emulate relational join semantics",
+          "targetArtifact": "COBOL Paragraph 2000-PROCESS-MATCH-MERGE"
+        },
+        {
+          "stageOrder": 3,
+          "stageName": "Projection & Filter Evaluation",
+          "operation": "Evaluate WHERE clauses, computed columns, and aggregate functions",
+          "targetArtifact": "COBOL Paragraph 2100-PROJECT-COLUMNS"
+        },
+        {
+          "stageOrder": 4,
+          "stageName": "Output Table Generation",
+          "operation": "Write joined and projected records to target QSAM file",
+          "intermediateFile": "WORKLIB.REGION_CONTROL_DETAIL",
+          "targetArtifact": "COBOL File Output"
+        }
+      ]
+    },
+    {
+      "stepId": "STEP-094",
+      "procName": "SORT",
+      "targetPattern": "DFSORT_STEP",
+      "stages": [
+        {
+          "stageOrder": 1,
+          "stageName": "Sort Key Extraction",
+          "operation": "Extract sort fields for region, sale_date",
+          "intermediateFile": "&&SORTCNTL",
+          "targetArtifact": "JCL SYSIN Control Card"
+        },
+        {
+          "stageOrder": 2,
+          "stageName": "DFSORT Execution",
+          "operation": "Execute DFSORT sequential sort utility with high-performance block sorting",
+          "intermediateFile": "WORKLIB.REGION_RUNNING_SALES",
+          "targetArtifact": "DFSORT Utility"
+        }
+      ]
+    },
+    {
+      "stepId": "STEP-096",
+      "procName": "SUMMARY",
+      "targetPattern": "COBOL_CONTROL_BREAK",
+      "stages": [
+        {
+          "stageOrder": 1,
+          "stageName": "Input Ordering Validation",
+          "operation": "Verify input dataset is sorted by grouping keys: region",
+          "intermediateFile": "&&PRE_SORTED",
+          "targetArtifact": "DFSORT / JCL Step"
+        },
+        {
+          "stageOrder": 2,
+          "stageName": "Control Break Detection",
+          "operation": "Compare current record key against previous record key in WORKING-STORAGE to trigger boundary processing",
+          "targetArtifact": "COBOL Paragraph 2200-EVALUATE-KEY-BREAK"
+        },
+        {
+          "stageOrder": 3,
+          "stageName": "Accumulator Management",
+          "operation": "Add metrics to packed decimal (COMP-3) accumulators; increment transaction counters",
+          "targetArtifact": "COBOL Paragraph 2300-ACCUMULATE-METRICS"
+        },
+        {
+          "stageOrder": 4,
+          "stageName": "Summary Record Writing",
+          "operation": "Format summary record with totals and computed means, then write to output file",
+          "intermediateFile": "WORKLIB.REGION_CHANGE_SUMMARY",
+          "targetArtifact": "COBOL Paragraph 2400-WRITE-SUMMARY"
+        }
+      ]
+    },
+    {
+      "stepId": "STEP-097",
+      "procName": "SQL",
+      "targetPattern": "SEQUENTIAL_MERGE",
+      "stages": [
+        {
+          "stageOrder": 1,
+          "stageName": "Input Dual-Stream Sorting",
+          "operation": "Ensure all joining datasets are sorted in ascending order by primary join keys",
+          "intermediateFile": "&&SQLSORT",
+          "targetArtifact": "DFSORT Utility Steps"
+        },
+        {
+          "stageOrder": 2,
+          "stageName": "Sequential Match-Merge Loop",
+          "operation": "Traverse primary and lookup files using HIGH-VALUES EOF sentinels to emulate relational join semantics",
+          "targetArtifact": "COBOL Paragraph 2000-PROCESS-MATCH-MERGE"
+        },
+        {
+          "stageOrder": 3,
+          "stageName": "Projection & Filter Evaluation",
+          "operation": "Evaluate WHERE clauses, computed columns, and aggregate functions",
+          "targetArtifact": "COBOL Paragraph 2100-PROJECT-COLUMNS"
+        },
+        {
+          "stageOrder": 4,
+          "stageName": "Output Table Generation",
+          "operation": "Write joined and projected records to target QSAM file",
+          "intermediateFile": "WORKLIB.CUSTOMER_LOOKUP",
+          "targetArtifact": "COBOL File Output"
+        }
+      ]
+    },
+    {
+      "stepId": "STEP-099",
+      "procName": "FREQ",
+      "targetPattern": "COBOL_CONTROL_BREAK",
+      "stages": [
+        {
+          "stageOrder": 1,
+          "stageName": "Category Sorting",
+          "operation": "Sort input stream by frequency dimension categories",
+          "intermediateFile": "&&FRQSORT",
+          "targetArtifact": "DFSORT Utility"
+        },
+        {
+          "stageOrder": 2,
+          "stageName": "Frequency Array Counting",
+          "operation": "Accumulate occurrence counts and calculate percentages in WORKING-STORAGE OCCURS table",
+          "targetArtifact": "COBOL Paragraph 2100-COUNT-FREQUENCY"
+        },
+        {
+          "stageOrder": 3,
+          "stageName": "Frequency Record Output",
+          "operation": "Emit formatted category frequency and cumulative percentage records",
+          "intermediateFile": "WORKLIB.LOOKUP_STATUS_COUNTS",
+          "targetArtifact": "COBOL Paragraph 2200-WRITE-FREQUENCY"
+        }
+      ]
+    },
+    {
+      "stepId": "STEP-101",
+      "procName": "FREQ",
+      "targetPattern": "COBOL_CONTROL_BREAK",
+      "stages": [
+        {
+          "stageOrder": 1,
+          "stageName": "Category Sorting",
+          "operation": "Sort input stream by frequency dimension categories",
+          "intermediateFile": "&&FRQSORT",
+          "targetArtifact": "DFSORT Utility"
+        },
+        {
+          "stageOrder": 2,
+          "stageName": "Frequency Array Counting",
+          "operation": "Accumulate occurrence counts and calculate percentages in WORKING-STORAGE OCCURS table",
+          "targetArtifact": "COBOL Paragraph 2100-COUNT-FREQUENCY"
+        },
+        {
+          "stageOrder": 3,
+          "stageName": "Frequency Record Output",
+          "operation": "Emit formatted category frequency and cumulative percentage records",
+          "intermediateFile": "WORKLIB.SEMANTIC_EDGE_COUNTS",
+          "targetArtifact": "COBOL Paragraph 2200-WRITE-FREQUENCY"
+        }
+      ]
+    },
+    {
+      "stepId": "STEP-102",
+      "procName": "SQL",
+      "targetPattern": "SEQUENTIAL_MERGE",
+      "stages": [
+        {
+          "stageOrder": 1,
+          "stageName": "Input Dual-Stream Sorting",
+          "operation": "Ensure all joining datasets are sorted in ascending order by primary join keys",
+          "intermediateFile": "&&SQLSORT",
+          "targetArtifact": "DFSORT Utility Steps"
+        },
+        {
+          "stageOrder": 2,
+          "stageName": "Sequential Match-Merge Loop",
+          "operation": "Traverse primary and lookup files using HIGH-VALUES EOF sentinels to emulate relational join semantics",
+          "targetArtifact": "COBOL Paragraph 2000-PROCESS-MATCH-MERGE"
+        },
+        {
+          "stageOrder": 3,
+          "stageName": "Projection & Filter Evaluation",
+          "operation": "Evaluate WHERE clauses, computed columns, and aggregate functions",
+          "targetArtifact": "COBOL Paragraph 2100-PROJECT-COLUMNS"
+        },
+        {
+          "stageOrder": 4,
+          "stageName": "Output Table Generation",
+          "operation": "Write joined and projected records to target QSAM file",
+          "intermediateFile": "WORKLIB.OPERATIONAL_DASHBOARD",
+          "targetArtifact": "COBOL File Output"
+        }
+      ]
+    },
+    {
+      "stepId": "STEP-104",
+      "procName": "PRINT",
+      "targetPattern": "COBOL_CONTROL_BREAK",
+      "stages": [
+        {
+          "stageOrder": 1,
+          "stageName": "Report Header Formatting",
+          "operation": "Format page headers, run timestamp, and column headings",
+          "targetArtifact": "COBOL Paragraph 1100-PRINT-HEADERS"
+        },
+        {
+          "stageOrder": 2,
+          "stageName": "Detail Line Formatting & Display",
+          "operation": "Format operational dashboard fields into print line and write to SYSOUT",
+          "targetArtifact": "COBOL Paragraph 2100-WRITE-REPORT-LINE"
+        }
+      ]
+    }
+  ]
+}

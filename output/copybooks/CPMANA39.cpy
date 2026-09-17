@@ -1,0 +1,4 @@
+000100 * COPYBOOK: CPMANA39 - FOR WORKLIB.MANAGEMENT_SUMMARY            
+000200 01  MANAGEMENT-SUMMARY-RECORD.                                   
+000300     05  MANAGE-REPORT-METRIC           PIC X(40).                
+000400     05  MANAGE-METRIC-VALUE            PIC S9(9)V99 COMP-3.      

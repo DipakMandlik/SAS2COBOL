@@ -1,0 +1,1342 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SAS2COBOL — Live Orchestration Observability</title>
+  <style>
+    :root {
+      --bg: #fbfbfd;
+      --surface: #ffffff;
+      --surface-subtle: #f5f5f7;
+      --surface-hover: #f0f0f4;
+      --border: #e5e5ea;
+      --border-subtle: #f0f0f2;
+      --text-primary: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --text-tertiary: #86868b;
+      --accent: #0071e3;
+      --accent-hover: #0077ed;
+      --accent-subtle: rgba(0, 113, 227, 0.08);
+      --green: #34c759;
+      --green-subtle: rgba(52, 199, 89, 0.12);
+      --orange: #ff9500;
+      --orange-subtle: rgba(255, 149, 0, 0.12);
+      --red: #ff3b30;
+      --red-subtle: rgba(255, 59, 48, 0.12);
+      --purple: #af52de;
+      --purple-subtle: rgba(175, 82, 222, 0.12);
+      --cyan: #5ac8fa;
+      --cyan-subtle: rgba(90, 200, 250, 0.12);
+      --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.04), 0 1px 2px rgba(0, 0, 0, 0.02);
+      --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.05), 0 1px 3px rgba(0, 0, 0, 0.02);
+      --radius-lg: 16px;
+      --radius-md: 12px;
+      --radius-sm: 8px;
+      --radius-pill: 9999px;
+      --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      --mono: ui-monospace, "SF Mono", Menlo, Monaco, Consolas, monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: var(--font);
+      background-color: var(--bg);
+      color: var(--text-primary);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding: 24px 32px;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .brand-group h1 {
+      font-size: 24px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .brand-sub {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-tertiary);
+      margin-top: 2px;
+    }
+
+    .brand-tagline {
+      font-size: 13px;
+      color: var(--text-secondary);
+      margin-top: 4px;
+    }
+
+    .header-meta {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 6px;
+    }
+
+    .live-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 12px;
+      background: var(--green-subtle);
+      color: var(--green);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      border-radius: var(--radius-pill);
+    }
+
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      background-color: var(--green);
+      border-radius: 50%;
+      animation: pulse-green 2s infinite ease-in-out;
+    }
+
+    @keyframes pulse-green {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.3); opacity: 0.6; }
+    }
+
+    .meta-details {
+      font-size: 12px;
+      color: var(--text-secondary);
+      display: flex;
+      gap: 16px;
+    }
+
+    .meta-details span strong {
+      color: var(--text-primary);
+    }
+
+    /* Pipeline Stepper */
+    .stepper-container {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 16px 24px;
+      margin-bottom: 24px;
+      box-shadow: var(--shadow-sm);
+    }
+
+    .stepper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: relative;
+    }
+
+    .step-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .step-num {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: 600;
+      background: var(--surface-subtle);
+      border: 2px solid var(--border);
+      color: var(--text-tertiary);
+      transition: all 0.2s ease;
+    }
+
+    .step-item.active .step-num {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: white;
+      box-shadow: 0 0 0 3px var(--accent-subtle);
+    }
+
+    .step-item.completed .step-num {
+      background: var(--green);
+      border-color: var(--green);
+      color: white;
+    }
+
+    .step-info {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .step-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .step-sub {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    .step-divider {
+      flex: 1;
+      height: 2px;
+      background: var(--border);
+      margin: 0 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Main 3-Column Layout */
+    .main-grid {
+      display: grid;
+      grid-template-columns: 310px 1fr 320px;
+      gap: 24px;
+      flex: 1;
+    }
+
+    /* Panels */
+    .panel {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .panel-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--text-primary);
+      letter-spacing: -0.01em;
+    }
+
+    .panel-sub {
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-top: 2px;
+    }
+
+    /* Left Column: Agents & Skills */
+    .agent-list, .skill-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .agent-card {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 14px;
+      background: var(--surface-subtle);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      transition: background 0.15s ease, border-color 0.15s ease;
+    }
+
+    .agent-card:hover {
+      background: var(--surface-hover);
+    }
+
+    .agent-card.running {
+      background: var(--surface);
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px var(--accent-subtle);
+    }
+
+    .agent-card.blocked {
+      background: #fff5f5;
+      border-color: var(--red);
+    }
+
+    .agent-info-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      min-width: 0;
+    }
+
+    .agent-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      flex-shrink: 0;
+    }
+
+    .agent-icon.blue { background: var(--accent-subtle); color: var(--accent); }
+    .agent-icon.green { background: var(--green-subtle); color: var(--green); }
+    .agent-icon.orange { background: var(--orange-subtle); color: var(--orange); }
+    .agent-icon.purple { background: var(--purple-subtle); color: var(--purple); }
+    .agent-icon.cyan { background: var(--cyan-subtle); color: #0088cc; }
+
+    .agent-name-group {
+      min-width: 0;
+    }
+
+    .agent-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-primary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .agent-role {
+      font-size: 11px;
+      color: var(--text-secondary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .status-badge {
+      font-size: 11px;
+      font-weight: 600;
+      padding: 3px 8px;
+      border-radius: var(--radius-pill);
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+      text-transform: uppercase;
+    }
+
+    .status-badge.running {
+      background: var(--accent-subtle);
+      color: var(--accent);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .status-badge.running::before {
+      content: "";
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse-blue 1.5s infinite ease-in-out;
+    }
+
+    @keyframes pulse-blue {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.4); opacity: 0.5; }
+    }
+
+    .status-badge.completed { background: var(--green-subtle); color: var(--green); }
+    .status-badge.waiting { background: var(--surface-subtle); color: var(--text-tertiary); border: 1px solid var(--border); }
+    .status-badge.blocked { background: var(--red-subtle); color: var(--red); font-weight: 700; }
+    .status-badge.invoked { background: var(--accent-subtle); color: var(--accent); }
+    .status-badge.available { background: var(--surface-subtle); color: var(--text-tertiary); }
+    .status-badge.unobservable { background: var(--surface-subtle); color: var(--text-tertiary); font-style: italic; }
+
+    .skill-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 12px;
+      background: var(--surface-subtle);
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+    }
+
+    .skill-info {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .skill-name {
+      font-family: var(--mono);
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    /* Center Column: Live Execution Stream */
+    .stream-panel {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      min-height: 540px;
+    }
+
+    .stream-controls {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .filter-select {
+      font-family: var(--font);
+      font-size: 12px;
+      color: var(--text-primary);
+      background: var(--surface-subtle);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 4px 10px;
+      cursor: pointer;
+      outline: none;
+    }
+
+    .stream-container {
+      flex: 1;
+      overflow-y: auto;
+      max-height: 440px;
+      padding-right: 8px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      position: relative;
+    }
+
+    .stream-item {
+      display: flex;
+      gap: 12px;
+      font-size: 13px;
+      line-height: 1.4;
+      position: relative;
+      animation: fade-in 0.2s ease-out;
+    }
+
+    @keyframes fade-in {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .stream-time {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-tertiary);
+      min-width: 64px;
+      padding-top: 2px;
+    }
+
+    .stream-icon {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: var(--surface-subtle);
+      border: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      flex-shrink: 0;
+    }
+
+    .stream-body {
+      flex: 1;
+    }
+
+    .stream-actor {
+      font-weight: 600;
+      color: var(--text-primary);
+      display: inline;
+      margin-right: 6px;
+    }
+
+    .stream-msg {
+      color: var(--text-secondary);
+      display: inline;
+    }
+
+    .stream-item.blocked-item {
+      background: #fff5f5;
+      border: 1px solid rgba(255, 59, 48, 0.2);
+      border-radius: var(--radius-sm);
+      padding: 10px 12px;
+    }
+
+    .stream-item.blocked-item .stream-msg {
+      color: var(--red);
+      font-weight: 500;
+    }
+
+    /* Current Activity Card */
+    .current-activity-card {
+      background: #f4f8ff;
+      border: 1px solid #d0e2ff;
+      border-radius: var(--radius-md);
+      padding: 14px 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 14px;
+    }
+
+    .act-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .act-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .act-icon {
+      width: 28px;
+      height: 28px;
+      background: #0071e3;
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+
+    .act-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .act-detail {
+      font-size: 12px;
+      color: var(--text-secondary);
+    }
+
+    .phase-badge {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--accent);
+      background: white;
+      padding: 4px 10px;
+      border-radius: var(--radius-pill);
+      border: 1px solid #d0e2ff;
+    }
+
+    .act-progress-track {
+      height: 6px;
+      background: #e0ecff;
+      border-radius: var(--radius-pill);
+      overflow: hidden;
+    }
+
+    .act-progress-fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: var(--radius-pill);
+      transition: width 0.4s ease;
+    }
+
+    /* Right Column: Run Status & Gates */
+    .status-panel-group {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .progress-hero {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .progress-num {
+      font-size: 32px;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--accent);
+    }
+
+    .progress-bar-track {
+      height: 8px;
+      background: var(--surface-subtle);
+      border-radius: var(--radius-pill);
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      background: var(--accent);
+      border-radius: var(--radius-pill);
+      transition: width 0.5s ease;
+    }
+
+    .metrics-table {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .metric-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 13px;
+      padding: 4px 0;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .metric-row:last-child {
+      border-bottom: none;
+    }
+
+    .metric-label {
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .metric-val {
+      font-weight: 600;
+      color: var(--text-primary);
+      font-family: var(--mono);
+      font-size: 12px;
+    }
+
+    /* Quality Gates Card */
+    .gate-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 12px;
+      background: var(--surface-subtle);
+      border-radius: var(--radius-sm);
+      font-size: 13px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      transition: background 0.15s ease;
+    }
+
+    .gate-row:hover {
+      background: var(--surface-hover);
+    }
+
+    .gate-left {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .gate-icon {
+      font-size: 14px;
+    }
+
+    .gate-score {
+      font-family: var(--mono);
+      font-size: 11px;
+      color: var(--text-secondary);
+      margin-left: 4px;
+    }
+
+    /* Artifacts Card */
+    .artifact-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 0;
+      font-size: 12px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .artifact-row:last-child {
+      border-bottom: none;
+    }
+
+    .artifact-name {
+      font-family: var(--mono);
+      color: var(--text-primary);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 200px;
+    }
+
+    .artifact-time {
+      color: var(--text-tertiary);
+      font-family: var(--mono);
+      font-size: 11px;
+    }
+
+    /* Modal / Inspection Drawer */
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.2);
+      backdrop-filter: blur(4px);
+      z-index: 100;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-card {
+      background: var(--surface);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+      width: 540px;
+      max-width: 90vw;
+      box-shadow: var(--shadow-md);
+      border: 1px solid var(--border);
+    }
+
+    .modal-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .modal-close {
+      background: none;
+      border: none;
+      font-size: 18px;
+      color: var(--text-tertiary);
+      cursor: pointer;
+    }
+
+    .modal-body {
+      font-family: var(--mono);
+      font-size: 12px;
+      background: var(--surface-subtle);
+      padding: 14px;
+      border-radius: var(--radius-sm);
+      max-height: 360px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+    }
+
+    /* Empty state */
+    .empty-msg {
+      color: var(--text-tertiary);
+      font-size: 13px;
+      text-align: center;
+      padding: 24px 0;
+    }
+
+    @media (max-width: 1100px) {
+      .main-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="brand-group">
+      <h1>
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="16 18 22 12 16 6"></polyline>
+          <polyline points="8 6 2 12 8 18"></polyline>
+        </svg>
+        SAS2COBOL
+      </h1>
+      <div class="brand-sub">AI-Powered Legacy Modernization</div>
+      <div class="brand-tagline">From Legacy Code to Lasting Value: Understand → Reason → Generate → Validate</div>
+    </div>
+    <div class="header-meta">
+      <div class="live-pill">
+        <div class="live-dot"></div>
+        LIVE
+      </div>
+      <div class="meta-details">
+        <span>Run ID: <strong id="runIdDisplay">RUN-INITIALIZING</strong></span>
+        <span>Started: <strong id="startTimeDisplay">--:--:--</strong></span>
+        <span>Elapsed: <strong id="elapsedDisplay">00:00:00</strong></span>
+      </div>
+    </div>
+  </header>
+
+  <!-- Stepper -->
+  <div class="stepper-container">
+    <div class="stepper">
+      <div class="step-item active" id="step-p1">
+        <div class="step-num">1</div>
+        <div class="step-info">
+          <div class="step-title">Understand</div>
+          <div class="step-sub">SAS Analysis</div>
+        </div>
+      </div>
+      <div class="step-divider"></div>
+      <div class="step-item" id="step-p2">
+        <div class="step-num">2</div>
+        <div class="step-info">
+          <div class="step-title">Reason & Design</div>
+          <div class="step-sub">Migration Architecture</div>
+        </div>
+      </div>
+      <div class="step-divider"></div>
+      <div class="step-item" id="step-p3">
+        <div class="step-num">3</div>
+        <div class="step-info">
+          <div class="step-title">Generate & Audit</div>
+          <div class="step-sub">COBOL, JCL, SQL</div>
+        </div>
+      </div>
+      <div class="step-divider"></div>
+      <div class="step-item" id="step-p4">
+        <div class="step-num">4</div>
+        <div class="step-info">
+          <div class="step-title">Deliver</div>
+          <div class="step-sub">Package & Report</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Grid -->
+  <div class="main-grid">
+
+    <!-- Left Column: Agents & Skills -->
+    <div style="display: flex; flex-direction: column; gap: 24px;">
+
+      <!-- Agents Panel -->
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <div class="panel-title">Agents</div>
+            <div class="panel-sub">Claude orchestrates specialized agents</div>
+          </div>
+        </div>
+        <div class="agent-list" id="agentList">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+
+      <!-- Skills Panel -->
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <div class="panel-title">Skills</div>
+            <div class="panel-sub">Domain expertise in action</div>
+          </div>
+        </div>
+        <div class="skill-list" id="skillList">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Center Column: Live Execution Stream -->
+    <div class="panel stream-panel">
+      <div class="panel-header">
+        <div>
+          <div class="panel-title">Live Execution Stream</div>
+          <div class="panel-sub">Real-time activity from Claude Code orchestration</div>
+        </div>
+        <div class="stream-controls">
+          <select class="filter-select" id="eventFilter">
+            <option value="all">All Events</option>
+            <option value="agent">Agents Only</option>
+            <option value="skill">Skills Only</option>
+            <option value="gate">Gates Only</option>
+            <option value="artifact">Artifacts</option>
+            <option value="error">Errors & Blocks</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="stream-container" id="streamContainer">
+        <div class="empty-msg">Listening for orchestration events...</div>
+      </div>
+
+      <!-- Current Activity Card -->
+      <div class="current-activity-card">
+        <div class="act-header">
+          <div class="act-left">
+            <div class="act-icon">💡</div>
+            <div>
+              <div class="act-title" id="actTitle">Ready for migration execution</div>
+              <div class="act-detail" id="actDetail">Standing by for next phase objective</div>
+            </div>
+          </div>
+          <div class="phase-badge" id="actPhaseBadge">Phase 1 ></div>
+        </div>
+        <div class="act-progress-track">
+          <div class="act-progress-fill" id="actProgressFill" style="width: 5%;"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Column: Run Status, Gates, Artifacts -->
+    <div class="status-panel-group">
+
+      <!-- Run Status -->
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <div class="panel-title">Run Status</div>
+            <div class="panel-sub">Overall migration progress</div>
+          </div>
+        </div>
+        <div class="progress-hero">
+          <span style="font-size: 13px; color: var(--text-secondary);">Milestone Progress</span>
+          <span class="progress-num" id="progressPctDisplay">0%</span>
+        </div>
+        <div class="progress-bar-track">
+          <div class="progress-bar-fill" id="progressBarFill" style="width: 0%;"></div>
+        </div>
+        <div class="metrics-table">
+          <div class="metric-row">
+            <span class="metric-label">📄 Source Steps</span>
+            <span class="metric-val" id="metricSteps">-</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">🗄 Datasets</span>
+            <span class="metric-val" id="metricDatasets">-</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">⚙ Processing Units</span>
+            <span class="metric-val" id="metricPUs">-</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">📦 Generated Artifacts</span>
+            <span class="metric-val" id="metricArtifacts">-</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">🔗 Traceability Coverage</span>
+            <span class="metric-val" id="metricTrace">-</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">🛡 Quality Gates</span>
+            <span class="metric-val" id="metricGates">0 / 3</span>
+          </div>
+          <div class="metric-row">
+            <span class="metric-label">🧪 Test Suite</span>
+            <span class="metric-val" id="metricTests">10 / 10</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quality Gates -->
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <div class="panel-title">Quality Gates</div>
+            <div class="panel-sub">Deterministic validation at each phase</div>
+          </div>
+        </div>
+        <div id="gateList">
+          <div class="gate-row" onclick="viewGateDetails(1)">
+            <div class="gate-left">
+              <span class="gate-icon" id="gateIcon1">⚪</span>
+              <span style="font-weight: 500;">Phase 1 - Understanding</span>
+            </div>
+            <span class="status-badge waiting" id="gateBadge1">PENDING</span>
+          </div>
+          <div class="gate-row" onclick="viewGateDetails(2)">
+            <div class="gate-left">
+              <span class="gate-icon" id="gateIcon2">⚪</span>
+              <span style="font-weight: 500;">Phase 2 - Design</span>
+            </div>
+            <span class="status-badge waiting" id="gateBadge2">PENDING</span>
+          </div>
+          <div class="gate-row" onclick="viewGateDetails(3)">
+            <div class="gate-left">
+              <span class="gate-icon" id="gateIcon3">⚪</span>
+              <span style="font-weight: 500;">Phase 3 - Generation</span>
+            </div>
+            <span class="status-badge waiting" id="gateBadge3">PENDING</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recent Artifacts -->
+      <div class="panel">
+        <div class="panel-header">
+          <div>
+            <div class="panel-title">Recent Artifacts</div>
+            <div class="panel-sub">Generated during this run</div>
+          </div>
+        </div>
+        <div id="recentArtifactsList">
+          <div class="empty-msg" style="padding: 10px 0;">No artifacts created yet</div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- Gate Details Modal -->
+  <div class="modal-backdrop" id="modalBackdrop">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3 id="modalTitle" style="font-size: 16px; font-weight: 600;">Gate Validation Report</h3>
+        <button class="modal-close" onclick="closeModal()">✕</button>
+      </div>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <script>
+    let runStartTime = null;
+    let allEvents = [];
+    let currentFilter = 'all';
+
+    const AGENT_META = {
+      'Claude Orchestrator': { color: 'blue', icon: '⚡' },
+      'sas-analyst': { color: 'green', icon: '🔍' },
+      'migration-architect': { color: 'orange', icon: '📐' },
+      'cobol-engineer': { color: 'purple', icon: '💻' },
+      'quality-auditor': { color: 'cyan', icon: '🛡' },
+    };
+
+    function startTimer() {
+      setInterval(() => {
+        if (!runStartTime) return;
+        const now = new Date();
+        const diff = Math.floor((now - runStartTime) / 1000);
+        if (diff < 0) return;
+        const hrs = String(Math.floor(diff / 3600)).padStart(2, '0');
+        const mins = String(Math.floor((diff % 3600) / 60)).padStart(2, '0');
+        const secs = String(diff % 60).padStart(2, '0');
+        document.getElementById('elapsedDisplay').textContent = `${hrs}:${mins}:${secs}`;
+      }, 1000);
+    }
+
+    function renderSnapshot(snap) {
+      if (!snap) return;
+
+      document.getElementById('runIdDisplay').textContent = snap.runId || 'ACTIVE';
+      if (snap.startTime) {
+        runStartTime = new Date(snap.startTime);
+        document.getElementById('startTimeDisplay').textContent = runStartTime.toLocaleTimeString('en-US', { hour12: false });
+      }
+
+      // Progress
+      const pct = snap.progressPct || 0;
+      document.getElementById('progressPctDisplay').textContent = `${pct}%`;
+      document.getElementById('progressBarFill').style.width = `${pct}%`;
+      document.getElementById('actProgressFill').style.width = `${pct}%`;
+
+      // Stepper
+      const p = snap.phase || '';
+      const s1 = document.getElementById('step-p1');
+      const s2 = document.getElementById('step-p2');
+      const s3 = document.getElementById('step-p3');
+      const s4 = document.getElementById('step-p4');
+
+      [s1, s2, s3, s4].forEach(s => s.className = 'step-item');
+      if (p.includes('Phase 1')) {
+        s1.classList.add('active');
+      } else if (p.includes('Phase 2')) {
+        s1.classList.add('completed');
+        s2.classList.add('active');
+      } else if (p.includes('Phase 3')) {
+        s1.classList.add('completed');
+        s2.classList.add('completed');
+        s3.classList.add('active');
+      } else if (p.includes('Phase 4') || p.includes('Deliver')) {
+        s1.classList.add('completed');
+        s2.classList.add('completed');
+        s3.classList.add('completed');
+        s4.classList.add('active');
+      }
+
+      // Current Activity
+      document.getElementById('actTitle').textContent = snap.currentActivity || 'Supervising migration pipeline';
+      document.getElementById('actDetail').textContent = snap.currentActivityDetail || '';
+      document.getElementById('actPhaseBadge').textContent = snap.phase ? `${snap.phase.split(' - ')[0]} >` : 'Phase 1 >';
+
+      // Agents
+      const agentList = document.getElementById('agentList');
+      if (snap.agents) {
+        agentList.innerHTML = snap.agents.map(ag => {
+          const meta = AGENT_META[ag.name] || { color: 'blue', icon: '👤' };
+          const stateClass = ag.state.toLowerCase();
+          return `
+            <div class="agent-card ${stateClass}">
+              <div class="agent-info-left">
+                <div class="agent-icon ${meta.color}">${meta.icon}</div>
+                <div class="agent-name-group">
+                  <div class="agent-name">${escapeHtml(ag.name)}</div>
+                  <div class="agent-role" title="${escapeHtml(ag.error || ag.currentTask)}">${escapeHtml(ag.error || ag.currentTask)}</div>
+                </div>
+              </div>
+              <span class="status-badge ${stateClass}">${ag.state}</span>
+            </div>
+          `;
+        }).join('');
+      }
+
+      // Skills
+      const skillList = document.getElementById('skillList');
+      if (snap.skills) {
+        skillList.innerHTML = snap.skills.map(sk => {
+          const stateClass = sk.state.toLowerCase();
+          return `
+            <div class="skill-row">
+              <div class="skill-info">
+                <span class="skill-name">${escapeHtml(sk.name)}</span>
+              </div>
+              <span class="status-badge ${stateClass}">${sk.state}</span>
+            </div>
+          `;
+        }).join('');
+      }
+
+      // Metrics
+      if (snap.metrics) {
+        document.getElementById('metricSteps').textContent = snap.metrics.sourceSteps ? snap.metrics.sourceSteps : '-';
+        document.getElementById('metricDatasets').textContent = snap.metrics.datasets ? snap.metrics.datasets : '-';
+        document.getElementById('metricPUs').textContent = snap.metrics.processingUnits ? snap.metrics.processingUnits : '-';
+        document.getElementById('metricArtifacts').textContent = snap.metrics.generatedArtifacts ? snap.metrics.generatedArtifacts : '-';
+        document.getElementById('metricTrace').textContent = (snap.metrics.traceabilityCoverage !== null && snap.metrics.traceabilityCoverage !== undefined) ? `${snap.metrics.traceabilityCoverage}%` : '-';
+        document.getElementById('metricGates').textContent = `${snap.metrics.qualityGatesPassed || 0} / ${snap.metrics.qualityGatesTotal || 3}`;
+        document.getElementById('metricTests').textContent = `${snap.metrics.testSuitePassed || 10} / ${snap.metrics.testSuiteTotal || 10}`;
+      }
+
+      // Gates
+      if (snap.gates) {
+        renderGate('phase1', 1, snap.gates.phase1);
+        renderGate('phase2', 2, snap.gates.phase2);
+        renderGate('phase3', 3, snap.gates.phase3);
+      }
+
+      // Recent Artifacts
+      const artList = document.getElementById('recentArtifactsList');
+      if (snap.recentArtifacts && snap.recentArtifacts.length > 0) {
+        artList.innerHTML = snap.recentArtifacts.map(art => `
+          <div class="artifact-row">
+            <span class="artifact-name" title="${escapeHtml(art.path)}">📄 ${escapeHtml(art.path)}</span>
+            <span class="artifact-time">${escapeHtml(art.timeStr || '')}</span>
+          </div>
+        `).join('');
+      } else {
+        artList.innerHTML = '<div class="empty-msg" style="padding: 10px 0;">No artifacts created yet</div>';
+      }
+    }
+
+    function renderGate(key, num, gate) {
+      if (!gate) return;
+      const icon = document.getElementById(`gateIcon${num}`);
+      const badge = document.getElementById(`gateBadge${num}`);
+
+      badge.className = 'status-badge ' + gate.status.toLowerCase();
+      badge.textContent = gate.status === 'PASSED'
+        ? `${gate.checksPassed}/${gate.totalChecks} PASSED`
+        : gate.status;
+
+      if (gate.status === 'PASSED') {
+        icon.textContent = '✅';
+      } else if (gate.status === 'FAILED') {
+        icon.textContent = '❌';
+      } else if (gate.status === 'VALIDATING') {
+        icon.textContent = '⏳';
+      } else {
+        icon.textContent = '⚪';
+      }
+    }
+
+    function appendEvent(ev) {
+      allEvents.push(ev);
+      renderEventItem(ev);
+    }
+
+    function renderEventItem(ev) {
+      if (!matchesFilter(ev, currentFilter)) return;
+
+      const container = document.getElementById('streamContainer');
+      const emptyMsg = container.querySelector('.empty-msg');
+      if (emptyMsg) emptyMsg.remove();
+
+      const item = document.createElement('div');
+      const isBlocked = ev.type === 'agent.blocked' || ev.type === 'agent.failed';
+      item.className = 'stream-item' + (isBlocked ? ' blocked-item' : '');
+
+      let icon = '●';
+      if (ev.type.startsWith('agent')) icon = '👤';
+      else if (ev.type.startsWith('skill')) icon = '⚡';
+      else if (ev.type.startsWith('gate')) icon = '🛡';
+      else if (ev.type.startsWith('artifact')) icon = '📄';
+      else if (ev.type.startsWith('tool')) icon = '⚙';
+
+      item.innerHTML = `
+        <div class="stream-time">${escapeHtml(ev.timeStr || '')}</div>
+        <div class="stream-icon">${icon}</div>
+        <div class="stream-body">
+          <span class="stream-actor">${escapeHtml(ev.actor || 'System')}:</span>
+          <span class="stream-msg">${escapeHtml(ev.message || '')}</span>
+        </div>
+      `;
+
+      container.appendChild(item);
+      container.scrollTop = container.scrollHeight;
+    }
+
+    function matchesFilter(ev, filter) {
+      if (filter === 'all') return true;
+      if (filter === 'agent') return ev.type.startsWith('agent');
+      if (filter === 'skill') return ev.type.startsWith('skill') || ev.type.startsWith('tool');
+      if (filter === 'gate') return ev.type.startsWith('gate');
+      if (filter === 'artifact') return ev.type.startsWith('artifact');
+      if (filter === 'error') return ev.type.includes('blocked') || ev.type.includes('failed');
+      return true;
+    }
+
+    function applyFilter() {
+      currentFilter = document.getElementById('eventFilter').value;
+      const container = document.getElementById('streamContainer');
+      container.innerHTML = '';
+      if (allEvents.length === 0) {
+        container.innerHTML = '<div class="empty-msg">Listening for orchestration events...</div>';
+        return;
+      }
+      for (const ev of allEvents) {
+        renderEventItem(ev);
+      }
+    }
+
+    document.getElementById('eventFilter').addEventListener('change', applyFilter);
+
+    function viewGateDetails(phaseNum) {
+      const modal = document.getElementById('modalBackdrop');
+      const title = document.getElementById('modalTitle');
+      const body = document.getElementById('modalBody');
+
+      title.textContent = `Gate ${phaseNum} Validation Output`;
+      body.textContent = 'Fetching deterministic gate report...';
+      modal.classList.add('open');
+
+      fetch(`/api/gate/${phaseNum}`)
+        .then(res => res.json())
+        .then(data => {
+          body.textContent = data.output || 'No gate output recorded yet.';
+        })
+        .catch(err => {
+          body.textContent = `Phase ${phaseNum} gate verification pending execution.`;
+        });
+    }
+
+    function closeModal() {
+      document.getElementById('modalBackdrop').classList.remove('open');
+    }
+
+    function escapeHtml(str) {
+      if (!str) return '';
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    // Connect to Server-Sent Events (live streaming without polling or page reload)
+    function connectSSE() {
+      const es = new EventSource('/events');
+
+      es.onmessage = (e) => {
+        try {
+          const ev = JSON.parse(e.data);
+          appendEvent(ev);
+          // Refresh snapshot on significant events
+          refreshSnapshot();
+        } catch (err) {
+          // ignore
+        }
+      };
+
+      es.onerror = () => {
+        // Fallback to lightweight polling if SSE is interrupted
+        setTimeout(connectSSE, 3000);
+      };
+    }
+
+    function refreshSnapshot() {
+      fetch('/api/snapshot')
+        .then(res => res.json())
+        .then(snap => renderSnapshot(snap))
+        .catch(() => {});
+    }
+
+    function syncEvents() {
+      fetch('/api/events')
+        .then(res => res.json())
+        .then(events => {
+          if (Array.isArray(events) && events.length > allEvents.length) {
+            allEvents = events;
+            applyFilter();
+          }
+        })
+        .catch(() => {});
+    }
+
+    function init() {
+      startTimer();
+      // Fetch initial snapshot and past events
+      fetch('/api/snapshot')
+        .then(res => res.json())
+        .then(snap => {
+          renderSnapshot(snap);
+          return fetch('/api/events');
+        })
+        .then(res => res.json())
+        .then(events => {
+          if (Array.isArray(events)) {
+            allEvents = events;
+            applyFilter();
+          }
+          connectSSE();
+        })
+        .catch(() => {
+          connectSSE();
+        });
+
+      // Resilient live polling every 2s in case SSE is interrupted or throttled
+      setInterval(() => {
+        refreshSnapshot();
+        syncEvents();
+      }, 2000);
+    }
+
+    window.addEventListener('DOMContentLoaded', init);
+  </script>
+</body>
+</html>

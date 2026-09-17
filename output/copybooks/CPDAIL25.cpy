@@ -1,0 +1,6 @@
+000100 * COPYBOOK: CPDAIL25 - FOR WORKLIB.DAILY_SALES_SORTED            
+000200 01  DAILY-SALES-SORTED-RECORD.                                   
+000300     05  DAILY-SALE-DATE                PIC 9(8).                 
+000400     05  DAILY-DAILY-TOTAL              PIC S9(9)V99 COMP-3.      
+000500     05  DAILY-DAILY-COUNT              PIC S9(9)V99 COMP-3.      
+000600     05  DAILY-RUNNING-MONTHLY-TOTAL    PIC S9(9)V99 COMP-3.      

@@ -1,0 +1,6 @@
+000100 * COPYBOOK: CPDELI26 - FOR WORKLIB.DELIVERY_MANIFEST             
+000200 01  DELIVERY-MANIFEST-RECORD.                                    
+000300     05  DELIVE-MANIFEST-ID             PIC S9(9) COMP-3.         
+000400     05  DELIVE-DESTINATION-REGION      PIC X(20).                
+000500     05  DELIVE-TOTAL-PACKAGES          PIC S9(9)V99 COMP-3.      
+000600     05  DELIVE-MANIFEST-DATE           PIC 9(8).                 

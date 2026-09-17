@@ -6,7 +6,8 @@
       "stepId": "STEP-006",
       "description": "External RAW.customers physical layout is unmanaged in SAS code; field types and lengths inferred from SET statement.",
       "impact": "MEDIUM",
-      "status": "INFERRED"
+      "status": "INFERRED",
+      "epistemicTier": "EXTERNALLY_UNKNOWN"
     },
     {
       "id": "UNC-002",
@@ -14,7 +15,8 @@
       "stepId": "STEP-008",
       "description": "External RAW.products physical layout is unmanaged; field types and lengths inferred from SET statement.",
       "impact": "MEDIUM",
-      "status": "INFERRED"
+      "status": "INFERRED",
+      "epistemicTier": "EXTERNALLY_UNKNOWN"
     },
     {
       "id": "UNC-003",
@@ -22,7 +24,8 @@
       "stepId": "STEP-010",
       "description": "External RAW.sales physical layout is unmanaged; field types and formats inferred from LENGTH and FORMAT statements.",
       "impact": "MEDIUM",
-      "status": "INFERRED"
+      "status": "INFERRED",
+      "epistemicTier": "EXTERNALLY_UNKNOWN"
     },
     {
       "id": "UNC-004",
@@ -30,7 +33,8 @@
       "stepId": "STEP-037",
       "description": "Macro %build_region_report dynamically conditions on &RUN_REGION; in production this parameter may be injected via scheduler.",
       "impact": "LOW",
-      "status": "CONFIRMED"
+      "status": "CONFIRMED",
+      "epistemicTier": "MIGRATION_DECISION_MADE"
     },
     {
       "id": "UNC-005",
@@ -38,7 +42,44 @@
       "stepId": "STEP-056",
       "description": "Macro %parameterized_filter dynamic table substitution (&output) resolved statically to WORKLIB.high_value_sales.",
       "impact": "LOW",
-      "status": "CONFIRMED"
+      "status": "CONFIRMED",
+      "epistemicTier": "MIGRATION_DECISION_MADE"
+    },
+    {
+      "id": "UNC-006",
+      "kind": "REQUIRES_REVIEW",
+      "stepId": "STEP-006",
+      "description": "Source code defect: FIRST.customer_id evaluated without BY customer_id statement in customer_base. Requires architecture review.",
+      "impact": "HIGH",
+      "status": "CONFIRMED",
+      "epistemicTier": "RUNTIME_VALIDATION_REQUIRED"
+    },
+    {
+      "id": "UNC-007",
+      "kind": "REQUIRES_REVIEW",
+      "stepId": "STEP-027",
+      "description": "Source sequence defect: daily_sales executes BY sale_date against sales_sorted (sorted by customer_id). Requires JCL sort step.",
+      "impact": "HIGH",
+      "status": "CONFIRMED",
+      "epistemicTier": "RUNTIME_VALIDATION_REQUIRED"
+    },
+    {
+      "id": "UNC-008",
+      "kind": "REQUIRES_REVIEW",
+      "stepId": "STEP-039",
+      "description": "Source join defect: final_sales_extract merges on customer_region where inputs contain region and are sorted by sales desc.",
+      "impact": "HIGH",
+      "status": "CONFIRMED",
+      "epistemicTier": "RUNTIME_VALIDATION_REQUIRED"
+    },
+    {
+      "id": "UNC-009",
+      "kind": "REQUIRES_REVIEW",
+      "stepId": "STEP-044",
+      "description": "Source loop defect: reconciliation executes conditional SET on _N_=1 without STOP, causing infinite loop in batch SAS.",
+      "impact": "HIGH",
+      "status": "CONFIRMED",
+      "epistemicTier": "RUNTIME_VALIDATION_REQUIRED"
     },
     {
       "id": "ASM-001",
@@ -46,7 +87,8 @@
       "stepId": "STEP-001",
       "description": "Source system operates in single-byte character encoding (ASCII/EBCDIC standard).",
       "impact": "LOW",
-      "status": "RESOLVED"
+      "status": "RESOLVED",
+      "epistemicTier": "RESOLVED"
     },
     {
       "id": "ASM-002",
@@ -54,7 +96,8 @@
       "stepId": "STEP-044",
       "description": "Reconciliation baseline expected_rows and expected_sales require pre-migration historical baseline inputs.",
       "impact": "MEDIUM",
-      "status": "RESOLVED"
+      "status": "CONFIRMED",
+      "epistemicTier": "RUNTIME_VALIDATION_REQUIRED"
     }
   ]
 }

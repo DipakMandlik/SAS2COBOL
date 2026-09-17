@@ -6,40 +6,41 @@
       "library": "RAW",
       "isPermanent": true,
       "schemaStatus": "PARTIAL_SCHEMA_UNKNOWN",
+      "producerStepId": "STEP-006",
       "variables": [
         {
-          "fieldId": "FIELD-001",
+          "fieldId": "FIELD-0001",
           "name": "customer_id",
           "type": "NUM",
           "semanticRole": "BUSINESS_IDENTIFIER"
         },
         {
-          "fieldId": "FIELD-002",
+          "fieldId": "FIELD-0002",
           "name": "customer_name",
           "type": "CHAR",
-          "length": 80,
-          "semanticRole": "DIMENSION"
+          "semanticRole": "DIMENSION",
+          "length": 80
         },
         {
-          "fieldId": "FIELD-003",
+          "fieldId": "FIELD-0003",
           "name": "segment",
           "type": "CHAR",
-          "length": 20,
-          "semanticRole": "DIMENSION"
+          "semanticRole": "DIMENSION",
+          "length": 20
         },
         {
-          "fieldId": "FIELD-004",
+          "fieldId": "FIELD-0004",
           "name": "region",
           "type": "CHAR",
-          "length": 20,
-          "semanticRole": "DIMENSION"
+          "semanticRole": "DIMENSION",
+          "length": 20
         },
         {
-          "fieldId": "FIELD-005",
+          "fieldId": "FIELD-0005",
           "name": "status",
           "type": "CHAR",
-          "length": 12,
-          "semanticRole": "FILTER"
+          "semanticRole": "FILTER",
+          "length": 12
         }
       ]
     },
@@ -49,33 +50,34 @@
       "library": "RAW",
       "isPermanent": true,
       "schemaStatus": "PARTIAL_SCHEMA_UNKNOWN",
+      "producerStepId": "STEP-008",
       "variables": [
         {
-          "fieldId": "FIELD-006",
+          "fieldId": "FIELD-0006",
           "name": "product_id",
           "type": "NUM",
           "semanticRole": "BUSINESS_IDENTIFIER"
         },
         {
-          "fieldId": "FIELD-007",
+          "fieldId": "FIELD-0007",
           "name": "product_name",
           "type": "CHAR",
-          "length": 100,
-          "semanticRole": "DIMENSION"
+          "semanticRole": "DIMENSION",
+          "length": 100
         },
         {
-          "fieldId": "FIELD-008",
+          "fieldId": "FIELD-0008",
           "name": "category",
           "type": "CHAR",
-          "length": 40,
-          "semanticRole": "DIMENSION"
+          "semanticRole": "DIMENSION",
+          "length": 40
         },
         {
-          "fieldId": "FIELD-009",
+          "fieldId": "FIELD-0009",
           "name": "subcategory",
           "type": "CHAR",
-          "length": 40,
-          "semanticRole": "DIMENSION"
+          "semanticRole": "DIMENSION",
+          "length": 40
         }
       ]
     },
@@ -85,63 +87,64 @@
       "library": "RAW",
       "isPermanent": true,
       "schemaStatus": "PARTIAL_SCHEMA_UNKNOWN",
+      "producerStepId": "STEP-010",
       "variables": [
         {
-          "fieldId": "FIELD-010",
+          "fieldId": "FIELD-0010",
           "name": "sale_id",
           "type": "NUM",
           "semanticRole": "BUSINESS_IDENTIFIER"
         },
         {
-          "fieldId": "FIELD-011",
+          "fieldId": "FIELD-0011",
           "name": "customer_id",
           "type": "NUM",
           "semanticRole": "BUSINESS_IDENTIFIER"
         },
         {
-          "fieldId": "FIELD-012",
+          "fieldId": "FIELD-0012",
           "name": "product_id",
           "type": "NUM",
           "semanticRole": "BUSINESS_IDENTIFIER"
         },
         {
-          "fieldId": "FIELD-013",
+          "fieldId": "FIELD-0013",
           "name": "quantity",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-014",
+          "fieldId": "FIELD-0014",
           "name": "unit_price",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-015",
+          "fieldId": "FIELD-0015",
           "name": "discount_pct",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-016",
+          "fieldId": "FIELD-0016",
           "name": "sale_date",
           "type": "NUM",
-          "format": "date9.",
-          "semanticRole": "DIMENSION"
+          "semanticRole": "DIMENSION",
+          "format": "date9."
         },
         {
-          "fieldId": "FIELD-017",
+          "fieldId": "FIELD-0017",
           "name": "region",
           "type": "CHAR",
-          "length": 20,
-          "semanticRole": "DIMENSION"
+          "semanticRole": "DIMENSION",
+          "length": 20
         },
         {
-          "fieldId": "FIELD-018",
+          "fieldId": "FIELD-0018",
           "name": "channel",
           "type": "CHAR",
-          "length": 20,
-          "semanticRole": "DIMENSION"
+          "semanticRole": "DIMENSION",
+          "length": 20
         }
       ]
     },
@@ -151,24 +154,33 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-088",
       "variables": [
         {
-          "fieldId": "FIELD-104",
-          "name": "primary_key",
-          "type": "NUM",
-          "semanticRole": "BUSINESS_IDENTIFIER"
+          "fieldId": "FIELD-0019",
+          "name": "activity_band",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 15
         },
         {
-          "fieldId": "FIELD-204",
-          "name": "metric_value",
+          "fieldId": "FIELD-0020",
+          "name": "recency_band",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 15
+        },
+        {
+          "fieldId": "FIELD-0021",
+          "name": "COUNT",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-304",
-          "name": "classification_tag",
-          "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "fieldId": "FIELD-0022",
+          "name": "PERCENT",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
         }
       ]
     },
@@ -178,24 +190,51 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-089",
       "variables": [
         {
-          "fieldId": "FIELD-105",
-          "name": "primary_key",
-          "type": "NUM",
-          "semanticRole": "BUSINESS_IDENTIFIER"
+          "fieldId": "FIELD-0023",
+          "name": "activity_band",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 15
         },
         {
-          "fieldId": "FIELD-205",
-          "name": "metric_value",
+          "fieldId": "FIELD-0024",
+          "name": "recency_band",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 15
+        },
+        {
+          "fieldId": "FIELD-0025",
+          "name": "_TYPE_",
+          "type": "NUM",
+          "semanticRole": "DERIVED_METRIC"
+        },
+        {
+          "fieldId": "FIELD-0026",
+          "name": "_FREQ_",
+          "type": "NUM",
+          "semanticRole": "DERIVED_METRIC"
+        },
+        {
+          "fieldId": "FIELD-0027",
+          "name": "sales",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-305",
-          "name": "classification_tag",
-          "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "fieldId": "FIELD-0028",
+          "name": "transactions",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0029",
+          "name": "average_active_days",
+          "type": "NUM",
+          "semanticRole": "DERIVED_METRIC"
         }
       ]
     },
@@ -205,24 +244,51 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-042",
       "variables": [
         {
-          "fieldId": "FIELD-106",
-          "name": "primary_key",
-          "type": "NUM",
-          "semanticRole": "BUSINESS_IDENTIFIER"
+          "fieldId": "FIELD-0030",
+          "name": "customer_region",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 20
         },
         {
-          "fieldId": "FIELD-206",
-          "name": "metric_value",
+          "fieldId": "FIELD-0031",
+          "name": "transactions",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-306",
-          "name": "classification_tag",
+          "fieldId": "FIELD-0032",
+          "name": "sales",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0033",
+          "name": "average_sale",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0034",
+          "name": "units",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0035",
+          "name": "audit_timestamp",
+          "type": "NUM",
+          "semanticRole": "DERIVED_METRIC"
+        },
+        {
+          "fieldId": "FIELD-0036",
+          "name": "audit_source",
           "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "semanticRole": "DIMENSION",
+          "length": 30
         }
       ]
     },
@@ -232,24 +298,33 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-075",
       "variables": [
         {
-          "fieldId": "FIELD-107",
-          "name": "primary_key",
-          "type": "NUM",
-          "semanticRole": "BUSINESS_IDENTIFIER"
+          "fieldId": "FIELD-0037",
+          "name": "category",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 40
         },
         {
-          "fieldId": "FIELD-207",
-          "name": "metric_value",
+          "fieldId": "FIELD-0038",
+          "name": "demand_band",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 15
+        },
+        {
+          "fieldId": "FIELD-0039",
+          "name": "COUNT",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-307",
-          "name": "classification_tag",
-          "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "fieldId": "FIELD-0040",
+          "name": "PERCENT",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
         }
       ]
     },
@@ -259,24 +334,51 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-074",
       "variables": [
         {
-          "fieldId": "FIELD-108",
-          "name": "primary_key",
-          "type": "NUM",
-          "semanticRole": "BUSINESS_IDENTIFIER"
+          "fieldId": "FIELD-0041",
+          "name": "category",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 40
         },
         {
-          "fieldId": "FIELD-208",
-          "name": "metric_value",
+          "fieldId": "FIELD-0042",
+          "name": "demand_band",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 15
+        },
+        {
+          "fieldId": "FIELD-0043",
+          "name": "_TYPE_",
+          "type": "NUM",
+          "semanticRole": "DERIVED_METRIC"
+        },
+        {
+          "fieldId": "FIELD-0044",
+          "name": "_FREQ_",
+          "type": "NUM",
+          "semanticRole": "DERIVED_METRIC"
+        },
+        {
+          "fieldId": "FIELD-0045",
+          "name": "sales",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-308",
-          "name": "classification_tag",
-          "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "fieldId": "FIELD-0046",
+          "name": "units",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0047",
+          "name": "transactions",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
         }
       ]
     },
@@ -286,24 +388,26 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-017",
       "variables": [
         {
-          "fieldId": "FIELD-109",
-          "name": "primary_key",
-          "type": "NUM",
-          "semanticRole": "BUSINESS_IDENTIFIER"
+          "fieldId": "FIELD-0048",
+          "name": "channel",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 20
         },
         {
-          "fieldId": "FIELD-209",
-          "name": "metric_value",
+          "fieldId": "FIELD-0049",
+          "name": "COUNT",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-309",
-          "name": "classification_tag",
-          "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "fieldId": "FIELD-0050",
+          "name": "PERCENT",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
         }
       ]
     },
@@ -313,24 +417,59 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-085",
       "variables": [
         {
-          "fieldId": "FIELD-110",
-          "name": "primary_key",
+          "fieldId": "FIELD-0051",
+          "name": "customer_id",
           "type": "NUM",
           "semanticRole": "BUSINESS_IDENTIFIER"
         },
         {
-          "fieldId": "FIELD-210",
-          "name": "metric_value",
+          "fieldId": "FIELD-0052",
+          "name": "first_sale",
+          "type": "NUM",
+          "semanticRole": "DIMENSION",
+          "format": "date9."
+        },
+        {
+          "fieldId": "FIELD-0053",
+          "name": "last_sale",
+          "type": "NUM",
+          "semanticRole": "DIMENSION",
+          "format": "date9."
+        },
+        {
+          "fieldId": "FIELD-0054",
+          "name": "active_days",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-310",
-          "name": "classification_tag",
+          "fieldId": "FIELD-0055",
+          "name": "transaction_count",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0056",
+          "name": "sales",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0057",
+          "name": "activity_band",
           "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "semanticRole": "DIMENSION",
+          "length": 15
+        },
+        {
+          "fieldId": "FIELD-0058",
+          "name": "recency_band",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 15
         }
       ]
     },
@@ -340,40 +479,54 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-006",
       "variables": [
         {
-          "fieldId": "FIELD-019",
+          "fieldId": "FIELD-0059",
           "name": "customer_id",
           "type": "NUM",
           "semanticRole": "BUSINESS_IDENTIFIER"
         },
         {
-          "fieldId": "FIELD-020",
+          "fieldId": "FIELD-0060",
           "name": "customer_name",
           "type": "CHAR",
-          "length": 80,
-          "semanticRole": "DIMENSION"
+          "semanticRole": "DIMENSION",
+          "length": 80
         },
         {
-          "fieldId": "FIELD-021",
+          "fieldId": "FIELD-0061",
           "name": "segment",
           "type": "CHAR",
-          "length": 20,
-          "semanticRole": "DIMENSION"
+          "semanticRole": "DIMENSION",
+          "length": 20
         },
         {
-          "fieldId": "FIELD-022",
+          "fieldId": "FIELD-0062",
           "name": "region",
           "type": "CHAR",
-          "length": 20,
-          "semanticRole": "DIMENSION"
+          "semanticRole": "DIMENSION",
+          "length": 20
         },
         {
-          "fieldId": "FIELD-023",
+          "fieldId": "FIELD-0063",
           "name": "status",
           "type": "CHAR",
-          "length": 12,
-          "semanticRole": "FILTER"
+          "semanticRole": "FILTER",
+          "length": 12
+        },
+        {
+          "fieldId": "FIELD-0064",
+          "name": "account_year",
+          "type": "NUM",
+          "semanticRole": "DERIVED_METRIC"
+        },
+        {
+          "fieldId": "FIELD-0065",
+          "name": "customer_region",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 20
         }
       ]
     },
@@ -383,24 +536,60 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-030",
       "variables": [
         {
-          "fieldId": "FIELD-112",
-          "name": "primary_key",
+          "fieldId": "FIELD-0066",
+          "name": "customer_id",
           "type": "NUM",
           "semanticRole": "BUSINESS_IDENTIFIER"
         },
         {
-          "fieldId": "FIELD-212",
-          "name": "metric_value",
+          "fieldId": "FIELD-0067",
+          "name": "customer_tier",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 15
+        },
+        {
+          "fieldId": "FIELD-0068",
+          "name": "total_sales",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-312",
-          "name": "classification_tag",
+          "fieldId": "FIELD-0069",
+          "name": "transaction_count",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0070",
+          "name": "high_value_flag",
           "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "semanticRole": "FILTER",
+          "length": 1
+        },
+        {
+          "fieldId": "FIELD-0071",
+          "name": "frequent_shopper_flag",
+          "type": "CHAR",
+          "semanticRole": "FILTER",
+          "length": 1
+        },
+        {
+          "fieldId": "FIELD-0072",
+          "name": "dormant_flag",
+          "type": "CHAR",
+          "semanticRole": "FILTER",
+          "length": 1
+        },
+        {
+          "fieldId": "FIELD-0073",
+          "name": "region",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 20
         }
       ]
     },
@@ -410,24 +599,74 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-031",
       "variables": [
         {
-          "fieldId": "FIELD-113",
-          "name": "primary_key",
+          "fieldId": "FIELD-0074",
+          "name": "customer_id",
           "type": "NUM",
           "semanticRole": "BUSINESS_IDENTIFIER"
         },
         {
-          "fieldId": "FIELD-213",
-          "name": "metric_value",
+          "fieldId": "FIELD-0075",
+          "name": "customer_tier",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 15
+        },
+        {
+          "fieldId": "FIELD-0076",
+          "name": "total_sales",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-313",
-          "name": "classification_tag",
+          "fieldId": "FIELD-0077",
+          "name": "transaction_count",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0078",
+          "name": "high_value_flag",
           "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "semanticRole": "FILTER",
+          "length": 1
+        },
+        {
+          "fieldId": "FIELD-0079",
+          "name": "frequent_shopper_flag",
+          "type": "CHAR",
+          "semanticRole": "FILTER",
+          "length": 1
+        },
+        {
+          "fieldId": "FIELD-0080",
+          "name": "dormant_flag",
+          "type": "CHAR",
+          "semanticRole": "FILTER",
+          "length": 1
+        },
+        {
+          "fieldId": "FIELD-0081",
+          "name": "region",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 20
+        }
+      ],
+      "sortKeys": [
+        {
+          "name": "region",
+          "direction": "ASC"
+        },
+        {
+          "name": "customer_tier",
+          "direction": "ASC"
+        },
+        {
+          "name": "total_sales",
+          "direction": "DESC"
         }
       ]
     },
@@ -437,24 +676,57 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-023",
       "variables": [
         {
-          "fieldId": "FIELD-114",
-          "name": "primary_key",
+          "fieldId": "FIELD-0082",
+          "name": "customer_id",
           "type": "NUM",
           "semanticRole": "BUSINESS_IDENTIFIER"
         },
         {
-          "fieldId": "FIELD-214",
-          "name": "metric_value",
+          "fieldId": "FIELD-0083",
+          "name": "sales",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-314",
-          "name": "classification_tag",
+          "fieldId": "FIELD-0084",
+          "name": "units",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0085",
+          "name": "transactions",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0086",
+          "name": "avg_unit_price",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0087",
+          "name": "max_single_sale",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0088",
+          "name": "segment",
           "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "semanticRole": "DIMENSION",
+          "length": 20
+        },
+        {
+          "fieldId": "FIELD-0089",
+          "name": "region",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 20
         }
       ]
     },
@@ -464,24 +736,34 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-097",
       "variables": [
         {
-          "fieldId": "FIELD-115",
-          "name": "primary_key",
+          "fieldId": "FIELD-0090",
+          "name": "customer_id",
           "type": "NUM",
           "semanticRole": "BUSINESS_IDENTIFIER"
         },
         {
-          "fieldId": "FIELD-215",
-          "name": "metric_value",
-          "type": "NUM",
-          "semanticRole": "MEASURE"
+          "fieldId": "FIELD-0091",
+          "name": "customer_name",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 80
         },
         {
-          "fieldId": "FIELD-315",
-          "name": "classification_tag",
+          "fieldId": "FIELD-0092",
+          "name": "region",
           "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "semanticRole": "DIMENSION",
+          "length": 20
+        },
+        {
+          "fieldId": "FIELD-0093",
+          "name": "segment",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 20
         }
       ]
     },
@@ -491,24 +773,46 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-014",
       "variables": [
         {
-          "fieldId": "FIELD-116",
-          "name": "primary_key",
+          "fieldId": "FIELD-0094",
+          "name": "customer_id",
           "type": "NUM",
           "semanticRole": "BUSINESS_IDENTIFIER"
         },
         {
-          "fieldId": "FIELD-216",
-          "name": "metric_value",
-          "type": "NUM",
-          "semanticRole": "MEASURE"
+          "fieldId": "FIELD-0095",
+          "name": "customer_status",
+          "type": "CHAR",
+          "semanticRole": "FILTER",
+          "length": 12
         },
         {
-          "fieldId": "FIELD-316",
-          "name": "classification_tag",
+          "fieldId": "FIELD-0096",
+          "name": "customer_segment",
           "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "semanticRole": "DIMENSION",
+          "length": 20
+        },
+        {
+          "fieldId": "FIELD-0097",
+          "name": "customer_region",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 20
+        },
+        {
+          "fieldId": "FIELD-0098",
+          "name": "customer_total",
+          "type": "NUM",
+          "semanticRole": "ACCUMULATOR"
+        },
+        {
+          "fieldId": "FIELD-0099",
+          "name": "transaction_count",
+          "type": "NUM",
+          "semanticRole": "ACCUMULATOR"
         }
       ]
     },
@@ -518,24 +822,122 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-012",
       "variables": [
         {
-          "fieldId": "FIELD-117",
-          "name": "primary_key",
+          "fieldId": "FIELD-0100",
+          "name": "customer_id",
           "type": "NUM",
           "semanticRole": "BUSINESS_IDENTIFIER"
         },
         {
-          "fieldId": "FIELD-217",
-          "name": "metric_value",
+          "fieldId": "FIELD-0101",
+          "name": "customer_name",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 80
+        },
+        {
+          "fieldId": "FIELD-0102",
+          "name": "segment",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 20
+        },
+        {
+          "fieldId": "FIELD-0103",
+          "name": "customer_region",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 20
+        },
+        {
+          "fieldId": "FIELD-0104",
+          "name": "status",
+          "type": "CHAR",
+          "semanticRole": "FILTER",
+          "length": 12
+        },
+        {
+          "fieldId": "FIELD-0105",
+          "name": "sale_id",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-0106",
+          "name": "product_id",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-0107",
+          "name": "quantity",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-317",
-          "name": "classification_tag",
+          "fieldId": "FIELD-0108",
+          "name": "unit_price",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0109",
+          "name": "discount_pct",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0110",
+          "name": "gross_amount",
+          "type": "NUM",
+          "semanticRole": "DERIVED_METRIC"
+        },
+        {
+          "fieldId": "FIELD-0111",
+          "name": "discount_amount",
+          "type": "NUM",
+          "semanticRole": "DERIVED_METRIC"
+        },
+        {
+          "fieldId": "FIELD-0112",
+          "name": "net_amount",
+          "type": "NUM",
+          "semanticRole": "DERIVED_METRIC"
+        },
+        {
+          "fieldId": "FIELD-0113",
+          "name": "sale_date",
+          "type": "NUM",
+          "semanticRole": "DIMENSION",
+          "format": "date9."
+        },
+        {
+          "fieldId": "FIELD-0114",
+          "name": "region",
           "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "semanticRole": "DIMENSION",
+          "length": 20
+        },
+        {
+          "fieldId": "FIELD-0115",
+          "name": "channel",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 20
+        },
+        {
+          "fieldId": "FIELD-0116",
+          "name": "in_customer",
+          "type": "NUM",
+          "semanticRole": "FILTER"
+        },
+        {
+          "fieldId": "FIELD-0117",
+          "name": "in_sale",
+          "type": "NUM",
+          "semanticRole": "FILTER"
         }
       ]
     },
@@ -545,24 +947,116 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-013",
       "variables": [
         {
-          "fieldId": "FIELD-118",
-          "name": "primary_key",
+          "fieldId": "FIELD-0118",
+          "name": "customer_id",
           "type": "NUM",
           "semanticRole": "BUSINESS_IDENTIFIER"
         },
         {
-          "fieldId": "FIELD-218",
-          "name": "metric_value",
+          "fieldId": "FIELD-0119",
+          "name": "customer_name",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 80
+        },
+        {
+          "fieldId": "FIELD-0120",
+          "name": "segment",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 20
+        },
+        {
+          "fieldId": "FIELD-0121",
+          "name": "customer_region",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 20
+        },
+        {
+          "fieldId": "FIELD-0122",
+          "name": "status",
+          "type": "CHAR",
+          "semanticRole": "FILTER",
+          "length": 12
+        },
+        {
+          "fieldId": "FIELD-0123",
+          "name": "sale_id",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-0124",
+          "name": "product_id",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-0125",
+          "name": "quantity",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-318",
-          "name": "classification_tag",
+          "fieldId": "FIELD-0126",
+          "name": "unit_price",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0127",
+          "name": "discount_pct",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0128",
+          "name": "gross_amount",
+          "type": "NUM",
+          "semanticRole": "DERIVED_METRIC"
+        },
+        {
+          "fieldId": "FIELD-0129",
+          "name": "discount_amount",
+          "type": "NUM",
+          "semanticRole": "DERIVED_METRIC"
+        },
+        {
+          "fieldId": "FIELD-0130",
+          "name": "net_amount",
+          "type": "NUM",
+          "semanticRole": "DERIVED_METRIC"
+        },
+        {
+          "fieldId": "FIELD-0131",
+          "name": "sale_date",
+          "type": "NUM",
+          "semanticRole": "DIMENSION",
+          "format": "date9."
+        },
+        {
+          "fieldId": "FIELD-0132",
+          "name": "region",
           "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "semanticRole": "DIMENSION",
+          "length": 20
+        },
+        {
+          "fieldId": "FIELD-0133",
+          "name": "channel",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 20
+        }
+      ],
+      "sortKeys": [
+        {
+          "name": "customer_id",
+          "direction": "ASC"
         }
       ]
     },
@@ -572,24 +1066,38 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-063",
       "variables": [
         {
-          "fieldId": "FIELD-119",
-          "name": "primary_key",
+          "fieldId": "FIELD-0134",
+          "name": "customer_id",
           "type": "NUM",
           "semanticRole": "BUSINESS_IDENTIFIER"
         },
         {
-          "fieldId": "FIELD-219",
-          "name": "metric_value",
+          "fieldId": "FIELD-0135",
+          "name": "spend_score",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-319",
-          "name": "classification_tag",
+          "fieldId": "FIELD-0136",
+          "name": "frequency_score",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0137",
+          "name": "composite_score",
+          "type": "NUM",
+          "semanticRole": "DERIVED_METRIC"
+        },
+        {
+          "fieldId": "FIELD-0138",
+          "name": "score_band",
           "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "semanticRole": "DIMENSION",
+          "length": 15
         }
       ]
     },
@@ -599,40 +1107,41 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-007",
       "variables": [
         {
-          "fieldId": "FIELD-024",
+          "fieldId": "FIELD-0139",
           "name": "customer_id",
           "type": "NUM",
           "semanticRole": "BUSINESS_IDENTIFIER"
         },
         {
-          "fieldId": "FIELD-025",
+          "fieldId": "FIELD-0140",
           "name": "customer_name",
           "type": "CHAR",
-          "length": 80,
-          "semanticRole": "DIMENSION"
+          "semanticRole": "DIMENSION",
+          "length": 80
         },
         {
-          "fieldId": "FIELD-026",
+          "fieldId": "FIELD-0141",
           "name": "segment",
           "type": "CHAR",
-          "length": 20,
-          "semanticRole": "DIMENSION"
+          "semanticRole": "DIMENSION",
+          "length": 20
         },
         {
-          "fieldId": "FIELD-027",
+          "fieldId": "FIELD-0142",
           "name": "region",
           "type": "CHAR",
-          "length": 20,
-          "semanticRole": "DIMENSION"
+          "semanticRole": "DIMENSION",
+          "length": 20
         },
         {
-          "fieldId": "FIELD-028",
+          "fieldId": "FIELD-0143",
           "name": "status",
           "type": "CHAR",
-          "length": 12,
-          "semanticRole": "FILTER"
+          "semanticRole": "FILTER",
+          "length": 12
         }
       ],
       "sortKeys": [
@@ -648,24 +1157,44 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-025",
       "variables": [
         {
-          "fieldId": "FIELD-121",
-          "name": "primary_key",
+          "fieldId": "FIELD-0144",
+          "name": "customer_id",
           "type": "NUM",
           "semanticRole": "BUSINESS_IDENTIFIER"
         },
         {
-          "fieldId": "FIELD-221",
-          "name": "metric_value",
+          "fieldId": "FIELD-0145",
+          "name": "sales",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-321",
-          "name": "classification_tag",
+          "fieldId": "FIELD-0146",
+          "name": "units",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0147",
+          "name": "transactions",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0148",
+          "name": "customer_tier",
           "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "semanticRole": "DIMENSION",
+          "length": 15
+        },
+        {
+          "fieldId": "FIELD-0149",
+          "name": "loyalty_score",
+          "type": "NUM",
+          "semanticRole": "DERIVED_METRIC"
         }
       ]
     },
@@ -675,24 +1204,50 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-026",
       "variables": [
         {
-          "fieldId": "FIELD-122",
-          "name": "primary_key",
+          "fieldId": "FIELD-0150",
+          "name": "customer_id",
           "type": "NUM",
           "semanticRole": "BUSINESS_IDENTIFIER"
         },
         {
-          "fieldId": "FIELD-222",
-          "name": "metric_value",
+          "fieldId": "FIELD-0151",
+          "name": "sales",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-322",
-          "name": "classification_tag",
+          "fieldId": "FIELD-0152",
+          "name": "units",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0153",
+          "name": "transactions",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0154",
+          "name": "customer_tier",
           "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "semanticRole": "DIMENSION",
+          "length": 15
+        },
+        {
+          "fieldId": "FIELD-0155",
+          "name": "loyalty_score",
+          "type": "NUM",
+          "semanticRole": "DERIVED_METRIC"
+        }
+      ],
+      "sortKeys": [
+        {
+          "name": "customer_id",
+          "direction": "ASC"
         }
       ]
     },
@@ -702,24 +1257,32 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-027",
       "variables": [
         {
-          "fieldId": "FIELD-123",
-          "name": "primary_key",
+          "fieldId": "FIELD-0156",
+          "name": "sale_date",
           "type": "NUM",
-          "semanticRole": "BUSINESS_IDENTIFIER"
+          "semanticRole": "DIMENSION",
+          "format": "date9."
         },
         {
-          "fieldId": "FIELD-223",
-          "name": "metric_value",
+          "fieldId": "FIELD-0157",
+          "name": "daily_total",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-323",
-          "name": "classification_tag",
-          "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "fieldId": "FIELD-0158",
+          "name": "daily_count",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0159",
+          "name": "running_monthly_total",
+          "type": "NUM",
+          "semanticRole": "ACCUMULATOR"
         }
       ]
     },
@@ -729,24 +1292,33 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-029",
       "variables": [
         {
-          "fieldId": "FIELD-124",
-          "name": "primary_key",
+          "fieldId": "FIELD-0160",
+          "name": "sale_date",
           "type": "NUM",
-          "semanticRole": "BUSINESS_IDENTIFIER"
+          "semanticRole": "DIMENSION",
+          "format": "date9."
         },
         {
-          "fieldId": "FIELD-224",
-          "name": "metric_value",
+          "fieldId": "FIELD-0161",
+          "name": "_NAME_",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 32
+        },
+        {
+          "fieldId": "FIELD-0162",
+          "name": "daily_total",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-324",
-          "name": "classification_tag",
-          "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "fieldId": "FIELD-0163",
+          "name": "daily_count",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
         }
       ]
     },
@@ -756,24 +1328,38 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-028",
       "variables": [
         {
-          "fieldId": "FIELD-125",
-          "name": "primary_key",
+          "fieldId": "FIELD-0164",
+          "name": "sale_date",
           "type": "NUM",
-          "semanticRole": "BUSINESS_IDENTIFIER"
+          "semanticRole": "DIMENSION",
+          "format": "date9."
         },
         {
-          "fieldId": "FIELD-225",
-          "name": "metric_value",
+          "fieldId": "FIELD-0165",
+          "name": "daily_total",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-325",
-          "name": "classification_tag",
-          "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "fieldId": "FIELD-0166",
+          "name": "daily_count",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0167",
+          "name": "running_monthly_total",
+          "type": "NUM",
+          "semanticRole": "ACCUMULATOR"
+        }
+      ],
+      "sortKeys": [
+        {
+          "name": "sale_date",
+          "direction": "ASC"
         }
       ]
     },
@@ -783,24 +1369,33 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-052",
       "variables": [
         {
-          "fieldId": "FIELD-126",
-          "name": "primary_key",
+          "fieldId": "FIELD-0168",
+          "name": "manifest_id",
           "type": "NUM",
           "semanticRole": "BUSINESS_IDENTIFIER"
         },
         {
-          "fieldId": "FIELD-226",
-          "name": "metric_value",
+          "fieldId": "FIELD-0169",
+          "name": "destination_region",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 20
+        },
+        {
+          "fieldId": "FIELD-0170",
+          "name": "total_packages",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-326",
-          "name": "classification_tag",
-          "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "fieldId": "FIELD-0171",
+          "name": "manifest_date",
+          "type": "NUM",
+          "semanticRole": "DIMENSION",
+          "format": "date9."
         }
       ]
     },
@@ -810,24 +1405,38 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-061",
       "variables": [
         {
-          "fieldId": "FIELD-127",
-          "name": "primary_key",
-          "type": "NUM",
-          "semanticRole": "BUSINESS_IDENTIFIER"
+          "fieldId": "FIELD-0172",
+          "name": "customer_tier",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 15
         },
         {
-          "fieldId": "FIELD-227",
-          "name": "metric_value",
+          "fieldId": "FIELD-0173",
+          "name": "_TYPE_",
+          "type": "NUM",
+          "semanticRole": "DERIVED_METRIC"
+        },
+        {
+          "fieldId": "FIELD-0174",
+          "name": "_FREQ_",
+          "type": "NUM",
+          "semanticRole": "DERIVED_METRIC"
+        },
+        {
+          "fieldId": "FIELD-0175",
+          "name": "avg_sales",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-327",
-          "name": "classification_tag",
-          "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "fieldId": "FIELD-0176",
+          "name": "avg_orders",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
         }
       ]
     },
@@ -837,116 +1446,124 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-019",
       "variables": [
         {
-          "fieldId": "FIELD-045",
+          "fieldId": "FIELD-0177",
           "name": "sale_id",
           "type": "NUM",
           "semanticRole": "BUSINESS_IDENTIFIER"
         },
         {
-          "fieldId": "FIELD-046",
+          "fieldId": "FIELD-0178",
           "name": "sale_date",
           "type": "NUM",
-          "semanticRole": "DIMENSION"
+          "semanticRole": "DIMENSION",
+          "format": "date9."
         },
         {
-          "fieldId": "FIELD-047",
+          "fieldId": "FIELD-0179",
           "name": "customer_id",
           "type": "NUM",
           "semanticRole": "BUSINESS_IDENTIFIER"
         },
         {
-          "fieldId": "FIELD-048",
+          "fieldId": "FIELD-0180",
           "name": "customer_name",
           "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "semanticRole": "DIMENSION",
+          "length": 80
         },
         {
-          "fieldId": "FIELD-049",
+          "fieldId": "FIELD-0181",
           "name": "segment",
           "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "semanticRole": "DIMENSION",
+          "length": 20
         },
         {
-          "fieldId": "FIELD-050",
+          "fieldId": "FIELD-0182",
           "name": "customer_region",
           "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "semanticRole": "DIMENSION",
+          "length": 20
         },
         {
-          "fieldId": "FIELD-051",
+          "fieldId": "FIELD-0183",
           "name": "product_id",
           "type": "NUM",
           "semanticRole": "BUSINESS_IDENTIFIER"
         },
         {
-          "fieldId": "FIELD-052",
+          "fieldId": "FIELD-0184",
           "name": "product_name",
           "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "semanticRole": "DIMENSION",
+          "length": 100
         },
         {
-          "fieldId": "FIELD-053",
+          "fieldId": "FIELD-0185",
           "name": "category",
           "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "semanticRole": "DIMENSION",
+          "length": 40
         },
         {
-          "fieldId": "FIELD-054",
+          "fieldId": "FIELD-0186",
           "name": "subcategory",
           "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "semanticRole": "DIMENSION",
+          "length": 40
         },
         {
-          "fieldId": "FIELD-055",
+          "fieldId": "FIELD-0187",
           "name": "quantity",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-056",
+          "fieldId": "FIELD-0188",
           "name": "unit_price",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-057",
+          "fieldId": "FIELD-0189",
           "name": "discount_pct",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-058",
+          "fieldId": "FIELD-0190",
           "name": "gross_amount",
           "type": "NUM",
           "semanticRole": "DERIVED_METRIC"
         },
         {
-          "fieldId": "FIELD-059",
+          "fieldId": "FIELD-0191",
           "name": "discount_amount",
           "type": "NUM",
           "semanticRole": "DERIVED_METRIC"
         },
         {
-          "fieldId": "FIELD-060",
+          "fieldId": "FIELD-0192",
           "name": "net_amount",
           "type": "NUM",
           "semanticRole": "DERIVED_METRIC"
         },
         {
-          "fieldId": "FIELD-061",
+          "fieldId": "FIELD-0193",
           "name": "value_band",
           "type": "CHAR",
-          "length": 10,
-          "semanticRole": "DIMENSION"
+          "semanticRole": "DIMENSION",
+          "length": 10
         },
         {
-          "fieldId": "FIELD-062",
+          "fieldId": "FIELD-0194",
           "name": "pricing_band",
           "type": "CHAR",
-          "length": 12,
-          "semanticRole": "DIMENSION"
+          "semanticRole": "DIMENSION",
+          "length": 12
         }
       ]
     },
@@ -956,24 +1573,26 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-049",
       "variables": [
         {
-          "fieldId": "FIELD-129",
-          "name": "primary_key",
-          "type": "NUM",
-          "semanticRole": "BUSINESS_IDENTIFIER"
+          "fieldId": "FIELD-0195",
+          "name": "exception_code",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 20
         },
         {
-          "fieldId": "FIELD-229",
-          "name": "metric_value",
+          "fieldId": "FIELD-0196",
+          "name": "COUNT",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-329",
-          "name": "classification_tag",
-          "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "fieldId": "FIELD-0197",
+          "name": "PERCENT",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
         }
       ]
     },
@@ -983,24 +1602,45 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-048",
       "variables": [
         {
-          "fieldId": "FIELD-130",
-          "name": "primary_key",
+          "fieldId": "FIELD-0198",
+          "name": "sale_id",
           "type": "NUM",
           "semanticRole": "BUSINESS_IDENTIFIER"
         },
         {
-          "fieldId": "FIELD-230",
-          "name": "metric_value",
+          "fieldId": "FIELD-0199",
+          "name": "customer_id",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-0200",
+          "name": "net_amount",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-330",
-          "name": "classification_tag",
+          "fieldId": "FIELD-0201",
+          "name": "exception_flag",
           "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "semanticRole": "FILTER",
+          "length": 1
+        },
+        {
+          "fieldId": "FIELD-0202",
+          "name": "exception_code",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 20
+        },
+        {
+          "fieldId": "FIELD-0203",
+          "name": "exception_severity",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
         }
       ]
     },
@@ -1010,24 +1650,26 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-050",
       "variables": [
         {
-          "fieldId": "FIELD-131",
-          "name": "primary_key",
-          "type": "NUM",
-          "semanticRole": "BUSINESS_IDENTIFIER"
+          "fieldId": "FIELD-0204",
+          "name": "exception_code",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 20
         },
         {
-          "fieldId": "FIELD-231",
-          "name": "metric_value",
+          "fieldId": "FIELD-0205",
+          "name": "exception_count",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-331",
-          "name": "classification_tag",
-          "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "fieldId": "FIELD-0206",
+          "name": "total_severity",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
         }
       ]
     },
@@ -1037,24 +1679,27 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-062",
       "variables": [
         {
-          "fieldId": "FIELD-132",
-          "name": "primary_key",
-          "type": "NUM",
-          "semanticRole": "BUSINESS_IDENTIFIER"
+          "fieldId": "FIELD-0207",
+          "name": "report_section",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 30
         },
         {
-          "fieldId": "FIELD-232",
+          "fieldId": "FIELD-0208",
+          "name": "metric_name",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 40
+        },
+        {
+          "fieldId": "FIELD-0209",
           "name": "metric_value",
           "type": "NUM",
           "semanticRole": "MEASURE"
-        },
-        {
-          "fieldId": "FIELD-332",
-          "name": "classification_tag",
-          "type": "CHAR",
-          "semanticRole": "DIMENSION"
         }
       ]
     },
@@ -1064,24 +1709,25 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-043",
       "variables": [
         {
-          "fieldId": "FIELD-133",
-          "name": "primary_key",
-          "type": "NUM",
-          "semanticRole": "BUSINESS_IDENTIFIER"
-        },
-        {
-          "fieldId": "FIELD-233",
-          "name": "metric_value",
+          "fieldId": "FIELD-0210",
+          "name": "total_records",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-333",
-          "name": "classification_tag",
-          "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "fieldId": "FIELD-0211",
+          "name": "total_sales_amount",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0212",
+          "name": "avg_ticket",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
         }
       ]
     },
@@ -1091,24 +1737,59 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-058",
       "variables": [
         {
-          "fieldId": "FIELD-134",
-          "name": "primary_key",
+          "fieldId": "FIELD-0213",
+          "name": "customer_id",
           "type": "NUM",
           "semanticRole": "BUSINESS_IDENTIFIER"
         },
         {
-          "fieldId": "FIELD-234",
-          "name": "metric_value",
+          "fieldId": "FIELD-0214",
+          "name": "segment",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 20
+        },
+        {
+          "fieldId": "FIELD-0215",
+          "name": "customer_region",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 20
+        },
+        {
+          "fieldId": "FIELD-0216",
+          "name": "total_sales",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-334",
-          "name": "classification_tag",
+          "fieldId": "FIELD-0217",
+          "name": "total_units",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0218",
+          "name": "total_orders",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0219",
+          "name": "customer_tier",
           "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "semanticRole": "DIMENSION",
+          "length": 15
+        },
+        {
+          "fieldId": "FIELD-0220",
+          "name": "profile_status",
+          "type": "CHAR",
+          "semanticRole": "FILTER",
+          "length": 12
         }
       ]
     },
@@ -1118,24 +1799,38 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-039",
       "variables": [
         {
-          "fieldId": "FIELD-135",
-          "name": "primary_key",
-          "type": "NUM",
-          "semanticRole": "BUSINESS_IDENTIFIER"
+          "fieldId": "FIELD-0221",
+          "name": "customer_region",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 20
         },
         {
-          "fieldId": "FIELD-235",
-          "name": "metric_value",
+          "fieldId": "FIELD-0222",
+          "name": "transactions",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-335",
-          "name": "classification_tag",
-          "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "fieldId": "FIELD-0223",
+          "name": "sales",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0224",
+          "name": "average_sale",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0225",
+          "name": "units",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
         }
       ]
     },
@@ -1145,24 +1840,39 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-057",
       "variables": [
         {
-          "fieldId": "FIELD-136",
-          "name": "primary_key",
+          "fieldId": "FIELD-0226",
+          "name": "customer_id",
           "type": "NUM",
           "semanticRole": "BUSINESS_IDENTIFIER"
         },
         {
-          "fieldId": "FIELD-236",
-          "name": "metric_value",
+          "fieldId": "FIELD-0227",
+          "name": "customer_name",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 80
+        },
+        {
+          "fieldId": "FIELD-0228",
+          "name": "customer_region",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 20
+        },
+        {
+          "fieldId": "FIELD-0229",
+          "name": "high_value_sales",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-336",
-          "name": "classification_tag",
-          "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "fieldId": "FIELD-0230",
+          "name": "high_value_orders",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
         }
       ]
     },
@@ -1172,24 +1882,124 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-056",
       "variables": [
         {
-          "fieldId": "FIELD-137",
-          "name": "primary_key",
+          "fieldId": "FIELD-0231",
+          "name": "sale_id",
           "type": "NUM",
           "semanticRole": "BUSINESS_IDENTIFIER"
         },
         {
-          "fieldId": "FIELD-237",
-          "name": "metric_value",
+          "fieldId": "FIELD-0232",
+          "name": "sale_date",
+          "type": "NUM",
+          "semanticRole": "DIMENSION",
+          "format": "date9."
+        },
+        {
+          "fieldId": "FIELD-0233",
+          "name": "customer_id",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-0234",
+          "name": "customer_name",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 80
+        },
+        {
+          "fieldId": "FIELD-0235",
+          "name": "segment",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 20
+        },
+        {
+          "fieldId": "FIELD-0236",
+          "name": "customer_region",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 20
+        },
+        {
+          "fieldId": "FIELD-0237",
+          "name": "product_id",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-0238",
+          "name": "product_name",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 100
+        },
+        {
+          "fieldId": "FIELD-0239",
+          "name": "category",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 40
+        },
+        {
+          "fieldId": "FIELD-0240",
+          "name": "subcategory",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 40
+        },
+        {
+          "fieldId": "FIELD-0241",
+          "name": "quantity",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-337",
-          "name": "classification_tag",
+          "fieldId": "FIELD-0242",
+          "name": "unit_price",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0243",
+          "name": "discount_pct",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0244",
+          "name": "gross_amount",
+          "type": "NUM",
+          "semanticRole": "DERIVED_METRIC"
+        },
+        {
+          "fieldId": "FIELD-0245",
+          "name": "discount_amount",
+          "type": "NUM",
+          "semanticRole": "DERIVED_METRIC"
+        },
+        {
+          "fieldId": "FIELD-0246",
+          "name": "net_amount",
+          "type": "NUM",
+          "semanticRole": "DERIVED_METRIC"
+        },
+        {
+          "fieldId": "FIELD-0247",
+          "name": "value_band",
           "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "semanticRole": "DIMENSION",
+          "length": 10
+        },
+        {
+          "fieldId": "FIELD-0248",
+          "name": "pricing_band",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 12
         }
       ]
     },
@@ -1199,24 +2009,26 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-099",
       "variables": [
         {
-          "fieldId": "FIELD-138",
-          "name": "primary_key",
-          "type": "NUM",
-          "semanticRole": "BUSINESS_IDENTIFIER"
+          "fieldId": "FIELD-0249",
+          "name": "lookup_status",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 12
         },
         {
-          "fieldId": "FIELD-238",
-          "name": "metric_value",
+          "fieldId": "FIELD-0250",
+          "name": "COUNT",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-338",
-          "name": "classification_tag",
-          "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "fieldId": "FIELD-0251",
+          "name": "PERCENT",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
         }
       ]
     },
@@ -1226,24 +2038,20 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-051",
       "variables": [
         {
-          "fieldId": "FIELD-139",
-          "name": "primary_key",
-          "type": "NUM",
-          "semanticRole": "BUSINESS_IDENTIFIER"
+          "fieldId": "FIELD-0252",
+          "name": "report_metric",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 40
         },
         {
-          "fieldId": "FIELD-239",
+          "fieldId": "FIELD-0253",
           "name": "metric_value",
           "type": "NUM",
           "semanticRole": "MEASURE"
-        },
-        {
-          "fieldId": "FIELD-339",
-          "name": "classification_tag",
-          "type": "CHAR",
-          "semanticRole": "DIMENSION"
         }
       ]
     },
@@ -1253,24 +2061,26 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-041",
       "variables": [
         {
-          "fieldId": "FIELD-140",
-          "name": "primary_key",
-          "type": "NUM",
-          "semanticRole": "BUSINESS_IDENTIFIER"
+          "fieldId": "FIELD-0254",
+          "name": "dataset_name",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 40
         },
         {
-          "fieldId": "FIELD-240",
-          "name": "metric_value",
+          "fieldId": "FIELD-0255",
+          "name": "nobs",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-340",
-          "name": "classification_tag",
-          "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "fieldId": "FIELD-0256",
+          "name": "nvar",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
         }
       ]
     },
@@ -1280,24 +2090,38 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-080",
       "variables": [
         {
-          "fieldId": "FIELD-141",
-          "name": "primary_key",
-          "type": "NUM",
-          "semanticRole": "BUSINESS_IDENTIFIER"
+          "fieldId": "FIELD-0257",
+          "name": "region",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 20
         },
         {
-          "fieldId": "FIELD-241",
-          "name": "metric_value",
+          "fieldId": "FIELD-0258",
+          "name": "fiscal_year",
+          "type": "NUM",
+          "semanticRole": "DIMENSION"
+        },
+        {
+          "fieldId": "FIELD-0259",
+          "name": "period_sales",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-341",
-          "name": "classification_tag",
-          "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "fieldId": "FIELD-0260",
+          "name": "period_units",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0261",
+          "name": "regional_sales_rank",
+          "type": "NUM",
+          "semanticRole": "DERIVED_METRIC"
         }
       ]
     },
@@ -1307,24 +2131,44 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-078",
       "variables": [
         {
-          "fieldId": "FIELD-142",
-          "name": "primary_key",
-          "type": "NUM",
-          "semanticRole": "BUSINESS_IDENTIFIER"
+          "fieldId": "FIELD-0262",
+          "name": "region",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 20
         },
         {
-          "fieldId": "FIELD-242",
-          "name": "metric_value",
+          "fieldId": "FIELD-0263",
+          "name": "fiscal_year",
+          "type": "NUM",
+          "semanticRole": "DIMENSION"
+        },
+        {
+          "fieldId": "FIELD-0264",
+          "name": "_TYPE_",
+          "type": "NUM",
+          "semanticRole": "DERIVED_METRIC"
+        },
+        {
+          "fieldId": "FIELD-0265",
+          "name": "_FREQ_",
+          "type": "NUM",
+          "semanticRole": "DERIVED_METRIC"
+        },
+        {
+          "fieldId": "FIELD-0266",
+          "name": "period_sales",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-342",
-          "name": "classification_tag",
-          "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "fieldId": "FIELD-0267",
+          "name": "period_units",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
         }
       ]
     },
@@ -1334,24 +2178,63 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-102",
       "variables": [
         {
-          "fieldId": "FIELD-143",
-          "name": "primary_key",
-          "type": "NUM",
-          "semanticRole": "BUSINESS_IDENTIFIER"
-        },
-        {
-          "fieldId": "FIELD-243",
-          "name": "metric_value",
+          "fieldId": "FIELD-0268",
+          "name": "sales_rows",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-343",
-          "name": "classification_tag",
+          "fieldId": "FIELD-0269",
+          "name": "total_sales",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0270",
+          "name": "customers",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0271",
+          "name": "products",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0272",
+          "name": "review_items",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0273",
+          "name": "duplicate_sales",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0274",
+          "name": "invalid_sales",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0275",
+          "name": "overall_status",
           "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "semanticRole": "FILTER",
+          "length": 15
+        },
+        {
+          "fieldId": "FIELD-0276",
+          "name": "report_date",
+          "type": "NUM",
+          "semanticRole": "DIMENSION",
+          "format": "date9."
         }
       ]
     },
@@ -1361,33 +2244,41 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-008",
       "variables": [
         {
-          "fieldId": "FIELD-029",
+          "fieldId": "FIELD-0277",
           "name": "product_id",
           "type": "NUM",
           "semanticRole": "BUSINESS_IDENTIFIER"
         },
         {
-          "fieldId": "FIELD-030",
+          "fieldId": "FIELD-0278",
           "name": "product_name",
           "type": "CHAR",
-          "length": 100,
-          "semanticRole": "DIMENSION"
+          "semanticRole": "DIMENSION",
+          "length": 100
         },
         {
-          "fieldId": "FIELD-031",
+          "fieldId": "FIELD-0279",
           "name": "category",
           "type": "CHAR",
-          "length": 40,
-          "semanticRole": "DIMENSION"
+          "semanticRole": "DIMENSION",
+          "length": 40
         },
         {
-          "fieldId": "FIELD-032",
+          "fieldId": "FIELD-0280",
           "name": "subcategory",
           "type": "CHAR",
-          "length": 40,
-          "semanticRole": "DIMENSION"
+          "semanticRole": "DIMENSION",
+          "length": 40
+        },
+        {
+          "fieldId": "FIELD-0281",
+          "name": "active_flag",
+          "type": "CHAR",
+          "semanticRole": "FILTER",
+          "length": 1
         }
       ]
     },
@@ -1397,24 +2288,58 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-024",
       "variables": [
         {
-          "fieldId": "FIELD-145",
-          "name": "primary_key",
+          "fieldId": "FIELD-0282",
+          "name": "product_id",
           "type": "NUM",
           "semanticRole": "BUSINESS_IDENTIFIER"
         },
         {
-          "fieldId": "FIELD-245",
-          "name": "metric_value",
+          "fieldId": "FIELD-0283",
+          "name": "product_name",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 100
+        },
+        {
+          "fieldId": "FIELD-0284",
+          "name": "category",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 40
+        },
+        {
+          "fieldId": "FIELD-0285",
+          "name": "subcategory",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 40
+        },
+        {
+          "fieldId": "FIELD-0286",
+          "name": "units_sold",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-345",
-          "name": "classification_tag",
-          "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "fieldId": "FIELD-0287",
+          "name": "total_revenue",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0288",
+          "name": "distinct_customers",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0289",
+          "name": "avg_price_realized",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
         }
       ]
     },
@@ -1424,24 +2349,52 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-071",
       "variables": [
         {
-          "fieldId": "FIELD-146",
-          "name": "primary_key",
+          "fieldId": "FIELD-0290",
+          "name": "product_id",
           "type": "NUM",
           "semanticRole": "BUSINESS_IDENTIFIER"
         },
         {
-          "fieldId": "FIELD-246",
-          "name": "metric_value",
+          "fieldId": "FIELD-0291",
+          "name": "product_name",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 100
+        },
+        {
+          "fieldId": "FIELD-0292",
+          "name": "category",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 40
+        },
+        {
+          "fieldId": "FIELD-0293",
+          "name": "sales",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-346",
-          "name": "classification_tag",
+          "fieldId": "FIELD-0294",
+          "name": "units",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0295",
+          "name": "transactions",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0296",
+          "name": "demand_band",
           "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "semanticRole": "DIMENSION",
+          "length": 15
         }
       ]
     },
@@ -1451,33 +2404,41 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-009",
       "variables": [
         {
-          "fieldId": "FIELD-029",
+          "fieldId": "FIELD-0297",
           "name": "product_id",
           "type": "NUM",
           "semanticRole": "BUSINESS_IDENTIFIER"
         },
         {
-          "fieldId": "FIELD-030",
+          "fieldId": "FIELD-0298",
           "name": "product_name",
           "type": "CHAR",
-          "length": 100,
-          "semanticRole": "DIMENSION"
+          "semanticRole": "DIMENSION",
+          "length": 100
         },
         {
-          "fieldId": "FIELD-031",
+          "fieldId": "FIELD-0299",
           "name": "category",
           "type": "CHAR",
-          "length": 40,
-          "semanticRole": "DIMENSION"
+          "semanticRole": "DIMENSION",
+          "length": 40
         },
         {
-          "fieldId": "FIELD-032",
+          "fieldId": "FIELD-0300",
           "name": "subcategory",
           "type": "CHAR",
-          "length": 40,
-          "semanticRole": "DIMENSION"
+          "semanticRole": "DIMENSION",
+          "length": 40
+        },
+        {
+          "fieldId": "FIELD-0301",
+          "name": "active_flag",
+          "type": "CHAR",
+          "semanticRole": "FILTER",
+          "length": 1
         }
       ],
       "sortKeys": [
@@ -1493,24 +2454,26 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-084",
       "variables": [
         {
-          "fieldId": "FIELD-148",
-          "name": "primary_key",
-          "type": "NUM",
-          "semanticRole": "BUSINESS_IDENTIFIER"
+          "fieldId": "FIELD-0302",
+          "name": "quality_status",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 12
         },
         {
-          "fieldId": "FIELD-248",
-          "name": "metric_value",
+          "fieldId": "FIELD-0303",
+          "name": "records",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-348",
-          "name": "classification_tag",
-          "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "fieldId": "FIELD-0304",
+          "name": "record_pct",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
         }
       ]
     },
@@ -1520,24 +2483,45 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-079",
       "variables": [
         {
-          "fieldId": "FIELD-149",
-          "name": "primary_key",
-          "type": "NUM",
-          "semanticRole": "BUSINESS_IDENTIFIER"
+          "fieldId": "FIELD-0305",
+          "name": "region",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 20
         },
         {
-          "fieldId": "FIELD-249",
-          "name": "metric_value",
+          "fieldId": "FIELD-0306",
+          "name": "fiscal_quarter",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 8
+        },
+        {
+          "fieldId": "FIELD-0307",
+          "name": "_TYPE_",
+          "type": "NUM",
+          "semanticRole": "DERIVED_METRIC"
+        },
+        {
+          "fieldId": "FIELD-0308",
+          "name": "_FREQ_",
+          "type": "NUM",
+          "semanticRole": "DERIVED_METRIC"
+        },
+        {
+          "fieldId": "FIELD-0309",
+          "name": "quarter_sales",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-349",
-          "name": "classification_tag",
-          "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "fieldId": "FIELD-0310",
+          "name": "quarter_units",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
         }
       ]
     },
@@ -1547,24 +2531,44 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-044",
       "variables": [
         {
-          "fieldId": "FIELD-150",
-          "name": "primary_key",
-          "type": "NUM",
-          "semanticRole": "BUSINESS_IDENTIFIER"
-        },
-        {
-          "fieldId": "FIELD-250",
-          "name": "metric_value",
+          "fieldId": "FIELD-0311",
+          "name": "expected_rows",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-350",
-          "name": "classification_tag",
+          "fieldId": "FIELD-0312",
+          "name": "expected_sales",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0313",
+          "name": "actual_rows",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0314",
+          "name": "actual_sales",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0315",
+          "name": "reconciliation_status",
           "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "semanticRole": "FILTER",
+          "length": 20
+        },
+        {
+          "fieldId": "FIELD-0316",
+          "name": "diff_sales",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
         }
       ]
     },
@@ -1574,24 +2578,44 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-096",
       "variables": [
         {
-          "fieldId": "FIELD-151",
-          "name": "primary_key",
-          "type": "NUM",
-          "semanticRole": "BUSINESS_IDENTIFIER"
+          "fieldId": "FIELD-0317",
+          "name": "region",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 20
         },
         {
-          "fieldId": "FIELD-251",
-          "name": "metric_value",
+          "fieldId": "FIELD-0318",
+          "name": "_TYPE_",
+          "type": "NUM",
+          "semanticRole": "DERIVED_METRIC"
+        },
+        {
+          "fieldId": "FIELD-0319",
+          "name": "_FREQ_",
+          "type": "NUM",
+          "semanticRole": "DERIVED_METRIC"
+        },
+        {
+          "fieldId": "FIELD-0320",
+          "name": "net_change",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-351",
-          "name": "classification_tag",
-          "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "fieldId": "FIELD-0321",
+          "name": "maximum_change",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0322",
+          "name": "minimum_change",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
         }
       ]
     },
@@ -1601,24 +2625,33 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-017",
       "variables": [
         {
-          "fieldId": "FIELD-152",
-          "name": "primary_key",
-          "type": "NUM",
-          "semanticRole": "BUSINESS_IDENTIFIER"
+          "fieldId": "FIELD-0323",
+          "name": "region",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 20
         },
         {
-          "fieldId": "FIELD-252",
-          "name": "metric_value",
+          "fieldId": "FIELD-0324",
+          "name": "channel",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 20
+        },
+        {
+          "fieldId": "FIELD-0325",
+          "name": "COUNT",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-352",
-          "name": "classification_tag",
-          "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "fieldId": "FIELD-0326",
+          "name": "PERCENT",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
         }
       ]
     },
@@ -1628,24 +2661,51 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-015",
       "variables": [
         {
-          "fieldId": "FIELD-153",
-          "name": "primary_key",
-          "type": "NUM",
-          "semanticRole": "BUSINESS_IDENTIFIER"
+          "fieldId": "FIELD-0327",
+          "name": "region",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 20
         },
         {
-          "fieldId": "FIELD-253",
-          "name": "metric_value",
+          "fieldId": "FIELD-0328",
+          "name": "channel",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 20
+        },
+        {
+          "fieldId": "FIELD-0329",
+          "name": "_TYPE_",
+          "type": "NUM",
+          "semanticRole": "DERIVED_METRIC"
+        },
+        {
+          "fieldId": "FIELD-0330",
+          "name": "_FREQ_",
+          "type": "NUM",
+          "semanticRole": "DERIVED_METRIC"
+        },
+        {
+          "fieldId": "FIELD-0331",
+          "name": "total_sales",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-353",
-          "name": "classification_tag",
-          "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "fieldId": "FIELD-0332",
+          "name": "total_quantity",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0333",
+          "name": "avg_sale",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
         }
       ]
     },
@@ -1655,24 +2715,52 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-090",
       "variables": [
         {
-          "fieldId": "FIELD-154",
-          "name": "primary_key",
-          "type": "NUM",
-          "semanticRole": "BUSINESS_IDENTIFIER"
+          "fieldId": "FIELD-0334",
+          "name": "customer_region",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 20
         },
         {
-          "fieldId": "FIELD-254",
-          "name": "metric_value",
+          "fieldId": "FIELD-0335",
+          "name": "sales",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-354",
-          "name": "classification_tag",
+          "fieldId": "FIELD-0336",
+          "name": "transactions",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0337",
+          "name": "average_sale",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0338",
+          "name": "units",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0339",
+          "name": "control_flag",
           "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "semanticRole": "FILTER",
+          "length": 12
+        },
+        {
+          "fieldId": "FIELD-0340",
+          "name": "control_reason",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 100
         }
       ]
     },
@@ -1682,24 +2770,26 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-091",
       "variables": [
         {
-          "fieldId": "FIELD-155",
-          "name": "primary_key",
-          "type": "NUM",
-          "semanticRole": "BUSINESS_IDENTIFIER"
+          "fieldId": "FIELD-0341",
+          "name": "control_flag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 12
         },
         {
-          "fieldId": "FIELD-255",
-          "name": "metric_value",
+          "fieldId": "FIELD-0342",
+          "name": "COUNT",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-355",
-          "name": "classification_tag",
-          "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "fieldId": "FIELD-0343",
+          "name": "PERCENT",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
         }
       ]
     },
@@ -1709,24 +2799,46 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-092",
       "variables": [
         {
-          "fieldId": "FIELD-156",
-          "name": "primary_key",
-          "type": "NUM",
-          "semanticRole": "BUSINESS_IDENTIFIER"
+          "fieldId": "FIELD-0344",
+          "name": "customer_region",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 20
         },
         {
-          "fieldId": "FIELD-256",
-          "name": "metric_value",
+          "fieldId": "FIELD-0345",
+          "name": "sales",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-356",
-          "name": "classification_tag",
+          "fieldId": "FIELD-0346",
+          "name": "transactions",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0347",
+          "name": "average_sale",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0348",
+          "name": "control_flag",
           "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "semanticRole": "FILTER",
+          "length": 12
+        },
+        {
+          "fieldId": "FIELD-0349",
+          "name": "control_reason",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 100
         }
       ]
     },
@@ -1736,24 +2848,33 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-068",
       "variables": [
         {
-          "fieldId": "FIELD-157",
-          "name": "primary_key",
-          "type": "NUM",
-          "semanticRole": "BUSINESS_IDENTIFIER"
+          "fieldId": "FIELD-0350",
+          "name": "customer_region",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 20
         },
         {
-          "fieldId": "FIELD-257",
-          "name": "metric_value",
+          "fieldId": "FIELD-0351",
+          "name": "score_band",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 15
+        },
+        {
+          "fieldId": "FIELD-0352",
+          "name": "customer_count",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-357",
-          "name": "classification_tag",
-          "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "fieldId": "FIELD-0353",
+          "name": "total_spend",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
         }
       ]
     },
@@ -1763,24 +2884,40 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-069",
       "variables": [
         {
-          "fieldId": "FIELD-158",
-          "name": "primary_key",
-          "type": "NUM",
-          "semanticRole": "BUSINESS_IDENTIFIER"
+          "fieldId": "FIELD-0354",
+          "name": "customer_region",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 20
         },
         {
-          "fieldId": "FIELD-258",
-          "name": "metric_value",
+          "fieldId": "FIELD-0355",
+          "name": "score_band",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 15
+        },
+        {
+          "fieldId": "FIELD-0356",
+          "name": "customer_count",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-358",
-          "name": "classification_tag",
+          "fieldId": "FIELD-0357",
+          "name": "total_spend",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0358",
+          "name": "priority_flag",
           "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "semanticRole": "FILTER",
+          "length": 12
         }
       ]
     },
@@ -1790,24 +2927,38 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-038",
       "variables": [
         {
-          "fieldId": "FIELD-159",
-          "name": "primary_key",
-          "type": "NUM",
-          "semanticRole": "BUSINESS_IDENTIFIER"
+          "fieldId": "FIELD-0359",
+          "name": "customer_region",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 20
         },
         {
-          "fieldId": "FIELD-259",
-          "name": "metric_value",
+          "fieldId": "FIELD-0360",
+          "name": "transactions",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-359",
-          "name": "classification_tag",
-          "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "fieldId": "FIELD-0361",
+          "name": "sales",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0362",
+          "name": "average_sale",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0363",
+          "name": "units",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
         }
       ]
     },
@@ -1817,24 +2968,110 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-034",
       "variables": [
         {
-          "fieldId": "FIELD-160",
-          "name": "primary_key",
+          "fieldId": "FIELD-0364",
+          "name": "sale_id",
           "type": "NUM",
           "semanticRole": "BUSINESS_IDENTIFIER"
         },
         {
-          "fieldId": "FIELD-260",
-          "name": "metric_value",
+          "fieldId": "FIELD-0365",
+          "name": "sale_date",
+          "type": "NUM",
+          "semanticRole": "DIMENSION",
+          "format": "date9."
+        },
+        {
+          "fieldId": "FIELD-0366",
+          "name": "customer_id",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-0367",
+          "name": "customer_name",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 80
+        },
+        {
+          "fieldId": "FIELD-0368",
+          "name": "segment",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 20
+        },
+        {
+          "fieldId": "FIELD-0369",
+          "name": "customer_region",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 20
+        },
+        {
+          "fieldId": "FIELD-0370",
+          "name": "product_id",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-0371",
+          "name": "product_name",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 100
+        },
+        {
+          "fieldId": "FIELD-0372",
+          "name": "category",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 40
+        },
+        {
+          "fieldId": "FIELD-0373",
+          "name": "subcategory",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 40
+        },
+        {
+          "fieldId": "FIELD-0374",
+          "name": "quantity",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-360",
-          "name": "classification_tag",
-          "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "fieldId": "FIELD-0375",
+          "name": "unit_price",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0376",
+          "name": "discount_pct",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0377",
+          "name": "gross_amount",
+          "type": "NUM",
+          "semanticRole": "DERIVED_METRIC"
+        },
+        {
+          "fieldId": "FIELD-0378",
+          "name": "discount_amount",
+          "type": "NUM",
+          "semanticRole": "DERIVED_METRIC"
+        },
+        {
+          "fieldId": "FIELD-0379",
+          "name": "net_amount",
+          "type": "NUM",
+          "semanticRole": "DERIVED_METRIC"
         }
       ]
     },
@@ -1844,24 +3081,45 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-093",
       "variables": [
         {
-          "fieldId": "FIELD-161",
-          "name": "primary_key",
-          "type": "NUM",
-          "semanticRole": "BUSINESS_IDENTIFIER"
+          "fieldId": "FIELD-0380",
+          "name": "region",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 20
         },
         {
-          "fieldId": "FIELD-261",
-          "name": "metric_value",
+          "fieldId": "FIELD-0381",
+          "name": "sale_date",
+          "type": "NUM",
+          "semanticRole": "DIMENSION",
+          "format": "date9."
+        },
+        {
+          "fieldId": "FIELD-0382",
+          "name": "running_sales",
+          "type": "NUM",
+          "semanticRole": "ACCUMULATOR"
+        },
+        {
+          "fieldId": "FIELD-0383",
+          "name": "running_units",
+          "type": "NUM",
+          "semanticRole": "ACCUMULATOR"
+        },
+        {
+          "fieldId": "FIELD-0384",
+          "name": "previous_sales",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-361",
-          "name": "classification_tag",
-          "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "fieldId": "FIELD-0385",
+          "name": "sales_change",
+          "type": "NUM",
+          "semanticRole": "DERIVED_METRIC"
         }
       ]
     },
@@ -1871,24 +3129,57 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-016",
       "variables": [
         {
-          "fieldId": "FIELD-162",
-          "name": "primary_key",
-          "type": "NUM",
-          "semanticRole": "BUSINESS_IDENTIFIER"
+          "fieldId": "FIELD-0386",
+          "name": "region",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 20
         },
         {
-          "fieldId": "FIELD-262",
-          "name": "metric_value",
+          "fieldId": "FIELD-0387",
+          "name": "channel",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 20
+        },
+        {
+          "fieldId": "FIELD-0388",
+          "name": "_TYPE_",
+          "type": "NUM",
+          "semanticRole": "DERIVED_METRIC"
+        },
+        {
+          "fieldId": "FIELD-0389",
+          "name": "_FREQ_",
+          "type": "NUM",
+          "semanticRole": "DERIVED_METRIC"
+        },
+        {
+          "fieldId": "FIELD-0390",
+          "name": "mean_net",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-362",
-          "name": "classification_tag",
-          "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "fieldId": "FIELD-0391",
+          "name": "std_net",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0392",
+          "name": "min_net",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0393",
+          "name": "max_net",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
         }
       ]
     },
@@ -1898,24 +3189,45 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-018",
       "variables": [
         {
-          "fieldId": "FIELD-163",
-          "name": "primary_key",
-          "type": "NUM",
-          "semanticRole": "BUSINESS_IDENTIFIER"
+          "fieldId": "FIELD-0394",
+          "name": "region",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 20
         },
         {
-          "fieldId": "FIELD-263",
-          "name": "metric_value",
+          "fieldId": "FIELD-0395",
+          "name": "_NAME_",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 32
+        },
+        {
+          "fieldId": "FIELD-0396",
+          "name": "channel_ONLINE",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-363",
-          "name": "classification_tag",
-          "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "fieldId": "FIELD-0397",
+          "name": "channel_RETAIL",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0398",
+          "name": "channel_PARTNER",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0399",
+          "name": "channel_WHOLESALE",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
         }
       ]
     },
@@ -1925,24 +3237,33 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-033",
       "variables": [
         {
-          "fieldId": "FIELD-164",
-          "name": "primary_key",
-          "type": "NUM",
-          "semanticRole": "BUSINESS_IDENTIFIER"
+          "fieldId": "FIELD-0400",
+          "name": "region",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 20
         },
         {
-          "fieldId": "FIELD-264",
-          "name": "metric_value",
+          "fieldId": "FIELD-0401",
+          "name": "customer_tier",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 15
+        },
+        {
+          "fieldId": "FIELD-0402",
+          "name": "COUNT",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-364",
-          "name": "classification_tag",
-          "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "fieldId": "FIELD-0403",
+          "name": "PERCENT",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
         }
       ]
     },
@@ -1952,24 +3273,58 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-021",
       "variables": [
         {
-          "fieldId": "FIELD-165",
-          "name": "primary_key",
+          "fieldId": "FIELD-0404",
+          "name": "sale_id",
           "type": "NUM",
           "semanticRole": "BUSINESS_IDENTIFIER"
         },
         {
-          "fieldId": "FIELD-265",
-          "name": "metric_value",
+          "fieldId": "FIELD-0405",
+          "name": "customer_id",
           "type": "NUM",
-          "semanticRole": "MEASURE"
+          "semanticRole": "BUSINESS_IDENTIFIER"
         },
         {
-          "fieldId": "FIELD-365",
-          "name": "classification_tag",
+          "fieldId": "FIELD-0406",
+          "name": "product_id",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-0407",
+          "name": "net_amount",
+          "type": "NUM",
+          "semanticRole": "DERIVED_METRIC"
+        },
+        {
+          "fieldId": "FIELD-0408",
+          "name": "high_value_flag",
           "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "semanticRole": "FILTER",
+          "length": 1
+        },
+        {
+          "fieldId": "FIELD-0409",
+          "name": "anomaly_flag",
+          "type": "CHAR",
+          "semanticRole": "FILTER",
+          "length": 1
+        },
+        {
+          "fieldId": "FIELD-0410",
+          "name": "review_reason",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 50
+        }
+      ],
+      "sortKeys": [
+        {
+          "name": "sale_id",
+          "direction": "ASC"
         }
       ]
     },
@@ -1979,24 +3334,65 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-022",
       "variables": [
         {
-          "fieldId": "FIELD-166",
-          "name": "primary_key",
+          "fieldId": "FIELD-0411",
+          "name": "sale_id",
           "type": "NUM",
           "semanticRole": "BUSINESS_IDENTIFIER"
         },
         {
-          "fieldId": "FIELD-266",
-          "name": "metric_value",
+          "fieldId": "FIELD-0412",
+          "name": "customer_id",
           "type": "NUM",
-          "semanticRole": "MEASURE"
+          "semanticRole": "BUSINESS_IDENTIFIER"
         },
         {
-          "fieldId": "FIELD-366",
-          "name": "classification_tag",
+          "fieldId": "FIELD-0413",
+          "name": "product_id",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-0414",
+          "name": "net_amount",
+          "type": "NUM",
+          "semanticRole": "DERIVED_METRIC"
+        },
+        {
+          "fieldId": "FIELD-0415",
+          "name": "high_value_flag",
           "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "semanticRole": "FILTER",
+          "length": 1
+        },
+        {
+          "fieldId": "FIELD-0416",
+          "name": "anomaly_flag",
+          "type": "CHAR",
+          "semanticRole": "FILTER",
+          "length": 1
+        },
+        {
+          "fieldId": "FIELD-0417",
+          "name": "review_reason",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 50
+        },
+        {
+          "fieldId": "FIELD-0418",
+          "name": "priority_level",
+          "type": "CHAR",
+          "semanticRole": "FILTER",
+          "length": 10
+        },
+        {
+          "fieldId": "FIELD-0419",
+          "name": "audit_timestamp",
+          "type": "NUM",
+          "semanticRole": "DERIVED_METRIC"
         }
       ]
     },
@@ -2006,84 +3402,85 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-010",
       "variables": [
         {
-          "fieldId": "FIELD-033",
+          "fieldId": "FIELD-0420",
           "name": "sale_id",
           "type": "NUM",
           "semanticRole": "BUSINESS_IDENTIFIER"
         },
         {
-          "fieldId": "FIELD-034",
+          "fieldId": "FIELD-0421",
           "name": "customer_id",
           "type": "NUM",
           "semanticRole": "BUSINESS_IDENTIFIER"
         },
         {
-          "fieldId": "FIELD-035",
+          "fieldId": "FIELD-0422",
           "name": "product_id",
           "type": "NUM",
           "semanticRole": "BUSINESS_IDENTIFIER"
         },
         {
-          "fieldId": "FIELD-036",
+          "fieldId": "FIELD-0423",
           "name": "quantity",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-037",
+          "fieldId": "FIELD-0424",
           "name": "unit_price",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-038",
+          "fieldId": "FIELD-0425",
           "name": "discount_pct",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-039",
+          "fieldId": "FIELD-0426",
           "name": "gross_amount",
           "type": "NUM",
-          "format": "comma14.2",
-          "semanticRole": "DERIVED_METRIC"
+          "semanticRole": "DERIVED_METRIC",
+          "format": "comma14.2"
         },
         {
-          "fieldId": "FIELD-040",
+          "fieldId": "FIELD-0427",
           "name": "discount_amount",
           "type": "NUM",
-          "format": "comma14.2",
-          "semanticRole": "DERIVED_METRIC"
+          "semanticRole": "DERIVED_METRIC",
+          "format": "comma14.2"
         },
         {
-          "fieldId": "FIELD-041",
+          "fieldId": "FIELD-0428",
           "name": "net_amount",
           "type": "NUM",
-          "format": "comma14.2",
-          "semanticRole": "DERIVED_METRIC"
+          "semanticRole": "DERIVED_METRIC",
+          "format": "comma14.2"
         },
         {
-          "fieldId": "FIELD-042",
+          "fieldId": "FIELD-0429",
           "name": "sale_date",
           "type": "NUM",
-          "format": "date9.",
-          "semanticRole": "DIMENSION"
+          "semanticRole": "DIMENSION",
+          "format": "date9."
         },
         {
-          "fieldId": "FIELD-043",
+          "fieldId": "FIELD-0430",
           "name": "region",
           "type": "CHAR",
-          "length": 20,
-          "semanticRole": "DIMENSION"
+          "semanticRole": "DIMENSION",
+          "length": 20
         },
         {
-          "fieldId": "FIELD-044",
+          "fieldId": "FIELD-0431",
           "name": "channel",
           "type": "CHAR",
-          "length": 20,
-          "semanticRole": "DIMENSION"
+          "semanticRole": "DIMENSION",
+          "length": 20
         }
       ]
     },
@@ -2093,24 +3490,64 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-081",
       "variables": [
         {
-          "fieldId": "FIELD-168",
-          "name": "primary_key",
+          "fieldId": "FIELD-0432",
+          "name": "sale_id",
           "type": "NUM",
           "semanticRole": "BUSINESS_IDENTIFIER"
         },
         {
-          "fieldId": "FIELD-268",
-          "name": "metric_value",
+          "fieldId": "FIELD-0433",
+          "name": "customer_id",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-0434",
+          "name": "product_id",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-0435",
+          "name": "quantity",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-368",
-          "name": "classification_tag",
+          "fieldId": "FIELD-0436",
+          "name": "unit_price",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0437",
+          "name": "discount_pct",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0438",
+          "name": "sale_date",
+          "type": "NUM",
+          "semanticRole": "DIMENSION",
+          "format": "date9."
+        },
+        {
+          "fieldId": "FIELD-0439",
+          "name": "region",
           "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "semanticRole": "DIMENSION",
+          "length": 20
+        },
+        {
+          "fieldId": "FIELD-0440",
+          "name": "channel",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 20
         }
       ]
     },
@@ -2120,24 +3557,70 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-081",
       "variables": [
         {
-          "fieldId": "FIELD-169",
-          "name": "primary_key",
+          "fieldId": "FIELD-0441",
+          "name": "sale_id",
           "type": "NUM",
           "semanticRole": "BUSINESS_IDENTIFIER"
         },
         {
-          "fieldId": "FIELD-269",
-          "name": "metric_value",
+          "fieldId": "FIELD-0442",
+          "name": "customer_id",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-0443",
+          "name": "product_id",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-0444",
+          "name": "quantity",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-369",
-          "name": "classification_tag",
+          "fieldId": "FIELD-0445",
+          "name": "unit_price",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0446",
+          "name": "discount_pct",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0447",
+          "name": "sale_date",
+          "type": "NUM",
+          "semanticRole": "DIMENSION",
+          "format": "date9."
+        },
+        {
+          "fieldId": "FIELD-0448",
+          "name": "region",
           "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "semanticRole": "DIMENSION",
+          "length": 20
+        },
+        {
+          "fieldId": "FIELD-0449",
+          "name": "channel",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 20
+        }
+      ],
+      "sortKeys": [
+        {
+          "name": "sale_id",
+          "direction": "ASC"
         }
       ]
     },
@@ -2147,24 +3630,84 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-098",
       "variables": [
         {
-          "fieldId": "FIELD-170",
-          "name": "primary_key",
+          "fieldId": "FIELD-0450",
+          "name": "sale_id",
           "type": "NUM",
           "semanticRole": "BUSINESS_IDENTIFIER"
         },
         {
-          "fieldId": "FIELD-270",
-          "name": "metric_value",
+          "fieldId": "FIELD-0451",
+          "name": "customer_id",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-0452",
+          "name": "product_id",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-0453",
+          "name": "quantity",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-370",
-          "name": "classification_tag",
+          "fieldId": "FIELD-0454",
+          "name": "unit_price",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0455",
+          "name": "discount_pct",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0456",
+          "name": "net_amount",
+          "type": "NUM",
+          "semanticRole": "DERIVED_METRIC"
+        },
+        {
+          "fieldId": "FIELD-0457",
+          "name": "sale_date",
+          "type": "NUM",
+          "semanticRole": "DIMENSION",
+          "format": "date9."
+        },
+        {
+          "fieldId": "FIELD-0458",
+          "name": "customer_name",
           "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "semanticRole": "DIMENSION",
+          "length": 80
+        },
+        {
+          "fieldId": "FIELD-0459",
+          "name": "region",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 20
+        },
+        {
+          "fieldId": "FIELD-0460",
+          "name": "segment",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 20
+        },
+        {
+          "fieldId": "FIELD-0461",
+          "name": "lookup_status",
+          "type": "CHAR",
+          "semanticRole": "FILTER",
+          "length": 12
         }
       ]
     },
@@ -2174,23 +3717,58 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-076",
       "variables": [
         {
-          "fieldId": "FIELD-171",
-          "name": "primary_key",
+          "fieldId": "FIELD-0462",
+          "name": "sale_id",
           "type": "NUM",
           "semanticRole": "BUSINESS_IDENTIFIER"
         },
         {
-          "fieldId": "FIELD-271",
-          "name": "metric_value",
+          "fieldId": "FIELD-0463",
+          "name": "sale_date",
+          "type": "NUM",
+          "semanticRole": "DIMENSION",
+          "format": "date9."
+        },
+        {
+          "fieldId": "FIELD-0464",
+          "name": "region",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 20
+        },
+        {
+          "fieldId": "FIELD-0465",
+          "name": "net_amount",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-371",
-          "name": "classification_tag",
+          "fieldId": "FIELD-0466",
+          "name": "quantity",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0467",
+          "name": "period_flag",
           "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 15
+        },
+        {
+          "fieldId": "FIELD-0468",
+          "name": "fiscal_quarter",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 8
+        },
+        {
+          "fieldId": "FIELD-0469",
+          "name": "fiscal_year",
+          "type": "NUM",
           "semanticRole": "DIMENSION"
         }
       ]
@@ -2201,24 +3779,84 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-082",
       "variables": [
         {
-          "fieldId": "FIELD-172",
-          "name": "primary_key",
+          "fieldId": "FIELD-0470",
+          "name": "sale_id",
           "type": "NUM",
           "semanticRole": "BUSINESS_IDENTIFIER"
         },
         {
-          "fieldId": "FIELD-272",
-          "name": "metric_value",
+          "fieldId": "FIELD-0471",
+          "name": "customer_id",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-0472",
+          "name": "product_id",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-0473",
+          "name": "quantity",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-372",
-          "name": "classification_tag",
+          "fieldId": "FIELD-0474",
+          "name": "unit_price",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0475",
+          "name": "discount_pct",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0476",
+          "name": "sale_date",
+          "type": "NUM",
+          "semanticRole": "DIMENSION",
+          "format": "date9."
+        },
+        {
+          "fieldId": "FIELD-0477",
+          "name": "region",
           "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "semanticRole": "DIMENSION",
+          "length": 20
+        },
+        {
+          "fieldId": "FIELD-0478",
+          "name": "channel",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 20
+        },
+        {
+          "fieldId": "FIELD-0479",
+          "name": "quality_status",
+          "type": "CHAR",
+          "semanticRole": "FILTER",
+          "length": 12
+        },
+        {
+          "fieldId": "FIELD-0480",
+          "name": "quality_reason",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 50
+        },
+        {
+          "fieldId": "FIELD-0481",
+          "name": "net_amount",
+          "type": "NUM",
+          "semanticRole": "DERIVED_METRIC"
         }
       ]
     },
@@ -2228,24 +3866,26 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-083",
       "variables": [
         {
-          "fieldId": "FIELD-173",
-          "name": "primary_key",
-          "type": "NUM",
-          "semanticRole": "BUSINESS_IDENTIFIER"
+          "fieldId": "FIELD-0482",
+          "name": "quality_status",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 12
         },
         {
-          "fieldId": "FIELD-273",
-          "name": "metric_value",
+          "fieldId": "FIELD-0483",
+          "name": "COUNT",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-373",
-          "name": "classification_tag",
-          "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "fieldId": "FIELD-0484",
+          "name": "PERCENT",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
         }
       ]
     },
@@ -2255,24 +3895,52 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-020",
       "variables": [
         {
-          "fieldId": "FIELD-174",
-          "name": "primary_key",
+          "fieldId": "FIELD-0485",
+          "name": "sale_id",
           "type": "NUM",
           "semanticRole": "BUSINESS_IDENTIFIER"
         },
         {
-          "fieldId": "FIELD-274",
-          "name": "metric_value",
+          "fieldId": "FIELD-0486",
+          "name": "customer_id",
           "type": "NUM",
-          "semanticRole": "MEASURE"
+          "semanticRole": "BUSINESS_IDENTIFIER"
         },
         {
-          "fieldId": "FIELD-374",
-          "name": "classification_tag",
+          "fieldId": "FIELD-0487",
+          "name": "product_id",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-0488",
+          "name": "net_amount",
+          "type": "NUM",
+          "semanticRole": "DERIVED_METRIC"
+        },
+        {
+          "fieldId": "FIELD-0489",
+          "name": "high_value_flag",
           "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "semanticRole": "FILTER",
+          "length": 1
+        },
+        {
+          "fieldId": "FIELD-0490",
+          "name": "anomaly_flag",
+          "type": "CHAR",
+          "semanticRole": "FILTER",
+          "length": 1
+        },
+        {
+          "fieldId": "FIELD-0491",
+          "name": "review_reason",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 50
         }
       ]
     },
@@ -2282,84 +3950,85 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-011",
       "variables": [
         {
-          "fieldId": "FIELD-033",
+          "fieldId": "FIELD-0492",
           "name": "sale_id",
           "type": "NUM",
           "semanticRole": "BUSINESS_IDENTIFIER"
         },
         {
-          "fieldId": "FIELD-034",
+          "fieldId": "FIELD-0493",
           "name": "customer_id",
           "type": "NUM",
           "semanticRole": "BUSINESS_IDENTIFIER"
         },
         {
-          "fieldId": "FIELD-035",
+          "fieldId": "FIELD-0494",
           "name": "product_id",
           "type": "NUM",
           "semanticRole": "BUSINESS_IDENTIFIER"
         },
         {
-          "fieldId": "FIELD-036",
+          "fieldId": "FIELD-0495",
           "name": "quantity",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-037",
+          "fieldId": "FIELD-0496",
           "name": "unit_price",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-038",
+          "fieldId": "FIELD-0497",
           "name": "discount_pct",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-039",
+          "fieldId": "FIELD-0498",
           "name": "gross_amount",
           "type": "NUM",
-          "format": "comma14.2",
-          "semanticRole": "DERIVED_METRIC"
+          "semanticRole": "DERIVED_METRIC",
+          "format": "comma14.2"
         },
         {
-          "fieldId": "FIELD-040",
+          "fieldId": "FIELD-0499",
           "name": "discount_amount",
           "type": "NUM",
-          "format": "comma14.2",
-          "semanticRole": "DERIVED_METRIC"
+          "semanticRole": "DERIVED_METRIC",
+          "format": "comma14.2"
         },
         {
-          "fieldId": "FIELD-041",
+          "fieldId": "FIELD-0500",
           "name": "net_amount",
           "type": "NUM",
-          "format": "comma14.2",
-          "semanticRole": "DERIVED_METRIC"
+          "semanticRole": "DERIVED_METRIC",
+          "format": "comma14.2"
         },
         {
-          "fieldId": "FIELD-042",
+          "fieldId": "FIELD-0501",
           "name": "sale_date",
           "type": "NUM",
-          "format": "date9.",
-          "semanticRole": "DIMENSION"
+          "semanticRole": "DIMENSION",
+          "format": "date9."
         },
         {
-          "fieldId": "FIELD-043",
+          "fieldId": "FIELD-0502",
           "name": "region",
           "type": "CHAR",
-          "length": 20,
-          "semanticRole": "DIMENSION"
+          "semanticRole": "DIMENSION",
+          "length": 20
         },
         {
-          "fieldId": "FIELD-044",
+          "fieldId": "FIELD-0503",
           "name": "channel",
           "type": "CHAR",
-          "length": 20,
-          "semanticRole": "DIMENSION"
+          "semanticRole": "DIMENSION",
+          "length": 20
         }
       ],
       "sortKeys": [
@@ -2383,24 +4052,26 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-065",
       "variables": [
         {
-          "fieldId": "FIELD-176",
-          "name": "primary_key",
-          "type": "NUM",
-          "semanticRole": "BUSINESS_IDENTIFIER"
+          "fieldId": "FIELD-0504",
+          "name": "score_band",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 15
         },
         {
-          "fieldId": "FIELD-276",
-          "name": "metric_value",
+          "fieldId": "FIELD-0505",
+          "name": "COUNT",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-376",
-          "name": "classification_tag",
-          "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "fieldId": "FIELD-0506",
+          "name": "PERCENT",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
         }
       ]
     },
@@ -2410,24 +4081,44 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-066",
       "variables": [
         {
-          "fieldId": "FIELD-177",
-          "name": "primary_key",
-          "type": "NUM",
-          "semanticRole": "BUSINESS_IDENTIFIER"
+          "fieldId": "FIELD-0507",
+          "name": "score_band",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 15
         },
         {
-          "fieldId": "FIELD-277",
-          "name": "metric_value",
+          "fieldId": "FIELD-0508",
+          "name": "_TYPE_",
+          "type": "NUM",
+          "semanticRole": "DERIVED_METRIC"
+        },
+        {
+          "fieldId": "FIELD-0509",
+          "name": "_FREQ_",
+          "type": "NUM",
+          "semanticRole": "DERIVED_METRIC"
+        },
+        {
+          "fieldId": "FIELD-0510",
+          "name": "mean_score",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-377",
-          "name": "classification_tag",
-          "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "fieldId": "FIELD-0511",
+          "name": "min_score",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0512",
+          "name": "max_score",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
         }
       ]
     },
@@ -2437,24 +4128,38 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-047",
       "variables": [
         {
-          "fieldId": "FIELD-178",
-          "name": "primary_key",
-          "type": "NUM",
-          "semanticRole": "BUSINESS_IDENTIFIER"
+          "fieldId": "FIELD-0513",
+          "name": "segment",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 20
         },
         {
-          "fieldId": "FIELD-278",
-          "name": "metric_value",
+          "fieldId": "FIELD-0514",
+          "name": "segment_sales",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-378",
-          "name": "classification_tag",
-          "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "fieldId": "FIELD-0515",
+          "name": "segment_records",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0516",
+          "name": "segment_units",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0517",
+          "name": "generated_rank",
+          "type": "NUM",
+          "semanticRole": "DERIVED_METRIC"
         }
       ]
     },
@@ -2464,24 +4169,32 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-045",
       "variables": [
         {
-          "fieldId": "FIELD-179",
-          "name": "primary_key",
-          "type": "NUM",
-          "semanticRole": "BUSINESS_IDENTIFIER"
+          "fieldId": "FIELD-0518",
+          "name": "segment",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 20
         },
         {
-          "fieldId": "FIELD-279",
-          "name": "metric_value",
+          "fieldId": "FIELD-0519",
+          "name": "segment_sales",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-379",
-          "name": "classification_tag",
-          "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "fieldId": "FIELD-0520",
+          "name": "segment_records",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0521",
+          "name": "segment_units",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
         }
       ]
     },
@@ -2491,24 +4204,38 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-046",
       "variables": [
         {
-          "fieldId": "FIELD-180",
-          "name": "primary_key",
-          "type": "NUM",
-          "semanticRole": "BUSINESS_IDENTIFIER"
+          "fieldId": "FIELD-0522",
+          "name": "segment",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 20
         },
         {
-          "fieldId": "FIELD-280",
-          "name": "metric_value",
+          "fieldId": "FIELD-0523",
+          "name": "segment_sales",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-380",
-          "name": "classification_tag",
-          "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "fieldId": "FIELD-0524",
+          "name": "segment_records",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-0525",
+          "name": "segment_units",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        }
+      ],
+      "sortKeys": [
+        {
+          "name": "segment",
+          "direction": "ASC"
         }
       ]
     },
@@ -2518,24 +4245,52 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-100",
       "variables": [
         {
-          "fieldId": "FIELD-181",
-          "name": "primary_key",
+          "fieldId": "FIELD-0526",
+          "name": "sale_id",
           "type": "NUM",
           "semanticRole": "BUSINESS_IDENTIFIER"
         },
         {
-          "fieldId": "FIELD-281",
-          "name": "metric_value",
+          "fieldId": "FIELD-0527",
+          "name": "discount_pct",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-381",
-          "name": "classification_tag",
+          "fieldId": "FIELD-0528",
+          "name": "missing_class",
           "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "semanticRole": "DIMENSION",
+          "length": 15
+        },
+        {
+          "fieldId": "FIELD-0529",
+          "name": "conversion_flag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 15
+        },
+        {
+          "fieldId": "FIELD-0530",
+          "name": "character_amount",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 14
+        },
+        {
+          "fieldId": "FIELD-0531",
+          "name": "numeric_from_text",
+          "type": "NUM",
+          "semanticRole": "DERIVED_METRIC"
+        },
+        {
+          "fieldId": "FIELD-0532",
+          "name": "net_amount",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
         }
       ]
     },
@@ -2545,24 +4300,33 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-101",
       "variables": [
         {
-          "fieldId": "FIELD-182",
-          "name": "primary_key",
-          "type": "NUM",
-          "semanticRole": "BUSINESS_IDENTIFIER"
+          "fieldId": "FIELD-0533",
+          "name": "missing_class",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 15
         },
         {
-          "fieldId": "FIELD-282",
-          "name": "metric_value",
+          "fieldId": "FIELD-0534",
+          "name": "conversion_flag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 15
+        },
+        {
+          "fieldId": "FIELD-0535",
+          "name": "COUNT",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-382",
-          "name": "classification_tag",
-          "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "fieldId": "FIELD-0536",
+          "name": "PERCENT",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
         }
       ]
     },
@@ -2572,24 +4336,26 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-033",
       "variables": [
         {
-          "fieldId": "FIELD-183",
-          "name": "primary_key",
-          "type": "NUM",
-          "semanticRole": "BUSINESS_IDENTIFIER"
+          "fieldId": "FIELD-0537",
+          "name": "customer_tier",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 15
         },
         {
-          "fieldId": "FIELD-283",
-          "name": "metric_value",
+          "fieldId": "FIELD-0538",
+          "name": "COUNT",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-383",
-          "name": "classification_tag",
-          "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "fieldId": "FIELD-0539",
+          "name": "PERCENT",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
         }
       ]
     },
@@ -2599,24 +4365,45 @@
       "library": "WORKLIB",
       "isPermanent": false,
       "schemaStatus": "COMPLETE",
+      "producerStepId": "STEP-032",
       "variables": [
         {
-          "fieldId": "FIELD-184",
-          "name": "primary_key",
-          "type": "NUM",
-          "semanticRole": "BUSINESS_IDENTIFIER"
+          "fieldId": "FIELD-0540",
+          "name": "customer_tier",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 15
         },
         {
-          "fieldId": "FIELD-284",
-          "name": "metric_value",
+          "fieldId": "FIELD-0541",
+          "name": "region",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION",
+          "length": 20
+        },
+        {
+          "fieldId": "FIELD-0542",
+          "name": "_TYPE_",
+          "type": "NUM",
+          "semanticRole": "DERIVED_METRIC"
+        },
+        {
+          "fieldId": "FIELD-0543",
+          "name": "_FREQ_",
+          "type": "NUM",
+          "semanticRole": "DERIVED_METRIC"
+        },
+        {
+          "fieldId": "FIELD-0544",
+          "name": "tier_sales",
           "type": "NUM",
           "semanticRole": "MEASURE"
         },
         {
-          "fieldId": "FIELD-384",
-          "name": "classification_tag",
-          "type": "CHAR",
-          "semanticRole": "DIMENSION"
+          "fieldId": "FIELD-0545",
+          "name": "tier_transactions",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
         }
       ]
     }

@@ -1,0 +1,113 @@
+{
+  "files": [
+    {
+      "file": "output/cobol/CBLSL001.cbl",
+      "areaAViolations": 0,
+      "areaBViolations": 0,
+      "fileStatusChecks": 4,
+      "missingFileStatusChecks": 0,
+      "compliant": true,
+      "findings": []
+    },
+    {
+      "file": "output/cobol/CBLSL002.cbl",
+      "areaAViolations": 0,
+      "areaBViolations": 0,
+      "fileStatusChecks": 4,
+      "missingFileStatusChecks": 0,
+      "compliant": true,
+      "findings": []
+    },
+    {
+      "file": "output/cobol/CBLSL003.cbl",
+      "areaAViolations": 0,
+      "areaBViolations": 0,
+      "fileStatusChecks": 4,
+      "missingFileStatusChecks": 0,
+      "compliant": true,
+      "findings": []
+    },
+    {
+      "file": "output/cobol/CBLSL004.cbl",
+      "areaAViolations": 0,
+      "areaBViolations": 0,
+      "fileStatusChecks": 4,
+      "missingFileStatusChecks": 0,
+      "compliant": true,
+      "findings": []
+    },
+    {
+      "file": "output/cobol/CBLSL005.cbl",
+      "areaAViolations": 0,
+      "areaBViolations": 0,
+      "fileStatusChecks": 4,
+      "missingFileStatusChecks": 0,
+      "compliant": true,
+      "findings": []
+    },
+    {
+      "file": "output/cobol/CBLSL006.cbl",
+      "areaAViolations": 0,
+      "areaBViolations": 0,
+      "fileStatusChecks": 4,
+      "missingFileStatusChecks": 0,
+      "compliant": true,
+      "findings": []
+    },
+    {
+      "file": "output/cobol/CBLSL007.cbl",
+      "areaAViolations": 0,
+      "areaBViolations": 0,
+      "fileStatusChecks": 4,
+      "missingFileStatusChecks": 0,
+      "compliant": true,
+      "findings": []
+    },
+    {
+      "file": "output/cobol/CBLSL008.cbl",
+      "areaAViolations": 0,
+      "areaBViolations": 0,
+      "fileStatusChecks": 4,
+      "missingFileStatusChecks": 0,
+      "compliant": true,
+      "findings": []
+    },
+    {
+      "file": "output/cobol/CBLSL009.cbl",
+      "areaAViolations": 0,
+      "areaBViolations": 0,
+      "fileStatusChecks": 4,
+      "missingFileStatusChecks": 0,
+      "compliant": true,
+      "findings": []
+    },
+    {
+      "file": "output/cobol/CBLSL010.cbl",
+      "areaAViolations": 0,
+      "areaBViolations": 0,
+      "fileStatusChecks": 4,
+      "missingFileStatusChecks": 0,
+      "compliant": true,
+      "findings": []
+    },
+    {
+      "file": "output/cobol/CBLSL011.cbl",
+      "areaAViolations": 0,
+      "areaBViolations": 0,
+      "fileStatusChecks": 4,
+      "missingFileStatusChecks": 0,
+      "compliant": true,
+      "findings": []
+    },
+    {
+      "file": "output/cobol/CBLSL012.cbl",
+      "areaAViolations": 0,
+      "areaBViolations": 0,
+      "fileStatusChecks": 4,
+      "missingFileStatusChecks": 0,
+      "compliant": true,
+      "findings": []
+    }
+  ],
+  "verdict": "PASSED"
+}

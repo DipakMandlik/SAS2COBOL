@@ -1,0 +1,6 @@
+000100 * COPYBOOK: CPREGI57 - FOR WORKLIB.REGION_CUSTOMER_SCORE         
+000200 01  REGION-CUSTOMER-SCORE-RECORD.                                
+000300     05  REGION-CUSTOMER-REGION         PIC X(20).                
+000400     05  REGION-SCORE-BAND              PIC X(15).                
+000500     05  REGION-CUSTOMER-COUNT          PIC S9(9)V99 COMP-3.      
+000600     05  REGION-TOTAL-SPEND             PIC S9(9)V99 COMP-3.      

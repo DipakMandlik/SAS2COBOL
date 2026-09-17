@@ -1,0 +1,136 @@
+{
+  "controls": [
+    {
+      "controlId": "CTRL-REC-001",
+      "sourceEntity": "RAW.CUSTOMERS",
+      "targetEntity": "WORKLIB.CUSTOMER_BASE",
+      "metricType": "RECORD_COUNT",
+      "tolerance": 0
+    },
+    {
+      "controlId": "CTRL-REC-002",
+      "sourceEntity": "RAW.SALES",
+      "targetEntity": "WORKLIB.SALES_BASE",
+      "metricType": "RECORD_COUNT",
+      "tolerance": 0
+    },
+    {
+      "controlId": "CTRL-SUM-001",
+      "sourceEntity": "RAW.SALES",
+      "targetEntity": "WORKLIB.SALES_BASE",
+      "metricType": "COLUMN_SUM",
+      "targetField": "gross_amount",
+      "tolerance": 0.01
+    },
+    {
+      "controlId": "CTRL-SUM-002",
+      "sourceEntity": "RAW.SALES",
+      "targetEntity": "WORKLIB.SALES_BASE",
+      "metricType": "COLUMN_SUM",
+      "targetField": "net_amount",
+      "tolerance": 0.01
+    },
+    {
+      "controlId": "CTRL-BAL-001",
+      "sourceEntity": "WORKLIB.SALES_BASE",
+      "targetEntity": "WORKLIB.SALES_BASE",
+      "metricType": "BALANCING_CHECK",
+      "targetField": "gross_minus_discount_equals_net",
+      "tolerance": 0.01
+    },
+    {
+      "controlId": "CTRL-REC-003",
+      "sourceEntity": "WORKLIB.SALES_SORTED",
+      "targetEntity": "WORKLIB.CUSTOMER_SALES",
+      "metricType": "RECORD_COUNT",
+      "tolerance": 0
+    },
+    {
+      "controlId": "CTRL-SUM-003",
+      "sourceEntity": "WORKLIB.CUSTOMER_SALES",
+      "targetEntity": "WORKLIB.CUSTOMER_MONTHLY",
+      "metricType": "COLUMN_SUM",
+      "targetField": "customer_total",
+      "tolerance": 0.01
+    },
+    {
+      "controlId": "CTRL-HSH-001",
+      "sourceEntity": "WORKLIB.CUSTOMER_BASE",
+      "targetEntity": "WORKLIB.CUSTOMER_SORTED",
+      "metricType": "HASH_TOTAL",
+      "targetField": "customer_id",
+      "tolerance": 0
+    },
+    {
+      "controlId": "CTRL-HSH-002",
+      "sourceEntity": "WORKLIB.SALES_BASE",
+      "targetEntity": "WORKLIB.SALES_SORTED",
+      "metricType": "HASH_TOTAL",
+      "targetField": "sale_id",
+      "tolerance": 0
+    },
+    {
+      "controlId": "CTRL-SUM-004",
+      "sourceEntity": "WORKLIB.ENRICHED_SALES",
+      "targetEntity": "WORKLIB.CATEGORY_SUMMARY",
+      "metricType": "COLUMN_SUM",
+      "targetField": "net_amount",
+      "tolerance": 0.01
+    },
+    {
+      "controlId": "CTRL-REC-004",
+      "sourceEntity": "RAW.SALES",
+      "targetEntity": "WORKLIB.SALES_DUPLICATE_CHECK",
+      "metricType": "RECORD_COUNT",
+      "tolerance": 0
+    },
+    {
+      "controlId": "CTRL-BAL-002",
+      "sourceEntity": "WORKLIB.FINAL_CONTROL_TOTALS",
+      "targetEntity": "WORKLIB.RECONCILIATION",
+      "metricType": "BALANCING_CHECK",
+      "targetField": "row_count_and_sales_tolerance",
+      "tolerance": 0.01
+    },
+    {
+      "controlId": "CTRL-SUM-005",
+      "sourceEntity": "WORKLIB.CUSTOMER_SCORING",
+      "targetEntity": "WORKLIB.SCORE_SUMMARY",
+      "metricType": "COLUMN_SUM",
+      "targetField": "customer_score",
+      "tolerance": 0.05
+    },
+    {
+      "controlId": "CTRL-BAL-003",
+      "sourceEntity": "WORKLIB.OPERATIONAL_DASHBOARD",
+      "targetEntity": "WORKLIB.OPERATIONAL_DASHBOARD",
+      "metricType": "BALANCING_CHECK",
+      "targetField": "reconciliation_status_equals_MATCH",
+      "tolerance": 0
+    },
+    {
+      "controlId": "CTRL-REC-015",
+      "sourceEntity": "WORKLIB.CUSTOMER_SALES_SORTED",
+      "targetEntity": "WORKLIB.CUSTOMER_MONTHLY",
+      "metricType": "BALANCING_CHECK",
+      "tolerance": 0,
+      "description": "STEP-014 Customer subtotal vs legacy cumulative total divergence check (SAR2-005). Validates that sum of per-customer totals equals legacy final cumulative total."
+    },
+    {
+      "controlId": "CTRL-REC-016",
+      "sourceEntity": "WORKLIB.TRANSPOSE_PREP_SORTED",
+      "targetEntity": "WORKLIB.MONTHLY_REGION_PIVOT",
+      "metricType": "HASH_TOTAL",
+      "tolerance": 0,
+      "description": "PROC TRANSPOSE OCCURS pivot semantic integrity composite hash of REGION and MONTH columns (SAR2-010)."
+    },
+    {
+      "controlId": "CTRL-REC-017",
+      "sourceEntity": "WORKLIB.REGION_RUNNING_SALES_SORTED",
+      "targetEntity": "WORKLIB.REGION_RUNNING_SALES_DELTA",
+      "metricType": "RECORD_COUNT",
+      "tolerance": 0,
+      "description": "Sequential transit dataset record conservation check (SAR2-006)."
+    }
+  ]
+}

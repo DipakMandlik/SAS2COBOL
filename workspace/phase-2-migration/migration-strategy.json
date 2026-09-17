@@ -1,0 +1,1044 @@
+{
+  "decisions": [
+    {
+      "decisionId": "STRAT-DEC-001",
+      "stepId": "STEP-001",
+      "sourceComponent": "GLOBAL_OPTIONS",
+      "strategy": "STRUCTURED_REWRITE",
+      "targetPattern": "JCL PARM / SET Symbols / Static Configuration",
+      "requiresDecomposition": false,
+      "rationale": "Global SAS options and macro definitions are translated into JCL execution parameters, SET symbols, and shared copybook configuration constants.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-002",
+      "stepId": "STEP-002",
+      "sourceComponent": "MACRO_DEF_SET_RUN_CONTEXT",
+      "strategy": "STRUCTURED_REWRITE",
+      "targetPattern": "JCL PARM / SET Symbols / Static Configuration",
+      "requiresDecomposition": false,
+      "rationale": "Global SAS options and macro definitions are translated into JCL execution parameters, SET symbols, and shared copybook configuration constants.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-003",
+      "stepId": "STEP-003",
+      "sourceComponent": "MACRO_DEF_CHOOSE_PERIOD",
+      "strategy": "STRUCTURED_REWRITE",
+      "targetPattern": "JCL PARM / SET Symbols / Static Configuration",
+      "requiresDecomposition": false,
+      "rationale": "Global SAS options and macro definitions are translated into JCL execution parameters, SET symbols, and shared copybook configuration constants.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-004",
+      "stepId": "STEP-004",
+      "sourceComponent": "%set_run_context(region=ALL,min_amount=100)",
+      "strategy": "STRUCTURED_REWRITE",
+      "targetPattern": "JCL Procedure Parameter Substitution / SYSIN Control Cards",
+      "requiresDecomposition": false,
+      "rationale": "Macro invocations are parameterized via JCL procedure symbols, PARM strings, or SYSIN control card inputs.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-005",
+      "stepId": "STEP-005",
+      "sourceComponent": "%choose_period(period=MONTHLY)",
+      "strategy": "STRUCTURED_REWRITE",
+      "targetPattern": "JCL Procedure Parameter Substitution / SYSIN Control Cards",
+      "requiresDecomposition": false,
+      "rationale": "Macro invocations are parameterized via JCL procedure symbols, PARM strings, or SYSIN control card inputs.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-006",
+      "stepId": "STEP-006",
+      "sourceComponent": "WORKLIB.customer_base",
+      "strategy": "MANUAL_REVIEW_REQUIRED",
+      "targetPattern": "COBOL Sequential Record Ingestion with Unconditional String Trimming",
+      "requiresDecomposition": false,
+      "rationale": "Contains unanchored FIRST.customer_id without BY statement (SAR-002). Remediated to unconditional FUNCTION TRIM in COBOL while logging syntax defect.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-007",
+      "stepId": "STEP-007",
+      "sourceComponent": "SORT",
+      "strategy": "DFSORT_UTILITY_STEP",
+      "targetPattern": "DFSORT Control Statement (SORT FIELDS=...)",
+      "requiresDecomposition": false,
+      "rationale": "Native mainframe DFSORT utility provides superior I/O throughput and hardware-accelerated sequential sorting compared to internal COBOL sorting.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-008",
+      "stepId": "STEP-008",
+      "sourceComponent": "WORKLIB.product_base",
+      "strategy": "DATA_STEP_TO_SEQUENTIAL_PROCESSING",
+      "targetPattern": "COBOL Sequential File Processing",
+      "requiresDecomposition": false,
+      "rationale": "Sequential processing of step STEP-008",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-009",
+      "stepId": "STEP-009",
+      "sourceComponent": "SORT",
+      "strategy": "DFSORT_UTILITY_STEP",
+      "targetPattern": "DFSORT Control Statement (SORT FIELDS=...)",
+      "requiresDecomposition": false,
+      "rationale": "Native mainframe DFSORT utility provides superior I/O throughput and hardware-accelerated sequential sorting compared to internal COBOL sorting.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-010",
+      "stepId": "STEP-010",
+      "sourceComponent": "WORKLIB.sales_base",
+      "strategy": "DATA_STEP_TO_SEQUENTIAL_PROCESSING",
+      "targetPattern": "COBOL Sequential File Processing",
+      "requiresDecomposition": false,
+      "rationale": "Sequential processing of step STEP-010",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-011",
+      "stepId": "STEP-011",
+      "sourceComponent": "SORT",
+      "strategy": "DFSORT_UTILITY_STEP",
+      "targetPattern": "DFSORT Control Statement (SORT FIELDS=...)",
+      "requiresDecomposition": false,
+      "rationale": "Native mainframe DFSORT utility provides superior I/O throughput and hardware-accelerated sequential sorting compared to internal COBOL sorting.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-012",
+      "stepId": "STEP-012",
+      "sourceComponent": "WORKLIB.customer_sales",
+      "strategy": "DATA_STEP_TO_SEQUENTIAL_PROCESSING",
+      "targetPattern": "Sequential Match-Merge with Explicit Field Overwrite Semantics",
+      "requiresDecomposition": false,
+      "rationale": "Two-way match-merge with variable collision on region (SAR-006). Emulates SAS PDV rightmost overwrite by explicitly moving sales_sorted.region to output.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-013",
+      "stepId": "STEP-013",
+      "sourceComponent": "SORT",
+      "strategy": "DFSORT_UTILITY_STEP",
+      "targetPattern": "DFSORT Control Statement (SORT FIELDS=...)",
+      "requiresDecomposition": false,
+      "rationale": "Native mainframe DFSORT utility provides superior I/O throughput and hardware-accelerated sequential sorting compared to internal COBOL sorting.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-014",
+      "stepId": "STEP-014",
+      "sourceComponent": "WORKLIB.customer_monthly",
+      "strategy": "DATA_STEP_TO_SORT_AND_GROUP",
+      "targetPattern": "COBOL Control Break on Customer ID with Output on Boundary",
+      "requiresDecomposition": true,
+      "rationale": "Stateful monthly accumulation with RETAIN variables and output triggered by LAST.customer_id boundary (SAR-007).",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-015",
+      "stepId": "STEP-015",
+      "sourceComponent": "SUMMARY",
+      "strategy": "PROC_DECOMPOSITION",
+      "targetPattern": "COBOL Multi-Level Control Break with Dynamic Accumulators",
+      "requiresDecomposition": true,
+      "rationale": "Monolithic aggregation PROC is decomposed into pre-sort, control-break boundary detection, multi-level accumulator summation, and formatted record output.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-016",
+      "stepId": "STEP-016",
+      "sourceComponent": "MEANS",
+      "strategy": "PROC_DECOMPOSITION",
+      "targetPattern": "COBOL Multi-Level Control Break with Dynamic Accumulators",
+      "requiresDecomposition": true,
+      "rationale": "Monolithic aggregation PROC is decomposed into pre-sort, control-break boundary detection, multi-level accumulator summation, and formatted record output.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-017",
+      "stepId": "STEP-017",
+      "sourceComponent": "FREQ",
+      "strategy": "PROC_DECOMPOSITION",
+      "targetPattern": "COBOL Frequency Table Counting with OCCURS Array",
+      "requiresDecomposition": true,
+      "rationale": "Categorical frequency distributions and crosstabs are decomposed into pre-sort, in-memory OCCURS counter arrays, and formatted summary reporting.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-018",
+      "stepId": "STEP-018",
+      "sourceComponent": "TRANSPOSE",
+      "strategy": "PROC_DECOMPOSITION",
+      "targetPattern": "COBOL OCCURS Pivoting Table",
+      "requiresDecomposition": true,
+      "rationale": "Dynamic narrow-to-wide pivoting is decomposed into ordered group buffering, fixed OCCURS slot assignment, and wide record emission.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-019",
+      "stepId": "STEP-019",
+      "sourceComponent": "SQL",
+      "strategy": "SQL_TO_DATA_PROCESSING",
+      "targetPattern": "Sequential Match-Merge or DB2 Relational View",
+      "requiresDecomposition": false,
+      "rationale": "Relational SQL queries are implemented via two-file sequential match-merge algorithms with HIGH-VALUES sentinels or DB2 SQL cursors.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-020",
+      "stepId": "STEP-020",
+      "sourceComponent": "WORKLIB.sales_rules",
+      "strategy": "DATA_STEP_TO_SEQUENTIAL_PROCESSING",
+      "targetPattern": "COBOL Sequential File Processing",
+      "requiresDecomposition": false,
+      "rationale": "Sequential processing of step STEP-020",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-021",
+      "stepId": "STEP-021",
+      "sourceComponent": "SORT",
+      "strategy": "DFSORT_UTILITY_STEP",
+      "targetPattern": "DFSORT Control Statement (SORT FIELDS=...)",
+      "requiresDecomposition": false,
+      "rationale": "Native mainframe DFSORT utility provides superior I/O throughput and hardware-accelerated sequential sorting compared to internal COBOL sorting.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-022",
+      "stepId": "STEP-022",
+      "sourceComponent": "WORKLIB.review_queue_final",
+      "strategy": "DATA_STEP_TO_SEQUENTIAL_PROCESSING",
+      "targetPattern": "COBOL Sequential File Processing",
+      "requiresDecomposition": false,
+      "rationale": "Sequential processing of step STEP-022",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-023",
+      "stepId": "STEP-023",
+      "sourceComponent": "SQL",
+      "strategy": "SQL_TO_DATA_PROCESSING",
+      "targetPattern": "Sequential Match-Merge or DB2 Relational View",
+      "requiresDecomposition": false,
+      "rationale": "Relational SQL queries are implemented via two-file sequential match-merge algorithms with HIGH-VALUES sentinels or DB2 SQL cursors.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-024",
+      "stepId": "STEP-024",
+      "sourceComponent": "SQL",
+      "strategy": "SQL_TO_DATA_PROCESSING",
+      "targetPattern": "Sequential Match-Merge or DB2 Relational View",
+      "requiresDecomposition": false,
+      "rationale": "Relational SQL queries are implemented via two-file sequential match-merge algorithms with HIGH-VALUES sentinels or DB2 SQL cursors.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-025",
+      "stepId": "STEP-025",
+      "sourceComponent": "WORKLIB.customer_tier",
+      "strategy": "DATA_STEP_TO_SEQUENTIAL_PROCESSING",
+      "targetPattern": "COBOL Sequential File Processing",
+      "requiresDecomposition": false,
+      "rationale": "Sequential processing of step STEP-025",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-026",
+      "stepId": "STEP-026",
+      "sourceComponent": "SORT",
+      "strategy": "DFSORT_UTILITY_STEP",
+      "targetPattern": "DFSORT Control Statement (SORT FIELDS=...)",
+      "requiresDecomposition": false,
+      "rationale": "Native mainframe DFSORT utility provides superior I/O throughput and hardware-accelerated sequential sorting compared to internal COBOL sorting.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-027",
+      "stepId": "STEP-027",
+      "sourceComponent": "WORKLIB.daily_sales",
+      "strategy": "MANUAL_REVIEW_REQUIRED",
+      "targetPattern": "DFSORT Pre-Sort by Sale Date followed by COBOL Daily Accumulator",
+      "requiresDecomposition": true,
+      "rationale": "SAS source executes BY sale_date against data sorted by customer_id (SAR-003). Target architecture inserts mandatory DFSORT step on sale_date.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-028",
+      "stepId": "STEP-028",
+      "sourceComponent": "SORT",
+      "strategy": "DFSORT_UTILITY_STEP",
+      "targetPattern": "DFSORT Control Statement (SORT FIELDS=...)",
+      "requiresDecomposition": false,
+      "rationale": "Native mainframe DFSORT utility provides superior I/O throughput and hardware-accelerated sequential sorting compared to internal COBOL sorting.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-029",
+      "stepId": "STEP-029",
+      "sourceComponent": "TRANSPOSE",
+      "strategy": "PROC_DECOMPOSITION",
+      "targetPattern": "COBOL OCCURS Pivoting Table",
+      "requiresDecomposition": true,
+      "rationale": "Dynamic narrow-to-wide pivoting is decomposed into ordered group buffering, fixed OCCURS slot assignment, and wide record emission.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-030",
+      "stepId": "STEP-030",
+      "sourceComponent": "WORKLIB.customer_flags",
+      "strategy": "DATA_STEP_TO_SEQUENTIAL_PROCESSING",
+      "targetPattern": "COBOL Sequential File Processing",
+      "requiresDecomposition": false,
+      "rationale": "Sequential processing of step STEP-030",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-031",
+      "stepId": "STEP-031",
+      "sourceComponent": "SORT",
+      "strategy": "DFSORT_UTILITY_STEP",
+      "targetPattern": "DFSORT Control Statement (SORT FIELDS=...)",
+      "requiresDecomposition": false,
+      "rationale": "Native mainframe DFSORT utility provides superior I/O throughput and hardware-accelerated sequential sorting compared to internal COBOL sorting.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-032",
+      "stepId": "STEP-032",
+      "sourceComponent": "SUMMARY",
+      "strategy": "PROC_DECOMPOSITION",
+      "targetPattern": "COBOL Multi-Level Control Break with Dynamic Accumulators",
+      "requiresDecomposition": true,
+      "rationale": "Monolithic aggregation PROC is decomposed into pre-sort, control-break boundary detection, multi-level accumulator summation, and formatted record output.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-033",
+      "stepId": "STEP-033",
+      "sourceComponent": "FREQ",
+      "strategy": "PROC_DECOMPOSITION",
+      "targetPattern": "COBOL Frequency Table Counting with OCCURS Array",
+      "requiresDecomposition": true,
+      "rationale": "Categorical frequency distributions and crosstabs are decomposed into pre-sort, in-memory OCCURS counter arrays, and formatted summary reporting.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-034",
+      "stepId": "STEP-034",
+      "sourceComponent": "MACRO_DEF_BUILD_REGION_REPORT",
+      "strategy": "STRUCTURED_REWRITE",
+      "targetPattern": "JCL PARM / SET Symbols / Static Configuration",
+      "requiresDecomposition": false,
+      "rationale": "Global SAS options and macro definitions are translated into JCL execution parameters, SET symbols, and shared copybook configuration constants.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-035",
+      "stepId": "STEP-035",
+      "sourceComponent": "WORKLIB.region_report_input_all",
+      "strategy": "DATA_STEP_TO_SEQUENTIAL_PROCESSING",
+      "targetPattern": "COBOL Sequential File Processing",
+      "requiresDecomposition": false,
+      "rationale": "Sequential processing of step STEP-035",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-036",
+      "stepId": "STEP-036",
+      "sourceComponent": "WORKLIB.region_report_input_filtered",
+      "strategy": "DATA_STEP_TO_SEQUENTIAL_PROCESSING",
+      "targetPattern": "COBOL Sequential File Processing",
+      "requiresDecomposition": false,
+      "rationale": "Sequential processing of step STEP-036",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-037",
+      "stepId": "STEP-037",
+      "sourceComponent": "%build_region_report(region=&RUN_REGION)",
+      "strategy": "STRUCTURED_REWRITE",
+      "targetPattern": "JCL Procedure Parameter Substitution / SYSIN Control Cards",
+      "requiresDecomposition": false,
+      "rationale": "Macro invocations are parameterized via JCL procedure symbols, PARM strings, or SYSIN control card inputs.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-038",
+      "stepId": "STEP-038",
+      "sourceComponent": "SQL",
+      "strategy": "SQL_TO_DATA_PROCESSING",
+      "targetPattern": "Sequential Match-Merge or DB2 Relational View",
+      "requiresDecomposition": false,
+      "rationale": "Relational SQL queries are implemented via two-file sequential match-merge algorithms with HIGH-VALUES sentinels or DB2 SQL cursors.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-039",
+      "stepId": "STEP-039",
+      "sourceComponent": "WORKLIB.final_sales_extract",
+      "strategy": "MANUAL_REVIEW_REQUIRED",
+      "targetPattern": "DFSORT Dual-File Alignment followed by COBOL Match-Merge",
+      "requiresDecomposition": true,
+      "rationale": "MERGE between region_report and region_channel_summary has key/sorting mismatch (SAR-004). Target mandates pre-sort on customer_region.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-040",
+      "stepId": "STEP-040",
+      "sourceComponent": "SORT",
+      "strategy": "DFSORT_UTILITY_STEP",
+      "targetPattern": "DFSORT Control Statement (SORT FIELDS=...)",
+      "requiresDecomposition": false,
+      "rationale": "Native mainframe DFSORT utility provides superior I/O throughput and hardware-accelerated sequential sorting compared to internal COBOL sorting.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-041",
+      "stepId": "STEP-041",
+      "sourceComponent": "DATASETS",
+      "strategy": "DFSORT_UTILITY_STEP",
+      "targetPattern": "Mainframe IEFBR14 / IDCAMS Utility Step",
+      "requiresDecomposition": false,
+      "rationale": "SAS library maintenance and table cleanup are replaced by native z/OS catalog management utilities (IEFBR14/IDCAMS).",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-042",
+      "stepId": "STEP-042",
+      "sourceComponent": "WORKLIB.audit_extract",
+      "strategy": "DATA_STEP_TO_SEQUENTIAL_PROCESSING",
+      "targetPattern": "COBOL Sequential File Processing",
+      "requiresDecomposition": false,
+      "rationale": "Sequential processing of step STEP-042",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-043",
+      "stepId": "STEP-043",
+      "sourceComponent": "SQL",
+      "strategy": "SQL_TO_DATA_PROCESSING",
+      "targetPattern": "Sequential Match-Merge or DB2 Relational View",
+      "requiresDecomposition": false,
+      "rationale": "Relational SQL queries are implemented via two-file sequential match-merge algorithms with HIGH-VALUES sentinels or DB2 SQL cursors.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-044",
+      "stepId": "STEP-044",
+      "sourceComponent": "WORKLIB.reconciliation",
+      "strategy": "MANUAL_REVIEW_REQUIRED",
+      "targetPattern": "COBOL Control Ledger with Explicit Loop Termination",
+      "requiresDecomposition": false,
+      "rationale": "SAS code causes infinite loop due to conditional SET without STOP (SAR-001). Target COBOL reads control record once during initialization and terminates at EOF.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-045",
+      "stepId": "STEP-045",
+      "sourceComponent": "WORKLIB.segment_rollup",
+      "strategy": "DATA_STEP_TO_SEQUENTIAL_PROCESSING",
+      "targetPattern": "COBOL Sequential File Processing",
+      "requiresDecomposition": false,
+      "rationale": "Sequential processing of step STEP-045",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-046",
+      "stepId": "STEP-046",
+      "sourceComponent": "SORT",
+      "strategy": "DFSORT_UTILITY_STEP",
+      "targetPattern": "DFSORT Control Statement (SORT FIELDS=...)",
+      "requiresDecomposition": false,
+      "rationale": "Native mainframe DFSORT utility provides superior I/O throughput and hardware-accelerated sequential sorting compared to internal COBOL sorting.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-047",
+      "stepId": "STEP-047",
+      "sourceComponent": "SQL",
+      "strategy": "MANUAL_REVIEW_REQUIRED",
+      "targetPattern": "COBOL Sequential Processing with Explicit Sequence Counter",
+      "requiresDecomposition": false,
+      "rationale": "Uses undocumented non-deterministic monotonic() function (SAR-010). Replaced with deterministic WS-LINE-COUNTER in COBOL after explicit key sorting.",
+      "confidence": "MEDIUM"
+    },
+    {
+      "decisionId": "STRAT-DEC-048",
+      "stepId": "STEP-048",
+      "sourceComponent": "WORKLIB.exception_extract",
+      "strategy": "DATA_STEP_TO_SEQUENTIAL_PROCESSING",
+      "targetPattern": "COBOL Sequential File Processing",
+      "requiresDecomposition": false,
+      "rationale": "Sequential processing of step STEP-048",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-049",
+      "stepId": "STEP-049",
+      "sourceComponent": "FREQ",
+      "strategy": "PROC_DECOMPOSITION",
+      "targetPattern": "COBOL Frequency Table Counting with OCCURS Array",
+      "requiresDecomposition": true,
+      "rationale": "Categorical frequency distributions and crosstabs are decomposed into pre-sort, in-memory OCCURS counter arrays, and formatted summary reporting.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-050",
+      "stepId": "STEP-050",
+      "sourceComponent": "WORKLIB.exception_summary",
+      "strategy": "DATA_STEP_TO_SEQUENTIAL_PROCESSING",
+      "targetPattern": "COBOL Sequential File Processing",
+      "requiresDecomposition": false,
+      "rationale": "Sequential processing of step STEP-050",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-051",
+      "stepId": "STEP-051",
+      "sourceComponent": "SQL",
+      "strategy": "SQL_TO_DATA_PROCESSING",
+      "targetPattern": "Sequential Match-Merge or DB2 Relational View",
+      "requiresDecomposition": false,
+      "rationale": "Relational SQL queries are implemented via two-file sequential match-merge algorithms with HIGH-VALUES sentinels or DB2 SQL cursors.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-052",
+      "stepId": "STEP-052",
+      "sourceComponent": "WORKLIB.delivery_manifest",
+      "strategy": "DATA_STEP_TO_SEQUENTIAL_PROCESSING",
+      "targetPattern": "COBOL Sequential File Processing",
+      "requiresDecomposition": false,
+      "rationale": "Sequential processing of step STEP-052",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-053",
+      "stepId": "STEP-053",
+      "sourceComponent": "SORT",
+      "strategy": "DFSORT_UTILITY_STEP",
+      "targetPattern": "DFSORT Control Statement (SORT FIELDS=...)",
+      "requiresDecomposition": false,
+      "rationale": "Native mainframe DFSORT utility provides superior I/O throughput and hardware-accelerated sequential sorting compared to internal COBOL sorting.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-054",
+      "stepId": "STEP-054",
+      "sourceComponent": "MACRO_DEF_PARAMETERIZED_FILTER",
+      "strategy": "STRUCTURED_REWRITE",
+      "targetPattern": "JCL PARM / SET Symbols / Static Configuration",
+      "requiresDecomposition": false,
+      "rationale": "Global SAS options and macro definitions are translated into JCL execution parameters, SET symbols, and shared copybook configuration constants.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-055",
+      "stepId": "STEP-055",
+      "sourceComponent": "WORKLIB.high_value_sales_def",
+      "strategy": "DATA_STEP_TO_SEQUENTIAL_PROCESSING",
+      "targetPattern": "COBOL Sequential File Processing",
+      "requiresDecomposition": false,
+      "rationale": "Sequential processing of step STEP-055",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-056",
+      "stepId": "STEP-056",
+      "sourceComponent": "%parameterized_filter(input=WORKLIB.enriched_sales, output=WORKLIB.high_value_sales, threshold=10000)",
+      "strategy": "STRUCTURED_REWRITE",
+      "targetPattern": "JCL Procedure Parameter Substitution / SYSIN Control Cards",
+      "requiresDecomposition": false,
+      "rationale": "Macro invocations are parameterized via JCL procedure symbols, PARM strings, or SYSIN control card inputs.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-057",
+      "stepId": "STEP-057",
+      "sourceComponent": "SQL",
+      "strategy": "SQL_TO_DATA_PROCESSING",
+      "targetPattern": "Sequential Match-Merge or DB2 Relational View",
+      "requiresDecomposition": false,
+      "rationale": "Relational SQL queries are implemented via two-file sequential match-merge algorithms with HIGH-VALUES sentinels or DB2 SQL cursors.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-058",
+      "stepId": "STEP-058",
+      "sourceComponent": "WORKLIB.final_customer_profile",
+      "strategy": "DATA_STEP_TO_SEQUENTIAL_PROCESSING",
+      "targetPattern": "COBOL Sequential File Processing",
+      "requiresDecomposition": false,
+      "rationale": "Sequential processing of step STEP-058",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-059",
+      "stepId": "STEP-059",
+      "sourceComponent": "SORT",
+      "strategy": "DFSORT_UTILITY_STEP",
+      "targetPattern": "DFSORT Control Statement (SORT FIELDS=...)",
+      "requiresDecomposition": false,
+      "rationale": "Native mainframe DFSORT utility provides superior I/O throughput and hardware-accelerated sequential sorting compared to internal COBOL sorting.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-060",
+      "stepId": "STEP-060",
+      "sourceComponent": "WORKLIB.final_customer_profile_seq",
+      "strategy": "DATA_STEP_TO_SEQUENTIAL_PROCESSING",
+      "targetPattern": "COBOL Sequential File Processing",
+      "requiresDecomposition": false,
+      "rationale": "Sequential processing of step STEP-060",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-061",
+      "stepId": "STEP-061",
+      "sourceComponent": "SUMMARY",
+      "strategy": "PROC_DECOMPOSITION",
+      "targetPattern": "COBOL Multi-Level Control Break with Dynamic Accumulators",
+      "requiresDecomposition": true,
+      "rationale": "Monolithic aggregation PROC is decomposed into pre-sort, control-break boundary detection, multi-level accumulator summation, and formatted record output.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-062",
+      "stepId": "STEP-062",
+      "sourceComponent": "SQL",
+      "strategy": "SQL_TO_DATA_PROCESSING",
+      "targetPattern": "Sequential Match-Merge or DB2 Relational View",
+      "requiresDecomposition": false,
+      "rationale": "Relational SQL queries are implemented via two-file sequential match-merge algorithms with HIGH-VALUES sentinels or DB2 SQL cursors.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-063",
+      "stepId": "STEP-063",
+      "sourceComponent": "WORKLIB.customer_scoring",
+      "strategy": "DATA_STEP_TO_SEQUENTIAL_PROCESSING",
+      "targetPattern": "COBOL Sequential File Processing",
+      "requiresDecomposition": false,
+      "rationale": "Sequential processing of step STEP-063",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-064",
+      "stepId": "STEP-064",
+      "sourceComponent": "SORT",
+      "strategy": "DFSORT_UTILITY_STEP",
+      "targetPattern": "DFSORT Control Statement (SORT FIELDS=...)",
+      "requiresDecomposition": false,
+      "rationale": "Native mainframe DFSORT utility provides superior I/O throughput and hardware-accelerated sequential sorting compared to internal COBOL sorting.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-065",
+      "stepId": "STEP-065",
+      "sourceComponent": "FREQ",
+      "strategy": "PROC_DECOMPOSITION",
+      "targetPattern": "COBOL Frequency Table Counting with OCCURS Array",
+      "requiresDecomposition": true,
+      "rationale": "Categorical frequency distributions and crosstabs are decomposed into pre-sort, in-memory OCCURS counter arrays, and formatted summary reporting.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-066",
+      "stepId": "STEP-066",
+      "sourceComponent": "SUMMARY",
+      "strategy": "PROC_DECOMPOSITION",
+      "targetPattern": "COBOL Multi-Level Control Break with Dynamic Accumulators",
+      "requiresDecomposition": true,
+      "rationale": "Monolithic aggregation PROC is decomposed into pre-sort, control-break boundary detection, multi-level accumulator summation, and formatted record output.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-067",
+      "stepId": "STEP-067",
+      "sourceComponent": "WORKLIB.score_summary",
+      "strategy": "DATA_STEP_TO_SEQUENTIAL_PROCESSING",
+      "targetPattern": "COBOL Sequential File Processing",
+      "requiresDecomposition": false,
+      "rationale": "Sequential processing of step STEP-067",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-068",
+      "stepId": "STEP-068",
+      "sourceComponent": "SQL",
+      "strategy": "SQL_TO_DATA_PROCESSING",
+      "targetPattern": "Sequential Match-Merge or DB2 Relational View",
+      "requiresDecomposition": false,
+      "rationale": "Relational SQL queries are implemented via two-file sequential match-merge algorithms with HIGH-VALUES sentinels or DB2 SQL cursors.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-069",
+      "stepId": "STEP-069",
+      "sourceComponent": "WORKLIB.region_customer_score_flags",
+      "strategy": "DATA_STEP_TO_SEQUENTIAL_PROCESSING",
+      "targetPattern": "COBOL Sequential File Processing",
+      "requiresDecomposition": false,
+      "rationale": "Sequential processing of step STEP-069",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-070",
+      "stepId": "STEP-070",
+      "sourceComponent": "SORT",
+      "strategy": "DFSORT_UTILITY_STEP",
+      "targetPattern": "DFSORT Control Statement (SORT FIELDS=...)",
+      "requiresDecomposition": false,
+      "rationale": "Native mainframe DFSORT utility provides superior I/O throughput and hardware-accelerated sequential sorting compared to internal COBOL sorting.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-071",
+      "stepId": "STEP-071",
+      "sourceComponent": "SQL",
+      "strategy": "SQL_TO_DATA_PROCESSING",
+      "targetPattern": "Sequential Match-Merge or DB2 Relational View",
+      "requiresDecomposition": false,
+      "rationale": "Relational SQL queries are implemented via two-file sequential match-merge algorithms with HIGH-VALUES sentinels or DB2 SQL cursors.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-072",
+      "stepId": "STEP-072",
+      "sourceComponent": "WORKLIB.product_performance",
+      "strategy": "DATA_STEP_TO_SEQUENTIAL_PROCESSING",
+      "targetPattern": "COBOL Sequential File Processing",
+      "requiresDecomposition": false,
+      "rationale": "Sequential processing of step STEP-072",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-073",
+      "stepId": "STEP-073",
+      "sourceComponent": "SORT",
+      "strategy": "DFSORT_UTILITY_STEP",
+      "targetPattern": "DFSORT Control Statement (SORT FIELDS=...)",
+      "requiresDecomposition": false,
+      "rationale": "Native mainframe DFSORT utility provides superior I/O throughput and hardware-accelerated sequential sorting compared to internal COBOL sorting.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-074",
+      "stepId": "STEP-074",
+      "sourceComponent": "SUMMARY",
+      "strategy": "PROC_DECOMPOSITION",
+      "targetPattern": "COBOL Multi-Level Control Break with Dynamic Accumulators",
+      "requiresDecomposition": true,
+      "rationale": "Monolithic aggregation PROC is decomposed into pre-sort, control-break boundary detection, multi-level accumulator summation, and formatted record output.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-075",
+      "stepId": "STEP-075",
+      "sourceComponent": "FREQ",
+      "strategy": "PROC_DECOMPOSITION",
+      "targetPattern": "COBOL Frequency Table Counting with OCCURS Array",
+      "requiresDecomposition": true,
+      "rationale": "Categorical frequency distributions and crosstabs are decomposed into pre-sort, in-memory OCCURS counter arrays, and formatted summary reporting.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-076",
+      "stepId": "STEP-076",
+      "sourceComponent": "WORKLIB.sales_period_flags",
+      "strategy": "DATA_STEP_TO_SEQUENTIAL_PROCESSING",
+      "targetPattern": "COBOL Sequential File Processing",
+      "requiresDecomposition": false,
+      "rationale": "Sequential processing of step STEP-076",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-077",
+      "stepId": "STEP-077",
+      "sourceComponent": "SORT",
+      "strategy": "DFSORT_UTILITY_STEP",
+      "targetPattern": "DFSORT Control Statement (SORT FIELDS=...)",
+      "requiresDecomposition": false,
+      "rationale": "Native mainframe DFSORT utility provides superior I/O throughput and hardware-accelerated sequential sorting compared to internal COBOL sorting.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-078",
+      "stepId": "STEP-078",
+      "sourceComponent": "SUMMARY",
+      "strategy": "PROC_DECOMPOSITION",
+      "targetPattern": "COBOL Multi-Level Control Break with Dynamic Accumulators",
+      "requiresDecomposition": true,
+      "rationale": "Monolithic aggregation PROC is decomposed into pre-sort, control-break boundary detection, multi-level accumulator summation, and formatted record output.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-079",
+      "stepId": "STEP-079",
+      "sourceComponent": "SUMMARY",
+      "strategy": "PROC_DECOMPOSITION",
+      "targetPattern": "COBOL Multi-Level Control Break with Dynamic Accumulators",
+      "requiresDecomposition": true,
+      "rationale": "Monolithic aggregation PROC is decomposed into pre-sort, control-break boundary detection, multi-level accumulator summation, and formatted record output.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-080",
+      "stepId": "STEP-080",
+      "sourceComponent": "SQL",
+      "strategy": "SQL_TO_DATA_PROCESSING",
+      "targetPattern": "Sequential Match-Merge or DB2 Relational View",
+      "requiresDecomposition": false,
+      "rationale": "Relational SQL queries are implemented via two-file sequential match-merge algorithms with HIGH-VALUES sentinels or DB2 SQL cursors.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-081",
+      "stepId": "STEP-081",
+      "sourceComponent": "SORT",
+      "strategy": "DFSORT_UTILITY_STEP",
+      "targetPattern": "DFSORT Control Statement with SUM FIELDS=NONE, XSUM",
+      "requiresDecomposition": false,
+      "rationale": "Mainframe DFSORT with NODUPKEY emulation via SUM FIELDS=NONE and duplicate routing via XSUM DD statement (SAR-012).",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-082",
+      "stepId": "STEP-082",
+      "sourceComponent": "WORKLIB.sales_quality",
+      "strategy": "DATA_STEP_TO_SEQUENTIAL_PROCESSING",
+      "targetPattern": "COBOL Data Quality Validation with 88-Level Null/Missing Sentinels",
+      "requiresDecomposition": false,
+      "rationale": "Sales quality validation involves SAS missing value inequality anomaly (. < 0, SAR-009). Target COBOL checks 88-level sentinels explicitly before range tests.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-083",
+      "stepId": "STEP-083",
+      "sourceComponent": "FREQ",
+      "strategy": "PROC_DECOMPOSITION",
+      "targetPattern": "COBOL Frequency Table Counting with OCCURS Array",
+      "requiresDecomposition": true,
+      "rationale": "Categorical frequency distributions and crosstabs are decomposed into pre-sort, in-memory OCCURS counter arrays, and formatted summary reporting.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-084",
+      "stepId": "STEP-084",
+      "sourceComponent": "SQL",
+      "strategy": "SQL_TO_DATA_PROCESSING",
+      "targetPattern": "Sequential Match-Merge or DB2 Relational View",
+      "requiresDecomposition": false,
+      "rationale": "Relational SQL queries are implemented via two-file sequential match-merge algorithms with HIGH-VALUES sentinels or DB2 SQL cursors.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-085",
+      "stepId": "STEP-085",
+      "sourceComponent": "SQL",
+      "strategy": "SQL_TO_DATA_PROCESSING",
+      "targetPattern": "Sequential Match-Merge or DB2 Relational View",
+      "requiresDecomposition": false,
+      "rationale": "Relational SQL queries are implemented via two-file sequential match-merge algorithms with HIGH-VALUES sentinels or DB2 SQL cursors.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-086",
+      "stepId": "STEP-086",
+      "sourceComponent": "WORKLIB.customer_activity",
+      "strategy": "DATA_STEP_TO_SEQUENTIAL_PROCESSING",
+      "targetPattern": "COBOL Sequential File Processing",
+      "requiresDecomposition": false,
+      "rationale": "Sequential processing of step STEP-086",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-087",
+      "stepId": "STEP-087",
+      "sourceComponent": "SORT",
+      "strategy": "DFSORT_UTILITY_STEP",
+      "targetPattern": "DFSORT Control Statement (SORT FIELDS=...)",
+      "requiresDecomposition": false,
+      "rationale": "Native mainframe DFSORT utility provides superior I/O throughput and hardware-accelerated sequential sorting compared to internal COBOL sorting.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-088",
+      "stepId": "STEP-088",
+      "sourceComponent": "FREQ",
+      "strategy": "PROC_DECOMPOSITION",
+      "targetPattern": "COBOL Frequency Table Counting with OCCURS Array",
+      "requiresDecomposition": true,
+      "rationale": "Categorical frequency distributions and crosstabs are decomposed into pre-sort, in-memory OCCURS counter arrays, and formatted summary reporting.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-089",
+      "stepId": "STEP-089",
+      "sourceComponent": "SUMMARY",
+      "strategy": "PROC_DECOMPOSITION",
+      "targetPattern": "COBOL Multi-Level Control Break with Dynamic Accumulators",
+      "requiresDecomposition": true,
+      "rationale": "Monolithic aggregation PROC is decomposed into pre-sort, control-break boundary detection, multi-level accumulator summation, and formatted record output.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-090",
+      "stepId": "STEP-090",
+      "sourceComponent": "WORKLIB.region_controls",
+      "strategy": "DATA_STEP_TO_SEQUENTIAL_PROCESSING",
+      "targetPattern": "COBOL Sequential File Processing",
+      "requiresDecomposition": false,
+      "rationale": "Sequential processing of step STEP-090",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-091",
+      "stepId": "STEP-091",
+      "sourceComponent": "FREQ",
+      "strategy": "PROC_DECOMPOSITION",
+      "targetPattern": "COBOL Frequency Table Counting with OCCURS Array",
+      "requiresDecomposition": true,
+      "rationale": "Categorical frequency distributions and crosstabs are decomposed into pre-sort, in-memory OCCURS counter arrays, and formatted summary reporting.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-092",
+      "stepId": "STEP-092",
+      "sourceComponent": "SQL",
+      "strategy": "SQL_TO_DATA_PROCESSING",
+      "targetPattern": "Sequential Match-Merge or DB2 Relational View",
+      "requiresDecomposition": false,
+      "rationale": "Relational SQL queries are implemented via two-file sequential match-merge algorithms with HIGH-VALUES sentinels or DB2 SQL cursors.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-093",
+      "stepId": "STEP-093",
+      "sourceComponent": "WORKLIB.region_running_sales",
+      "strategy": "DATA_STEP_TO_SEQUENTIAL_PROCESSING",
+      "targetPattern": "COBOL Sequential File Processing",
+      "requiresDecomposition": false,
+      "rationale": "Sequential processing of step STEP-093",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-094",
+      "stepId": "STEP-094",
+      "sourceComponent": "SORT",
+      "strategy": "DFSORT_UTILITY_STEP",
+      "targetPattern": "DFSORT Control Statement (SORT FIELDS=...)",
+      "requiresDecomposition": false,
+      "rationale": "Native mainframe DFSORT utility provides superior I/O throughput and hardware-accelerated sequential sorting compared to internal COBOL sorting.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-095",
+      "stepId": "STEP-095",
+      "sourceComponent": "WORKLIB.region_running_sales_delta",
+      "strategy": "DATA_STEP_TO_SEQUENTIAL_PROCESSING",
+      "targetPattern": "COBOL Sequential File Processing",
+      "requiresDecomposition": false,
+      "rationale": "Sequential processing of step STEP-095",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-096",
+      "stepId": "STEP-096",
+      "sourceComponent": "SUMMARY",
+      "strategy": "PROC_DECOMPOSITION",
+      "targetPattern": "COBOL Multi-Level Control Break with Dynamic Accumulators",
+      "requiresDecomposition": true,
+      "rationale": "Monolithic aggregation PROC is decomposed into pre-sort, control-break boundary detection, multi-level accumulator summation, and formatted record output.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-097",
+      "stepId": "STEP-097",
+      "sourceComponent": "SQL",
+      "strategy": "SQL_TO_DATA_PROCESSING",
+      "targetPattern": "Sequential Match-Merge or DB2 Relational View",
+      "requiresDecomposition": false,
+      "rationale": "Relational SQL queries are implemented via two-file sequential match-merge algorithms with HIGH-VALUES sentinels or DB2 SQL cursors.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-098",
+      "stepId": "STEP-098",
+      "sourceComponent": "WORKLIB.sales_lookup_enriched",
+      "strategy": "DATA_STEP_TO_SEQUENTIAL_PROCESSING",
+      "targetPattern": "COBOL Sequential File Processing",
+      "requiresDecomposition": false,
+      "rationale": "Sequential processing of step STEP-098",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-099",
+      "stepId": "STEP-099",
+      "sourceComponent": "FREQ",
+      "strategy": "PROC_DECOMPOSITION",
+      "targetPattern": "COBOL Frequency Table Counting with OCCURS Array",
+      "requiresDecomposition": true,
+      "rationale": "Categorical frequency distributions and crosstabs are decomposed into pre-sort, in-memory OCCURS counter arrays, and formatted summary reporting.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-100",
+      "stepId": "STEP-100",
+      "sourceComponent": "WORKLIB.semantic_edge_cases",
+      "strategy": "DATA_STEP_TO_SEQUENTIAL_PROCESSING",
+      "targetPattern": "COBOL Sequential File Processing",
+      "requiresDecomposition": false,
+      "rationale": "Sequential processing of step STEP-100",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-101",
+      "stepId": "STEP-101",
+      "sourceComponent": "FREQ",
+      "strategy": "PROC_DECOMPOSITION",
+      "targetPattern": "COBOL Frequency Table Counting with OCCURS Array",
+      "requiresDecomposition": true,
+      "rationale": "Categorical frequency distributions and crosstabs are decomposed into pre-sort, in-memory OCCURS counter arrays, and formatted summary reporting.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-102",
+      "stepId": "STEP-102",
+      "sourceComponent": "SQL",
+      "strategy": "SQL_TO_DATA_PROCESSING",
+      "targetPattern": "Sequential Match-Merge or DB2 Relational View",
+      "requiresDecomposition": false,
+      "rationale": "Relational SQL queries are implemented via two-file sequential match-merge algorithms with HIGH-VALUES sentinels or DB2 SQL cursors.",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-103",
+      "stepId": "STEP-103",
+      "sourceComponent": "WORKLIB.operational_dashboard",
+      "strategy": "DATA_STEP_TO_SEQUENTIAL_PROCESSING",
+      "targetPattern": "COBOL Sequential File Processing",
+      "requiresDecomposition": false,
+      "rationale": "Sequential processing of step STEP-103",
+      "confidence": "HIGH"
+    },
+    {
+      "decisionId": "STRAT-DEC-104",
+      "stepId": "STEP-104",
+      "sourceComponent": "PRINT",
+      "strategy": "DIRECT_TRANSLATION",
+      "targetPattern": "COBOL Formatted SYSOUT Report Writer",
+      "requiresDecomposition": false,
+      "rationale": "PROC PRINT output is translated into standard line-sequential SYSOUT report writing with page headers and line limits.",
+      "confidence": "HIGH"
+    }
+  ]
+}

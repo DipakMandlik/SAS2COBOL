@@ -6,5 +6,31 @@
       "Bash(node .claude/hooks/gate-validator.js*)",
       "Bash(node --test*)"
     ]
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node observability/orchestrator-hook.js --phase pre",
+            "async": true
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node observability/orchestrator-hook.js --phase post",
+            "async": true
+          }
+        ]
+      }
+    ]
   }
 }

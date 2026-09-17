@@ -1,0 +1,7 @@
+000100 * COPYBOOK: CPCUST19 - FOR WORKLIB.CUSTOMER_SCORING              
+000200 01  CUSTOMER-SCORING-RECORD.                                     
+000300     05  CUSTOM-CUSTOMER-ID             PIC S9(9) COMP-3.         
+000400     05  CUSTOM-SPEND-SCORE             PIC S9(9)V99 COMP-3.      
+000500     05  CUSTOM-FREQUENCY-SCORE         PIC S9(9)V99 COMP-3.      
+000600     05  CUSTOM-COMPOSITE-SCORE         PIC S9(9)V99 COMP-3.      
+000700     05  CUSTOM-SCORE-BAND              PIC X(15).                

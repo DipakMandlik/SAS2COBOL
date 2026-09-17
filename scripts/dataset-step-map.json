@@ -1,0 +1,562 @@
+{
+  "WORKLIB.ACTIVITY_MATRIX": {
+    "stepId": "STEP-088",
+    "type": "PROC",
+    "name": "FREQ",
+    "range": "841-843",
+    "code": "proc freq data=WORKLIB.customer_activity;\n    tables activity_band*recency_band / missing out=WORKLIB.activity_matrix;\nrun;"
+  },
+  "WORKLIB.ACTIVITY_SUMMARY": {
+    "stepId": "STEP-089",
+    "type": "PROC",
+    "name": "SUMMARY",
+    "range": "845-852",
+    "code": "proc summary data=WORKLIB.customer_activity nway;\n    class activity_band recency_band;\n    var sales transaction_count active_days;\n    output out=WORKLIB.activity_summary\n        sum(sales)=sales\n        sum(transaction_count)=transactions\n        mean(active_days)=average_active_days;\nrun;"
+  },
+  "WORKLIB.AUDIT_EXTRACT": {
+    "stepId": "STEP-042",
+    "type": "DATA",
+    "name": "WORKLIB.audit_extract",
+    "range": "380-390",
+    "code": "data WORKLIB.audit_extract;\n    set WORKLIB.final_sales_extract;\n    length audit_timestamp 8 audit_source $30;\n    audit_timestamp=&RUN_TS;\n    audit_source=\"&SOURCE_SYSTEM\";\n    if sales < 0 then do;\n        put \"ERROR: NEGATIVE SALES \" customer_region= sales=;\n        output;\n    end;\n    else output;\nrun;"
+  },
+  "WORKLIB.CATEGORY_DEMAND_FREQ": {
+    "stepId": "STEP-075",
+    "type": "PROC",
+    "name": "FREQ",
+    "range": "695-697",
+    "code": "proc freq data=WORKLIB.product_performance;\n    tables category*demand_band / missing out=WORKLIB.category_demand_freq;\nrun;"
+  },
+  "WORKLIB.CATEGORY_DEMAND_SUMMARY": {
+    "stepId": "STEP-074",
+    "type": "PROC",
+    "name": "SUMMARY",
+    "range": "686-693",
+    "code": "proc summary data=WORKLIB.product_performance nway;\n    class category demand_band;\n    var sales units transactions;\n    output out=WORKLIB.category_demand_summary\n        sum(sales)=category_sales\n        sum(units)=category_units\n        sum(transactions)=category_transactions;\nrun;"
+  },
+  "WORKLIB.CHANNEL_FREQ": {
+    "stepId": "STEP-017",
+    "type": "PROC",
+    "name": "FREQ",
+    "range": "153-156",
+    "code": "proc freq data=WORKLIB.sales_sorted;\n    tables region*channel / missing out=WORKLIB.region_channel_freq;\n    tables channel / missing out=WORKLIB.channel_freq;\nrun;"
+  },
+  "WORKLIB.CUSTOMER_ACTIVITY": {
+    "stepId": "STEP-085",
+    "type": "PROC",
+    "name": "SQL",
+    "range": "813-823",
+    "code": "proc sql;\n    create table WORKLIB.customer_activity as\n    select customer_id,\n           min(sale_date) as first_sale format=date9.,\n           max(sale_date) as last_sale format=date9.,\n           intck('day',calculated first_sale,calculated last_sale) as active_days,\n           count(*) as transaction_count,\n           sum(net_amount) as sales\n    from WORKLIB.enriched_sales\n    group by customer_id;\nquit;"
+  },
+  "WORKLIB.CUSTOMER_BASE": {
+    "stepId": "STEP-006",
+    "type": "DATA",
+    "name": "WORKLIB.customer_base",
+    "range": "43-53",
+    "code": "data WORKLIB.customer_base;\n    length customer_id 8 customer_name $80 segment $20 region $20 status $12;\n    set RAW.customers;\n    if missing(customer_id) then delete;\n    if missing(status) then status='UNKNOWN';\n    if missing(region) then region='UNASSIGNED';\n    if upcase(status) ne 'INACTIVE';\n    if first.customer_id then customer_name=strip(customer_name);\n    customer_name=compbl(customer_name);\n    if missing(segment) then segment='UNCLASSIFIED';\nrun;"
+  },
+  "WORKLIB.CUSTOMER_FLAGS": {
+    "stepId": "STEP-030",
+    "type": "DATA",
+    "name": "WORKLIB.customer_flags",
+    "range": "299-309",
+    "code": "data WORKLIB.customer_flags;\n    merge WORKLIB.customer_tier_sorted(in=a)\n          WORKLIB.customer_monthly(in=b);\n    by customer_id;\n    if a;\n    length activity_flag $12;\n    if b and transaction_count > 0 then activity_flag='ACTIVE';\n    else activity_flag='INACTIVE';\n    if total_sales=. then total_sales=0;\n    if customer_total=. then customer_total=0;\nrun;"
+  },
+  "WORKLIB.CUSTOMER_FLAGS_SORTED": {
+    "stepId": "STEP-031",
+    "type": "PROC",
+    "name": "SORT",
+    "range": "311-314",
+    "code": "proc sort data=WORKLIB.customer_flags\n          out=WORKLIB.customer_flags_sorted;\n    by region customer_tier descending total_sales;\nrun;"
+  },
+  "WORKLIB.CUSTOMER_KPIS": {
+    "stepId": "STEP-023",
+    "type": "PROC",
+    "name": "SQL",
+    "range": "232-245",
+    "code": "proc sql;\n    create table WORKLIB.customer_kpis as\n    select customer_id,\n           max(customer_name) as customer_name,\n           max(customer_region) as region,\n           max(customer_segment) as segment,\n           sum(net_amount) as total_sales,\n           count(*) as transaction_count,\n           mean(net_amount) as average_transaction,\n           max(net_amount) as maximum_transaction\n    from WORKLIB.enriched_sales\n    group by customer_id\n    having calculated total_sales > 0;\nquit;"
+  },
+  "WORKLIB.CUSTOMER_LOOKUP": {
+    "stepId": "STEP-097",
+    "type": "PROC",
+    "name": "SQL",
+    "range": "938-946",
+    "code": "proc sql;\n    create table WORKLIB.customer_lookup as\n    select customer_id,\n           max(customer_name) as customer_name,\n           max(region) as region,\n           max(segment) as segment\n    from WORKLIB.customer_sorted\n    group by customer_id;\nquit;"
+  },
+  "WORKLIB.CUSTOMER_MONTHLY": {
+    "stepId": "STEP-014",
+    "type": "DATA",
+    "name": "WORKLIB.customer_monthly",
+    "range": "115-128",
+    "code": "data WORKLIB.customer_monthly;\n    set WORKLIB.customer_sales_sorted;\n    by customer_id;\n    retain customer_total 0 transaction_count 0;\n    if first.customer_id then do;\n        customer_total=0;\n        transaction_count=0;\n    end;\n    customer_total + net_amount;\n    transaction_count + 1;\n    if last.customer_id then output;\n    keep customer_id customer_status customer_segment customer_region\n         customer_total transaction_count;\nrun;"
+  },
+  "WORKLIB.CUSTOMER_SALES": {
+    "stepId": "STEP-012",
+    "type": "DATA",
+    "name": "WORKLIB.customer_sales",
+    "range": "100-108",
+    "code": "data WORKLIB.customer_sales;\n    merge WORKLIB.customer_sorted(in=in_customer)\n          WORKLIB.sales_sorted(in=in_sale);\n    by customer_id;\n    if in_customer and in_sale;\n    customer_status=status;\n    customer_segment=segment;\n    customer_region=region;\nrun;"
+  },
+  "WORKLIB.CUSTOMER_SALES_SORTED": {
+    "stepId": "STEP-013",
+    "type": "PROC",
+    "name": "SORT",
+    "range": "110-113",
+    "code": "proc sort data=WORKLIB.customer_sales\n          out=WORKLIB.customer_sales_sorted;\n    by customer_id sale_date;\nrun;"
+  },
+  "WORKLIB.CUSTOMER_SCORING": {
+    "stepId": "STEP-063",
+    "type": "DATA",
+    "name": "WORKLIB.customer_scoring",
+    "range": "572-594",
+    "code": "data WORKLIB.customer_scoring;\n    set WORKLIB.final_customer_profile;\n    length score_band $12 engagement_code $8;\n    retain score 0;\n    score=0;\n    if total_sales >= 100000 then score+40;\n    else if total_sales >= 50000 then score+30;\n    else if total_sales >= 10000 then score+20;\n    else score+10;\n    if transaction_count >= 100 then score+30;\n    else if transaction_count >= 50 then score+20;\n    else if transaction_count >= 10 then score+10;\n    if high_value_sales >= 50000 then score+30;\n    else if high_value_sales >= 10000 then score+20;\n    else if high_value_sales > 0 then score+10;\n    if score >= 80 then score_band='PLATINUM';\n    else if score >= 60 then score_band='GOLD';\n    else if score >= 40 then score_band='SILVER';\n    else score_band='BRONZE';\n    if engagement_level='HIGH' then engagement_code='H';\n    else if engagement_level='MEDIUM' then engagement_code='M';\n    else engagement_code='S';\nrun;"
+  },
+  "WORKLIB.CUSTOMER_SORTED": {
+    "stepId": "STEP-007",
+    "type": "PROC",
+    "name": "SORT",
+    "range": "55-58",
+    "code": "proc sort data=WORKLIB.customer_base\n          out=WORKLIB.customer_sorted;\n    by customer_id;\nrun;"
+  },
+  "WORKLIB.CUSTOMER_TIER": {
+    "stepId": "STEP-025",
+    "type": "DATA",
+    "name": "WORKLIB.customer_tier",
+    "range": "260-269",
+    "code": "data WORKLIB.customer_tier;\n    set WORKLIB.customer_kpis;\n    length customer_tier $12;\n    if total_sales >= 100000 then customer_tier='PLATINUM';\n    else if total_sales >= 50000 then customer_tier='GOLD';\n    else if total_sales >= 10000 then customer_tier='SILVER';\n    else customer_tier='STANDARD';\n    if transaction_count >= 100 then loyalty_flag='Y';\n    else loyalty_flag='N';\nrun;"
+  },
+  "WORKLIB.CUSTOMER_TIER_SORTED": {
+    "stepId": "STEP-026",
+    "type": "PROC",
+    "name": "SORT",
+    "range": "271-273",
+    "code": "proc sort data=WORKLIB.customer_tier out=WORKLIB.customer_tier_sorted;\n    by descending total_sales customer_id;\nrun;"
+  },
+  "WORKLIB.DAILY_SALES": {
+    "stepId": "STEP-027",
+    "type": "DATA",
+    "name": "WORKLIB.daily_sales",
+    "range": "275-287",
+    "code": "data WORKLIB.daily_sales;\n    set WORKLIB.sales_sorted;\n    by sale_date;\n    retain daily_sales 0 daily_units 0;\n    if first.sale_date then do;\n        daily_sales=0;\n        daily_units=0;\n    end;\n    daily_sales+net_amount;\n    daily_units+quantity;\n    if last.sale_date then output;\n    keep sale_date daily_sales daily_units;\nrun;"
+  },
+  "WORKLIB.DAILY_SALES_PIVOT": {
+    "stepId": "STEP-029",
+    "type": "PROC",
+    "name": "TRANSPOSE",
+    "range": "293-297",
+    "code": "proc transpose data=WORKLIB.daily_sales_sorted\n               out=WORKLIB.daily_sales_pivot prefix=day_;\n    id sale_date;\n    var daily_sales daily_units;\nrun;"
+  },
+  "WORKLIB.DAILY_SALES_SORTED": {
+    "stepId": "STEP-028",
+    "type": "PROC",
+    "name": "SORT",
+    "range": "289-291",
+    "code": "proc sort data=WORKLIB.daily_sales out=WORKLIB.daily_sales_sorted;\n    by sale_date;\nrun;"
+  },
+  "WORKLIB.DELIVERY_MANIFEST": {
+    "stepId": "STEP-052",
+    "type": "DATA",
+    "name": "WORKLIB.delivery_manifest",
+    "range": "479-486",
+    "code": "data WORKLIB.delivery_manifest;\n    length artifact_name $80 artifact_type $30 delivery_status $20;\n    set WORKLIB.management_summary;\n    artifact_name=cats('SALES_',region,'_',customer_tier);\n    artifact_type='MANAGEMENT_SUMMARY';\n    if missing(severity) then delivery_status='READY';\n    else delivery_status='REVIEW';\nrun;"
+  },
+  "WORKLIB.ENGAGEMENT_SUMMARY": {
+    "stepId": "STEP-061",
+    "type": "PROC",
+    "name": "SUMMARY",
+    "range": "541-548",
+    "code": "proc summary data=WORKLIB.final_customer_profile nway;\n    class engagement_level;\n    var high_value_sales total_sales;\n    output out=WORKLIB.engagement_summary\n        sum(high_value_sales)=engagement_sales\n        sum(total_sales)=total_customer_sales\n        mean(high_value_sales)=avg_engagement_sales;\nrun;"
+  },
+  "WORKLIB.ENRICHED_SALES": {
+    "stepId": "STEP-019",
+    "type": "PROC",
+    "name": "SQL",
+    "range": "164-199",
+    "code": "proc sql;\n    create table WORKLIB.enriched_sales as\n    select s.sale_id,\n           s.sale_date,\n           s.customer_id,\n           c.customer_name,\n           c.segment,\n           c.region as customer_region,\n           s.product_id,\n           p.product_name,\n           p.category,\n           p.subcategory,\n           s.quantity,\n           s.unit_price,\n           s.discount_pct,\n           s.gross_amount,\n           s.discount_amount,\n           s.net_amount,\n           case\n             when s.net_amount >= 10000 then 'HIGH'\n             when s.net_amount >= 5000 then 'MEDIUM'\n             else 'STANDARD'\n           end as value_band length=10,\n           case\n             when s.discount_pct >= 30 then 'PROMO'\n             when s.discount_pct > 0 then 'DISCOUNTED'\n             else 'FULL_PRICE'\n           end as pricing_band length=12\n    from WORKLIB.sales_sorted as s\n    left join WORKLIB.customer_sorted as c\n      on s.customer_id=c.customer_id\n    left join WORKLIB.product_sorted as p\n      on s.product_id=p.product_id\n    where s.net_amount > 0\n    order by s.customer_id, s.sale_date, s.sale_id;\nquit;"
+  },
+  "WORKLIB.EXCEPTION_COUNTS": {
+    "stepId": "STEP-049",
+    "type": "PROC",
+    "name": "FREQ",
+    "range": "453-455",
+    "code": "proc freq data=WORKLIB.exception_extract;\n    tables exception_code / missing out=WORKLIB.exception_counts;\nrun;"
+  },
+  "WORKLIB.EXCEPTION_EXTRACT": {
+    "stepId": "STEP-048",
+    "type": "DATA",
+    "name": "WORKLIB.exception_extract",
+    "range": "442-451",
+    "code": "data WORKLIB.exception_extract;\n    set WORKLIB.review_queue_final;\n    where risk_flag ne 'NORMAL' or priority ne 'STANDARD';\n    length exception_code $20;\n    if risk_flag='MISSING_CUSTOMER' then exception_code='CUST_REF';\n    else if risk_flag='MISSING_PRODUCT' then exception_code='PROD_REF';\n    else if risk_flag='LARGE_TRANSACTION' then exception_code='LARGE_TXN';\n    else if risk_flag='HIGH_DISCOUNT' then exception_code='HIGH_DISC';\n    else exception_code='OPER_REVIEW';\nrun;"
+  },
+  "WORKLIB.EXCEPTION_SUMMARY": {
+    "stepId": "STEP-050",
+    "type": "DATA",
+    "name": "WORKLIB.exception_summary",
+    "range": "457-463",
+    "code": "data WORKLIB.exception_summary;\n    set WORKLIB.exception_counts;\n    length severity $10;\n    if percent >= 20 then severity='HIGH';\n    else if percent >= 5 then severity='MEDIUM';\n    else severity='LOW';\nrun;"
+  },
+  "WORKLIB.FINAL_CONTROL_REPORT": {
+    "stepId": "STEP-062",
+    "type": "PROC",
+    "name": "SQL",
+    "range": "550-563",
+    "code": "proc sql;\n    create table WORKLIB.final_control_report as\n    select engagement_level,\n           engagement_sales,\n           total_customer_sales,\n           avg_engagement_sales,\n           case\n             when engagement_sales >= 500000 then 'GREEN'\n             when engagement_sales >= 100000 then 'AMBER'\n             else 'RED'\n           end as control_status length=10\n    from WORKLIB.engagement_summary\n    order by engagement_sales desc;\nquit;"
+  },
+  "WORKLIB.FINAL_CONTROL_TOTALS": {
+    "stepId": "STEP-043",
+    "type": "PROC",
+    "name": "SQL",
+    "range": "392-398",
+    "code": "proc sql;\n    create table WORKLIB.final_control_totals as\n    select count(*) as row_count,\n           sum(sales) as total_sales,\n           sum(transactions) as total_transactions\n    from WORKLIB.audit_extract;\nquit;"
+  },
+  "WORKLIB.FINAL_CUSTOMER_PROFILE": {
+    "stepId": "STEP-058",
+    "type": "DATA",
+    "name": "WORKLIB.final_customer_profile",
+    "range": "517-528",
+    "code": "data WORKLIB.final_customer_profile;\n    merge WORKLIB.customer_flags_sorted(in=base)\n          WORKLIB.high_value_customer(in=hv);\n    by customer_id;\n    if base;\n    if missing(high_value_transactions) then high_value_transactions=0;\n    if missing(high_value_sales) then high_value_sales=0;\n    length engagement_level $15;\n    if high_value_sales >= 50000 then engagement_level='HIGH';\n    else if high_value_sales >= 10000 then engagement_level='MEDIUM';\n    else engagement_level='STANDARD';\nrun;"
+  },
+  "WORKLIB.FINAL_SALES_EXTRACT": {
+    "stepId": "STEP-039",
+    "type": "DATA",
+    "name": "WORKLIB.final_sales_extract",
+    "range": "359-370",
+    "code": "data WORKLIB.final_sales_extract;\n    merge WORKLIB.region_report(in=r)\n          WORKLIB.region_channel_summary(in=s);\n    by customer_region;\n    if r;\n    if missing(transactions) then transactions=0;\n    if missing(sales) then sales=0;\n    length report_status $15;\n    if sales >= 1000000 then report_status='TARGET_MET';\n    else if sales >= 500000 then report_status='ON_TRACK';\n    else report_status='BELOW_TARGET';\nrun;"
+  },
+  "WORKLIB.HIGH_VALUE_CUSTOMER": {
+    "stepId": "STEP-057",
+    "type": "PROC",
+    "name": "SQL",
+    "range": "507-515",
+    "code": "proc sql;\n    create table WORKLIB.high_value_customer as\n    select customer_id,\n           count(*) as high_value_transactions,\n           sum(net_amount) as high_value_sales\n    from WORKLIB.high_value_sales\n    group by customer_id\n    order by calculated high_value_sales desc;\nquit;"
+  },
+  "WORKLIB.LOOKUP_STATUS_COUNTS": {
+    "stepId": "STEP-099",
+    "type": "PROC",
+    "name": "FREQ",
+    "range": "967-969",
+    "code": "proc freq data=WORKLIB.sales_lookup_enriched;\n    tables lookup_status / missing out=WORKLIB.lookup_status_counts;\nrun;"
+  },
+  "WORKLIB.MANAGEMENT_SUMMARY": {
+    "stepId": "STEP-051",
+    "type": "PROC",
+    "name": "SQL",
+    "range": "465-477",
+    "code": "proc sql;\n    create table WORKLIB.management_summary as\n    select a.region,\n           a.customer_tier,\n           a.tier_sales,\n           a.tier_transactions,\n           b.severity,\n           b.count as exception_count\n    from WORKLIB.tier_summary as a\n    left join WORKLIB.exception_summary as b\n      on 1=1\n    order by a.region, a.tier_sales desc;\nquit;"
+  },
+  "WORKLIB.METADATA_SNAPSHOT": {
+    "stepId": "STEP-041",
+    "type": "PROC",
+    "name": "DATASETS",
+    "range": "376-378",
+    "code": "proc datasets library=WORKLIB nolist;\n    contents data=_all_ out=WORKLIB.metadata_snapshot;\nquit;"
+  },
+  "WORKLIB.MONTH_REGION_RANKED": {
+    "stepId": "STEP-080",
+    "type": "PROC",
+    "name": "SQL",
+    "range": "739-750",
+    "code": "proc sql;\n    create table WORKLIB.month_region_ranked as\n    select *,\n           case\n             when monthly_sales >= 1000000 then 'A'\n             when monthly_sales >= 500000 then 'B'\n             when monthly_sales >= 100000 then 'C'\n             else 'D'\n           end as performance_band length=1\n    from WORKLIB.month_region_summary\n    order by month_start, monthly_sales desc;\nquit;"
+  },
+  "WORKLIB.MONTH_REGION_SUMMARY": {
+    "stepId": "STEP-078",
+    "type": "PROC",
+    "name": "SUMMARY",
+    "range": "721-728",
+    "code": "proc summary data=WORKLIB.sales_period_flags nway;\n    class month_start region;\n    var net_amount quantity;\n    output out=WORKLIB.month_region_summary\n        sum(net_amount)=monthly_sales\n        sum(quantity)=monthly_units\n        mean(net_amount)=monthly_average;\nrun;"
+  },
+  "WORKLIB.OPERATIONAL_DASHBOARD": {
+    "stepId": "STEP-102",
+    "type": "PROC",
+    "name": "SQL",
+    "range": "996-1006",
+    "code": "proc sql;\n    create table WORKLIB.operational_dashboard as\n    select\n        (select count(*) from WORKLIB.enriched_sales) as sales_rows,\n        (select sum(net_amount) from WORKLIB.enriched_sales) as total_sales,\n        (select count(distinct customer_id) from WORKLIB.enriched_sales) as customers,\n        (select count(distinct product_id) from WORKLIB.enriched_sales) as products,\n        (select count(*) from WORKLIB.review_queue_final) as review_items,\n        (select count(*) from WORKLIB.sales_duplicates) as duplicate_sales,\n        (select count(*) from WORKLIB.sales_quality where quality_status='INVALID') as invalid_sales;\nquit;"
+  },
+  "WORKLIB.PRODUCT_BASE": {
+    "stepId": "STEP-008",
+    "type": "DATA",
+    "name": "WORKLIB.product_base",
+    "range": "60-67",
+    "code": "data WORKLIB.product_base;\n    length product_id 8 product_name $100 category $40 subcategory $40;\n    set RAW.products;\n    if missing(product_id) then delete;\n    if missing(category) then category='UNKNOWN';\n    if missing(subcategory) then subcategory='UNKNOWN';\n    product_name=propcase(strip(product_name));\nrun;"
+  },
+  "WORKLIB.PRODUCT_KPIS": {
+    "stepId": "STEP-024",
+    "type": "PROC",
+    "name": "SQL",
+    "range": "247-258",
+    "code": "proc sql;\n    create table WORKLIB.product_kpis as\n    select product_id,\n           max(product_name) as product_name,\n           max(category) as category,\n           max(subcategory) as subcategory,\n           sum(quantity) as units_sold,\n           sum(net_amount) as net_sales,\n           mean(net_amount) as average_sale\n    from WORKLIB.enriched_sales\n    group by product_id;\nquit;"
+  },
+  "WORKLIB.PRODUCT_PERFORMANCE": {
+    "stepId": "STEP-071",
+    "type": "PROC",
+    "name": "SQL",
+    "range": "653-668",
+    "code": "proc sql;\n    create table WORKLIB.product_performance as\n    select p.product_id,\n           p.product_name,\n           p.category,\n           p.subcategory,\n           sum(e.quantity) as units,\n           sum(e.net_amount) as sales,\n           mean(e.net_amount) as average_sale,\n           count(e.sale_id) as transactions,\n           max(e.sale_date) as last_sale_date format=date9.\n    from WORKLIB.product_sorted as p\n    left join WORKLIB.enriched_sales as e\n      on p.product_id=e.product_id\n    group by p.product_id, p.product_name, p.category, p.subcategory;\nquit;"
+  },
+  "WORKLIB.PRODUCT_SORTED": {
+    "stepId": "STEP-009",
+    "type": "PROC",
+    "name": "SORT",
+    "range": "69-72",
+    "code": "proc sort data=WORKLIB.product_base\n          out=WORKLIB.product_sorted;\n    by product_id;\nrun;"
+  },
+  "WORKLIB.QUALITY_CONTROL": {
+    "stepId": "STEP-084",
+    "type": "PROC",
+    "name": "SQL",
+    "range": "798-807",
+    "code": "proc sql;\n    create table WORKLIB.quality_control as\n    select quality_status,\n           count(*) as records,\n           calculated records / (select count(*) from WORKLIB.sales_quality) * 100\n              as record_pct\n    from WORKLIB.sales_quality\n    group by quality_status\n    order by records desc;\nquit;"
+  },
+  "WORKLIB.QUARTER_REGION_SUMMARY": {
+    "stepId": "STEP-079",
+    "type": "PROC",
+    "name": "SUMMARY",
+    "range": "730-737",
+    "code": "proc summary data=WORKLIB.sales_period_flags nway;\n    class quarter_start region;\n    var net_amount quantity;\n    output out=WORKLIB.quarter_region_summary\n        sum(net_amount)=quarter_sales\n        sum(quantity)=quarter_units\n        mean(net_amount)=quarter_average;\nrun;"
+  },
+  "WORKLIB.RECONCILIATION": {
+    "stepId": "STEP-044",
+    "type": "DATA",
+    "name": "WORKLIB.reconciliation",
+    "range": "400-411",
+    "code": "data WORKLIB.reconciliation;\n    if _n_=1 then do;\n        set WORKLIB.final_control_totals;\n        expected_rows=.;\n        expected_sales=.;\n    end;\n    length reconciliation_status $20;\n    if missing(expected_rows) then reconciliation_status='BASELINE_REQUIRED';\n    else if row_count=expected_rows and abs(total_sales-expected_sales) < 0.01\n         then reconciliation_status='MATCH';\n    else reconciliation_status='MISMATCH';\nrun;"
+  },
+  "WORKLIB.REGION_CHANGE_SUMMARY": {
+    "stepId": "STEP-096",
+    "type": "PROC",
+    "name": "SUMMARY",
+    "range": "925-932",
+    "code": "proc summary data=WORKLIB.region_running_sales nway;\n    class region;\n    var sales_change;\n    output out=WORKLIB.region_change_summary\n        sum(sales_change)=net_change\n        max(sales_change)=maximum_change\n        min(sales_change)=minimum_change;\nrun;"
+  },
+  "WORKLIB.REGION_CHANNEL_FREQ": {
+    "stepId": "STEP-017",
+    "type": "PROC",
+    "name": "FREQ",
+    "range": "153-156",
+    "code": "proc freq data=WORKLIB.sales_sorted;\n    tables region*channel / missing out=WORKLIB.region_channel_freq;\n    tables channel / missing out=WORKLIB.channel_freq;\nrun;"
+  },
+  "WORKLIB.REGION_CHANNEL_SUMMARY": {
+    "stepId": "STEP-015",
+    "type": "PROC",
+    "name": "SUMMARY",
+    "range": "130-141",
+    "code": "proc summary data=WORKLIB.sales_sorted nway;\n    class region channel;\n    var gross_amount discount_amount net_amount quantity;\n    output out=WORKLIB.region_channel_summary\n        sum(gross_amount)=gross_sales\n        sum(discount_amount)=discount_total\n        sum(net_amount)=net_sales\n        sum(quantity)=units\n        mean(net_amount)=avg_ticket\n        max(net_amount)=max_ticket\n        min(net_amount)=min_ticket;\nrun;"
+  },
+  "WORKLIB.REGION_CONTROLS": {
+    "stepId": "STEP-090",
+    "type": "DATA",
+    "name": "WORKLIB.region_controls",
+    "range": "858-875",
+    "code": "data WORKLIB.region_controls;\n    set WORKLIB.region_report;\n    length control_flag $12 control_reason $100;\n    control_flag='PASS';\n    control_reason='Within operating thresholds';\n    if sales < 0 then do;\n        control_flag='FAIL';\n        control_reason='Negative regional sales';\n    end;\n    else if transactions=0 then do;\n        control_flag='WARN';\n        control_reason='No transactions reported';\n    end;\n    else if sales/transactions < 10 then do;\n        control_flag='WARN';\n        control_reason='Average transaction below threshold';\n    end;\nrun;"
+  },
+  "WORKLIB.REGION_CONTROL_COUNTS": {
+    "stepId": "STEP-091",
+    "type": "PROC",
+    "name": "FREQ",
+    "range": "877-879",
+    "code": "proc freq data=WORKLIB.region_controls;\n    tables control_flag / missing out=WORKLIB.region_control_counts;\nrun;"
+  },
+  "WORKLIB.REGION_CONTROL_DETAIL": {
+    "stepId": "STEP-092",
+    "type": "PROC",
+    "name": "SQL",
+    "range": "881-892",
+    "code": "proc sql;\n    create table WORKLIB.region_control_detail as\n    select r.region,\n           r.sales,\n           r.transactions,\n           r.average_sale,\n           c.control_flag,\n           c.control_reason\n    from WORKLIB.region_report as r\n    left join WORKLIB.region_controls as c\n      on r.customer_region=c.customer_region;\nquit;"
+  },
+  "WORKLIB.REGION_CUSTOMER_SCORE": {
+    "stepId": "STEP-068",
+    "type": "PROC",
+    "name": "SQL",
+    "range": "624-635",
+    "code": "proc sql;\n    create table WORKLIB.region_customer_score as\n    select region,\n           score_band,\n           count(*) as customer_count,\n           sum(total_sales) as region_sales,\n           mean(score) as avg_score,\n           max(score) as max_score\n    from WORKLIB.customer_scoring\n    group by region, score_band\n    order by region, calculated region_sales desc;\nquit;"
+  },
+  "WORKLIB.REGION_CUSTOMER_SCORE_FLAGS": {
+    "stepId": "STEP-069",
+    "type": "DATA",
+    "name": "WORKLIB.region_customer_score_flags",
+    "range": "637-643",
+    "code": "data WORKLIB.region_customer_score_flags;\n    set WORKLIB.region_customer_score;\n    length action_flag $20;\n    if max_score >= 80 and region_sales >= 250000 then action_flag='PRIORITY';\n    else if max_score >= 60 then action_flag='STANDARD';\n    else action_flag='DEVELOPMENT';\nrun;"
+  },
+  "WORKLIB.REGION_REPORT": {
+    "stepId": "STEP-038",
+    "type": "PROC",
+    "name": "SQL",
+    "range": "347-357",
+    "code": "proc sql;\n    create table WORKLIB.region_report as\n    select customer_region,\n           count(*) as transactions,\n           sum(net_amount) as sales,\n           mean(net_amount) as average_sale,\n           sum(quantity) as units\n    from WORKLIB.region_report_input\n    group by customer_region\n    order by sales desc;\nquit;"
+  },
+  "WORKLIB.REGION_REPORT_INPUT": {
+    "stepId": "STEP-034",
+    "type": "GLOBAL",
+    "name": "MACRO_DEF_BUILD_REGION_REPORT",
+    "range": "331-343",
+    "code": "%macro build_region_report(region=ALL);\n    %if %upcase(&region)=ALL %then %do;\n        data WORKLIB.region_report_input;\n            set WORKLIB.enriched_sales;\n        run;\n    %end;\n    %else %do;\n        data WORKLIB.region_report_input;\n            set WORKLIB.enriched_sales;\n            where upcase(customer_region)=upcase(\"&region\");\n        run;\n    %end;\n%mend;"
+  },
+  "WORKLIB.REGION_RUNNING_SALES": {
+    "stepId": "STEP-093",
+    "type": "DATA",
+    "name": "WORKLIB.region_running_sales",
+    "range": "898-910",
+    "code": "data WORKLIB.region_running_sales;\n    set WORKLIB.sales_period_flags;\n    by region sale_date;\n    retain running_sales 0 running_units 0;\n    if first.region then do;\n        running_sales=0;\n        running_units=0;\n    end;\n    running_sales+net_amount;\n    running_units+quantity;\n    if last.sale_date then output;\n    keep region sale_date running_sales running_units;\nrun;"
+  },
+  "WORKLIB.REGION_SUMMARY": {
+    "stepId": "STEP-016",
+    "type": "PROC",
+    "name": "MEANS",
+    "range": "143-151",
+    "code": "proc means data=WORKLIB.sales_sorted nway;\n    class region;\n    var net_amount quantity;\n    output out=WORKLIB.region_summary\n        sum(net_amount)=regional_sales\n        sum(quantity)=regional_units\n        mean(net_amount)=regional_avg\n        max(net_amount)=regional_max;\nrun;"
+  },
+  "WORKLIB.REGION_SUMMARY_WIDE": {
+    "stepId": "STEP-018",
+    "type": "PROC",
+    "name": "TRANSPOSE",
+    "range": "158-162",
+    "code": "proc transpose data=WORKLIB.region_summary\n               out=WORKLIB.region_summary_wide prefix=metric_;\n    id region;\n    var regional_sales regional_units regional_avg regional_max;\nrun;"
+  },
+  "WORKLIB.REGION_TIER_FREQ": {
+    "stepId": "STEP-033",
+    "type": "PROC",
+    "name": "FREQ",
+    "range": "326-329",
+    "code": "proc freq data=WORKLIB.customer_flags_sorted;\n    tables customer_tier*activity_flag / missing out=WORKLIB.tier_activity_freq;\n    tables region*customer_tier / missing out=WORKLIB.region_tier_freq;\nrun;"
+  },
+  "WORKLIB.REVIEW_QUEUE": {
+    "stepId": "STEP-021",
+    "type": "PROC",
+    "name": "SORT",
+    "range": "215-217",
+    "code": "proc sort data=WORKLIB.sales_rules out=WORKLIB.review_queue;\n    by descending net_amount customer_id sale_date;\nrun;"
+  },
+  "WORKLIB.REVIEW_QUEUE_FINAL": {
+    "stepId": "STEP-022",
+    "type": "DATA",
+    "name": "WORKLIB.review_queue_final",
+    "range": "219-230",
+    "code": "data WORKLIB.review_queue_final;\n    set WORKLIB.review_queue;\n    retain queue_rank 0;\n    queue_rank+1;\n    length review_reason $120;\n    if risk_flag='MISSING_CUSTOMER' then review_reason='Customer reference unavailable';\n    else if risk_flag='MISSING_PRODUCT' then review_reason='Product reference unavailable';\n    else if risk_flag='LARGE_TRANSACTION' then review_reason='Large transaction requires review';\n    else if risk_flag='HIGH_DISCOUNT' then review_reason='High discount requires review';\n    else if priority='REVIEW' then review_reason='High value promotional transaction';\n    else review_reason='Bulk or operational review';\nrun;"
+  },
+  "WORKLIB.SALES_BASE": {
+    "stepId": "STEP-010",
+    "type": "DATA",
+    "name": "WORKLIB.sales_base",
+    "range": "74-93",
+    "code": "data WORKLIB.sales_base;\n    length sale_id 8 customer_id 8 product_id 8 quantity 8;\n    length unit_price 8 discount_pct 8 gross_amount 8 discount_amount 8 net_amount 8;\n    length sale_date 8 region $20 channel $20;\n    format sale_date date9. gross_amount discount_amount net_amount comma14.2;\n    set RAW.sales;\n    if missing(sale_id) then delete;\n    if missing(customer_id) then customer_id=0;\n    if missing(product_id) then product_id=0;\n    if missing(quantity) or quantity < 0 then quantity=0;\n    if missing(unit_price) then unit_price=0;\n    if missing(discount_pct) then discount_pct=0;\n    gross_amount=quantity*unit_price;\n    discount_amount=gross_amount*(discount_pct/100);\n    net_amount=gross_amount-discount_amount;\n    if missing(region) then region='UNASSIGNED';\n    if missing(channel) then channel='UNKNOWN';\n    if sale_date=. then sale_date=&RUN_DATE;\n    if net_amount >= &MIN_AMOUNT;\nrun;"
+  },
+  "WORKLIB.SALES_DUPLICATES": {
+    "stepId": "STEP-081",
+    "type": "PROC",
+    "name": "SORT",
+    "range": "756-761",
+    "code": "proc sort data=RAW.sales\n          out=WORKLIB.sales_duplicate_check\n          nodupkey\n          dupout=WORKLIB.sales_duplicates;\n    by sale_id;\nrun;"
+  },
+  "WORKLIB.SALES_DUPLICATE_CHECK": {
+    "stepId": "STEP-081",
+    "type": "PROC",
+    "name": "SORT",
+    "range": "756-761",
+    "code": "proc sort data=RAW.sales\n          out=WORKLIB.sales_duplicate_check\n          nodupkey\n          dupout=WORKLIB.sales_duplicates;\n    by sale_id;\nrun;"
+  },
+  "WORKLIB.SALES_LOOKUP_ENRICHED": {
+    "stepId": "STEP-098",
+    "type": "DATA",
+    "name": "WORKLIB.sales_lookup_enriched",
+    "range": "948-965",
+    "code": "data WORKLIB.sales_lookup_enriched;\n    if _n_=1 then do;\n        declare hash h(dataset:'WORKLIB.customer_lookup');\n        h.defineKey('customer_id');\n        h.defineData('customer_name','region','segment');\n        h.defineDone();\n    end;\n    set WORKLIB.sales_sorted;\n    length lookup_status $12;\n    rc=h.find();\n    if rc=0 then lookup_status='MATCH';\n    else do;\n        lookup_status='MISS';\n        customer_name='UNKNOWN';\n        region='UNKNOWN';\n        segment='UNKNOWN';\n    end;\nrun;"
+  },
+  "WORKLIB.SALES_PERIOD_FLAGS": {
+    "stepId": "STEP-076",
+    "type": "DATA",
+    "name": "WORKLIB.sales_period_flags",
+    "range": "703-715",
+    "code": "data WORKLIB.sales_period_flags;\n    set WORKLIB.enriched_sales;\n    length period_type $12 weekend_flag $1;\n    month_start=intnx('month',sale_date,0,'b');\n    quarter_start=intnx('quarter',sale_date,0,'b');\n    year_start=intnx('year',sale_date,0,'b');\n    format month_start quarter_start year_start date9.;\n    if weekday(sale_date) in (1,7) then weekend_flag='Y';\n    else weekend_flag='N';\n    if day(sale_date) <= 7 then period_type='OPENING';\n    else if day(sale_date) >= 24 then period_type='CLOSING';\n    else period_type='MID';\nrun;"
+  },
+  "WORKLIB.SALES_QUALITY": {
+    "stepId": "STEP-082",
+    "type": "DATA",
+    "name": "WORKLIB.sales_quality",
+    "range": "763-792",
+    "code": "data WORKLIB.sales_quality;\n    set RAW.sales;\n    length quality_status $20 quality_reason $80;\n    quality_status='VALID';\n    quality_reason='No exception detected';\n    if missing(sale_id) then do;\n        quality_status='INVALID';\n        quality_reason='Missing sale identifier';\n    end;\n    else if missing(customer_id) then do;\n        quality_status='WARNING';\n        quality_reason='Missing customer identifier';\n    end;\n    else if missing(product_id) then do;\n        quality_status='WARNING';\n        quality_reason='Missing product identifier';\n    end;\n    else if quantity < 0 then do;\n        quality_status='INVALID';\n        quality_reason='Negative quantity';\n    end;\n    else if unit_price < 0 then do;\n        quality_status='INVALID';\n        quality_reason='Negative unit price';\n    end;\n    else if discount_pct > 100 then do;\n        quality_status='INVALID';\n        quality_reason='Discount exceeds maximum';\n    end;\nrun;"
+  },
+  "WORKLIB.SALES_QUALITY_COUNTS": {
+    "stepId": "STEP-083",
+    "type": "PROC",
+    "name": "FREQ",
+    "range": "794-796",
+    "code": "proc freq data=WORKLIB.sales_quality;\n    tables quality_status / missing out=WORKLIB.sales_quality_counts;\nrun;"
+  },
+  "WORKLIB.SALES_RULES": {
+    "stepId": "STEP-020",
+    "type": "DATA",
+    "name": "WORKLIB.sales_rules",
+    "range": "201-213",
+    "code": "data WORKLIB.sales_rules;\n    set WORKLIB.enriched_sales;\n    length risk_flag $20 priority $12;\n    risk_flag='NORMAL';\n    priority='STANDARD';\n    if missing(customer_name) then risk_flag='MISSING_CUSTOMER';\n    if missing(product_name) then risk_flag='MISSING_PRODUCT';\n    if net_amount > 25000 then risk_flag='LARGE_TRANSACTION';\n    if discount_pct >= 50 then risk_flag='HIGH_DISCOUNT';\n    if quantity >= 100 then priority='BULK';\n    if value_band='HIGH' and pricing_band='PROMO' then priority='REVIEW';\n    if risk_flag ne 'NORMAL' or priority ne 'STANDARD';\nrun;"
+  },
+  "WORKLIB.SALES_SORTED": {
+    "stepId": "STEP-011",
+    "type": "PROC",
+    "name": "SORT",
+    "range": "95-98",
+    "code": "proc sort data=WORKLIB.sales_base\n          out=WORKLIB.sales_sorted;\n    by customer_id sale_date sale_id;\nrun;"
+  },
+  "WORKLIB.SCORE_DISTRIBUTION": {
+    "stepId": "STEP-065",
+    "type": "PROC",
+    "name": "FREQ",
+    "range": "600-602",
+    "code": "proc freq data=WORKLIB.customer_scoring;\n    tables score_band*engagement_level / missing out=WORKLIB.score_distribution;\nrun;"
+  },
+  "WORKLIB.SCORE_SUMMARY": {
+    "stepId": "STEP-066",
+    "type": "PROC",
+    "name": "SUMMARY",
+    "range": "604-614",
+    "code": "proc summary data=WORKLIB.customer_scoring nway;\n    class score_band;\n    var total_sales transaction_count high_value_sales score;\n    output out=WORKLIB.score_summary\n        sum(total_sales)=sales\n        sum(transaction_count)=transactions\n        sum(high_value_sales)=high_value_sales\n        mean(score)=average_score\n        max(score)=maximum_score\n        min(score)=minimum_score;\nrun;"
+  },
+  "WORKLIB.SEGMENT_RANKED": {
+    "stepId": "STEP-047",
+    "type": "PROC",
+    "name": "SQL",
+    "range": "434-440",
+    "code": "proc sql;\n    create table WORKLIB.segment_ranked as\n    select *,\n           monotonic() as generated_rank\n    from WORKLIB.segment_rollup_sorted\n    order by region, calculated generated_rank;\nquit;"
+  },
+  "WORKLIB.SEGMENT_ROLLUP": {
+    "stepId": "STEP-045",
+    "type": "DATA",
+    "name": "WORKLIB.segment_rollup",
+    "range": "416-428",
+    "code": "data WORKLIB.segment_rollup;\n    set WORKLIB.customer_flags_sorted;\n    by region customer_tier;\n    retain segment_sales segment_customers 0;\n    if first.customer_tier then do;\n        segment_sales=0;\n        segment_customers=0;\n    end;\n    segment_sales+total_sales;\n    segment_customers+1;\n    if last.customer_tier then output;\n    keep region customer_tier segment_sales segment_customers;\nrun;"
+  },
+  "WORKLIB.SEGMENT_ROLLUP_SORTED": {
+    "stepId": "STEP-046",
+    "type": "PROC",
+    "name": "SORT",
+    "range": "430-432",
+    "code": "proc sort data=WORKLIB.segment_rollup out=WORKLIB.segment_rollup_sorted;\n    by region descending segment_sales;\nrun;"
+  },
+  "WORKLIB.SEMANTIC_EDGE_CASES": {
+    "stepId": "STEP-100",
+    "type": "DATA",
+    "name": "WORKLIB.semantic_edge_cases",
+    "range": "975-986",
+    "code": "data WORKLIB.semantic_edge_cases;\n    set WORKLIB.sales_quality;\n    length missing_class $15 conversion_flag $15;\n    if discount_pct=. then missing_class='STANDARD_MISSING';\n    else if discount_pct=.A then missing_class='SPECIAL_A';\n    else if discount_pct=.Z then missing_class='SPECIAL_Z';\n    else missing_class='POPULATED';\n    conversion_flag='NUMERIC';\n    character_amount=put(net_amount,comma14.2);\n    numeric_from_text=input(strip(character_amount),comma14.2);\n    if numeric_from_text ne net_amount then conversion_flag='CONVERSION_DIFF';\nrun;"
+  },
+  "WORKLIB.SEMANTIC_EDGE_COUNTS": {
+    "stepId": "STEP-101",
+    "type": "PROC",
+    "name": "FREQ",
+    "range": "988-990",
+    "code": "proc freq data=WORKLIB.semantic_edge_cases;\n    tables missing_class*conversion_flag / missing out=WORKLIB.semantic_edge_counts;\nrun;"
+  },
+  "WORKLIB.TIER_ACTIVITY_FREQ": {
+    "stepId": "STEP-033",
+    "type": "PROC",
+    "name": "FREQ",
+    "range": "326-329",
+    "code": "proc freq data=WORKLIB.customer_flags_sorted;\n    tables customer_tier*activity_flag / missing out=WORKLIB.tier_activity_freq;\n    tables region*customer_tier / missing out=WORKLIB.region_tier_freq;\nrun;"
+  },
+  "WORKLIB.TIER_SUMMARY": {
+    "stepId": "STEP-032",
+    "type": "PROC",
+    "name": "SUMMARY",
+    "range": "316-324",
+    "code": "proc summary data=WORKLIB.customer_flags_sorted nway;\n    class region customer_tier;\n    var total_sales transaction_count customer_total;\n    output out=WORKLIB.tier_summary\n        sum(total_sales)=tier_sales\n        sum(transaction_count)=tier_transactions\n        mean(total_sales)=avg_customer_sales\n        max(total_sales)=top_customer_sales;\nrun;"
+  }
+}

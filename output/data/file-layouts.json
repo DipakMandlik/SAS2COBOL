@@ -1,0 +1,4408 @@
+{
+  "version": "1.0.0",
+  "layouts": [
+    {
+      "copybookName": "CPCUST01",
+      "dataset": "RAW.CUSTOMERS",
+      "recordLength": 100,
+      "fields": [
+        {
+          "level": "05",
+          "name": "CUSTOM-CUSTOMER-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "customer_id"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-CUSTOMER-NAME",
+          "picClause": "PIC X(80)",
+          "usage": "DISPLAY",
+          "sourceVariable": "customer_name"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-SEGMENT",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "segment"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-REGION",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "region"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-STATUS",
+          "picClause": "PIC X(12)",
+          "usage": "DISPLAY",
+          "sourceVariable": "status"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPPROD02",
+      "dataset": "RAW.PRODUCTS",
+      "recordLength": 80,
+      "fields": [
+        {
+          "level": "05",
+          "name": "PRODUC-PRODUCT-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "product_id"
+        },
+        {
+          "level": "05",
+          "name": "PRODUC-PRODUCT-NAME",
+          "picClause": "PIC X(100)",
+          "usage": "DISPLAY",
+          "sourceVariable": "product_name"
+        },
+        {
+          "level": "05",
+          "name": "PRODUC-CATEGORY",
+          "picClause": "PIC X(40)",
+          "usage": "DISPLAY",
+          "sourceVariable": "category"
+        },
+        {
+          "level": "05",
+          "name": "PRODUC-SUBCATEGORY",
+          "picClause": "PIC X(40)",
+          "usage": "DISPLAY",
+          "sourceVariable": "subcategory"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPSALE03",
+      "dataset": "RAW.SALES",
+      "recordLength": 180,
+      "fields": [
+        {
+          "level": "05",
+          "name": "SALES-SALE-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "sale_id"
+        },
+        {
+          "level": "05",
+          "name": "SALES-CUSTOMER-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "customer_id"
+        },
+        {
+          "level": "05",
+          "name": "SALES-PRODUCT-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "product_id"
+        },
+        {
+          "level": "05",
+          "name": "SALES-QUANTITY",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "quantity"
+        },
+        {
+          "level": "05",
+          "name": "SALES-UNIT-PRICE",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "unit_price"
+        },
+        {
+          "level": "05",
+          "name": "SALES-DISCOUNT-PCT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "discount_pct"
+        },
+        {
+          "level": "05",
+          "name": "SALES-SALE-DATE",
+          "picClause": "PIC 9(8)",
+          "usage": "DISPLAY",
+          "sourceVariable": "sale_date"
+        },
+        {
+          "level": "05",
+          "name": "SALES-REGION",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "region"
+        },
+        {
+          "level": "05",
+          "name": "SALES-CHANNEL",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "channel"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPACTI04",
+      "dataset": "WORKLIB.ACTIVITY_MATRIX",
+      "recordLength": 80,
+      "fields": [
+        {
+          "level": "05",
+          "name": "ACTIVI-ACTIVITY-BAND",
+          "picClause": "PIC X(15)",
+          "usage": "DISPLAY",
+          "sourceVariable": "activity_band"
+        },
+        {
+          "level": "05",
+          "name": "ACTIVI-RECENCY-BAND",
+          "picClause": "PIC X(15)",
+          "usage": "DISPLAY",
+          "sourceVariable": "recency_band"
+        },
+        {
+          "level": "05",
+          "name": "ACTIVI-COUNT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "COUNT"
+        },
+        {
+          "level": "05",
+          "name": "ACTIVI-PERCENT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "PERCENT"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPACTI05",
+      "dataset": "WORKLIB.ACTIVITY_SUMMARY",
+      "recordLength": 140,
+      "fields": [
+        {
+          "level": "05",
+          "name": "ACTIVI-ACTIVITY-BAND",
+          "picClause": "PIC X(15)",
+          "usage": "DISPLAY",
+          "sourceVariable": "activity_band"
+        },
+        {
+          "level": "05",
+          "name": "ACTIVI-RECENCY-BAND",
+          "picClause": "PIC X(15)",
+          "usage": "DISPLAY",
+          "sourceVariable": "recency_band"
+        },
+        {
+          "level": "05",
+          "name": "ACTIVI-REC-TYPE",
+          "picClause": "PIC 9(4)",
+          "usage": "COMP-3",
+          "sourceVariable": "_TYPE_"
+        },
+        {
+          "level": "05",
+          "name": "ACTIVI-REC-FREQ",
+          "picClause": "PIC 9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "_FREQ_"
+        },
+        {
+          "level": "05",
+          "name": "ACTIVI-SALES",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "sales"
+        },
+        {
+          "level": "05",
+          "name": "ACTIVI-TRANSACTIONS",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "transactions"
+        },
+        {
+          "level": "05",
+          "name": "ACTIVI-AVERAGE-ACTIVE-DAYS",
+          "picClause": "PIC 9(8)",
+          "usage": "DISPLAY",
+          "sourceVariable": "average_active_days"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPAUDI06",
+      "dataset": "WORKLIB.AUDIT_EXTRACT",
+      "recordLength": 140,
+      "fields": [
+        {
+          "level": "05",
+          "name": "AUDIT-CUSTOMER-REGION",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "customer_region"
+        },
+        {
+          "level": "05",
+          "name": "AUDIT-TRANSACTIONS",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "transactions"
+        },
+        {
+          "level": "05",
+          "name": "AUDIT-SALES",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "sales"
+        },
+        {
+          "level": "05",
+          "name": "AUDIT-AVERAGE-SALE",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "average_sale"
+        },
+        {
+          "level": "05",
+          "name": "AUDIT-UNITS",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "units"
+        },
+        {
+          "level": "05",
+          "name": "AUDIT-AUDIT-TIMESTAMP",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "audit_timestamp"
+        },
+        {
+          "level": "05",
+          "name": "AUDIT-AUDIT-SOURCE",
+          "picClause": "PIC X(30)",
+          "usage": "DISPLAY",
+          "sourceVariable": "audit_source"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPCATE07",
+      "dataset": "WORKLIB.CATEGORY_DEMAND_FREQ",
+      "recordLength": 80,
+      "fields": [
+        {
+          "level": "05",
+          "name": "CATEGO-CATEGORY",
+          "picClause": "PIC X(40)",
+          "usage": "DISPLAY",
+          "sourceVariable": "category"
+        },
+        {
+          "level": "05",
+          "name": "CATEGO-DEMAND-BAND",
+          "picClause": "PIC X(15)",
+          "usage": "DISPLAY",
+          "sourceVariable": "demand_band"
+        },
+        {
+          "level": "05",
+          "name": "CATEGO-COUNT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "COUNT"
+        },
+        {
+          "level": "05",
+          "name": "CATEGO-PERCENT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "PERCENT"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPCATE08",
+      "dataset": "WORKLIB.CATEGORY_DEMAND_SUMMARY",
+      "recordLength": 140,
+      "fields": [
+        {
+          "level": "05",
+          "name": "CATEGO-CATEGORY",
+          "picClause": "PIC X(40)",
+          "usage": "DISPLAY",
+          "sourceVariable": "category"
+        },
+        {
+          "level": "05",
+          "name": "CATEGO-DEMAND-BAND",
+          "picClause": "PIC X(15)",
+          "usage": "DISPLAY",
+          "sourceVariable": "demand_band"
+        },
+        {
+          "level": "05",
+          "name": "CATEGO-REC-TYPE",
+          "picClause": "PIC 9(4)",
+          "usage": "COMP-3",
+          "sourceVariable": "_TYPE_"
+        },
+        {
+          "level": "05",
+          "name": "CATEGO-REC-FREQ",
+          "picClause": "PIC 9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "_FREQ_"
+        },
+        {
+          "level": "05",
+          "name": "CATEGO-SALES",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "sales"
+        },
+        {
+          "level": "05",
+          "name": "CATEGO-UNITS",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "units"
+        },
+        {
+          "level": "05",
+          "name": "CATEGO-TRANSACTIONS",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "transactions"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPCHAN09",
+      "dataset": "WORKLIB.CHANNEL_FREQ",
+      "recordLength": 60,
+      "fields": [
+        {
+          "level": "05",
+          "name": "CHANNE-CHANNEL",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "channel"
+        },
+        {
+          "level": "05",
+          "name": "CHANNE-COUNT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "COUNT"
+        },
+        {
+          "level": "05",
+          "name": "CHANNE-PERCENT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "PERCENT"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPCUST10",
+      "dataset": "WORKLIB.CUSTOMER_ACTIVITY",
+      "recordLength": 160,
+      "fields": [
+        {
+          "level": "05",
+          "name": "CUSTOM-CUSTOMER-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "customer_id"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-FIRST-SALE",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "first_sale"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-LAST-SALE",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "last_sale"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-ACTIVE-DAYS",
+          "picClause": "PIC 9(8)",
+          "usage": "DISPLAY",
+          "sourceVariable": "active_days"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-TRANSACTION-COUNT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "transaction_count"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-SALES",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "sales"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-ACTIVITY-BAND",
+          "picClause": "PIC X(15)",
+          "usage": "DISPLAY",
+          "sourceVariable": "activity_band"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-RECENCY-BAND",
+          "picClause": "PIC X(15)",
+          "usage": "DISPLAY",
+          "sourceVariable": "recency_band"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPCUST11",
+      "dataset": "WORKLIB.CUSTOMER_BASE",
+      "recordLength": 140,
+      "fields": [
+        {
+          "level": "05",
+          "name": "CUSTOM-CUSTOMER-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "customer_id"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-CUSTOMER-NAME",
+          "picClause": "PIC X(80)",
+          "usage": "DISPLAY",
+          "sourceVariable": "customer_name"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-SEGMENT",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "segment"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-REGION",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "region"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-STATUS",
+          "picClause": "PIC X(12)",
+          "usage": "DISPLAY",
+          "sourceVariable": "status"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-ACCOUNT-YEAR",
+          "picClause": "PIC 9(4)",
+          "usage": "DISPLAY",
+          "sourceVariable": "account_year"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-CUSTOMER-REGION",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "customer_region"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPCUST12",
+      "dataset": "WORKLIB.CUSTOMER_FLAGS",
+      "recordLength": 160,
+      "fields": [
+        {
+          "level": "05",
+          "name": "CUSTOM-CUSTOMER-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "customer_id"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-CUSTOMER-TIER",
+          "picClause": "PIC X(15)",
+          "usage": "DISPLAY",
+          "sourceVariable": "customer_tier"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-TOTAL-SALES",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "total_sales"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-TRANSACTION-COUNT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "transaction_count"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-HIGH-VALUE-FLAG",
+          "picClause": "PIC X(1)",
+          "usage": "DISPLAY",
+          "sourceVariable": "high_value_flag"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-FREQUENT-SHOPPER-FLAG",
+          "picClause": "PIC X(1)",
+          "usage": "DISPLAY",
+          "sourceVariable": "frequent_shopper_flag"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-DORMANT-FLAG",
+          "picClause": "PIC X(1)",
+          "usage": "DISPLAY",
+          "sourceVariable": "dormant_flag"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-REGION",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "region"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPCUST13",
+      "dataset": "WORKLIB.CUSTOMER_FLAGS_SORTED",
+      "recordLength": 160,
+      "fields": [
+        {
+          "level": "05",
+          "name": "CUSTOM-CUSTOMER-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "customer_id"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-CUSTOMER-TIER",
+          "picClause": "PIC X(15)",
+          "usage": "DISPLAY",
+          "sourceVariable": "customer_tier"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-TOTAL-SALES",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "total_sales"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-TRANSACTION-COUNT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "transaction_count"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-HIGH-VALUE-FLAG",
+          "picClause": "PIC X(1)",
+          "usage": "DISPLAY",
+          "sourceVariable": "high_value_flag"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-FREQUENT-SHOPPER-FLAG",
+          "picClause": "PIC X(1)",
+          "usage": "DISPLAY",
+          "sourceVariable": "frequent_shopper_flag"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-DORMANT-FLAG",
+          "picClause": "PIC X(1)",
+          "usage": "DISPLAY",
+          "sourceVariable": "dormant_flag"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-REGION",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "region"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPCUST14",
+      "dataset": "WORKLIB.CUSTOMER_KPIS",
+      "recordLength": 160,
+      "fields": [
+        {
+          "level": "05",
+          "name": "CUSTOM-CUSTOMER-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "customer_id"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-SALES",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "sales"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-UNITS",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "units"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-TRANSACTIONS",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "transactions"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-AVG-UNIT-PRICE",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "avg_unit_price"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-MAX-SINGLE-SALE",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "max_single_sale"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-SEGMENT",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "segment"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-REGION",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "region"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPCUST15",
+      "dataset": "WORKLIB.CUSTOMER_LOOKUP",
+      "recordLength": 80,
+      "fields": [
+        {
+          "level": "05",
+          "name": "CUSTOM-CUSTOMER-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "customer_id"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-CUSTOMER-NAME",
+          "picClause": "PIC X(80)",
+          "usage": "DISPLAY",
+          "sourceVariable": "customer_name"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-REGION",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "region"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-SEGMENT",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "segment"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPCUST16",
+      "dataset": "WORKLIB.CUSTOMER_MONTHLY",
+      "recordLength": 120,
+      "fields": [
+        {
+          "level": "05",
+          "name": "CUSTOM-CUSTOMER-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "customer_id"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-CUSTOMER-STATUS",
+          "picClause": "PIC X(12)",
+          "usage": "DISPLAY",
+          "sourceVariable": "customer_status"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-CUSTOMER-SEGMENT",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "customer_segment"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-CUSTOMER-REGION",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "customer_region"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-CUSTOMER-TOTAL",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "customer_total"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-TRANSACTION-COUNT",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "transaction_count"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPCUST17",
+      "dataset": "WORKLIB.CUSTOMER_SALES",
+      "recordLength": 360,
+      "fields": [
+        {
+          "level": "05",
+          "name": "CUSTOM-CUSTOMER-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "customer_id"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-CUSTOMER-NAME",
+          "picClause": "PIC X(80)",
+          "usage": "DISPLAY",
+          "sourceVariable": "customer_name"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-SEGMENT",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "segment"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-CUSTOMER-REGION",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "customer_region"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-STATUS",
+          "picClause": "PIC X(12)",
+          "usage": "DISPLAY",
+          "sourceVariable": "status"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-SALE-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "sale_id"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-PRODUCT-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "product_id"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-QUANTITY",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "quantity"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-UNIT-PRICE",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "unit_price"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-DISCOUNT-PCT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "discount_pct"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-GROSS-AMOUNT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "gross_amount"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-DISCOUNT-AMOUNT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "discount_amount"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-NET-AMOUNT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "net_amount"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-SALE-DATE",
+          "picClause": "PIC 9(8)",
+          "usage": "DISPLAY",
+          "sourceVariable": "sale_date"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-REGION",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "region"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-CHANNEL",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "channel"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-IN-CUSTOMER",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "in_customer"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-IN-SALE",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "in_sale"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPCUST18",
+      "dataset": "WORKLIB.CUSTOMER_SALES_SORTED",
+      "recordLength": 320,
+      "fields": [
+        {
+          "level": "05",
+          "name": "CUSTOM-CUSTOMER-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "customer_id"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-CUSTOMER-NAME",
+          "picClause": "PIC X(80)",
+          "usage": "DISPLAY",
+          "sourceVariable": "customer_name"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-SEGMENT",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "segment"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-CUSTOMER-REGION",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "customer_region"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-STATUS",
+          "picClause": "PIC X(12)",
+          "usage": "DISPLAY",
+          "sourceVariable": "status"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-SALE-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "sale_id"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-PRODUCT-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "product_id"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-QUANTITY",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "quantity"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-UNIT-PRICE",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "unit_price"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-DISCOUNT-PCT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "discount_pct"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-GROSS-AMOUNT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "gross_amount"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-DISCOUNT-AMOUNT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "discount_amount"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-NET-AMOUNT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "net_amount"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-SALE-DATE",
+          "picClause": "PIC 9(8)",
+          "usage": "DISPLAY",
+          "sourceVariable": "sale_date"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-REGION",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "region"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-CHANNEL",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "channel"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPCUST19",
+      "dataset": "WORKLIB.CUSTOMER_SCORING",
+      "recordLength": 100,
+      "fields": [
+        {
+          "level": "05",
+          "name": "CUSTOM-CUSTOMER-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "customer_id"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-SPEND-SCORE",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "spend_score"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-FREQUENCY-SCORE",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "frequency_score"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-COMPOSITE-SCORE",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "composite_score"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-SCORE-BAND",
+          "picClause": "PIC X(15)",
+          "usage": "DISPLAY",
+          "sourceVariable": "score_band"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPCUST20",
+      "dataset": "WORKLIB.CUSTOMER_SORTED",
+      "recordLength": 100,
+      "fields": [
+        {
+          "level": "05",
+          "name": "CUSTOM-CUSTOMER-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "customer_id"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-CUSTOMER-NAME",
+          "picClause": "PIC X(80)",
+          "usage": "DISPLAY",
+          "sourceVariable": "customer_name"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-SEGMENT",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "segment"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-REGION",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "region"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-STATUS",
+          "picClause": "PIC X(12)",
+          "usage": "DISPLAY",
+          "sourceVariable": "status"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPCUST21",
+      "dataset": "WORKLIB.CUSTOMER_TIER",
+      "recordLength": 120,
+      "fields": [
+        {
+          "level": "05",
+          "name": "CUSTOM-CUSTOMER-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "customer_id"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-SALES",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "sales"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-UNITS",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "units"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-TRANSACTIONS",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "transactions"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-CUSTOMER-TIER",
+          "picClause": "PIC X(15)",
+          "usage": "DISPLAY",
+          "sourceVariable": "customer_tier"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-LOYALTY-SCORE",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "loyalty_score"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPCUST22",
+      "dataset": "WORKLIB.CUSTOMER_TIER_SORTED",
+      "recordLength": 120,
+      "fields": [
+        {
+          "level": "05",
+          "name": "CUSTOM-CUSTOMER-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "customer_id"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-SALES",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "sales"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-UNITS",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "units"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-TRANSACTIONS",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "transactions"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-CUSTOMER-TIER",
+          "picClause": "PIC X(15)",
+          "usage": "DISPLAY",
+          "sourceVariable": "customer_tier"
+        },
+        {
+          "level": "05",
+          "name": "CUSTOM-LOYALTY-SCORE",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "loyalty_score"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPDAIL23",
+      "dataset": "WORKLIB.DAILY_SALES",
+      "recordLength": 80,
+      "fields": [
+        {
+          "level": "05",
+          "name": "DAILY-SALE-DATE",
+          "picClause": "PIC 9(8)",
+          "usage": "DISPLAY",
+          "sourceVariable": "sale_date"
+        },
+        {
+          "level": "05",
+          "name": "DAILY-DAILY-TOTAL",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "daily_total"
+        },
+        {
+          "level": "05",
+          "name": "DAILY-DAILY-COUNT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "daily_count"
+        },
+        {
+          "level": "05",
+          "name": "DAILY-RUNNING-MONTHLY-TOTAL",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "running_monthly_total"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPDAIL24",
+      "dataset": "WORKLIB.DAILY_SALES_PIVOT",
+      "recordLength": 80,
+      "fields": [
+        {
+          "level": "05",
+          "name": "DAILY-SALE-DATE",
+          "picClause": "PIC 9(8)",
+          "usage": "DISPLAY",
+          "sourceVariable": "sale_date"
+        },
+        {
+          "level": "05",
+          "name": "DAILY-VAR-NAME",
+          "picClause": "PIC X(32)",
+          "usage": "DISPLAY",
+          "sourceVariable": "_NAME_"
+        },
+        {
+          "level": "05",
+          "name": "DAILY-DAILY-TOTAL",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "daily_total"
+        },
+        {
+          "level": "05",
+          "name": "DAILY-DAILY-COUNT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "daily_count"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPDAIL25",
+      "dataset": "WORKLIB.DAILY_SALES_SORTED",
+      "recordLength": 80,
+      "fields": [
+        {
+          "level": "05",
+          "name": "DAILY-SALE-DATE",
+          "picClause": "PIC 9(8)",
+          "usage": "DISPLAY",
+          "sourceVariable": "sale_date"
+        },
+        {
+          "level": "05",
+          "name": "DAILY-DAILY-TOTAL",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "daily_total"
+        },
+        {
+          "level": "05",
+          "name": "DAILY-DAILY-COUNT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "daily_count"
+        },
+        {
+          "level": "05",
+          "name": "DAILY-RUNNING-MONTHLY-TOTAL",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "running_monthly_total"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPDELI26",
+      "dataset": "WORKLIB.DELIVERY_MANIFEST",
+      "recordLength": 80,
+      "fields": [
+        {
+          "level": "05",
+          "name": "DELIVE-MANIFEST-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "manifest_id"
+        },
+        {
+          "level": "05",
+          "name": "DELIVE-DESTINATION-REGION",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "destination_region"
+        },
+        {
+          "level": "05",
+          "name": "DELIVE-TOTAL-PACKAGES",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "total_packages"
+        },
+        {
+          "level": "05",
+          "name": "DELIVE-MANIFEST-DATE",
+          "picClause": "PIC 9(8)",
+          "usage": "DISPLAY",
+          "sourceVariable": "manifest_date"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPENGA27",
+      "dataset": "WORKLIB.ENGAGEMENT_SUMMARY",
+      "recordLength": 100,
+      "fields": [
+        {
+          "level": "05",
+          "name": "ENGAGE-CUSTOMER-TIER",
+          "picClause": "PIC X(15)",
+          "usage": "DISPLAY",
+          "sourceVariable": "customer_tier"
+        },
+        {
+          "level": "05",
+          "name": "ENGAGE-REC-TYPE",
+          "picClause": "PIC 9(4)",
+          "usage": "COMP-3",
+          "sourceVariable": "_TYPE_"
+        },
+        {
+          "level": "05",
+          "name": "ENGAGE-REC-FREQ",
+          "picClause": "PIC 9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "_FREQ_"
+        },
+        {
+          "level": "05",
+          "name": "ENGAGE-AVG-SALES",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "avg_sales"
+        },
+        {
+          "level": "05",
+          "name": "ENGAGE-AVG-ORDERS",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "avg_orders"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPENRI28",
+      "dataset": "WORKLIB.ENRICHED_SALES",
+      "recordLength": 360,
+      "fields": [
+        {
+          "level": "05",
+          "name": "ENRICH-SALE-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "sale_id"
+        },
+        {
+          "level": "05",
+          "name": "ENRICH-SALE-DATE",
+          "picClause": "PIC 9(8)",
+          "usage": "DISPLAY",
+          "sourceVariable": "sale_date"
+        },
+        {
+          "level": "05",
+          "name": "ENRICH-CUSTOMER-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "customer_id"
+        },
+        {
+          "level": "05",
+          "name": "ENRICH-CUSTOMER-NAME",
+          "picClause": "PIC X(80)",
+          "usage": "DISPLAY",
+          "sourceVariable": "customer_name"
+        },
+        {
+          "level": "05",
+          "name": "ENRICH-SEGMENT",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "segment"
+        },
+        {
+          "level": "05",
+          "name": "ENRICH-CUSTOMER-REGION",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "customer_region"
+        },
+        {
+          "level": "05",
+          "name": "ENRICH-PRODUCT-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "product_id"
+        },
+        {
+          "level": "05",
+          "name": "ENRICH-PRODUCT-NAME",
+          "picClause": "PIC X(100)",
+          "usage": "DISPLAY",
+          "sourceVariable": "product_name"
+        },
+        {
+          "level": "05",
+          "name": "ENRICH-CATEGORY",
+          "picClause": "PIC X(40)",
+          "usage": "DISPLAY",
+          "sourceVariable": "category"
+        },
+        {
+          "level": "05",
+          "name": "ENRICH-SUBCATEGORY",
+          "picClause": "PIC X(40)",
+          "usage": "DISPLAY",
+          "sourceVariable": "subcategory"
+        },
+        {
+          "level": "05",
+          "name": "ENRICH-QUANTITY",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "quantity"
+        },
+        {
+          "level": "05",
+          "name": "ENRICH-UNIT-PRICE",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "unit_price"
+        },
+        {
+          "level": "05",
+          "name": "ENRICH-DISCOUNT-PCT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "discount_pct"
+        },
+        {
+          "level": "05",
+          "name": "ENRICH-GROSS-AMOUNT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "gross_amount"
+        },
+        {
+          "level": "05",
+          "name": "ENRICH-DISCOUNT-AMOUNT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "discount_amount"
+        },
+        {
+          "level": "05",
+          "name": "ENRICH-NET-AMOUNT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "net_amount"
+        },
+        {
+          "level": "05",
+          "name": "ENRICH-VALUE-BAND",
+          "picClause": "PIC X(10)",
+          "usage": "DISPLAY",
+          "sourceVariable": "value_band"
+        },
+        {
+          "level": "05",
+          "name": "ENRICH-PRICING-BAND",
+          "picClause": "PIC X(12)",
+          "usage": "DISPLAY",
+          "sourceVariable": "pricing_band"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPEXCE29",
+      "dataset": "WORKLIB.EXCEPTION_COUNTS",
+      "recordLength": 60,
+      "fields": [
+        {
+          "level": "05",
+          "name": "EXCEPT-EXCEPTION-CODE",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "exception_code"
+        },
+        {
+          "level": "05",
+          "name": "EXCEPT-COUNT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "COUNT"
+        },
+        {
+          "level": "05",
+          "name": "EXCEPT-PERCENT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "PERCENT"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPEXCE30",
+      "dataset": "WORKLIB.EXCEPTION_EXTRACT",
+      "recordLength": 120,
+      "fields": [
+        {
+          "level": "05",
+          "name": "EXCEPT-SALE-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "sale_id"
+        },
+        {
+          "level": "05",
+          "name": "EXCEPT-CUSTOMER-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "customer_id"
+        },
+        {
+          "level": "05",
+          "name": "EXCEPT-NET-AMOUNT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "net_amount"
+        },
+        {
+          "level": "05",
+          "name": "EXCEPT-EXCEPTION-FLAG",
+          "picClause": "PIC X(1)",
+          "usage": "DISPLAY",
+          "sourceVariable": "exception_flag"
+        },
+        {
+          "level": "05",
+          "name": "EXCEPT-EXCEPTION-CODE",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "exception_code"
+        },
+        {
+          "level": "05",
+          "name": "EXCEPT-EXCEPTION-SEVERITY",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "exception_severity"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPEXCE31",
+      "dataset": "WORKLIB.EXCEPTION_SUMMARY",
+      "recordLength": 60,
+      "fields": [
+        {
+          "level": "05",
+          "name": "EXCEPT-EXCEPTION-CODE",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "exception_code"
+        },
+        {
+          "level": "05",
+          "name": "EXCEPT-EXCEPTION-COUNT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "exception_count"
+        },
+        {
+          "level": "05",
+          "name": "EXCEPT-TOTAL-SEVERITY",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "total_severity"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPFINA32",
+      "dataset": "WORKLIB.FINAL_CONTROL_REPORT",
+      "recordLength": 60,
+      "fields": [
+        {
+          "level": "05",
+          "name": "FINAL-REPORT-SECTION",
+          "picClause": "PIC X(30)",
+          "usage": "DISPLAY",
+          "sourceVariable": "report_section"
+        },
+        {
+          "level": "05",
+          "name": "FINAL-METRIC-NAME",
+          "picClause": "PIC X(40)",
+          "usage": "DISPLAY",
+          "sourceVariable": "metric_name"
+        },
+        {
+          "level": "05",
+          "name": "FINAL-METRIC-VALUE",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "metric_value"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPFINA33",
+      "dataset": "WORKLIB.FINAL_CONTROL_TOTALS",
+      "recordLength": 60,
+      "fields": [
+        {
+          "level": "05",
+          "name": "FINAL-TOTAL-RECORDS",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "total_records"
+        },
+        {
+          "level": "05",
+          "name": "FINAL-TOTAL-SALES-AMOUNT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "total_sales_amount"
+        },
+        {
+          "level": "05",
+          "name": "FINAL-AVG-TICKET",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "avg_ticket"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPFINA34",
+      "dataset": "WORKLIB.FINAL_CUSTOMER_PROFILE",
+      "recordLength": 160,
+      "fields": [
+        {
+          "level": "05",
+          "name": "FINAL-CUSTOMER-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "customer_id"
+        },
+        {
+          "level": "05",
+          "name": "FINAL-SEGMENT",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "segment"
+        },
+        {
+          "level": "05",
+          "name": "FINAL-CUSTOMER-REGION",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "customer_region"
+        },
+        {
+          "level": "05",
+          "name": "FINAL-TOTAL-SALES",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "total_sales"
+        },
+        {
+          "level": "05",
+          "name": "FINAL-TOTAL-UNITS",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "total_units"
+        },
+        {
+          "level": "05",
+          "name": "FINAL-TOTAL-ORDERS",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "total_orders"
+        },
+        {
+          "level": "05",
+          "name": "FINAL-CUSTOMER-TIER",
+          "picClause": "PIC X(15)",
+          "usage": "DISPLAY",
+          "sourceVariable": "customer_tier"
+        },
+        {
+          "level": "05",
+          "name": "FINAL-PROFILE-STATUS",
+          "picClause": "PIC X(12)",
+          "usage": "DISPLAY",
+          "sourceVariable": "profile_status"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPFINA35",
+      "dataset": "WORKLIB.FINAL_SALES_EXTRACT",
+      "recordLength": 100,
+      "fields": [
+        {
+          "level": "05",
+          "name": "FINAL-CUSTOMER-REGION",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "customer_region"
+        },
+        {
+          "level": "05",
+          "name": "FINAL-TRANSACTIONS",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "transactions"
+        },
+        {
+          "level": "05",
+          "name": "FINAL-SALES",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "sales"
+        },
+        {
+          "level": "05",
+          "name": "FINAL-AVERAGE-SALE",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "average_sale"
+        },
+        {
+          "level": "05",
+          "name": "FINAL-UNITS",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "units"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPHIGH36",
+      "dataset": "WORKLIB.HIGH_VALUE_CUSTOMER",
+      "recordLength": 100,
+      "fields": [
+        {
+          "level": "05",
+          "name": "HIGHV-CUSTOMER-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "customer_id"
+        },
+        {
+          "level": "05",
+          "name": "HIGHV-CUSTOMER-NAME",
+          "picClause": "PIC X(80)",
+          "usage": "DISPLAY",
+          "sourceVariable": "customer_name"
+        },
+        {
+          "level": "05",
+          "name": "HIGHV-CUSTOMER-REGION",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "customer_region"
+        },
+        {
+          "level": "05",
+          "name": "HIGHV-HIGH-VALUE-SALES",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "high_value_sales"
+        },
+        {
+          "level": "05",
+          "name": "HIGHV-HIGH-VALUE-ORDERS",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "high_value_orders"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPHIGH37",
+      "dataset": "WORKLIB.HIGH_VALUE_SALES",
+      "recordLength": 360,
+      "fields": [
+        {
+          "level": "05",
+          "name": "HIGHV-SALE-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "sale_id"
+        },
+        {
+          "level": "05",
+          "name": "HIGHV-SALE-DATE",
+          "picClause": "PIC 9(8)",
+          "usage": "DISPLAY",
+          "sourceVariable": "sale_date"
+        },
+        {
+          "level": "05",
+          "name": "HIGHV-CUSTOMER-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "customer_id"
+        },
+        {
+          "level": "05",
+          "name": "HIGHV-CUSTOMER-NAME",
+          "picClause": "PIC X(80)",
+          "usage": "DISPLAY",
+          "sourceVariable": "customer_name"
+        },
+        {
+          "level": "05",
+          "name": "HIGHV-SEGMENT",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "segment"
+        },
+        {
+          "level": "05",
+          "name": "HIGHV-CUSTOMER-REGION",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "customer_region"
+        },
+        {
+          "level": "05",
+          "name": "HIGHV-PRODUCT-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "product_id"
+        },
+        {
+          "level": "05",
+          "name": "HIGHV-PRODUCT-NAME",
+          "picClause": "PIC X(100)",
+          "usage": "DISPLAY",
+          "sourceVariable": "product_name"
+        },
+        {
+          "level": "05",
+          "name": "HIGHV-CATEGORY",
+          "picClause": "PIC X(40)",
+          "usage": "DISPLAY",
+          "sourceVariable": "category"
+        },
+        {
+          "level": "05",
+          "name": "HIGHV-SUBCATEGORY",
+          "picClause": "PIC X(40)",
+          "usage": "DISPLAY",
+          "sourceVariable": "subcategory"
+        },
+        {
+          "level": "05",
+          "name": "HIGHV-QUANTITY",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "quantity"
+        },
+        {
+          "level": "05",
+          "name": "HIGHV-UNIT-PRICE",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "unit_price"
+        },
+        {
+          "level": "05",
+          "name": "HIGHV-DISCOUNT-PCT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "discount_pct"
+        },
+        {
+          "level": "05",
+          "name": "HIGHV-GROSS-AMOUNT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "gross_amount"
+        },
+        {
+          "level": "05",
+          "name": "HIGHV-DISCOUNT-AMOUNT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "discount_amount"
+        },
+        {
+          "level": "05",
+          "name": "HIGHV-NET-AMOUNT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "net_amount"
+        },
+        {
+          "level": "05",
+          "name": "HIGHV-VALUE-BAND",
+          "picClause": "PIC X(10)",
+          "usage": "DISPLAY",
+          "sourceVariable": "value_band"
+        },
+        {
+          "level": "05",
+          "name": "HIGHV-PRICING-BAND",
+          "picClause": "PIC X(12)",
+          "usage": "DISPLAY",
+          "sourceVariable": "pricing_band"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPLOOK38",
+      "dataset": "WORKLIB.LOOKUP_STATUS_COUNTS",
+      "recordLength": 60,
+      "fields": [
+        {
+          "level": "05",
+          "name": "LOOKUP-LOOKUP-STATUS",
+          "picClause": "PIC X(12)",
+          "usage": "DISPLAY",
+          "sourceVariable": "lookup_status"
+        },
+        {
+          "level": "05",
+          "name": "LOOKUP-COUNT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "COUNT"
+        },
+        {
+          "level": "05",
+          "name": "LOOKUP-PERCENT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "PERCENT"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPMANA39",
+      "dataset": "WORKLIB.MANAGEMENT_SUMMARY",
+      "recordLength": 40,
+      "fields": [
+        {
+          "level": "05",
+          "name": "MANAGE-REPORT-METRIC",
+          "picClause": "PIC X(40)",
+          "usage": "DISPLAY",
+          "sourceVariable": "report_metric"
+        },
+        {
+          "level": "05",
+          "name": "MANAGE-METRIC-VALUE",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "metric_value"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPMETA40",
+      "dataset": "WORKLIB.METADATA_SNAPSHOT",
+      "recordLength": 60,
+      "fields": [
+        {
+          "level": "05",
+          "name": "METADA-DATASET-NAME",
+          "picClause": "PIC X(40)",
+          "usage": "DISPLAY",
+          "sourceVariable": "dataset_name"
+        },
+        {
+          "level": "05",
+          "name": "METADA-NOBS",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "nobs"
+        },
+        {
+          "level": "05",
+          "name": "METADA-NVAR",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "nvar"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPMONT41",
+      "dataset": "WORKLIB.MONTH_REGION_RANKED",
+      "recordLength": 100,
+      "fields": [
+        {
+          "level": "05",
+          "name": "MONTH-REGION",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "region"
+        },
+        {
+          "level": "05",
+          "name": "MONTH-FISCAL-YEAR",
+          "picClause": "PIC 9(4)",
+          "usage": "DISPLAY",
+          "sourceVariable": "fiscal_year"
+        },
+        {
+          "level": "05",
+          "name": "MONTH-PERIOD-SALES",
+          "picClause": "PIC 9(8)",
+          "usage": "DISPLAY",
+          "sourceVariable": "period_sales"
+        },
+        {
+          "level": "05",
+          "name": "MONTH-PERIOD-UNITS",
+          "picClause": "PIC 9(8)",
+          "usage": "DISPLAY",
+          "sourceVariable": "period_units"
+        },
+        {
+          "level": "05",
+          "name": "MONTH-REGIONAL-SALES-RANK",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "regional_sales_rank"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPMONT42",
+      "dataset": "WORKLIB.MONTH_REGION_SUMMARY",
+      "recordLength": 120,
+      "fields": [
+        {
+          "level": "05",
+          "name": "MONTH-REGION",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "region"
+        },
+        {
+          "level": "05",
+          "name": "MONTH-FISCAL-YEAR",
+          "picClause": "PIC 9(4)",
+          "usage": "DISPLAY",
+          "sourceVariable": "fiscal_year"
+        },
+        {
+          "level": "05",
+          "name": "MONTH-REC-TYPE",
+          "picClause": "PIC 9(4)",
+          "usage": "COMP-3",
+          "sourceVariable": "_TYPE_"
+        },
+        {
+          "level": "05",
+          "name": "MONTH-REC-FREQ",
+          "picClause": "PIC 9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "_FREQ_"
+        },
+        {
+          "level": "05",
+          "name": "MONTH-PERIOD-SALES",
+          "picClause": "PIC 9(8)",
+          "usage": "DISPLAY",
+          "sourceVariable": "period_sales"
+        },
+        {
+          "level": "05",
+          "name": "MONTH-PERIOD-UNITS",
+          "picClause": "PIC 9(8)",
+          "usage": "DISPLAY",
+          "sourceVariable": "period_units"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPOPER43",
+      "dataset": "WORKLIB.OPERATIONAL_DASHBOARD",
+      "recordLength": 180,
+      "fields": [
+        {
+          "level": "05",
+          "name": "OPERAT-SALES-ROWS",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "sales_rows"
+        },
+        {
+          "level": "05",
+          "name": "OPERAT-TOTAL-SALES",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "total_sales"
+        },
+        {
+          "level": "05",
+          "name": "OPERAT-CUSTOMERS",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "customers"
+        },
+        {
+          "level": "05",
+          "name": "OPERAT-PRODUCTS",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "products"
+        },
+        {
+          "level": "05",
+          "name": "OPERAT-REVIEW-ITEMS",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "review_items"
+        },
+        {
+          "level": "05",
+          "name": "OPERAT-DUPLICATE-SALES",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "duplicate_sales"
+        },
+        {
+          "level": "05",
+          "name": "OPERAT-INVALID-SALES",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "invalid_sales"
+        },
+        {
+          "level": "05",
+          "name": "OPERAT-OVERALL-STATUS",
+          "picClause": "PIC X(15)",
+          "usage": "DISPLAY",
+          "sourceVariable": "overall_status"
+        },
+        {
+          "level": "05",
+          "name": "OPERAT-REPORT-DATE",
+          "picClause": "PIC 9(8)",
+          "usage": "DISPLAY",
+          "sourceVariable": "report_date"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPPROD44",
+      "dataset": "WORKLIB.PRODUCT_BASE",
+      "recordLength": 100,
+      "fields": [
+        {
+          "level": "05",
+          "name": "PRODUC-PRODUCT-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "product_id"
+        },
+        {
+          "level": "05",
+          "name": "PRODUC-PRODUCT-NAME",
+          "picClause": "PIC X(100)",
+          "usage": "DISPLAY",
+          "sourceVariable": "product_name"
+        },
+        {
+          "level": "05",
+          "name": "PRODUC-CATEGORY",
+          "picClause": "PIC X(40)",
+          "usage": "DISPLAY",
+          "sourceVariable": "category"
+        },
+        {
+          "level": "05",
+          "name": "PRODUC-SUBCATEGORY",
+          "picClause": "PIC X(40)",
+          "usage": "DISPLAY",
+          "sourceVariable": "subcategory"
+        },
+        {
+          "level": "05",
+          "name": "PRODUC-ACTIVE-FLAG",
+          "picClause": "PIC X(1)",
+          "usage": "DISPLAY",
+          "sourceVariable": "active_flag"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPPROD45",
+      "dataset": "WORKLIB.PRODUCT_KPIS",
+      "recordLength": 160,
+      "fields": [
+        {
+          "level": "05",
+          "name": "PRODUC-PRODUCT-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "product_id"
+        },
+        {
+          "level": "05",
+          "name": "PRODUC-PRODUCT-NAME",
+          "picClause": "PIC X(100)",
+          "usage": "DISPLAY",
+          "sourceVariable": "product_name"
+        },
+        {
+          "level": "05",
+          "name": "PRODUC-CATEGORY",
+          "picClause": "PIC X(40)",
+          "usage": "DISPLAY",
+          "sourceVariable": "category"
+        },
+        {
+          "level": "05",
+          "name": "PRODUC-SUBCATEGORY",
+          "picClause": "PIC X(40)",
+          "usage": "DISPLAY",
+          "sourceVariable": "subcategory"
+        },
+        {
+          "level": "05",
+          "name": "PRODUC-UNITS-SOLD",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "units_sold"
+        },
+        {
+          "level": "05",
+          "name": "PRODUC-TOTAL-REVENUE",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "total_revenue"
+        },
+        {
+          "level": "05",
+          "name": "PRODUC-DISTINCT-CUSTOMERS",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "distinct_customers"
+        },
+        {
+          "level": "05",
+          "name": "PRODUC-AVG-PRICE-REALIZED",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "avg_price_realized"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPPROD46",
+      "dataset": "WORKLIB.PRODUCT_PERFORMANCE",
+      "recordLength": 140,
+      "fields": [
+        {
+          "level": "05",
+          "name": "PRODUC-PRODUCT-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "product_id"
+        },
+        {
+          "level": "05",
+          "name": "PRODUC-PRODUCT-NAME",
+          "picClause": "PIC X(100)",
+          "usage": "DISPLAY",
+          "sourceVariable": "product_name"
+        },
+        {
+          "level": "05",
+          "name": "PRODUC-CATEGORY",
+          "picClause": "PIC X(40)",
+          "usage": "DISPLAY",
+          "sourceVariable": "category"
+        },
+        {
+          "level": "05",
+          "name": "PRODUC-SALES",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "sales"
+        },
+        {
+          "level": "05",
+          "name": "PRODUC-UNITS",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "units"
+        },
+        {
+          "level": "05",
+          "name": "PRODUC-TRANSACTIONS",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "transactions"
+        },
+        {
+          "level": "05",
+          "name": "PRODUC-DEMAND-BAND",
+          "picClause": "PIC X(15)",
+          "usage": "DISPLAY",
+          "sourceVariable": "demand_band"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPPROD47",
+      "dataset": "WORKLIB.PRODUCT_SORTED",
+      "recordLength": 100,
+      "fields": [
+        {
+          "level": "05",
+          "name": "PRODUC-PRODUCT-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "product_id"
+        },
+        {
+          "level": "05",
+          "name": "PRODUC-PRODUCT-NAME",
+          "picClause": "PIC X(100)",
+          "usage": "DISPLAY",
+          "sourceVariable": "product_name"
+        },
+        {
+          "level": "05",
+          "name": "PRODUC-CATEGORY",
+          "picClause": "PIC X(40)",
+          "usage": "DISPLAY",
+          "sourceVariable": "category"
+        },
+        {
+          "level": "05",
+          "name": "PRODUC-SUBCATEGORY",
+          "picClause": "PIC X(40)",
+          "usage": "DISPLAY",
+          "sourceVariable": "subcategory"
+        },
+        {
+          "level": "05",
+          "name": "PRODUC-ACTIVE-FLAG",
+          "picClause": "PIC X(1)",
+          "usage": "DISPLAY",
+          "sourceVariable": "active_flag"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPQUAL48",
+      "dataset": "WORKLIB.QUALITY_CONTROL",
+      "recordLength": 60,
+      "fields": [
+        {
+          "level": "05",
+          "name": "QUALIT-QUALITY-STATUS",
+          "picClause": "PIC X(12)",
+          "usage": "DISPLAY",
+          "sourceVariable": "quality_status"
+        },
+        {
+          "level": "05",
+          "name": "QUALIT-RECORDS",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "records"
+        },
+        {
+          "level": "05",
+          "name": "QUALIT-RECORD-PCT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "record_pct"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPQUAR49",
+      "dataset": "WORKLIB.QUARTER_REGION_SUMMARY",
+      "recordLength": 120,
+      "fields": [
+        {
+          "level": "05",
+          "name": "QUARTE-REGION",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "region"
+        },
+        {
+          "level": "05",
+          "name": "QUARTE-FISCAL-QUARTER",
+          "picClause": "PIC X(8)",
+          "usage": "DISPLAY",
+          "sourceVariable": "fiscal_quarter"
+        },
+        {
+          "level": "05",
+          "name": "QUARTE-REC-TYPE",
+          "picClause": "PIC 9(4)",
+          "usage": "COMP-3",
+          "sourceVariable": "_TYPE_"
+        },
+        {
+          "level": "05",
+          "name": "QUARTE-REC-FREQ",
+          "picClause": "PIC 9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "_FREQ_"
+        },
+        {
+          "level": "05",
+          "name": "QUARTE-QUARTER-SALES",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "quarter_sales"
+        },
+        {
+          "level": "05",
+          "name": "QUARTE-QUARTER-UNITS",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "quarter_units"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPRECO50",
+      "dataset": "WORKLIB.RECONCILIATION",
+      "recordLength": 120,
+      "fields": [
+        {
+          "level": "05",
+          "name": "RECONC-EXPECTED-ROWS",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "expected_rows"
+        },
+        {
+          "level": "05",
+          "name": "RECONC-EXPECTED-SALES",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "expected_sales"
+        },
+        {
+          "level": "05",
+          "name": "RECONC-ACTUAL-ROWS",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "actual_rows"
+        },
+        {
+          "level": "05",
+          "name": "RECONC-ACTUAL-SALES",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "actual_sales"
+        },
+        {
+          "level": "05",
+          "name": "RECONC-RECONCILIATION-STATUS",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "reconciliation_status"
+        },
+        {
+          "level": "05",
+          "name": "RECONC-DIFF-SALES",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "diff_sales"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPREGI51",
+      "dataset": "WORKLIB.REGION_CHANGE_SUMMARY",
+      "recordLength": 120,
+      "fields": [
+        {
+          "level": "05",
+          "name": "REGION-REGION",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "region"
+        },
+        {
+          "level": "05",
+          "name": "REGION-REC-TYPE",
+          "picClause": "PIC 9(4)",
+          "usage": "COMP-3",
+          "sourceVariable": "_TYPE_"
+        },
+        {
+          "level": "05",
+          "name": "REGION-REC-FREQ",
+          "picClause": "PIC 9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "_FREQ_"
+        },
+        {
+          "level": "05",
+          "name": "REGION-NET-CHANGE",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "net_change"
+        },
+        {
+          "level": "05",
+          "name": "REGION-MAXIMUM-CHANGE",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "maximum_change"
+        },
+        {
+          "level": "05",
+          "name": "REGION-MINIMUM-CHANGE",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "minimum_change"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPREGI52",
+      "dataset": "WORKLIB.REGION_CHANNEL_FREQ",
+      "recordLength": 80,
+      "fields": [
+        {
+          "level": "05",
+          "name": "REGION-REGION",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "region"
+        },
+        {
+          "level": "05",
+          "name": "REGION-CHANNEL",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "channel"
+        },
+        {
+          "level": "05",
+          "name": "REGION-COUNT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "COUNT"
+        },
+        {
+          "level": "05",
+          "name": "REGION-PERCENT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "PERCENT"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPREGI53",
+      "dataset": "WORKLIB.REGION_CHANNEL_SUMMARY",
+      "recordLength": 140,
+      "fields": [
+        {
+          "level": "05",
+          "name": "REGION-REGION",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "region"
+        },
+        {
+          "level": "05",
+          "name": "REGION-CHANNEL",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "channel"
+        },
+        {
+          "level": "05",
+          "name": "REGION-REC-TYPE",
+          "picClause": "PIC 9(4)",
+          "usage": "COMP-3",
+          "sourceVariable": "_TYPE_"
+        },
+        {
+          "level": "05",
+          "name": "REGION-REC-FREQ",
+          "picClause": "PIC 9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "_FREQ_"
+        },
+        {
+          "level": "05",
+          "name": "REGION-TOTAL-SALES",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "total_sales"
+        },
+        {
+          "level": "05",
+          "name": "REGION-TOTAL-QUANTITY",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "total_quantity"
+        },
+        {
+          "level": "05",
+          "name": "REGION-AVG-SALE",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "avg_sale"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPREGI54",
+      "dataset": "WORKLIB.REGION_CONTROLS",
+      "recordLength": 140,
+      "fields": [
+        {
+          "level": "05",
+          "name": "REGION-CUSTOMER-REGION",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "customer_region"
+        },
+        {
+          "level": "05",
+          "name": "REGION-SALES",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "sales"
+        },
+        {
+          "level": "05",
+          "name": "REGION-TRANSACTIONS",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "transactions"
+        },
+        {
+          "level": "05",
+          "name": "REGION-AVERAGE-SALE",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "average_sale"
+        },
+        {
+          "level": "05",
+          "name": "REGION-UNITS",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "units"
+        },
+        {
+          "level": "05",
+          "name": "REGION-CONTROL-FLAG",
+          "picClause": "PIC X(12)",
+          "usage": "DISPLAY",
+          "sourceVariable": "control_flag"
+        },
+        {
+          "level": "05",
+          "name": "REGION-CONTROL-REASON",
+          "picClause": "PIC X(100)",
+          "usage": "DISPLAY",
+          "sourceVariable": "control_reason"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPREGI55",
+      "dataset": "WORKLIB.REGION_CONTROL_COUNTS",
+      "recordLength": 60,
+      "fields": [
+        {
+          "level": "05",
+          "name": "REGION-CONTROL-FLAG",
+          "picClause": "PIC X(12)",
+          "usage": "DISPLAY",
+          "sourceVariable": "control_flag"
+        },
+        {
+          "level": "05",
+          "name": "REGION-COUNT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "COUNT"
+        },
+        {
+          "level": "05",
+          "name": "REGION-PERCENT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "PERCENT"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPREGI56",
+      "dataset": "WORKLIB.REGION_CONTROL_DETAIL",
+      "recordLength": 120,
+      "fields": [
+        {
+          "level": "05",
+          "name": "REGION-CUSTOMER-REGION",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "customer_region"
+        },
+        {
+          "level": "05",
+          "name": "REGION-SALES",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "sales"
+        },
+        {
+          "level": "05",
+          "name": "REGION-TRANSACTIONS",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "transactions"
+        },
+        {
+          "level": "05",
+          "name": "REGION-AVERAGE-SALE",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "average_sale"
+        },
+        {
+          "level": "05",
+          "name": "REGION-CONTROL-FLAG",
+          "picClause": "PIC X(12)",
+          "usage": "DISPLAY",
+          "sourceVariable": "control_flag"
+        },
+        {
+          "level": "05",
+          "name": "REGION-CONTROL-REASON",
+          "picClause": "PIC X(100)",
+          "usage": "DISPLAY",
+          "sourceVariable": "control_reason"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPREGI57",
+      "dataset": "WORKLIB.REGION_CUSTOMER_SCORE",
+      "recordLength": 80,
+      "fields": [
+        {
+          "level": "05",
+          "name": "REGION-CUSTOMER-REGION",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "customer_region"
+        },
+        {
+          "level": "05",
+          "name": "REGION-SCORE-BAND",
+          "picClause": "PIC X(15)",
+          "usage": "DISPLAY",
+          "sourceVariable": "score_band"
+        },
+        {
+          "level": "05",
+          "name": "REGION-CUSTOMER-COUNT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "customer_count"
+        },
+        {
+          "level": "05",
+          "name": "REGION-TOTAL-SPEND",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "total_spend"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPREGI58",
+      "dataset": "WORKLIB.REGION_CUSTOMER_SCORE_FLAGS",
+      "recordLength": 100,
+      "fields": [
+        {
+          "level": "05",
+          "name": "REGION-CUSTOMER-REGION",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "customer_region"
+        },
+        {
+          "level": "05",
+          "name": "REGION-SCORE-BAND",
+          "picClause": "PIC X(15)",
+          "usage": "DISPLAY",
+          "sourceVariable": "score_band"
+        },
+        {
+          "level": "05",
+          "name": "REGION-CUSTOMER-COUNT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "customer_count"
+        },
+        {
+          "level": "05",
+          "name": "REGION-TOTAL-SPEND",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "total_spend"
+        },
+        {
+          "level": "05",
+          "name": "REGION-PRIORITY-FLAG",
+          "picClause": "PIC X(12)",
+          "usage": "DISPLAY",
+          "sourceVariable": "priority_flag"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPREGI59",
+      "dataset": "WORKLIB.REGION_REPORT",
+      "recordLength": 100,
+      "fields": [
+        {
+          "level": "05",
+          "name": "REGION-CUSTOMER-REGION",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "customer_region"
+        },
+        {
+          "level": "05",
+          "name": "REGION-TRANSACTIONS",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "transactions"
+        },
+        {
+          "level": "05",
+          "name": "REGION-SALES",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "sales"
+        },
+        {
+          "level": "05",
+          "name": "REGION-AVERAGE-SALE",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "average_sale"
+        },
+        {
+          "level": "05",
+          "name": "REGION-UNITS",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "units"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPREGI60",
+      "dataset": "WORKLIB.REGION_REPORT_INPUT",
+      "recordLength": 320,
+      "fields": [
+        {
+          "level": "05",
+          "name": "REGION-SALE-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "sale_id"
+        },
+        {
+          "level": "05",
+          "name": "REGION-SALE-DATE",
+          "picClause": "PIC 9(8)",
+          "usage": "DISPLAY",
+          "sourceVariable": "sale_date"
+        },
+        {
+          "level": "05",
+          "name": "REGION-CUSTOMER-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "customer_id"
+        },
+        {
+          "level": "05",
+          "name": "REGION-CUSTOMER-NAME",
+          "picClause": "PIC X(80)",
+          "usage": "DISPLAY",
+          "sourceVariable": "customer_name"
+        },
+        {
+          "level": "05",
+          "name": "REGION-SEGMENT",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "segment"
+        },
+        {
+          "level": "05",
+          "name": "REGION-CUSTOMER-REGION",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "customer_region"
+        },
+        {
+          "level": "05",
+          "name": "REGION-PRODUCT-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "product_id"
+        },
+        {
+          "level": "05",
+          "name": "REGION-PRODUCT-NAME",
+          "picClause": "PIC X(100)",
+          "usage": "DISPLAY",
+          "sourceVariable": "product_name"
+        },
+        {
+          "level": "05",
+          "name": "REGION-CATEGORY",
+          "picClause": "PIC X(40)",
+          "usage": "DISPLAY",
+          "sourceVariable": "category"
+        },
+        {
+          "level": "05",
+          "name": "REGION-SUBCATEGORY",
+          "picClause": "PIC X(40)",
+          "usage": "DISPLAY",
+          "sourceVariable": "subcategory"
+        },
+        {
+          "level": "05",
+          "name": "REGION-QUANTITY",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "quantity"
+        },
+        {
+          "level": "05",
+          "name": "REGION-UNIT-PRICE",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "unit_price"
+        },
+        {
+          "level": "05",
+          "name": "REGION-DISCOUNT-PCT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "discount_pct"
+        },
+        {
+          "level": "05",
+          "name": "REGION-GROSS-AMOUNT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "gross_amount"
+        },
+        {
+          "level": "05",
+          "name": "REGION-DISCOUNT-AMOUNT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "discount_amount"
+        },
+        {
+          "level": "05",
+          "name": "REGION-NET-AMOUNT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "net_amount"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPREGI61",
+      "dataset": "WORKLIB.REGION_RUNNING_SALES",
+      "recordLength": 120,
+      "fields": [
+        {
+          "level": "05",
+          "name": "REGION-REGION",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "region"
+        },
+        {
+          "level": "05",
+          "name": "REGION-SALE-DATE",
+          "picClause": "PIC 9(8)",
+          "usage": "DISPLAY",
+          "sourceVariable": "sale_date"
+        },
+        {
+          "level": "05",
+          "name": "REGION-RUNNING-SALES",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "running_sales"
+        },
+        {
+          "level": "05",
+          "name": "REGION-RUNNING-UNITS",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "running_units"
+        },
+        {
+          "level": "05",
+          "name": "REGION-PREVIOUS-SALES",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "previous_sales"
+        },
+        {
+          "level": "05",
+          "name": "REGION-SALES-CHANGE",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "sales_change"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPREGI62",
+      "dataset": "WORKLIB.REGION_SUMMARY",
+      "recordLength": 160,
+      "fields": [
+        {
+          "level": "05",
+          "name": "REGION-REGION",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "region"
+        },
+        {
+          "level": "05",
+          "name": "REGION-CHANNEL",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "channel"
+        },
+        {
+          "level": "05",
+          "name": "REGION-REC-TYPE",
+          "picClause": "PIC 9(4)",
+          "usage": "COMP-3",
+          "sourceVariable": "_TYPE_"
+        },
+        {
+          "level": "05",
+          "name": "REGION-REC-FREQ",
+          "picClause": "PIC 9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "_FREQ_"
+        },
+        {
+          "level": "05",
+          "name": "REGION-MEAN-NET",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "mean_net"
+        },
+        {
+          "level": "05",
+          "name": "REGION-STD-NET",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "std_net"
+        },
+        {
+          "level": "05",
+          "name": "REGION-MIN-NET",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "min_net"
+        },
+        {
+          "level": "05",
+          "name": "REGION-MAX-NET",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "max_net"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPREGI63",
+      "dataset": "WORKLIB.REGION_SUMMARY_WIDE",
+      "recordLength": 120,
+      "fields": [
+        {
+          "level": "05",
+          "name": "REGION-REGION",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "region"
+        },
+        {
+          "level": "05",
+          "name": "REGION-VAR-NAME",
+          "picClause": "PIC X(32)",
+          "usage": "DISPLAY",
+          "sourceVariable": "_NAME_"
+        },
+        {
+          "level": "05",
+          "name": "REGION-CHANNEL-ONLINE",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "channel_ONLINE"
+        },
+        {
+          "level": "05",
+          "name": "REGION-CHANNEL-RETAIL",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "channel_RETAIL"
+        },
+        {
+          "level": "05",
+          "name": "REGION-CHANNEL-PARTNER",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "channel_PARTNER"
+        },
+        {
+          "level": "05",
+          "name": "REGION-CHANNEL-WHOLESALE",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "channel_WHOLESALE"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPREGI64",
+      "dataset": "WORKLIB.REGION_TIER_FREQ",
+      "recordLength": 80,
+      "fields": [
+        {
+          "level": "05",
+          "name": "REGION-REGION",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "region"
+        },
+        {
+          "level": "05",
+          "name": "REGION-CUSTOMER-TIER",
+          "picClause": "PIC X(15)",
+          "usage": "DISPLAY",
+          "sourceVariable": "customer_tier"
+        },
+        {
+          "level": "05",
+          "name": "REGION-COUNT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "COUNT"
+        },
+        {
+          "level": "05",
+          "name": "REGION-PERCENT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "PERCENT"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPREVI65",
+      "dataset": "WORKLIB.REVIEW_QUEUE",
+      "recordLength": 140,
+      "fields": [
+        {
+          "level": "05",
+          "name": "REVIEW-SALE-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "sale_id"
+        },
+        {
+          "level": "05",
+          "name": "REVIEW-CUSTOMER-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "customer_id"
+        },
+        {
+          "level": "05",
+          "name": "REVIEW-PRODUCT-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "product_id"
+        },
+        {
+          "level": "05",
+          "name": "REVIEW-NET-AMOUNT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "net_amount"
+        },
+        {
+          "level": "05",
+          "name": "REVIEW-HIGH-VALUE-FLAG",
+          "picClause": "PIC X(1)",
+          "usage": "DISPLAY",
+          "sourceVariable": "high_value_flag"
+        },
+        {
+          "level": "05",
+          "name": "REVIEW-ANOMALY-FLAG",
+          "picClause": "PIC X(1)",
+          "usage": "DISPLAY",
+          "sourceVariable": "anomaly_flag"
+        },
+        {
+          "level": "05",
+          "name": "REVIEW-REVIEW-REASON",
+          "picClause": "PIC X(50)",
+          "usage": "DISPLAY",
+          "sourceVariable": "review_reason"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPREVI66",
+      "dataset": "WORKLIB.REVIEW_QUEUE_FINAL",
+      "recordLength": 180,
+      "fields": [
+        {
+          "level": "05",
+          "name": "REVIEW-SALE-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "sale_id"
+        },
+        {
+          "level": "05",
+          "name": "REVIEW-CUSTOMER-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "customer_id"
+        },
+        {
+          "level": "05",
+          "name": "REVIEW-PRODUCT-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "product_id"
+        },
+        {
+          "level": "05",
+          "name": "REVIEW-NET-AMOUNT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "net_amount"
+        },
+        {
+          "level": "05",
+          "name": "REVIEW-HIGH-VALUE-FLAG",
+          "picClause": "PIC X(1)",
+          "usage": "DISPLAY",
+          "sourceVariable": "high_value_flag"
+        },
+        {
+          "level": "05",
+          "name": "REVIEW-ANOMALY-FLAG",
+          "picClause": "PIC X(1)",
+          "usage": "DISPLAY",
+          "sourceVariable": "anomaly_flag"
+        },
+        {
+          "level": "05",
+          "name": "REVIEW-REVIEW-REASON",
+          "picClause": "PIC X(50)",
+          "usage": "DISPLAY",
+          "sourceVariable": "review_reason"
+        },
+        {
+          "level": "05",
+          "name": "REVIEW-PRIORITY-LEVEL",
+          "picClause": "PIC X(10)",
+          "usage": "DISPLAY",
+          "sourceVariable": "priority_level"
+        },
+        {
+          "level": "05",
+          "name": "REVIEW-AUDIT-TIMESTAMP",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "audit_timestamp"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPSALE67",
+      "dataset": "WORKLIB.SALES_BASE",
+      "recordLength": 240,
+      "fields": [
+        {
+          "level": "05",
+          "name": "SALES-SALE-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "sale_id"
+        },
+        {
+          "level": "05",
+          "name": "SALES-CUSTOMER-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "customer_id"
+        },
+        {
+          "level": "05",
+          "name": "SALES-PRODUCT-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "product_id"
+        },
+        {
+          "level": "05",
+          "name": "SALES-QUANTITY",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "quantity"
+        },
+        {
+          "level": "05",
+          "name": "SALES-UNIT-PRICE",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "unit_price"
+        },
+        {
+          "level": "05",
+          "name": "SALES-DISCOUNT-PCT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "discount_pct"
+        },
+        {
+          "level": "05",
+          "name": "SALES-GROSS-AMOUNT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "gross_amount"
+        },
+        {
+          "level": "05",
+          "name": "SALES-DISCOUNT-AMOUNT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "discount_amount"
+        },
+        {
+          "level": "05",
+          "name": "SALES-NET-AMOUNT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "net_amount"
+        },
+        {
+          "level": "05",
+          "name": "SALES-SALE-DATE",
+          "picClause": "PIC 9(8)",
+          "usage": "DISPLAY",
+          "sourceVariable": "sale_date"
+        },
+        {
+          "level": "05",
+          "name": "SALES-REGION",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "region"
+        },
+        {
+          "level": "05",
+          "name": "SALES-CHANNEL",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "channel"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPSALE68",
+      "dataset": "WORKLIB.SALES_DUPLICATES",
+      "recordLength": 180,
+      "fields": [
+        {
+          "level": "05",
+          "name": "SALES-SALE-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "sale_id"
+        },
+        {
+          "level": "05",
+          "name": "SALES-CUSTOMER-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "customer_id"
+        },
+        {
+          "level": "05",
+          "name": "SALES-PRODUCT-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "product_id"
+        },
+        {
+          "level": "05",
+          "name": "SALES-QUANTITY",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "quantity"
+        },
+        {
+          "level": "05",
+          "name": "SALES-UNIT-PRICE",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "unit_price"
+        },
+        {
+          "level": "05",
+          "name": "SALES-DISCOUNT-PCT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "discount_pct"
+        },
+        {
+          "level": "05",
+          "name": "SALES-SALE-DATE",
+          "picClause": "PIC 9(8)",
+          "usage": "DISPLAY",
+          "sourceVariable": "sale_date"
+        },
+        {
+          "level": "05",
+          "name": "SALES-REGION",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "region"
+        },
+        {
+          "level": "05",
+          "name": "SALES-CHANNEL",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "channel"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPSALE69",
+      "dataset": "WORKLIB.SALES_DUPLICATE_CHECK",
+      "recordLength": 180,
+      "fields": [
+        {
+          "level": "05",
+          "name": "SALES-SALE-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "sale_id"
+        },
+        {
+          "level": "05",
+          "name": "SALES-CUSTOMER-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "customer_id"
+        },
+        {
+          "level": "05",
+          "name": "SALES-PRODUCT-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "product_id"
+        },
+        {
+          "level": "05",
+          "name": "SALES-QUANTITY",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "quantity"
+        },
+        {
+          "level": "05",
+          "name": "SALES-UNIT-PRICE",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "unit_price"
+        },
+        {
+          "level": "05",
+          "name": "SALES-DISCOUNT-PCT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "discount_pct"
+        },
+        {
+          "level": "05",
+          "name": "SALES-SALE-DATE",
+          "picClause": "PIC 9(8)",
+          "usage": "DISPLAY",
+          "sourceVariable": "sale_date"
+        },
+        {
+          "level": "05",
+          "name": "SALES-REGION",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "region"
+        },
+        {
+          "level": "05",
+          "name": "SALES-CHANNEL",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "channel"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPSALE70",
+      "dataset": "WORKLIB.SALES_LOOKUP_ENRICHED",
+      "recordLength": 240,
+      "fields": [
+        {
+          "level": "05",
+          "name": "SALES-SALE-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "sale_id"
+        },
+        {
+          "level": "05",
+          "name": "SALES-CUSTOMER-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "customer_id"
+        },
+        {
+          "level": "05",
+          "name": "SALES-PRODUCT-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "product_id"
+        },
+        {
+          "level": "05",
+          "name": "SALES-QUANTITY",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "quantity"
+        },
+        {
+          "level": "05",
+          "name": "SALES-UNIT-PRICE",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "unit_price"
+        },
+        {
+          "level": "05",
+          "name": "SALES-DISCOUNT-PCT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "discount_pct"
+        },
+        {
+          "level": "05",
+          "name": "SALES-NET-AMOUNT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "net_amount"
+        },
+        {
+          "level": "05",
+          "name": "SALES-SALE-DATE",
+          "picClause": "PIC 9(8)",
+          "usage": "DISPLAY",
+          "sourceVariable": "sale_date"
+        },
+        {
+          "level": "05",
+          "name": "SALES-CUSTOMER-NAME",
+          "picClause": "PIC X(80)",
+          "usage": "DISPLAY",
+          "sourceVariable": "customer_name"
+        },
+        {
+          "level": "05",
+          "name": "SALES-REGION",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "region"
+        },
+        {
+          "level": "05",
+          "name": "SALES-SEGMENT",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "segment"
+        },
+        {
+          "level": "05",
+          "name": "SALES-LOOKUP-STATUS",
+          "picClause": "PIC X(12)",
+          "usage": "DISPLAY",
+          "sourceVariable": "lookup_status"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPSALE71",
+      "dataset": "WORKLIB.SALES_PERIOD_FLAGS",
+      "recordLength": 160,
+      "fields": [
+        {
+          "level": "05",
+          "name": "SALES-SALE-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "sale_id"
+        },
+        {
+          "level": "05",
+          "name": "SALES-SALE-DATE",
+          "picClause": "PIC 9(8)",
+          "usage": "DISPLAY",
+          "sourceVariable": "sale_date"
+        },
+        {
+          "level": "05",
+          "name": "SALES-REGION",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "region"
+        },
+        {
+          "level": "05",
+          "name": "SALES-NET-AMOUNT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "net_amount"
+        },
+        {
+          "level": "05",
+          "name": "SALES-QUANTITY",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "quantity"
+        },
+        {
+          "level": "05",
+          "name": "SALES-PERIOD-FLAG",
+          "picClause": "PIC X(15)",
+          "usage": "DISPLAY",
+          "sourceVariable": "period_flag"
+        },
+        {
+          "level": "05",
+          "name": "SALES-FISCAL-QUARTER",
+          "picClause": "PIC X(8)",
+          "usage": "DISPLAY",
+          "sourceVariable": "fiscal_quarter"
+        },
+        {
+          "level": "05",
+          "name": "SALES-FISCAL-YEAR",
+          "picClause": "PIC 9(4)",
+          "usage": "DISPLAY",
+          "sourceVariable": "fiscal_year"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPSALE72",
+      "dataset": "WORKLIB.SALES_QUALITY",
+      "recordLength": 240,
+      "fields": [
+        {
+          "level": "05",
+          "name": "SALES-SALE-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "sale_id"
+        },
+        {
+          "level": "05",
+          "name": "SALES-CUSTOMER-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "customer_id"
+        },
+        {
+          "level": "05",
+          "name": "SALES-PRODUCT-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "product_id"
+        },
+        {
+          "level": "05",
+          "name": "SALES-QUANTITY",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "quantity"
+        },
+        {
+          "level": "05",
+          "name": "SALES-UNIT-PRICE",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "unit_price"
+        },
+        {
+          "level": "05",
+          "name": "SALES-DISCOUNT-PCT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "discount_pct"
+        },
+        {
+          "level": "05",
+          "name": "SALES-SALE-DATE",
+          "picClause": "PIC 9(8)",
+          "usage": "DISPLAY",
+          "sourceVariable": "sale_date"
+        },
+        {
+          "level": "05",
+          "name": "SALES-REGION",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "region"
+        },
+        {
+          "level": "05",
+          "name": "SALES-CHANNEL",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "channel"
+        },
+        {
+          "level": "05",
+          "name": "SALES-QUALITY-STATUS",
+          "picClause": "PIC X(12)",
+          "usage": "DISPLAY",
+          "sourceVariable": "quality_status"
+        },
+        {
+          "level": "05",
+          "name": "SALES-QUALITY-REASON",
+          "picClause": "PIC X(50)",
+          "usage": "DISPLAY",
+          "sourceVariable": "quality_reason"
+        },
+        {
+          "level": "05",
+          "name": "SALES-NET-AMOUNT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "net_amount"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPSALE73",
+      "dataset": "WORKLIB.SALES_QUALITY_COUNTS",
+      "recordLength": 60,
+      "fields": [
+        {
+          "level": "05",
+          "name": "SALES-QUALITY-STATUS",
+          "picClause": "PIC X(12)",
+          "usage": "DISPLAY",
+          "sourceVariable": "quality_status"
+        },
+        {
+          "level": "05",
+          "name": "SALES-COUNT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "COUNT"
+        },
+        {
+          "level": "05",
+          "name": "SALES-PERCENT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "PERCENT"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPSALE74",
+      "dataset": "WORKLIB.SALES_RULES",
+      "recordLength": 140,
+      "fields": [
+        {
+          "level": "05",
+          "name": "SALES-SALE-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "sale_id"
+        },
+        {
+          "level": "05",
+          "name": "SALES-CUSTOMER-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "customer_id"
+        },
+        {
+          "level": "05",
+          "name": "SALES-PRODUCT-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "product_id"
+        },
+        {
+          "level": "05",
+          "name": "SALES-NET-AMOUNT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "net_amount"
+        },
+        {
+          "level": "05",
+          "name": "SALES-HIGH-VALUE-FLAG",
+          "picClause": "PIC X(1)",
+          "usage": "DISPLAY",
+          "sourceVariable": "high_value_flag"
+        },
+        {
+          "level": "05",
+          "name": "SALES-ANOMALY-FLAG",
+          "picClause": "PIC X(1)",
+          "usage": "DISPLAY",
+          "sourceVariable": "anomaly_flag"
+        },
+        {
+          "level": "05",
+          "name": "SALES-REVIEW-REASON",
+          "picClause": "PIC X(50)",
+          "usage": "DISPLAY",
+          "sourceVariable": "review_reason"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPSALE75",
+      "dataset": "WORKLIB.SALES_SORTED",
+      "recordLength": 240,
+      "fields": [
+        {
+          "level": "05",
+          "name": "SALES-SALE-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "sale_id"
+        },
+        {
+          "level": "05",
+          "name": "SALES-CUSTOMER-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "customer_id"
+        },
+        {
+          "level": "05",
+          "name": "SALES-PRODUCT-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "product_id"
+        },
+        {
+          "level": "05",
+          "name": "SALES-QUANTITY",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "quantity"
+        },
+        {
+          "level": "05",
+          "name": "SALES-UNIT-PRICE",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "unit_price"
+        },
+        {
+          "level": "05",
+          "name": "SALES-DISCOUNT-PCT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "discount_pct"
+        },
+        {
+          "level": "05",
+          "name": "SALES-GROSS-AMOUNT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "gross_amount"
+        },
+        {
+          "level": "05",
+          "name": "SALES-DISCOUNT-AMOUNT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "discount_amount"
+        },
+        {
+          "level": "05",
+          "name": "SALES-NET-AMOUNT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "net_amount"
+        },
+        {
+          "level": "05",
+          "name": "SALES-SALE-DATE",
+          "picClause": "PIC 9(8)",
+          "usage": "DISPLAY",
+          "sourceVariable": "sale_date"
+        },
+        {
+          "level": "05",
+          "name": "SALES-REGION",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "region"
+        },
+        {
+          "level": "05",
+          "name": "SALES-CHANNEL",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "channel"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPSCOR76",
+      "dataset": "WORKLIB.SCORE_DISTRIBUTION",
+      "recordLength": 60,
+      "fields": [
+        {
+          "level": "05",
+          "name": "SCORE-SCORE-BAND",
+          "picClause": "PIC X(15)",
+          "usage": "DISPLAY",
+          "sourceVariable": "score_band"
+        },
+        {
+          "level": "05",
+          "name": "SCORE-COUNT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "COUNT"
+        },
+        {
+          "level": "05",
+          "name": "SCORE-PERCENT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "PERCENT"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPSCOR77",
+      "dataset": "WORKLIB.SCORE_SUMMARY",
+      "recordLength": 120,
+      "fields": [
+        {
+          "level": "05",
+          "name": "SCORE-SCORE-BAND",
+          "picClause": "PIC X(15)",
+          "usage": "DISPLAY",
+          "sourceVariable": "score_band"
+        },
+        {
+          "level": "05",
+          "name": "SCORE-REC-TYPE",
+          "picClause": "PIC 9(4)",
+          "usage": "COMP-3",
+          "sourceVariable": "_TYPE_"
+        },
+        {
+          "level": "05",
+          "name": "SCORE-REC-FREQ",
+          "picClause": "PIC 9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "_FREQ_"
+        },
+        {
+          "level": "05",
+          "name": "SCORE-MEAN-SCORE",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "mean_score"
+        },
+        {
+          "level": "05",
+          "name": "SCORE-MIN-SCORE",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "min_score"
+        },
+        {
+          "level": "05",
+          "name": "SCORE-MAX-SCORE",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "max_score"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPSEGM78",
+      "dataset": "WORKLIB.SEGMENT_RANKED",
+      "recordLength": 100,
+      "fields": [
+        {
+          "level": "05",
+          "name": "SEGMEN-SEGMENT",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "segment"
+        },
+        {
+          "level": "05",
+          "name": "SEGMEN-SEGMENT-SALES",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "segment_sales"
+        },
+        {
+          "level": "05",
+          "name": "SEGMEN-SEGMENT-RECORDS",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "segment_records"
+        },
+        {
+          "level": "05",
+          "name": "SEGMEN-SEGMENT-UNITS",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "segment_units"
+        },
+        {
+          "level": "05",
+          "name": "SEGMEN-GENERATED-RANK",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "generated_rank"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPSEGM79",
+      "dataset": "WORKLIB.SEGMENT_ROLLUP",
+      "recordLength": 80,
+      "fields": [
+        {
+          "level": "05",
+          "name": "SEGMEN-SEGMENT",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "segment"
+        },
+        {
+          "level": "05",
+          "name": "SEGMEN-SEGMENT-SALES",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "segment_sales"
+        },
+        {
+          "level": "05",
+          "name": "SEGMEN-SEGMENT-RECORDS",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "segment_records"
+        },
+        {
+          "level": "05",
+          "name": "SEGMEN-SEGMENT-UNITS",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "segment_units"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPSEGM80",
+      "dataset": "WORKLIB.SEGMENT_ROLLUP_SORTED",
+      "recordLength": 80,
+      "fields": [
+        {
+          "level": "05",
+          "name": "SEGMEN-SEGMENT",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "segment"
+        },
+        {
+          "level": "05",
+          "name": "SEGMEN-SEGMENT-SALES",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "segment_sales"
+        },
+        {
+          "level": "05",
+          "name": "SEGMEN-SEGMENT-RECORDS",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "segment_records"
+        },
+        {
+          "level": "05",
+          "name": "SEGMEN-SEGMENT-UNITS",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "segment_units"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPSEMA81",
+      "dataset": "WORKLIB.SEMANTIC_EDGE_CASES",
+      "recordLength": 140,
+      "fields": [
+        {
+          "level": "05",
+          "name": "SEMANT-SALE-ID",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "sale_id"
+        },
+        {
+          "level": "05",
+          "name": "SEMANT-DISCOUNT-PCT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "discount_pct"
+        },
+        {
+          "level": "05",
+          "name": "SEMANT-MISSING-CLASS",
+          "picClause": "PIC X(15)",
+          "usage": "DISPLAY",
+          "sourceVariable": "missing_class"
+        },
+        {
+          "level": "05",
+          "name": "SEMANT-CONVERSION-FLAG",
+          "picClause": "PIC X(15)",
+          "usage": "DISPLAY",
+          "sourceVariable": "conversion_flag"
+        },
+        {
+          "level": "05",
+          "name": "SEMANT-CHARACTER-AMOUNT",
+          "picClause": "PIC X(14)",
+          "usage": "DISPLAY",
+          "sourceVariable": "character_amount"
+        },
+        {
+          "level": "05",
+          "name": "SEMANT-NUMERIC-FROM-TEXT",
+          "picClause": "PIC S9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "numeric_from_text"
+        },
+        {
+          "level": "05",
+          "name": "SEMANT-NET-AMOUNT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "net_amount"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPSEMA82",
+      "dataset": "WORKLIB.SEMANTIC_EDGE_COUNTS",
+      "recordLength": 80,
+      "fields": [
+        {
+          "level": "05",
+          "name": "SEMANT-MISSING-CLASS",
+          "picClause": "PIC X(15)",
+          "usage": "DISPLAY",
+          "sourceVariable": "missing_class"
+        },
+        {
+          "level": "05",
+          "name": "SEMANT-CONVERSION-FLAG",
+          "picClause": "PIC X(15)",
+          "usage": "DISPLAY",
+          "sourceVariable": "conversion_flag"
+        },
+        {
+          "level": "05",
+          "name": "SEMANT-COUNT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "COUNT"
+        },
+        {
+          "level": "05",
+          "name": "SEMANT-PERCENT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "PERCENT"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPTIER83",
+      "dataset": "WORKLIB.TIER_ACTIVITY_FREQ",
+      "recordLength": 60,
+      "fields": [
+        {
+          "level": "05",
+          "name": "TIERA-CUSTOMER-TIER",
+          "picClause": "PIC X(15)",
+          "usage": "DISPLAY",
+          "sourceVariable": "customer_tier"
+        },
+        {
+          "level": "05",
+          "name": "TIERA-COUNT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "COUNT"
+        },
+        {
+          "level": "05",
+          "name": "TIERA-PERCENT",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "PERCENT"
+        }
+      ]
+    },
+    {
+      "copybookName": "CPTIER84",
+      "dataset": "WORKLIB.TIER_SUMMARY",
+      "recordLength": 120,
+      "fields": [
+        {
+          "level": "05",
+          "name": "TIERS-CUSTOMER-TIER",
+          "picClause": "PIC X(15)",
+          "usage": "DISPLAY",
+          "sourceVariable": "customer_tier"
+        },
+        {
+          "level": "05",
+          "name": "TIERS-REGION",
+          "picClause": "PIC X(20)",
+          "usage": "DISPLAY",
+          "sourceVariable": "region"
+        },
+        {
+          "level": "05",
+          "name": "TIERS-REC-TYPE",
+          "picClause": "PIC 9(4)",
+          "usage": "COMP-3",
+          "sourceVariable": "_TYPE_"
+        },
+        {
+          "level": "05",
+          "name": "TIERS-REC-FREQ",
+          "picClause": "PIC 9(9)",
+          "usage": "COMP-3",
+          "sourceVariable": "_FREQ_"
+        },
+        {
+          "level": "05",
+          "name": "TIERS-TIER-SALES",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "tier_sales"
+        },
+        {
+          "level": "05",
+          "name": "TIERS-TIER-TRANSACTIONS",
+          "picClause": "PIC S9(9)V99",
+          "usage": "COMP-3",
+          "sourceVariable": "tier_transactions"
+        }
+      ]
+    }
+  ]
+}

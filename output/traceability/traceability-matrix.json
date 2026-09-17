@@ -1,0 +1,2091 @@
+{
+  "mappings": [
+    {
+      "mappingId": "MAP-0001",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 8,
+        "endLine": 17,
+        "stepId": "STEP-001",
+        "snippet": "GLOBAL GLOBAL_OPTIONS"
+      },
+      "architecture": {
+        "puId": "PU-ING-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0002",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 18,
+        "endLine": 22,
+        "stepId": "STEP-002",
+        "snippet": "GLOBAL MACRO_DEF_SET_RUN_CONTEXT"
+      },
+      "architecture": {
+        "puId": "PU-ING-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0003",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 24,
+        "endLine": 38,
+        "stepId": "STEP-003",
+        "snippet": "GLOBAL MACRO_DEF_CHOOSE_PERIOD"
+      },
+      "architecture": {
+        "puId": "PU-ING-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0004",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 40,
+        "endLine": 40,
+        "stepId": "STEP-004",
+        "snippet": "MACRO_CALL %set_run_context(region=ALL,min_amount=100)"
+      },
+      "architecture": {
+        "puId": "PU-ING-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0005",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 41,
+        "endLine": 41,
+        "stepId": "STEP-005",
+        "snippet": "MACRO_CALL %choose_period(period=MONTHLY)"
+      },
+      "architecture": {
+        "puId": "PU-ING-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0006",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 43,
+        "endLine": 53,
+        "stepId": "STEP-006",
+        "snippet": "DATA WORKLIB.customer_base"
+      },
+      "architecture": {
+        "puId": "PU-ING-002",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0007",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 55,
+        "endLine": 58,
+        "stepId": "STEP-007",
+        "snippet": "PROC SORT"
+      },
+      "architecture": {
+        "puId": "PU-CBL-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0008",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 60,
+        "endLine": 67,
+        "stepId": "STEP-008",
+        "snippet": "DATA WORKLIB.product_base"
+      },
+      "architecture": {
+        "puId": "PU-ING-003",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0009",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 69,
+        "endLine": 72,
+        "stepId": "STEP-009",
+        "snippet": "PROC SORT"
+      },
+      "architecture": {
+        "puId": "PU-CBL-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0010",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 74,
+        "endLine": 93,
+        "stepId": "STEP-010",
+        "snippet": "DATA WORKLIB.sales_base"
+      },
+      "architecture": {
+        "puId": "PU-ING-004",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0011",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 95,
+        "endLine": 98,
+        "stepId": "STEP-011",
+        "snippet": "PROC SORT"
+      },
+      "architecture": {
+        "puId": "PU-CBL-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0012",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 100,
+        "endLine": 108,
+        "stepId": "STEP-012",
+        "snippet": "DATA WORKLIB.customer_sales"
+      },
+      "architecture": {
+        "puId": "PU-CBL-002",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL002.cbl",
+        "element": "CBLSL002:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0013",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 110,
+        "endLine": 113,
+        "stepId": "STEP-013",
+        "snippet": "PROC SORT"
+      },
+      "architecture": {
+        "puId": "PU-CBL-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0014",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 115,
+        "endLine": 128,
+        "stepId": "STEP-014",
+        "snippet": "DATA WORKLIB.customer_monthly"
+      },
+      "architecture": {
+        "puId": "PU-CBL-003",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL002.cbl",
+        "element": "CBLSL002:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0015",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 130,
+        "endLine": 141,
+        "stepId": "STEP-015",
+        "snippet": "PROC SUMMARY"
+      },
+      "architecture": {
+        "puId": "PU-CBL-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0016",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 143,
+        "endLine": 151,
+        "stepId": "STEP-016",
+        "snippet": "PROC MEANS"
+      },
+      "architecture": {
+        "puId": "PU-CBL-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0017",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 153,
+        "endLine": 156,
+        "stepId": "STEP-017",
+        "snippet": "PROC FREQ"
+      },
+      "architecture": {
+        "puId": "PU-CBL-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0018",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 158,
+        "endLine": 162,
+        "stepId": "STEP-018",
+        "snippet": "PROC TRANSPOSE"
+      },
+      "architecture": {
+        "puId": "PU-CBL-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0019",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 164,
+        "endLine": 199,
+        "stepId": "STEP-019",
+        "snippet": "PROC SQL"
+      },
+      "architecture": {
+        "puId": "PU-CBL-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0020",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 201,
+        "endLine": 213,
+        "stepId": "STEP-020",
+        "snippet": "DATA WORKLIB.sales_rules"
+      },
+      "architecture": {
+        "puId": "PU-ENR-002",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL004.cbl",
+        "element": "CBLSL004:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0021",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 215,
+        "endLine": 217,
+        "stepId": "STEP-021",
+        "snippet": "PROC SORT"
+      },
+      "architecture": {
+        "puId": "PU-CBL-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0022",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 219,
+        "endLine": 230,
+        "stepId": "STEP-022",
+        "snippet": "DATA WORKLIB.review_queue_final"
+      },
+      "architecture": {
+        "puId": "PU-ENR-003",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL004.cbl",
+        "element": "CBLSL004:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0023",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 232,
+        "endLine": 245,
+        "stepId": "STEP-023",
+        "snippet": "PROC SQL"
+      },
+      "architecture": {
+        "puId": "PU-CBL-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0024",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 247,
+        "endLine": 258,
+        "stepId": "STEP-024",
+        "snippet": "PROC SQL"
+      },
+      "architecture": {
+        "puId": "PU-CBL-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0025",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 260,
+        "endLine": 269,
+        "stepId": "STEP-025",
+        "snippet": "DATA WORKLIB.customer_tier"
+      },
+      "architecture": {
+        "puId": "PU-DLY-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL005.cbl",
+        "element": "CBLSL005:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0026",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 271,
+        "endLine": 273,
+        "stepId": "STEP-026",
+        "snippet": "PROC SORT"
+      },
+      "architecture": {
+        "puId": "PU-CBL-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0027",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 275,
+        "endLine": 287,
+        "stepId": "STEP-027",
+        "snippet": "DATA WORKLIB.daily_sales"
+      },
+      "architecture": {
+        "puId": "PU-DLY-002",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL005.cbl",
+        "element": "CBLSL005:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0028",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 289,
+        "endLine": 291,
+        "stepId": "STEP-028",
+        "snippet": "PROC SORT"
+      },
+      "architecture": {
+        "puId": "PU-CBL-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0029",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 293,
+        "endLine": 297,
+        "stepId": "STEP-029",
+        "snippet": "PROC TRANSPOSE"
+      },
+      "architecture": {
+        "puId": "PU-CBL-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0030",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 299,
+        "endLine": 309,
+        "stepId": "STEP-030",
+        "snippet": "DATA WORKLIB.customer_flags"
+      },
+      "architecture": {
+        "puId": "PU-DLY-003",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL005.cbl",
+        "element": "CBLSL005:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0031",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 311,
+        "endLine": 314,
+        "stepId": "STEP-031",
+        "snippet": "PROC SORT"
+      },
+      "architecture": {
+        "puId": "PU-CBL-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0032",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 316,
+        "endLine": 324,
+        "stepId": "STEP-032",
+        "snippet": "PROC SUMMARY"
+      },
+      "architecture": {
+        "puId": "PU-CBL-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0033",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 326,
+        "endLine": 329,
+        "stepId": "STEP-033",
+        "snippet": "PROC FREQ"
+      },
+      "architecture": {
+        "puId": "PU-CBL-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0034",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 331,
+        "endLine": 343,
+        "stepId": "STEP-034",
+        "snippet": "GLOBAL MACRO_DEF_BUILD_REGION_REPORT"
+      },
+      "architecture": {
+        "puId": "PU-RPT-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL006.cbl",
+        "element": "CBLSL006:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0035",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 333,
+        "endLine": 335,
+        "stepId": "STEP-035",
+        "snippet": "DATA WORKLIB.region_report_input_all"
+      },
+      "architecture": {
+        "puId": "PU-RPT-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL006.cbl",
+        "element": "CBLSL006:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0036",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 338,
+        "endLine": 341,
+        "stepId": "STEP-036",
+        "snippet": "DATA WORKLIB.region_report_input_filtered"
+      },
+      "architecture": {
+        "puId": "PU-RPT-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL006.cbl",
+        "element": "CBLSL006:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0037",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 345,
+        "endLine": 345,
+        "stepId": "STEP-037",
+        "snippet": "MACRO_CALL %build_region_report(region=&RUN_REGION)"
+      },
+      "architecture": {
+        "puId": "PU-RPT-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL006.cbl",
+        "element": "CBLSL006:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0038",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 347,
+        "endLine": 357,
+        "stepId": "STEP-038",
+        "snippet": "PROC SQL"
+      },
+      "architecture": {
+        "puId": "PU-CBL-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0039",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 359,
+        "endLine": 370,
+        "stepId": "STEP-039",
+        "snippet": "DATA WORKLIB.final_sales_extract"
+      },
+      "architecture": {
+        "puId": "PU-RPT-003",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL006.cbl",
+        "element": "CBLSL006:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0040",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 372,
+        "endLine": 374,
+        "stepId": "STEP-040",
+        "snippet": "PROC SORT"
+      },
+      "architecture": {
+        "puId": "PU-CBL-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0041",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 376,
+        "endLine": 378,
+        "stepId": "STEP-041",
+        "snippet": "PROC DATASETS"
+      },
+      "architecture": {
+        "puId": "PU-CBL-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0042",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 380,
+        "endLine": 390,
+        "stepId": "STEP-042",
+        "snippet": "DATA WORKLIB.audit_extract"
+      },
+      "architecture": {
+        "puId": "PU-RPT-004",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL006.cbl",
+        "element": "CBLSL006:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0043",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 392,
+        "endLine": 398,
+        "stepId": "STEP-043",
+        "snippet": "PROC SQL"
+      },
+      "architecture": {
+        "puId": "PU-CBL-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0044",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 400,
+        "endLine": 411,
+        "stepId": "STEP-044",
+        "snippet": "DATA WORKLIB.reconciliation"
+      },
+      "architecture": {
+        "puId": "PU-RPT-006",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL006.cbl",
+        "element": "CBLSL006:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0045",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 416,
+        "endLine": 428,
+        "stepId": "STEP-045",
+        "snippet": "DATA WORKLIB.segment_rollup"
+      },
+      "architecture": {
+        "puId": "PU-SEG-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL007.cbl",
+        "element": "CBLSL007:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0046",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 430,
+        "endLine": 432,
+        "stepId": "STEP-046",
+        "snippet": "PROC SORT"
+      },
+      "architecture": {
+        "puId": "PU-CBL-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0047",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 434,
+        "endLine": 440,
+        "stepId": "STEP-047",
+        "snippet": "PROC SQL"
+      },
+      "architecture": {
+        "puId": "PU-CBL-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0048",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 442,
+        "endLine": 451,
+        "stepId": "STEP-048",
+        "snippet": "DATA WORKLIB.exception_extract"
+      },
+      "architecture": {
+        "puId": "PU-SEG-003",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL007.cbl",
+        "element": "CBLSL007:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0049",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 453,
+        "endLine": 455,
+        "stepId": "STEP-049",
+        "snippet": "PROC FREQ"
+      },
+      "architecture": {
+        "puId": "PU-CBL-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0050",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 457,
+        "endLine": 463,
+        "stepId": "STEP-050",
+        "snippet": "DATA WORKLIB.exception_summary"
+      },
+      "architecture": {
+        "puId": "PU-SEG-005",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL007.cbl",
+        "element": "CBLSL007:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0051",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 465,
+        "endLine": 477,
+        "stepId": "STEP-051",
+        "snippet": "PROC SQL"
+      },
+      "architecture": {
+        "puId": "PU-CBL-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0052",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 479,
+        "endLine": 486,
+        "stepId": "STEP-052",
+        "snippet": "DATA WORKLIB.delivery_manifest"
+      },
+      "architecture": {
+        "puId": "PU-SEG-007",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL007.cbl",
+        "element": "CBLSL007:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0053",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 488,
+        "endLine": 490,
+        "stepId": "STEP-053",
+        "snippet": "PROC SORT"
+      },
+      "architecture": {
+        "puId": "PU-CBL-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0054",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 492,
+        "endLine": 500,
+        "stepId": "STEP-054",
+        "snippet": "GLOBAL MACRO_DEF_PARAMETERIZED_FILTER"
+      },
+      "architecture": {
+        "puId": "PU-SCR-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL008.cbl",
+        "element": "CBLSL008:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0055",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 495,
+        "endLine": 498,
+        "stepId": "STEP-055",
+        "snippet": "DATA WORKLIB.high_value_sales_def"
+      },
+      "architecture": {
+        "puId": "PU-SCR-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL008.cbl",
+        "element": "CBLSL008:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0056",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 501,
+        "endLine": 505,
+        "stepId": "STEP-056",
+        "snippet": "MACRO_CALL %parameterized_filter(input=WORKLIB.enriched_sales, output=WORKLIB.high_value_sales, threshold=10000)"
+      },
+      "architecture": {
+        "puId": "PU-SCR-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL008.cbl",
+        "element": "CBLSL008:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0057",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 507,
+        "endLine": 515,
+        "stepId": "STEP-057",
+        "snippet": "PROC SQL"
+      },
+      "architecture": {
+        "puId": "PU-CBL-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0058",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 517,
+        "endLine": 528,
+        "stepId": "STEP-058",
+        "snippet": "DATA WORKLIB.final_customer_profile"
+      },
+      "architecture": {
+        "puId": "PU-SCR-003",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL008.cbl",
+        "element": "CBLSL008:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0059",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 530,
+        "endLine": 532,
+        "stepId": "STEP-059",
+        "snippet": "PROC SORT"
+      },
+      "architecture": {
+        "puId": "PU-CBL-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0060",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 534,
+        "endLine": 539,
+        "stepId": "STEP-060",
+        "snippet": "DATA WORKLIB.final_customer_profile_seq"
+      },
+      "architecture": {
+        "puId": "PU-SCR-004",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL008.cbl",
+        "element": "CBLSL008:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0061",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 541,
+        "endLine": 548,
+        "stepId": "STEP-061",
+        "snippet": "PROC SUMMARY"
+      },
+      "architecture": {
+        "puId": "PU-CBL-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0062",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 550,
+        "endLine": 563,
+        "stepId": "STEP-062",
+        "snippet": "PROC SQL"
+      },
+      "architecture": {
+        "puId": "PU-CBL-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0063",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 572,
+        "endLine": 594,
+        "stepId": "STEP-063",
+        "snippet": "DATA WORKLIB.customer_scoring"
+      },
+      "architecture": {
+        "puId": "PU-SCR-007",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL008.cbl",
+        "element": "CBLSL008:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0064",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 596,
+        "endLine": 598,
+        "stepId": "STEP-064",
+        "snippet": "PROC SORT"
+      },
+      "architecture": {
+        "puId": "PU-CBL-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0065",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 600,
+        "endLine": 602,
+        "stepId": "STEP-065",
+        "snippet": "PROC FREQ"
+      },
+      "architecture": {
+        "puId": "PU-CBL-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0066",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 604,
+        "endLine": 614,
+        "stepId": "STEP-066",
+        "snippet": "PROC SUMMARY"
+      },
+      "architecture": {
+        "puId": "PU-CBL-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0067",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 616,
+        "endLine": 622,
+        "stepId": "STEP-067",
+        "snippet": "DATA WORKLIB.score_summary"
+      },
+      "architecture": {
+        "puId": "PU-SCR-010",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL008.cbl",
+        "element": "CBLSL008:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0068",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 624,
+        "endLine": 635,
+        "stepId": "STEP-068",
+        "snippet": "PROC SQL"
+      },
+      "architecture": {
+        "puId": "PU-CBL-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0069",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 637,
+        "endLine": 643,
+        "stepId": "STEP-069",
+        "snippet": "DATA WORKLIB.region_customer_score_flags"
+      },
+      "architecture": {
+        "puId": "PU-SCR-012",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL008.cbl",
+        "element": "CBLSL008:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0070",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 645,
+        "endLine": 647,
+        "stepId": "STEP-070",
+        "snippet": "PROC SORT"
+      },
+      "architecture": {
+        "puId": "PU-CBL-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0071",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 653,
+        "endLine": 668,
+        "stepId": "STEP-071",
+        "snippet": "PROC SQL"
+      },
+      "architecture": {
+        "puId": "PU-CBL-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0072",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 670,
+        "endLine": 680,
+        "stepId": "STEP-072",
+        "snippet": "DATA WORKLIB.product_performance"
+      },
+      "architecture": {
+        "puId": "PU-PRD-002",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL009.cbl",
+        "element": "CBLSL009:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0073",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 682,
+        "endLine": 684,
+        "stepId": "STEP-073",
+        "snippet": "PROC SORT"
+      },
+      "architecture": {
+        "puId": "PU-CBL-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0074",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 686,
+        "endLine": 693,
+        "stepId": "STEP-074",
+        "snippet": "PROC SUMMARY"
+      },
+      "architecture": {
+        "puId": "PU-CBL-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0075",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 695,
+        "endLine": 697,
+        "stepId": "STEP-075",
+        "snippet": "PROC FREQ"
+      },
+      "architecture": {
+        "puId": "PU-CBL-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0076",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 703,
+        "endLine": 715,
+        "stepId": "STEP-076",
+        "snippet": "DATA WORKLIB.sales_period_flags"
+      },
+      "architecture": {
+        "puId": "PU-PRD-005",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL009.cbl",
+        "element": "CBLSL009:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0077",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 717,
+        "endLine": 719,
+        "stepId": "STEP-077",
+        "snippet": "PROC SORT"
+      },
+      "architecture": {
+        "puId": "PU-CBL-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0078",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 721,
+        "endLine": 728,
+        "stepId": "STEP-078",
+        "snippet": "PROC SUMMARY"
+      },
+      "architecture": {
+        "puId": "PU-CBL-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0079",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 730,
+        "endLine": 737,
+        "stepId": "STEP-079",
+        "snippet": "PROC SUMMARY"
+      },
+      "architecture": {
+        "puId": "PU-CBL-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0080",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 739,
+        "endLine": 750,
+        "stepId": "STEP-080",
+        "snippet": "PROC SQL"
+      },
+      "architecture": {
+        "puId": "PU-CBL-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0081",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 756,
+        "endLine": 761,
+        "stepId": "STEP-081",
+        "snippet": "PROC SORT"
+      },
+      "architecture": {
+        "puId": "PU-CBL-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0082",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 763,
+        "endLine": 792,
+        "stepId": "STEP-082",
+        "snippet": "DATA WORKLIB.sales_quality"
+      },
+      "architecture": {
+        "puId": "PU-QAL-002",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL010.cbl",
+        "element": "CBLSL010:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0083",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 794,
+        "endLine": 796,
+        "stepId": "STEP-083",
+        "snippet": "PROC FREQ"
+      },
+      "architecture": {
+        "puId": "PU-CBL-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0084",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 798,
+        "endLine": 807,
+        "stepId": "STEP-084",
+        "snippet": "PROC SQL"
+      },
+      "architecture": {
+        "puId": "PU-CBL-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0085",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 813,
+        "endLine": 823,
+        "stepId": "STEP-085",
+        "snippet": "PROC SQL"
+      },
+      "architecture": {
+        "puId": "PU-CBL-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0086",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 825,
+        "endLine": 835,
+        "stepId": "STEP-086",
+        "snippet": "DATA WORKLIB.customer_activity"
+      },
+      "architecture": {
+        "puId": "PU-ACT-002",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL011.cbl",
+        "element": "CBLSL011:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0087",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 837,
+        "endLine": 839,
+        "stepId": "STEP-087",
+        "snippet": "PROC SORT"
+      },
+      "architecture": {
+        "puId": "PU-CBL-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0088",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 841,
+        "endLine": 843,
+        "stepId": "STEP-088",
+        "snippet": "PROC FREQ"
+      },
+      "architecture": {
+        "puId": "PU-CBL-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0089",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 845,
+        "endLine": 852,
+        "stepId": "STEP-089",
+        "snippet": "PROC SUMMARY"
+      },
+      "architecture": {
+        "puId": "PU-CBL-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0090",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 858,
+        "endLine": 875,
+        "stepId": "STEP-090",
+        "snippet": "DATA WORKLIB.region_controls"
+      },
+      "architecture": {
+        "puId": "PU-ACT-005",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL011.cbl",
+        "element": "CBLSL011:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0091",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 877,
+        "endLine": 879,
+        "stepId": "STEP-091",
+        "snippet": "PROC FREQ"
+      },
+      "architecture": {
+        "puId": "PU-CBL-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0092",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 881,
+        "endLine": 892,
+        "stepId": "STEP-092",
+        "snippet": "PROC SQL"
+      },
+      "architecture": {
+        "puId": "PU-CBL-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0093",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 898,
+        "endLine": 910,
+        "stepId": "STEP-093",
+        "snippet": "DATA WORKLIB.region_running_sales"
+      },
+      "architecture": {
+        "puId": "PU-ACT-008",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL011.cbl",
+        "element": "CBLSL011:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0094",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 912,
+        "endLine": 914,
+        "stepId": "STEP-094",
+        "snippet": "PROC SORT"
+      },
+      "architecture": {
+        "puId": "PU-CBL-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0095",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 916,
+        "endLine": 923,
+        "stepId": "STEP-095",
+        "snippet": "DATA WORKLIB.region_running_sales_delta"
+      },
+      "architecture": {
+        "puId": "PU-ACT-009",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL011.cbl",
+        "element": "CBLSL011:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0096",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 925,
+        "endLine": 932,
+        "stepId": "STEP-096",
+        "snippet": "PROC SUMMARY"
+      },
+      "architecture": {
+        "puId": "PU-CBL-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0097",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 938,
+        "endLine": 946,
+        "stepId": "STEP-097",
+        "snippet": "PROC SQL"
+      },
+      "architecture": {
+        "puId": "PU-CBL-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0098",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 948,
+        "endLine": 965,
+        "stepId": "STEP-098",
+        "snippet": "DATA WORKLIB.sales_lookup_enriched"
+      },
+      "architecture": {
+        "puId": "PU-FIN-002",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL012.cbl",
+        "element": "CBLSL012:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0099",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 967,
+        "endLine": 969,
+        "stepId": "STEP-099",
+        "snippet": "PROC FREQ"
+      },
+      "architecture": {
+        "puId": "PU-CBL-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0100",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 975,
+        "endLine": 986,
+        "stepId": "STEP-100",
+        "snippet": "DATA WORKLIB.semantic_edge_cases"
+      },
+      "architecture": {
+        "puId": "PU-FIN-004",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL012.cbl",
+        "element": "CBLSL012:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0101",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 988,
+        "endLine": 990,
+        "stepId": "STEP-101",
+        "snippet": "PROC FREQ"
+      },
+      "architecture": {
+        "puId": "PU-CBL-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0102",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 996,
+        "endLine": 1006,
+        "stepId": "STEP-102",
+        "snippet": "PROC SQL"
+      },
+      "architecture": {
+        "puId": "PU-CBL-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0103",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 1008,
+        "endLine": 1016,
+        "stepId": "STEP-103",
+        "snippet": "DATA WORKLIB.operational_dashboard"
+      },
+      "architecture": {
+        "puId": "PU-FIN-007",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL012.cbl",
+        "element": "CBLSL012:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    },
+    {
+      "mappingId": "MAP-0104",
+      "source": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 1018,
+        "endLine": 1019,
+        "stepId": "STEP-104",
+        "snippet": "PROC PRINT"
+      },
+      "architecture": {
+        "puId": "PU-CBL-001",
+        "decisionId": "ADR-001"
+      },
+      "target": {
+        "file": "output/cobol/CBLSL001.cbl",
+        "element": "CBLSL001:2000-PROCESS-DATA",
+        "startLine": 1,
+        "endLine": 50
+      }
+    }
+  ],
+  "metrics": {
+    "totalSourceStatements": 104,
+    "mappedSourceStatements": 104,
+    "coveragePercentage": 100,
+    "sourceOrphans": 0,
+    "targetOrphans": 0
+  }
+}

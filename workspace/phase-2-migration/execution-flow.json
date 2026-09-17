@@ -1,0 +1,458 @@
+{
+  "executionSteps": [
+    {
+      "stepNumber": 1,
+      "stepName": "STEP010_INGEST",
+      "programOrUtility": "CBLSL001",
+      "inputs": [
+        "RAW.CUSTOMERS",
+        "RAW.PRODUCTS",
+        "RAW.SALES",
+        "PARMLIB.CONFIG.SALES"
+      ],
+      "outputs": [
+        "&&CUSTOMER_BASE",
+        "&&PRODUCT_BASE",
+        "&&SALES_BASE"
+      ],
+      "conditionCodeHandling": "COND=(0,NE)"
+    },
+    {
+      "stepNumber": 2,
+      "stepName": "STEP020_SRTCUST",
+      "programOrUtility": "SORT",
+      "inputs": [
+        "&&CUSTOMER_BASE"
+      ],
+      "outputs": [
+        "&&CUSTOMER_SORTED"
+      ],
+      "conditionCodeHandling": "COND=(0,NE)"
+    },
+    {
+      "stepNumber": 3,
+      "stepName": "STEP030_SRTPROD",
+      "programOrUtility": "SORT",
+      "inputs": [
+        "&&PRODUCT_BASE"
+      ],
+      "outputs": [
+        "&&PRODUCT_SORTED"
+      ],
+      "conditionCodeHandling": "COND=(0,NE)"
+    },
+    {
+      "stepNumber": 4,
+      "stepName": "STEP040_SRTSALE",
+      "programOrUtility": "SORT",
+      "inputs": [
+        "&&SALES_BASE"
+      ],
+      "outputs": [
+        "&&SALES_SORTED"
+      ],
+      "conditionCodeHandling": "COND=(0,NE)"
+    },
+    {
+      "stepNumber": 5,
+      "stepName": "STEP050_MRGCUST",
+      "programOrUtility": "CBLSL002",
+      "inputs": [
+        "&&CUSTOMER_SORTED",
+        "&&SALES_SORTED"
+      ],
+      "outputs": [
+        "&&CUSTOMER_SALES"
+      ],
+      "conditionCodeHandling": "COND=(0,NE)"
+    },
+    {
+      "stepNumber": 6,
+      "stepName": "STEP060_SRTCSAL",
+      "programOrUtility": "SORT",
+      "inputs": [
+        "&&CUSTOMER_SALES"
+      ],
+      "outputs": [
+        "&&CUSTOMER_SALES_SORTED"
+      ],
+      "conditionCodeHandling": "COND=(0,NE)"
+    },
+    {
+      "stepNumber": 7,
+      "stepName": "STEP070_CUSTMNTH",
+      "programOrUtility": "CBLSL002",
+      "inputs": [
+        "&&CUSTOMER_SALES_SORTED"
+      ],
+      "outputs": [
+        "&&CUSTOMER_MONTHLY"
+      ],
+      "conditionCodeHandling": "COND=(0,NE)"
+    },
+    {
+      "stepNumber": 8,
+      "stepName": "STEP080_AGGREG1",
+      "programOrUtility": "CBLSL003",
+      "inputs": [
+        "&&SALES_SORTED"
+      ],
+      "outputs": [
+        "&&REGION_SUMMARY",
+        "&&REGION_MEANS",
+        "&&REGION_CHANNEL_FREQ",
+        "&&REGION_SUMMARY_WIDE"
+      ],
+      "conditionCodeHandling": "COND=(0,NE)"
+    },
+    {
+      "stepNumber": 9,
+      "stepName": "STEP090_ENRICH",
+      "programOrUtility": "CBLSL004",
+      "inputs": [
+        "&&SALES_SORTED",
+        "&&CUSTOMER_SORTED",
+        "&&PRODUCT_SORTED"
+      ],
+      "outputs": [
+        "&&ENRICHED_SALES",
+        "&&SALES_RULES",
+        "&&CATEGORY_SUMMARY",
+        "&&SUBCATEGORY_SUMMARY"
+      ],
+      "conditionCodeHandling": "COND=(0,NE)"
+    },
+    {
+      "stepNumber": 10,
+      "stepName": "STEP100_SRTRULE",
+      "programOrUtility": "SORT",
+      "inputs": [
+        "&&SALES_RULES"
+      ],
+      "outputs": [
+        "&&SALES_RULES_SORTED"
+      ],
+      "conditionCodeHandling": "COND=(0,NE)"
+    },
+    {
+      "stepNumber": 11,
+      "stepName": "STEP110_REVQ",
+      "programOrUtility": "CBLSL004",
+      "inputs": [
+        "&&SALES_RULES_SORTED"
+      ],
+      "outputs": [
+        "PROD.SALES.REVIEW.QUEUE"
+      ],
+      "conditionCodeHandling": "COND=(0,NE)"
+    },
+    {
+      "stepNumber": 12,
+      "stepName": "STEP120_DAILYTR",
+      "programOrUtility": "CBLSL005",
+      "inputs": [
+        "&&CUSTOMER_MONTHLY",
+        "&&SALES_SORTED"
+      ],
+      "outputs": [
+        "&&CUSTOMER_TIER",
+        "&&DAILY_SALES",
+        "&&CUSTOMER_FLAGS",
+        "&&REGION_CHANNEL_SUMMARY",
+        "&&CHANNEL_FREQ"
+      ],
+      "conditionCodeHandling": "COND=(0,NE)"
+    },
+    {
+      "stepNumber": 13,
+      "stepName": "STEP130_SRTDLY",
+      "programOrUtility": "SORT",
+      "inputs": [
+        "&&DAILY_SALES"
+      ],
+      "outputs": [
+        "&&DAILY_SALES_SORTED"
+      ],
+      "conditionCodeHandling": "COND=(0,NE)"
+    },
+    {
+      "stepNumber": 14,
+      "stepName": "STEP140_PIVDLY",
+      "programOrUtility": "CBLSL005",
+      "inputs": [
+        "&&DAILY_SALES_SORTED"
+      ],
+      "outputs": [
+        "&&DAILY_SALES_WIDE"
+      ],
+      "conditionCodeHandling": "COND=(0,NE)"
+    },
+    {
+      "stepNumber": 15,
+      "stepName": "STEP150_REGRPT",
+      "programOrUtility": "CBLSL006",
+      "inputs": [
+        "&&SALES_SORTED",
+        "&&REGION_CHANNEL_SUMMARY"
+      ],
+      "outputs": [
+        "&&REGION_REPORT",
+        "&&FINAL_SALES_EXTRACT"
+      ],
+      "conditionCodeHandling": "COND=(0,NE)"
+    },
+    {
+      "stepNumber": 16,
+      "stepName": "STEP160_SRTRPT",
+      "programOrUtility": "SORT",
+      "inputs": [
+        "&&FINAL_SALES_EXTRACT"
+      ],
+      "outputs": [
+        "&&FINAL_SALES_EXTRACT_SORTED"
+      ],
+      "conditionCodeHandling": "COND=(0,NE)"
+    },
+    {
+      "stepNumber": 17,
+      "stepName": "STEP170_CLEANUP",
+      "programOrUtility": "IEFBR14",
+      "inputs": [],
+      "outputs": [
+        "&&TEMP_SCRATCH"
+      ],
+      "conditionCodeHandling": "COND=(0,NE)"
+    },
+    {
+      "stepNumber": 18,
+      "stepName": "STEP180_RECON1",
+      "programOrUtility": "CBLSL006",
+      "inputs": [
+        "&&FINAL_SALES_EXTRACT_SORTED"
+      ],
+      "outputs": [
+        "PROD.SALES.AUDIT.EXTRACT",
+        "&&FINAL_CONTROL_TOTALS",
+        "PROD.SALES.RECONCILIATION.LEDGER"
+      ],
+      "conditionCodeHandling": "COND=(0,NE)"
+    },
+    {
+      "stepNumber": 19,
+      "stepName": "STEP190_SEGMENT",
+      "programOrUtility": "CBLSL007",
+      "inputs": [
+        "&&ENRICHED_SALES"
+      ],
+      "outputs": [
+        "&&SEGMENT_ROLLUP",
+        "&&EXCEPTION_EXTRACT",
+        "&&DELIVERY_MANIFEST_RAW"
+      ],
+      "conditionCodeHandling": "COND=(0,NE)"
+    },
+    {
+      "stepNumber": 20,
+      "stepName": "STEP200_SRTSEG",
+      "programOrUtility": "SORT",
+      "inputs": [
+        "&&SEGMENT_ROLLUP"
+      ],
+      "outputs": [
+        "&&SEGMENT_ROLLUP_SORTED"
+      ],
+      "conditionCodeHandling": "COND=(0,NE)"
+    },
+    {
+      "stepNumber": 21,
+      "stepName": "STEP210_SEGRANK",
+      "programOrUtility": "CBLSL007",
+      "inputs": [
+        "&&SEGMENT_ROLLUP_SORTED",
+        "&&EXCEPTION_EXTRACT",
+        "&&DELIVERY_MANIFEST_RAW"
+      ],
+      "outputs": [
+        "&&SEGMENT_RANKED",
+        "&&EXCEPTION_SUMMARY",
+        "PROD.SALES.DELIVERY.MANIFEST"
+      ],
+      "conditionCodeHandling": "COND=(0,NE)"
+    },
+    {
+      "stepNumber": 22,
+      "stepName": "STEP220_SCORING",
+      "programOrUtility": "CBLSL008",
+      "inputs": [
+        "&&ENRICHED_SALES",
+        "&&CUSTOMER_TIER"
+      ],
+      "outputs": [
+        "&&HIGH_VALUE_SALES",
+        "&&FINAL_CUSTOMER_PROFILE",
+        "&&CUSTOMER_SCORING"
+      ],
+      "conditionCodeHandling": "COND=(0,NE)"
+    },
+    {
+      "stepNumber": 23,
+      "stepName": "STEP230_SRTSCR",
+      "programOrUtility": "SORT",
+      "inputs": [
+        "&&CUSTOMER_SCORING"
+      ],
+      "outputs": [
+        "&&CUSTOMER_SCORING_SORTED"
+      ],
+      "conditionCodeHandling": "COND=(0,NE)"
+    },
+    {
+      "stepNumber": 24,
+      "stepName": "STEP240_SCOREBNCH",
+      "programOrUtility": "CBLSL008",
+      "inputs": [
+        "&&CUSTOMER_SCORING_SORTED"
+      ],
+      "outputs": [
+        "&&SCORE_SUMMARY",
+        "&&REGION_SCORE_BENCHMARKS",
+        "PROD.SALES.REGION.SCORE.FLAGS"
+      ],
+      "conditionCodeHandling": "COND=(0,NE)"
+    },
+    {
+      "stepNumber": 25,
+      "stepName": "STEP250_PRODUCT",
+      "programOrUtility": "CBLSL009",
+      "inputs": [
+        "&&ENRICHED_SALES"
+      ],
+      "outputs": [
+        "&&PRODUCT_PERFORMANCE",
+        "&&SALES_PERIOD_FLAGS"
+      ],
+      "conditionCodeHandling": "COND=(0,NE)"
+    },
+    {
+      "stepNumber": 26,
+      "stepName": "STEP260_SRTPRD",
+      "programOrUtility": "SORT",
+      "inputs": [
+        "&&PRODUCT_PERFORMANCE"
+      ],
+      "outputs": [
+        "&&PRODUCT_PERFORMANCE_SORTED"
+      ],
+      "conditionCodeHandling": "COND=(0,NE)"
+    },
+    {
+      "stepNumber": 27,
+      "stepName": "STEP270_PRDSUM",
+      "programOrUtility": "CBLSL009",
+      "inputs": [
+        "&&PRODUCT_PERFORMANCE_SORTED",
+        "&&SALES_PERIOD_FLAGS"
+      ],
+      "outputs": [
+        "&&CATEGORY_REVENUE_TOTALS",
+        "&&QUARTERLY_SALES_SUMMARY",
+        "&&PERIOD_VARIANCE_ANALYSIS"
+      ],
+      "conditionCodeHandling": "COND=(0,NE)"
+    },
+    {
+      "stepNumber": 28,
+      "stepName": "STEP280_DEDUP",
+      "programOrUtility": "SORT",
+      "inputs": [
+        "RAW.SALES"
+      ],
+      "outputs": [
+        "&&SALES_DUPLICATE_CHECK",
+        "PROD.SALES.DUPLICATES.EXCEPTION"
+      ],
+      "conditionCodeHandling": "COND=(0,NE)"
+    },
+    {
+      "stepNumber": 29,
+      "stepName": "STEP290_QUALITY",
+      "programOrUtility": "CBLSL010",
+      "inputs": [
+        "&&SALES_DUPLICATE_CHECK"
+      ],
+      "outputs": [
+        "PROD.SALES.QUALITY.RECORDS",
+        "&&QUALITY_FLAG_FREQ",
+        "&&QUALITY_METRIC_SUMMARY"
+      ],
+      "conditionCodeHandling": "COND=(0,NE)"
+    },
+    {
+      "stepNumber": 30,
+      "stepName": "STEP300_ACTIVTY",
+      "programOrUtility": "CBLSL011",
+      "inputs": [
+        "&&ENRICHED_SALES"
+      ],
+      "outputs": [
+        "&&CUSTOMER_ACTIVITY",
+        "&&REGION_CONTROLS",
+        "&&REGION_RUNNING_SALES"
+      ],
+      "conditionCodeHandling": "COND=(0,NE)"
+    },
+    {
+      "stepNumber": 31,
+      "stepName": "STEP310_SRTACT",
+      "programOrUtility": "SORT",
+      "inputs": [
+        "&&CUSTOMER_ACTIVITY"
+      ],
+      "outputs": [
+        "&&CUSTOMER_ACTIVITY_SORTED"
+      ],
+      "conditionCodeHandling": "COND=(0,NE)"
+    },
+    {
+      "stepNumber": 32,
+      "stepName": "STEP320_SRTRUN",
+      "programOrUtility": "SORT",
+      "inputs": [
+        "&&REGION_RUNNING_SALES"
+      ],
+      "outputs": [
+        "&&REGION_RUNNING_SALES_SORTED"
+      ],
+      "conditionCodeHandling": "COND=(0,NE)"
+    },
+    {
+      "stepNumber": 33,
+      "stepName": "STEP330_RUNSUM",
+      "programOrUtility": "CBLSL011",
+      "inputs": [
+        "&&CUSTOMER_ACTIVITY_SORTED",
+        "&&REGION_RUNNING_SALES_SORTED"
+      ],
+      "outputs": [
+        "&&REGION_RUNNING_SALES_DELTA",
+        "&&RUNNING_DELTA_SUMMARY"
+      ],
+      "conditionCodeHandling": "COND=(0,NE)"
+    },
+    {
+      "stepNumber": 34,
+      "stepName": "STEP340_DASHBRD",
+      "programOrUtility": "CBLSL012",
+      "inputs": [
+        "&&ENRICHED_SALES",
+        "PROD.SALES.RECONCILIATION.LEDGER",
+        "&&PRODUCT_SORTED"
+      ],
+      "outputs": [
+        "PROD.SALES.OPERATIONAL.DASHBOARD",
+        "SYSOUT"
+      ],
+      "conditionCodeHandling": "COND=(0,NE)"
+    }
+  ]
+}

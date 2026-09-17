@@ -1,0 +1,7 @@
+000100 * COPYBOOK: CPSEGM78 - FOR WORKLIB.SEGMENT_RANKED                
+000200 01  SEGMENT-RANKED-RECORD.                                       
+000300     05  SEGMEN-SEGMENT                 PIC X(20).                
+000400     05  SEGMEN-SEGMENT-SALES           PIC S9(9)V99 COMP-3.      
+000500     05  SEGMEN-SEGMENT-RECORDS         PIC S9(9)V99 COMP-3.      
+000600     05  SEGMEN-SEGMENT-UNITS           PIC S9(9)V99 COMP-3.      
+000700     05  SEGMEN-GENERATED-RANK          PIC S9(9) COMP-3.         

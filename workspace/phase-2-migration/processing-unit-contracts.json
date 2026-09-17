@@ -1,0 +1,2873 @@
+{
+  "processingUnits": [
+    {
+      "puId": "PU-ING-001",
+      "sourceStepIds": [
+        "STEP-001",
+        "STEP-002",
+        "STEP-003",
+        "STEP-004",
+        "STEP-005"
+      ],
+      "targetProgram": "CBLSL001",
+      "inputs": [
+        {
+          "ddName": "SYSIN",
+          "datasetName": "PARMLIB.CONFIG.SALES",
+          "recordFormat": "FB",
+          "recordLength": 80
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "SYSOUT",
+          "datasetName": "SYSOUT",
+          "disposition": "SYSOUT=*"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-ING-001",
+          "description": "Initialize run context parameters",
+          "action": "Parse SYSIN parameters for RUN_REGION (default ALL) and MIN_AMOUNT (default 100)"
+        },
+        {
+          "ruleId": "R-ING-002",
+          "description": "Set calendar period boundaries",
+          "action": "Derive PERIOD_START and PERIOD_END from system date for MONTHLY period"
+        }
+      ]
+    },
+    {
+      "puId": "PU-ING-002",
+      "sourceStepIds": [
+        "STEP-006"
+      ],
+      "targetProgram": "CBLSL001",
+      "inputs": [
+        {
+          "ddName": "RAWCUST",
+          "datasetName": "RAW.CUSTOMERS",
+          "recordFormat": "FB",
+          "recordLength": 150
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "CUSTBASE",
+          "datasetName": "WORKLIB.CUSTOMER_BASE",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "RULE-001",
+          "description": "Filter records missing customer_id",
+          "action": "IF CUST-ID IS SPACES OR ZEROES THEN BYPASS-RECORD"
+        },
+        {
+          "ruleId": "RULE-002",
+          "description": "Default missing attributes",
+          "action": "IF STATUS IS SPACES MOVE UNKNOWN; IF REGION IS SPACES MOVE UNASSIGNED"
+        },
+        {
+          "ruleId": "RULE-003",
+          "description": "Filter inactive customers",
+          "action": "IF FUNCTION UPPER-CASE(STATUS) = INACTIVE THEN BYPASS-RECORD"
+        },
+        {
+          "ruleId": "R-ING-SAR002",
+          "description": "Remediate unanchored FIRST. customer_id (SAR-002)",
+          "action": "Perform unconditional string trimming: MOVE FUNCTION TRIM(CUST-NAME) TO OUT-CUST-NAME"
+        },
+        {
+          "ruleId": "R-RAW-PROVISIONAL-PU-ING-002",
+          "description": "Provisional external schema defensive buffer check (SAR2-003)",
+          "action": "Verify input dataset LRECL matches expected layout. Ensure FD record buffer handles potential trailing fields defensively without FILE STATUS 39 error."
+        }
+      ]
+    },
+    {
+      "puId": "PU-SRT-001",
+      "sourceStepIds": [
+        "STEP-007"
+      ],
+      "targetProgram": "SORT",
+      "inputs": [
+        {
+          "ddName": "SORTIN",
+          "datasetName": "WORKLIB.CUSTOMER_BASE",
+          "recordFormat": "FB",
+          "recordLength": 150
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "SORTOUT",
+          "datasetName": "WORKLIB.CUSTOMER_SORTED",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-SRT-001",
+          "description": "Sort customer base by customer_id",
+          "action": "DFSORT SORT FIELDS=(1,8,CH,A)"
+        }
+      ]
+    },
+    {
+      "puId": "PU-ING-003",
+      "sourceStepIds": [
+        "STEP-008"
+      ],
+      "targetProgram": "CBLSL001",
+      "inputs": [
+        {
+          "ddName": "RAWPROD",
+          "datasetName": "RAW.PRODUCTS",
+          "recordFormat": "FB",
+          "recordLength": 200
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "PRODBASE",
+          "datasetName": "WORKLIB.PRODUCT_BASE",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-ING-003",
+          "description": "Validate product master records",
+          "action": "Validate product_id > 0 and populate default UNKNOWN for missing subcategories"
+        },
+        {
+          "ruleId": "R-RAW-PROVISIONAL-PU-ING-003",
+          "description": "Provisional external schema defensive buffer check (SAR2-003)",
+          "action": "Verify input dataset LRECL matches expected layout. Ensure FD record buffer handles potential trailing fields defensively without FILE STATUS 39 error."
+        }
+      ]
+    },
+    {
+      "puId": "PU-SRT-002",
+      "sourceStepIds": [
+        "STEP-009"
+      ],
+      "targetProgram": "SORT",
+      "inputs": [
+        {
+          "ddName": "SORTIN",
+          "datasetName": "WORKLIB.PRODUCT_BASE",
+          "recordFormat": "FB",
+          "recordLength": 200
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "SORTOUT",
+          "datasetName": "WORKLIB.PRODUCT_SORTED",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-SRT-002",
+          "description": "Sort product base by product_id",
+          "action": "DFSORT SORT FIELDS=(1,8,CH,A)"
+        }
+      ]
+    },
+    {
+      "puId": "PU-ING-004",
+      "sourceStepIds": [
+        "STEP-010"
+      ],
+      "targetProgram": "CBLSL001",
+      "inputs": [
+        {
+          "ddName": "RAWSALES",
+          "datasetName": "RAW.SALES",
+          "recordFormat": "FB",
+          "recordLength": 180
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "SALEBASE",
+          "datasetName": "WORKLIB.SALES_BASE",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "RULE-004",
+          "description": "Calculate gross, discount, and net amounts",
+          "action": "COMPUTE GROSS = QTY * PRICE; COMPUTE DISC = GROSS * (PCT/100); COMPUTE NET = GROSS - DISC"
+        },
+        {
+          "ruleId": "R-ING-004",
+          "description": "Apply minimum transaction amount filter",
+          "action": "IF NET < WS-MIN-AMOUNT THEN BYPASS-RECORD"
+        },
+        {
+          "ruleId": "R-RAW-PROVISIONAL-PU-ING-004",
+          "description": "Provisional external schema defensive buffer check (SAR2-003)",
+          "action": "Verify input dataset LRECL matches expected layout. Ensure FD record buffer handles potential trailing fields defensively without FILE STATUS 39 error."
+        }
+      ]
+    },
+    {
+      "puId": "PU-SRT-003",
+      "sourceStepIds": [
+        "STEP-011"
+      ],
+      "targetProgram": "SORT",
+      "inputs": [
+        {
+          "ddName": "SORTIN",
+          "datasetName": "WORKLIB.SALES_BASE",
+          "recordFormat": "FB",
+          "recordLength": 180
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "SORTOUT",
+          "datasetName": "WORKLIB.SALES_SORTED",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-SRT-003",
+          "description": "Sort sales base by customer_id, sale_date, sale_id",
+          "action": "DFSORT SORT FIELDS=(1,8,CH,A,9,8,CH,A,17,8,CH,A)"
+        }
+      ]
+    },
+    {
+      "puId": "PU-CBL-002",
+      "sourceStepIds": [
+        "STEP-012"
+      ],
+      "targetProgram": "CBLSL002",
+      "inputs": [
+        {
+          "ddName": "CUSTSRT",
+          "datasetName": "WORKLIB.CUSTOMER_SORTED",
+          "recordFormat": "FB",
+          "recordLength": 150
+        },
+        {
+          "ddName": "SALESRT",
+          "datasetName": "WORKLIB.SALES_SORTED",
+          "recordFormat": "FB",
+          "recordLength": 180
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "CUSTSALE",
+          "datasetName": "WORKLIB.CUSTOMER_SALES",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "RULE-005",
+          "description": "Master-detail 1-to-many match-merge sequential processing (SAR2-004)",
+          "action": "Read CUSTOMER-SORTED master record into WS-MASTER-CUSTOMER-BUFFER. While SALES-SORTED transaction CUSTOMER-ID equals WS-MASTER-CUSTOMER-ID, emit merged output using buffered master fields. Advance transaction file. When transaction CUSTOMER-ID > master CUSTOMER-ID, advance master file."
+        },
+        {
+          "ruleId": "R-CBL-SAR006",
+          "description": "Preserve SAS PDV rightmost variable overwrite (SAR-006)",
+          "action": "Explicitly move SALES_SORTED.REGION to OUT-REGION, preserving SAS behavior where transaction dataset overwrites identically named master dataset variable."
+        }
+      ]
+    },
+    {
+      "puId": "PU-SRT-004",
+      "sourceStepIds": [
+        "STEP-013"
+      ],
+      "targetProgram": "SORT",
+      "inputs": [
+        {
+          "ddName": "SORTIN",
+          "datasetName": "WORKLIB.CUSTOMER_SALES",
+          "recordFormat": "FB",
+          "recordLength": 220
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "SORTOUT",
+          "datasetName": "WORKLIB.CUSTOMER_SALES_SORTED",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-SRT-004",
+          "description": "Sort customer sales by customer_id, sale_date",
+          "action": "DFSORT SORT FIELDS=(1,8,CH,A,9,8,CH,A)"
+        }
+      ]
+    },
+    {
+      "puId": "PU-CBL-003",
+      "sourceStepIds": [
+        "STEP-014"
+      ],
+      "targetProgram": "CBLSL002",
+      "inputs": [
+        {
+          "ddName": "CSALESRT",
+          "datasetName": "WORKLIB.CUSTOMER_SALES_SORTED",
+          "recordFormat": "FB",
+          "recordLength": 220
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "CUSTMNTH",
+          "datasetName": "WORKLIB.CUSTOMER_MONTHLY",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "RULE-006",
+          "description": "Stateful monthly accumulation per customer with explicit reset (SAR2-005)",
+          "action": "On FIRST.customer_id control-break, reset WS-CUSTOMER-TOTAL to 0 and WS-TRANS-COUNT to 0. For each observation, ADD NET-AMOUNT TO WS-CUSTOMER-TOTAL and ADD 1 TO WS-TRANS-COUNT."
+        },
+        {
+          "ruleId": "R-CBL-SAR007",
+          "description": "Preserve LAST.customer_id PDV attribute state (SAR-007)",
+          "action": "On LAST.customer_id break, capture non-retained fields from the current record and write summary to CUSTMNTH."
+        },
+        {
+          "ruleId": "R-CBL-SAR205",
+          "description": "Legacy SAS cumulative SUM divergence documentation (SAR2-005)",
+          "action": "Flag RUNTIME_VALIDATION_REQUIRED: Legacy SAS STEP-014 lacked FIRST.customer_id reset, accumulating across all customers. Target resets per customer for business correctness."
+        }
+      ]
+    },
+    {
+      "puId": "PU-AGG-001",
+      "sourceStepIds": [
+        "STEP-015"
+      ],
+      "targetProgram": "CBLSL003",
+      "inputs": [
+        {
+          "ddName": "SALESRT",
+          "datasetName": "WORKLIB.SALES_SORTED",
+          "recordFormat": "FB",
+          "recordLength": 180
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "REGSUM",
+          "datasetName": "WORKLIB.REGION_SUMMARY",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-AGG-001",
+          "description": "PROC SUMMARY by region and channel",
+          "action": "Control break on REGION and CHANNEL. Accumulate GROSS, DISCOUNT, and NET amounts."
+        }
+      ]
+    },
+    {
+      "puId": "PU-AGG-002",
+      "sourceStepIds": [
+        "STEP-016"
+      ],
+      "targetProgram": "CBLSL003",
+      "inputs": [
+        {
+          "ddName": "SALESRT",
+          "datasetName": "WORKLIB.SALES_SORTED",
+          "recordFormat": "FB",
+          "recordLength": 180
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "REGMEAN",
+          "datasetName": "WORKLIB.REGION_MEANS",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-AGG-002",
+          "description": "PROC MEANS by region",
+          "action": "Control break on REGION. Compute MEAN-NET = SUM-NET / COUNT-RECORDS and MEAN-QTY = SUM-QTY / COUNT-RECORDS."
+        }
+      ]
+    },
+    {
+      "puId": "PU-AGG-003",
+      "sourceStepIds": [
+        "STEP-017"
+      ],
+      "targetProgram": "CBLSL003",
+      "inputs": [
+        {
+          "ddName": "SALESRT",
+          "datasetName": "WORKLIB.SALES_SORTED",
+          "recordFormat": "FB",
+          "recordLength": 180
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "REGFRQ",
+          "datasetName": "WORKLIB.REGION_CHANNEL_FREQ",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-AGG-003",
+          "description": "PROC FREQ region by channel crosstab",
+          "action": "Count cell frequencies and derive relative percentages."
+        }
+      ]
+    },
+    {
+      "puId": "PU-PIV-001",
+      "sourceStepIds": [
+        "STEP-018"
+      ],
+      "targetProgram": "CBLSL003",
+      "inputs": [
+        {
+          "ddName": "REGSUM",
+          "datasetName": "WORKLIB.REGION_SUMMARY",
+          "recordFormat": "FB",
+          "recordLength": 120
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "REGWIDE",
+          "datasetName": "WORKLIB.REGION_SUMMARY_WIDE",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-PIV-001",
+          "description": "PROC TRANSPOSE region summary to wide OCCURS",
+          "action": "Pivot metric rows into wide record columns (METRIC_TOTAL_REV, METRIC_TOTAL_DISC, METRIC_NET)."
+        }
+      ]
+    },
+    {
+      "puId": "PU-ENR-001",
+      "sourceStepIds": [
+        "STEP-019"
+      ],
+      "targetProgram": "CBLSL004",
+      "inputs": [
+        {
+          "ddName": "SALESRT",
+          "datasetName": "WORKLIB.SALES_SORTED",
+          "recordFormat": "FB",
+          "recordLength": 180
+        },
+        {
+          "ddName": "CUSTSRT",
+          "datasetName": "WORKLIB.CUSTOMER_SORTED",
+          "recordFormat": "FB",
+          "recordLength": 150
+        },
+        {
+          "ddName": "PRODSRT",
+          "datasetName": "WORKLIB.PRODUCT_SORTED",
+          "recordFormat": "FB",
+          "recordLength": 200
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "ENRSALE",
+          "datasetName": "WORKLIB.ENRICHED_SALES",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "RULE-007",
+          "description": "Relational 3-way join and band derivation",
+          "action": "Join sales on customer_id and product_id; derive VALUE_BAND (HIGH/MED/LOW) and PRICING_BAND."
+        }
+      ]
+    },
+    {
+      "puId": "PU-ENR-002",
+      "sourceStepIds": [
+        "STEP-020"
+      ],
+      "targetProgram": "CBLSL004",
+      "inputs": [
+        {
+          "ddName": "ENRSALE",
+          "datasetName": "WORKLIB.ENRICHED_SALES",
+          "recordFormat": "FB",
+          "recordLength": 260
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "SALERULE",
+          "datasetName": "WORKLIB.SALES_RULES",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "RULE-008",
+          "description": "Evaluate transaction risk and priority rules",
+          "action": "Assign RISK_FLAG (LARGE_TRANSACTION, HIGH_DISCOUNT) and PRIORITY (CRITICAL, HIGH, STANDARD)."
+        }
+      ]
+    },
+    {
+      "puId": "PU-SRT-005",
+      "sourceStepIds": [
+        "STEP-021"
+      ],
+      "targetProgram": "SORT",
+      "inputs": [
+        {
+          "ddName": "SORTIN",
+          "datasetName": "WORKLIB.SALES_RULES",
+          "recordFormat": "FB",
+          "recordLength": 280
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "SORTOUT",
+          "datasetName": "WORKLIB.SALES_RULES_SORTED",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-SRT-005",
+          "description": "Sort sales rules by priority and risk_flag",
+          "action": "DFSORT SORT FIELDS=(1,12,CH,A,13,20,CH,A)"
+        }
+      ]
+    },
+    {
+      "puId": "PU-ENR-003",
+      "sourceStepIds": [
+        "STEP-022"
+      ],
+      "targetProgram": "CBLSL004",
+      "inputs": [
+        {
+          "ddName": "RULESRT",
+          "datasetName": "WORKLIB.SALES_RULES_SORTED",
+          "recordFormat": "FB",
+          "recordLength": 280
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "REVQFIN",
+          "datasetName": "WORKLIB.REVIEW_QUEUE_FINAL",
+          "disposition": "NEW,CATLG"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-ENR-003",
+          "description": "Filter high-risk review queue",
+          "action": "IF RISK_FLAG NOT = NORMAL OR PRIORITY NOT = STANDARD THEN WRITE REVIEW_QUEUE_RECORD"
+        }
+      ]
+    },
+    {
+      "puId": "PU-ENR-004",
+      "sourceStepIds": [
+        "STEP-023"
+      ],
+      "targetProgram": "CBLSL004",
+      "inputs": [
+        {
+          "ddName": "ENRSALE",
+          "datasetName": "WORKLIB.ENRICHED_SALES",
+          "recordFormat": "FB",
+          "recordLength": 260
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "CATSUM",
+          "datasetName": "WORKLIB.CATEGORY_SUMMARY",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-ENR-004",
+          "description": "SQL category summary aggregation",
+          "action": "Aggregate gross, discount, and net totals by product category."
+        }
+      ]
+    },
+    {
+      "puId": "PU-ENR-005",
+      "sourceStepIds": [
+        "STEP-024"
+      ],
+      "targetProgram": "CBLSL004",
+      "inputs": [
+        {
+          "ddName": "ENRSALE",
+          "datasetName": "WORKLIB.ENRICHED_SALES",
+          "recordFormat": "FB",
+          "recordLength": 260
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "SUBCSUM",
+          "datasetName": "WORKLIB.SUBCATEGORY_SUMMARY",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-ENR-005",
+          "description": "SQL subcategory summary aggregation",
+          "action": "Aggregate sales totals by category and subcategory."
+        }
+      ]
+    },
+    {
+      "puId": "PU-DLY-001",
+      "sourceStepIds": [
+        "STEP-025"
+      ],
+      "targetProgram": "CBLSL005",
+      "inputs": [
+        {
+          "ddName": "CUSTMNTH",
+          "datasetName": "WORKLIB.CUSTOMER_MONTHLY",
+          "recordFormat": "FB",
+          "recordLength": 160
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "CUSTTIER",
+          "datasetName": "WORKLIB.CUSTOMER_TIER",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "RULE-009",
+          "description": "Customer lifetime tier classification",
+          "action": "IF TOTAL_SALES >= 100000 SET PLATINUM; ELSE IF >= 50000 SET GOLD; SET LOYALTY_FLAG Y IF TRANS_COUNT >= 100."
+        }
+      ]
+    },
+    {
+      "puId": "PU-SRT-006",
+      "sourceStepIds": [
+        "STEP-026"
+      ],
+      "targetProgram": "SORT",
+      "inputs": [
+        {
+          "ddName": "SORTIN",
+          "datasetName": "WORKLIB.CUSTOMER_TIER",
+          "recordFormat": "FB",
+          "recordLength": 180
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "SORTOUT",
+          "datasetName": "WORKLIB.CUSTOMER_TIER_SORTED",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-SRT-006",
+          "description": "Sort customer tier by customer_id",
+          "action": "DFSORT SORT FIELDS=(1,8,CH,A)"
+        }
+      ]
+    },
+    {
+      "puId": "PU-DLY-002",
+      "sourceStepIds": [
+        "STEP-027"
+      ],
+      "targetProgram": "CBLSL005",
+      "inputs": [
+        {
+          "ddName": "SALESRT",
+          "datasetName": "WORKLIB.SALES_SORTED",
+          "recordFormat": "FB",
+          "recordLength": 180
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "DAILYSAL",
+          "datasetName": "WORKLIB.DAILY_SALES",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-DLY-SAR003",
+          "description": "Remediate incompatible sort order (SAR-003)",
+          "action": "Mandate DFSORT by sale_date prior to control break processing; accumulate daily sales."
+        }
+      ]
+    },
+    {
+      "puId": "PU-SRT-007",
+      "sourceStepIds": [
+        "STEP-028"
+      ],
+      "targetProgram": "SORT",
+      "inputs": [
+        {
+          "ddName": "SORTIN",
+          "datasetName": "WORKLIB.DAILY_SALES",
+          "recordFormat": "FB",
+          "recordLength": 120
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "SORTOUT",
+          "datasetName": "WORKLIB.DAILY_SALES_SORTED",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-SRT-007",
+          "description": "Sort daily sales by sale_date",
+          "action": "DFSORT SORT FIELDS=(1,8,CH,A)"
+        }
+      ]
+    },
+    {
+      "puId": "PU-PIV-002",
+      "sourceStepIds": [
+        "STEP-029"
+      ],
+      "targetProgram": "CBLSL005",
+      "inputs": [
+        {
+          "ddName": "DAILYSAL",
+          "datasetName": "WORKLIB.DAILY_SALES_SORTED",
+          "recordFormat": "FB",
+          "recordLength": 120
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "DAILYWID",
+          "datasetName": "WORKLIB.DAILY_SALES_WIDE",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-PIV-002",
+          "description": "PROC TRANSPOSE daily sales metrics to wide format",
+          "action": "Pivot daily transaction amounts into OCCURS day table."
+        }
+      ]
+    },
+    {
+      "puId": "PU-DLY-003",
+      "sourceStepIds": [
+        "STEP-030"
+      ],
+      "targetProgram": "CBLSL005",
+      "inputs": [
+        {
+          "ddName": "CUSTTIER",
+          "datasetName": "WORKLIB.CUSTOMER_TIER_SORTED",
+          "recordFormat": "FB",
+          "recordLength": 180
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "CUSTFLG",
+          "datasetName": "WORKLIB.CUSTOMER_FLAGS",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-DLY-003",
+          "description": "Assign customer activity and dormancy flags",
+          "action": "Set ACTIVE_FLAG, DORMANCY_STATUS based on days since last transaction."
+        }
+      ]
+    },
+    {
+      "puId": "PU-SRT-008",
+      "sourceStepIds": [
+        "STEP-031"
+      ],
+      "targetProgram": "SORT",
+      "inputs": [
+        {
+          "ddName": "SORTIN",
+          "datasetName": "WORKLIB.CUSTOMER_FLAGS",
+          "recordFormat": "FB",
+          "recordLength": 190
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "SORTOUT",
+          "datasetName": "WORKLIB.CUSTOMER_FLAGS_SORTED",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-SRT-008",
+          "description": "Sort customer flags by customer_id",
+          "action": "DFSORT SORT FIELDS=(1,8,CH,A)"
+        }
+      ]
+    },
+    {
+      "puId": "PU-DLY-004",
+      "sourceStepIds": [
+        "STEP-032"
+      ],
+      "targetProgram": "CBLSL005",
+      "inputs": [
+        {
+          "ddName": "SALESRT",
+          "datasetName": "WORKLIB.SALES_SORTED",
+          "recordFormat": "FB",
+          "recordLength": 180
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "RGCHSUM",
+          "datasetName": "WORKLIB.REGION_CHANNEL_SUMMARY",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-DLY-004",
+          "description": "PROC SUMMARY by customer_region and sales_channel",
+          "action": "Control break on REGION and CHANNEL; emit summary records."
+        }
+      ]
+    },
+    {
+      "puId": "PU-DLY-005",
+      "sourceStepIds": [
+        "STEP-033"
+      ],
+      "targetProgram": "CBLSL005",
+      "inputs": [
+        {
+          "ddName": "SALESRT",
+          "datasetName": "WORKLIB.SALES_SORTED",
+          "recordFormat": "FB",
+          "recordLength": 180
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "CHFRQ",
+          "datasetName": "WORKLIB.CHANNEL_FREQ",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-DLY-005",
+          "description": "PROC FREQ sales channel distribution",
+          "action": "Count frequency distribution across sales channels."
+        }
+      ]
+    },
+    {
+      "puId": "PU-RPT-001",
+      "sourceStepIds": [
+        "STEP-034",
+        "STEP-035",
+        "STEP-036",
+        "STEP-037"
+      ],
+      "targetProgram": "CBLSL006",
+      "inputs": [
+        {
+          "ddName": "SALESRT",
+          "datasetName": "WORKLIB.SALES_SORTED",
+          "recordFormat": "FB",
+          "recordLength": 180
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "RPTINP",
+          "datasetName": "WORKLIB.REGION_REPORT_INPUT",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-RPT-001",
+          "description": "Parameterized region report input selection",
+          "action": "IF RUN_REGION = ALL THEN PASS ALL RECORDS; ELSE FILTER BY RUN_REGION."
+        }
+      ]
+    },
+    {
+      "puId": "PU-RPT-002",
+      "sourceStepIds": [
+        "STEP-038"
+      ],
+      "targetProgram": "CBLSL006",
+      "inputs": [
+        {
+          "ddName": "RPTINP",
+          "datasetName": "WORKLIB.REGION_REPORT_INPUT",
+          "recordFormat": "FB",
+          "recordLength": 180
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "REGRPT",
+          "datasetName": "WORKLIB.REGION_REPORT",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-RPT-002",
+          "description": "SQL regional sales totals aggregation",
+          "action": "Group by customer_region; aggregate gross_amount, discount_amount, and net_amount."
+        }
+      ]
+    },
+    {
+      "puId": "PU-RPT-003",
+      "sourceStepIds": [
+        "STEP-039"
+      ],
+      "targetProgram": "CBLSL006",
+      "inputs": [
+        {
+          "ddName": "REGRPT",
+          "datasetName": "WORKLIB.REGION_REPORT",
+          "recordFormat": "FB",
+          "recordLength": 140
+        },
+        {
+          "ddName": "RGCHSUM",
+          "datasetName": "WORKLIB.REGION_CHANNEL_SUMMARY",
+          "recordFormat": "FB",
+          "recordLength": 140
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "FINFEXT",
+          "datasetName": "WORKLIB.FINAL_SALES_EXTRACT",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-RPT-SAR004",
+          "description": "Remediate MERGE key and sort mismatch (SAR-004)",
+          "action": "Mandate DFSORT by customer_region on both input files before sequential match-merge."
+        }
+      ]
+    },
+    {
+      "puId": "PU-SRT-009",
+      "sourceStepIds": [
+        "STEP-040"
+      ],
+      "targetProgram": "SORT",
+      "inputs": [
+        {
+          "ddName": "SORTIN",
+          "datasetName": "WORKLIB.FINAL_SALES_EXTRACT",
+          "recordFormat": "FB",
+          "recordLength": 200
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "SORTOUT",
+          "datasetName": "WORKLIB.FINAL_SALES_EXTRACT_SORTED",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-SRT-009",
+          "description": "Sort final sales extract by region",
+          "action": "DFSORT SORT FIELDS=(1,20,CH,A)"
+        }
+      ]
+    },
+    {
+      "puId": "PU-UTL-001",
+      "sourceStepIds": [
+        "STEP-041"
+      ],
+      "targetProgram": "IEFBR14",
+      "inputs": [],
+      "outputs": [
+        {
+          "ddName": "SCRATCH",
+          "datasetName": "WORKLIB.TEMP.*",
+          "disposition": "OLD,DELETE"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-UTL-001",
+          "description": "PROC DATASETS scratch cleanup",
+          "action": "Delete intermediate temporary work files."
+        }
+      ]
+    },
+    {
+      "puId": "PU-RPT-004",
+      "sourceStepIds": [
+        "STEP-042"
+      ],
+      "targetProgram": "CBLSL006",
+      "inputs": [
+        {
+          "ddName": "FINFEXT",
+          "datasetName": "WORKLIB.FINAL_SALES_EXTRACT_SORTED",
+          "recordFormat": "FB",
+          "recordLength": 200
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "AUDTEXT",
+          "datasetName": "WORKLIB.AUDIT_EXTRACT",
+          "disposition": "NEW,CATLG"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-RPT-004",
+          "description": "Generate audit extract records",
+          "action": "Format audit ledger with hash totals and timestamp markers."
+        }
+      ]
+    },
+    {
+      "puId": "PU-RPT-005",
+      "sourceStepIds": [
+        "STEP-043"
+      ],
+      "targetProgram": "CBLSL006",
+      "inputs": [
+        {
+          "ddName": "AUDTEXT",
+          "datasetName": "WORKLIB.AUDIT_EXTRACT",
+          "recordFormat": "FB",
+          "recordLength": 200
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "CTRLTOT",
+          "datasetName": "WORKLIB.FINAL_CONTROL_TOTALS",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-RPT-005",
+          "description": "Compute final control totals",
+          "action": "Aggregate row count, sum of total_sales, and expected benchmarks."
+        }
+      ]
+    },
+    {
+      "puId": "PU-RPT-006",
+      "sourceStepIds": [
+        "STEP-044"
+      ],
+      "targetProgram": "CBLSL006",
+      "inputs": [
+        {
+          "ddName": "CTRLTOT",
+          "datasetName": "WORKLIB.FINAL_CONTROL_TOTALS",
+          "recordFormat": "FB",
+          "recordLength": 100
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "RECONLED",
+          "datasetName": "WORKLIB.RECONCILIATION",
+          "disposition": "NEW,CATLG"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "RULE-010",
+          "description": "Reconcile final totals against expected benchmarks",
+          "action": "Evaluate match status: MATCH, MISMATCH, or BASELINE_REQUIRED."
+        },
+        {
+          "ruleId": "R-RPT-SAR001",
+          "description": "Remediate infinite loop in conditional SET (SAR-001)",
+          "action": "Read control totals record once in 1000-INITIALIZE; terminate processing upon EOF to avoid infinite looping."
+        }
+      ]
+    },
+    {
+      "puId": "PU-SEG-001",
+      "sourceStepIds": [
+        "STEP-045"
+      ],
+      "targetProgram": "CBLSL007",
+      "inputs": [
+        {
+          "ddName": "ENRSALE",
+          "datasetName": "WORKLIB.ENRICHED_SALES",
+          "recordFormat": "FB",
+          "recordLength": 260
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "SEGROLL",
+          "datasetName": "WORKLIB.SEGMENT_ROLLUP",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-SEG-001",
+          "description": "Customer segment rollup aggregation",
+          "action": "Control break on segment; accumulate transaction metrics."
+        }
+      ]
+    },
+    {
+      "puId": "PU-SRT-010",
+      "sourceStepIds": [
+        "STEP-046"
+      ],
+      "targetProgram": "SORT",
+      "inputs": [
+        {
+          "ddName": "SORTIN",
+          "datasetName": "WORKLIB.SEGMENT_ROLLUP",
+          "recordFormat": "FB",
+          "recordLength": 140
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "SORTOUT",
+          "datasetName": "WORKLIB.SEGMENT_ROLLUP_SORTED",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-SRT-010",
+          "description": "Sort segment rollup by segment",
+          "action": "DFSORT SORT FIELDS=(1,20,CH,A)"
+        }
+      ]
+    },
+    {
+      "puId": "PU-SEG-002",
+      "sourceStepIds": [
+        "STEP-047"
+      ],
+      "targetProgram": "CBLSL007",
+      "inputs": [
+        {
+          "ddName": "SEGROLL",
+          "datasetName": "WORKLIB.SEGMENT_ROLLUP_SORTED",
+          "recordFormat": "FB",
+          "recordLength": 140
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "SEGRANK",
+          "datasetName": "WORKLIB.SEGMENT_RANKED",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-SEG-SAR010",
+          "description": "Replace monotonic() with deterministic sequence counter (SAR-010)",
+          "action": "ADD 1 TO WS-GENERATED-RANK sequentially after explicit sort."
+        }
+      ]
+    },
+    {
+      "puId": "PU-SEG-003",
+      "sourceStepIds": [
+        "STEP-048"
+      ],
+      "targetProgram": "CBLSL007",
+      "inputs": [
+        {
+          "ddName": "ENRSALE",
+          "datasetName": "WORKLIB.ENRICHED_SALES",
+          "recordFormat": "FB",
+          "recordLength": 260
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "EXCEXT",
+          "datasetName": "WORKLIB.EXCEPTION_EXTRACT",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-SEG-003",
+          "description": "Extract delivery exceptions",
+          "action": "Filter delivery status exceptions and invalid address indicators."
+        }
+      ]
+    },
+    {
+      "puId": "PU-SEG-004",
+      "sourceStepIds": [
+        "STEP-049"
+      ],
+      "targetProgram": "CBLSL007",
+      "inputs": [
+        {
+          "ddName": "EXCEXT",
+          "datasetName": "WORKLIB.EXCEPTION_EXTRACT",
+          "recordFormat": "FB",
+          "recordLength": 160
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "EXCFRQ",
+          "datasetName": "WORKLIB.EXCEPTION_FREQ",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-SEG-004",
+          "description": "PROC FREQ exception categories",
+          "action": "Count frequency distribution across exception reasons."
+        }
+      ]
+    },
+    {
+      "puId": "PU-SEG-005",
+      "sourceStepIds": [
+        "STEP-050"
+      ],
+      "targetProgram": "CBLSL007",
+      "inputs": [
+        {
+          "ddName": "EXCEXT",
+          "datasetName": "WORKLIB.EXCEPTION_EXTRACT",
+          "recordFormat": "FB",
+          "recordLength": 160
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "EXCSUM",
+          "datasetName": "WORKLIB.EXCEPTION_SUMMARY",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-SEG-005",
+          "description": "Exception summary totals",
+          "action": "Summarize total exception amounts and impact metrics."
+        }
+      ]
+    },
+    {
+      "puId": "PU-SEG-006",
+      "sourceStepIds": [
+        "STEP-051"
+      ],
+      "targetProgram": "CBLSL007",
+      "inputs": [
+        {
+          "ddName": "ENRSALE",
+          "datasetName": "WORKLIB.ENRICHED_SALES",
+          "recordFormat": "FB",
+          "recordLength": 260
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "DELIVMAN",
+          "datasetName": "WORKLIB.DELIVERY_MANIFEST_RAW",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-SEG-006",
+          "description": "Delivery manifest relational projection",
+          "action": "Project shipping address, carrier code, and tracking IDs."
+        }
+      ]
+    },
+    {
+      "puId": "PU-SEG-007",
+      "sourceStepIds": [
+        "STEP-052"
+      ],
+      "targetProgram": "CBLSL007",
+      "inputs": [
+        {
+          "ddName": "DELIVRAW",
+          "datasetName": "WORKLIB.DELIVERY_MANIFEST_RAW",
+          "recordFormat": "FB",
+          "recordLength": 240
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "MANIFEST",
+          "datasetName": "WORKLIB.DELIVERY_MANIFEST",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-SEG-007",
+          "description": "Format delivery manifest records",
+          "action": "Format carrier dispatch lines and dispatch barcodes."
+        }
+      ]
+    },
+    {
+      "puId": "PU-SRT-011",
+      "sourceStepIds": [
+        "STEP-053"
+      ],
+      "targetProgram": "SORT",
+      "inputs": [
+        {
+          "ddName": "SORTIN",
+          "datasetName": "WORKLIB.DELIVERY_MANIFEST",
+          "recordFormat": "FB",
+          "recordLength": 240
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "SORTOUT",
+          "datasetName": "WORKLIB.DELIVERY_MANIFEST_SORTED",
+          "disposition": "NEW,CATLG"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-SRT-011",
+          "description": "Sort delivery manifest by customer_id and sale_id",
+          "action": "DFSORT SORT FIELDS=(1,8,CH,A,9,8,CH,A)"
+        }
+      ]
+    },
+    {
+      "puId": "PU-SCR-001",
+      "sourceStepIds": [
+        "STEP-054",
+        "STEP-055",
+        "STEP-056"
+      ],
+      "targetProgram": "CBLSL008",
+      "inputs": [
+        {
+          "ddName": "ENRSALE",
+          "datasetName": "WORKLIB.ENRICHED_SALES",
+          "recordFormat": "FB",
+          "recordLength": 260
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "HIVALOUT",
+          "datasetName": "WORKLIB.HIGH_VALUE_SALES",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-SCR-001",
+          "description": "Filter high-value transactions (> 10000)",
+          "action": "IF NET_AMOUNT >= 10000 WRITE HIGH_VALUE_RECORD"
+        }
+      ]
+    },
+    {
+      "puId": "PU-SCR-002",
+      "sourceStepIds": [
+        "STEP-057"
+      ],
+      "targetProgram": "CBLSL008",
+      "inputs": [
+        {
+          "ddName": "HIVALOUT",
+          "datasetName": "WORKLIB.HIGH_VALUE_SALES",
+          "recordFormat": "FB",
+          "recordLength": 260
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "HIVALSUM",
+          "datasetName": "WORKLIB.HIGH_VALUE_SALES_CUST",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-SCR-002",
+          "description": "SQL high-value sales customer aggregation",
+          "action": "Sum high value transactions by customer_id."
+        }
+      ]
+    },
+    {
+      "puId": "PU-SCR-003",
+      "sourceStepIds": [
+        "STEP-058"
+      ],
+      "targetProgram": "CBLSL008",
+      "inputs": [
+        {
+          "ddName": "CUSTTIER",
+          "datasetName": "WORKLIB.CUSTOMER_TIER_SORTED",
+          "recordFormat": "FB",
+          "recordLength": 180
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "CUSTPROF",
+          "datasetName": "WORKLIB.FINAL_CUSTOMER_PROFILE",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-SCR-003",
+          "description": "Synthesize customer profile",
+          "action": "Consolidate tier, tenure, and spend attributes."
+        }
+      ]
+    },
+    {
+      "puId": "PU-SRT-012",
+      "sourceStepIds": [
+        "STEP-059"
+      ],
+      "targetProgram": "SORT",
+      "inputs": [
+        {
+          "ddName": "SORTIN",
+          "datasetName": "WORKLIB.FINAL_CUSTOMER_PROFILE",
+          "recordFormat": "FB",
+          "recordLength": 200
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "SORTOUT",
+          "datasetName": "WORKLIB.FINAL_CUSTOMER_PROFILE_SORTED",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-SRT-012",
+          "description": "Sort final customer profile by customer_id",
+          "action": "DFSORT SORT FIELDS=(1,8,CH,A)"
+        }
+      ]
+    },
+    {
+      "puId": "PU-SCR-004",
+      "sourceStepIds": [
+        "STEP-060"
+      ],
+      "targetProgram": "CBLSL008",
+      "inputs": [
+        {
+          "ddName": "CUSTPROF",
+          "datasetName": "WORKLIB.FINAL_CUSTOMER_PROFILE_SORTED",
+          "recordFormat": "FB",
+          "recordLength": 200
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "PROFSEQ",
+          "datasetName": "WORKLIB.FINAL_CUSTOMER_PROFILE_SEQ",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-SCR-004",
+          "description": "Assign sequential customer profile number",
+          "action": "ADD 1 TO WS-PROFILE-SEQ-NUM."
+        }
+      ]
+    },
+    {
+      "puId": "PU-SCR-005",
+      "sourceStepIds": [
+        "STEP-061"
+      ],
+      "targetProgram": "CBLSL008",
+      "inputs": [
+        {
+          "ddName": "PROFSEQ",
+          "datasetName": "WORKLIB.FINAL_CUSTOMER_PROFILE_SEQ",
+          "recordFormat": "FB",
+          "recordLength": 210
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "PROFSUM",
+          "datasetName": "WORKLIB.CUSTOMER_PROFILE_SUMMARY",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-SCR-005",
+          "description": "PROC SUMMARY profile metrics by segment",
+          "action": "Control break on segment; summarize customer metrics."
+        }
+      ]
+    },
+    {
+      "puId": "PU-SCR-006",
+      "sourceStepIds": [
+        "STEP-062"
+      ],
+      "targetProgram": "CBLSL008",
+      "inputs": [
+        {
+          "ddName": "PROFSEQ",
+          "datasetName": "WORKLIB.FINAL_CUSTOMER_PROFILE_SEQ",
+          "recordFormat": "FB",
+          "recordLength": 210
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "PROFMET",
+          "datasetName": "WORKLIB.CUSTOMER_PROFILE_METRICS",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-SCR-006",
+          "description": "SQL customer profile metrics projection",
+          "action": "Compute segment-level average customer spend."
+        }
+      ]
+    },
+    {
+      "puId": "PU-SCR-007",
+      "sourceStepIds": [
+        "STEP-063"
+      ],
+      "targetProgram": "CBLSL008",
+      "inputs": [
+        {
+          "ddName": "PROFSEQ",
+          "datasetName": "WORKLIB.FINAL_CUSTOMER_PROFILE_SEQ",
+          "recordFormat": "FB",
+          "recordLength": 210
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "CUSTSCOR",
+          "datasetName": "WORKLIB.CUSTOMER_SCORING",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-SCR-007",
+          "description": "Multi-factor customer scoring model",
+          "action": "COMPUTE SCORE = (SPEND_FACTOR * 0.4) + (FREQ_FACTOR * 0.4) + (RECENCY_FACTOR * 0.2)."
+        }
+      ]
+    },
+    {
+      "puId": "PU-SRT-013",
+      "sourceStepIds": [
+        "STEP-064"
+      ],
+      "targetProgram": "SORT",
+      "inputs": [
+        {
+          "ddName": "SORTIN",
+          "datasetName": "WORKLIB.CUSTOMER_SCORING",
+          "recordFormat": "FB",
+          "recordLength": 220
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "SORTOUT",
+          "datasetName": "WORKLIB.CUSTOMER_SCORING_SORTED",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-SRT-013",
+          "description": "Sort customer scoring by score descending",
+          "action": "DFSORT SORT FIELDS=(15,8,PD,D)"
+        }
+      ]
+    },
+    {
+      "puId": "PU-SCR-008",
+      "sourceStepIds": [
+        "STEP-065"
+      ],
+      "targetProgram": "CBLSL008",
+      "inputs": [
+        {
+          "ddName": "CUSTSCOR",
+          "datasetName": "WORKLIB.CUSTOMER_SCORING_SORTED",
+          "recordFormat": "FB",
+          "recordLength": 220
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "SCORFRQ",
+          "datasetName": "WORKLIB.SCORE_TIER_FREQ",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-SCR-008",
+          "description": "PROC FREQ score tier distribution",
+          "action": "Count customer score tier distribution."
+        }
+      ]
+    },
+    {
+      "puId": "PU-SCR-009",
+      "sourceStepIds": [
+        "STEP-066"
+      ],
+      "targetProgram": "CBLSL008",
+      "inputs": [
+        {
+          "ddName": "CUSTSCOR",
+          "datasetName": "WORKLIB.CUSTOMER_SCORING_SORTED",
+          "recordFormat": "FB",
+          "recordLength": 220
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "REGSCOR",
+          "datasetName": "WORKLIB.REGION_SCORE_SUMMARY",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-SCR-009",
+          "description": "PROC SUMMARY score metrics by region",
+          "action": "Summarize score metrics by geographic region."
+        }
+      ]
+    },
+    {
+      "puId": "PU-SCR-010",
+      "sourceStepIds": [
+        "STEP-067"
+      ],
+      "targetProgram": "CBLSL008",
+      "inputs": [
+        {
+          "ddName": "REGSCOR",
+          "datasetName": "WORKLIB.REGION_SCORE_SUMMARY",
+          "recordFormat": "FB",
+          "recordLength": 140
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "SCORSUM",
+          "datasetName": "WORKLIB.SCORE_SUMMARY",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-SCR-010",
+          "description": "Format score statistics",
+          "action": "Derive regional score deciles and benchmark tiers."
+        }
+      ]
+    },
+    {
+      "puId": "PU-SCR-011",
+      "sourceStepIds": [
+        "STEP-068"
+      ],
+      "targetProgram": "CBLSL008",
+      "inputs": [
+        {
+          "ddName": "SCORSUM",
+          "datasetName": "WORKLIB.SCORE_SUMMARY",
+          "recordFormat": "FB",
+          "recordLength": 140
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "REGBNCH",
+          "datasetName": "WORKLIB.REGION_SCORE_BENCHMARKS",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-SCR-011",
+          "description": "SQL regional score benchmark calculation",
+          "action": "Project regional benchmark values for score comparisons."
+        }
+      ]
+    },
+    {
+      "puId": "PU-SCR-012",
+      "sourceStepIds": [
+        "STEP-069"
+      ],
+      "targetProgram": "CBLSL008",
+      "inputs": [
+        {
+          "ddName": "CUSTSCOR",
+          "datasetName": "WORKLIB.CUSTOMER_SCORING_SORTED",
+          "recordFormat": "FB",
+          "recordLength": 220
+        },
+        {
+          "ddName": "REGBNCH",
+          "datasetName": "WORKLIB.REGION_SCORE_BENCHMARKS",
+          "recordFormat": "FB",
+          "recordLength": 120
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "RCSCRFLG",
+          "datasetName": "WORKLIB.REGION_CUSTOMER_SCORE_FLAGS",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-SCR-012",
+          "description": "Assign benchmark comparison flags",
+          "action": "Set ABOVE_BENCHMARK_FLAG if customer score exceeds regional average."
+        }
+      ]
+    },
+    {
+      "puId": "PU-SRT-014",
+      "sourceStepIds": [
+        "STEP-070"
+      ],
+      "targetProgram": "SORT",
+      "inputs": [
+        {
+          "ddName": "SORTIN",
+          "datasetName": "WORKLIB.REGION_CUSTOMER_SCORE_FLAGS",
+          "recordFormat": "FB",
+          "recordLength": 230
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "SORTOUT",
+          "datasetName": "WORKLIB.REGION_CUSTOMER_SCORE_FLAGS_SORTED",
+          "disposition": "NEW,CATLG"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-SRT-014",
+          "description": "Sort score flags by region and customer_id",
+          "action": "DFSORT SORT FIELDS=(1,20,CH,A,21,8,CH,A)"
+        }
+      ]
+    },
+    {
+      "puId": "PU-PRD-001",
+      "sourceStepIds": [
+        "STEP-071"
+      ],
+      "targetProgram": "CBLSL009",
+      "inputs": [
+        {
+          "ddName": "ENRSALE",
+          "datasetName": "WORKLIB.ENRICHED_SALES",
+          "recordFormat": "FB",
+          "recordLength": 260
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "PRDPRF",
+          "datasetName": "WORKLIB.PRODUCT_PERFORMANCE_RAW",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-PRD-001",
+          "description": "SQL product sales performance join",
+          "action": "Aggregate sales by product_id and category."
+        }
+      ]
+    },
+    {
+      "puId": "PU-PRD-002",
+      "sourceStepIds": [
+        "STEP-072"
+      ],
+      "targetProgram": "CBLSL009",
+      "inputs": [
+        {
+          "ddName": "PRDPRF",
+          "datasetName": "WORKLIB.PRODUCT_PERFORMANCE_RAW",
+          "recordFormat": "FB",
+          "recordLength": 180
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "PRDPERF",
+          "datasetName": "WORKLIB.PRODUCT_PERFORMANCE",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-PRD-002",
+          "description": "Calculate product margin and profit",
+          "action": "COMPUTE MARGIN = (NET_REVENUE - TOTAL_COST) / NET_REVENUE."
+        }
+      ]
+    },
+    {
+      "puId": "PU-SRT-015",
+      "sourceStepIds": [
+        "STEP-073"
+      ],
+      "targetProgram": "SORT",
+      "inputs": [
+        {
+          "ddName": "SORTIN",
+          "datasetName": "WORKLIB.PRODUCT_PERFORMANCE",
+          "recordFormat": "FB",
+          "recordLength": 190
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "SORTOUT",
+          "datasetName": "WORKLIB.PRODUCT_PERFORMANCE_SORTED",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-SRT-015",
+          "description": "Sort product performance by category, net_revenue",
+          "action": "DFSORT SORT FIELDS=(1,40,CH,A,41,8,PD,D)"
+        }
+      ]
+    },
+    {
+      "puId": "PU-PRD-003",
+      "sourceStepIds": [
+        "STEP-074"
+      ],
+      "targetProgram": "CBLSL009",
+      "inputs": [
+        {
+          "ddName": "PRDPERF",
+          "datasetName": "WORKLIB.PRODUCT_PERFORMANCE_SORTED",
+          "recordFormat": "FB",
+          "recordLength": 190
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "CATREV",
+          "datasetName": "WORKLIB.CATEGORY_REVENUE_TOTALS",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-PRD-003",
+          "description": "PROC SUMMARY category revenue totals",
+          "action": "Control break on category; sum net revenues."
+        }
+      ]
+    },
+    {
+      "puId": "PU-PRD-004",
+      "sourceStepIds": [
+        "STEP-075"
+      ],
+      "targetProgram": "CBLSL009",
+      "inputs": [
+        {
+          "ddName": "PRDPERF",
+          "datasetName": "WORKLIB.PRODUCT_PERFORMANCE_SORTED",
+          "recordFormat": "FB",
+          "recordLength": 190
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "PRDCFRQ",
+          "datasetName": "WORKLIB.PRODUCT_CATEGORY_FREQ",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-PRD-004",
+          "description": "PROC FREQ product category counts",
+          "action": "Count frequency of active products per category."
+        }
+      ]
+    },
+    {
+      "puId": "PU-PRD-005",
+      "sourceStepIds": [
+        "STEP-076"
+      ],
+      "targetProgram": "CBLSL009",
+      "inputs": [
+        {
+          "ddName": "ENRSALE",
+          "datasetName": "WORKLIB.ENRICHED_SALES",
+          "recordFormat": "FB",
+          "recordLength": 260
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "PERIODFL",
+          "datasetName": "WORKLIB.SALES_PERIOD_FLAGS",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-PRD-005",
+          "description": "Assign seasonality and holiday flags",
+          "action": "Set QUARTER_TAG, HOLIDAY_IND based on sale_date calendar table."
+        }
+      ]
+    },
+    {
+      "puId": "PU-SRT-016",
+      "sourceStepIds": [
+        "STEP-077"
+      ],
+      "targetProgram": "SORT",
+      "inputs": [
+        {
+          "ddName": "SORTIN",
+          "datasetName": "WORKLIB.SALES_PERIOD_FLAGS",
+          "recordFormat": "FB",
+          "recordLength": 270
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "SORTOUT",
+          "datasetName": "WORKLIB.SALES_PERIOD_FLAGS_SORTED",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-SRT-016",
+          "description": "Sort sales period flags by period_tag",
+          "action": "DFSORT SORT FIELDS=(1,10,CH,A)"
+        }
+      ]
+    },
+    {
+      "puId": "PU-PRD-006",
+      "sourceStepIds": [
+        "STEP-078"
+      ],
+      "targetProgram": "CBLSL009",
+      "inputs": [
+        {
+          "ddName": "PERIODFL",
+          "datasetName": "WORKLIB.SALES_PERIOD_FLAGS_SORTED",
+          "recordFormat": "FB",
+          "recordLength": 270
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "QTRSUM",
+          "datasetName": "WORKLIB.QUARTERLY_SALES_SUMMARY",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-PRD-006",
+          "description": "PROC SUMMARY quarterly sales summary",
+          "action": "Control break on QUARTER_TAG; summarize quarterly metrics."
+        }
+      ]
+    },
+    {
+      "puId": "PU-PRD-007",
+      "sourceStepIds": [
+        "STEP-079"
+      ],
+      "targetProgram": "CBLSL009",
+      "inputs": [
+        {
+          "ddName": "PERIODFL",
+          "datasetName": "WORKLIB.SALES_PERIOD_FLAGS_SORTED",
+          "recordFormat": "FB",
+          "recordLength": 270
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "HOLSUM",
+          "datasetName": "WORKLIB.HOLIDAY_SALES_SUMMARY",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-PRD-007",
+          "description": "PROC SUMMARY holiday sales summary",
+          "action": "Control break on HOLIDAY_IND; summarize holiday transaction totals."
+        }
+      ]
+    },
+    {
+      "puId": "PU-PRD-008",
+      "sourceStepIds": [
+        "STEP-080"
+      ],
+      "targetProgram": "CBLSL009",
+      "inputs": [
+        {
+          "ddName": "PERIODFL",
+          "datasetName": "WORKLIB.SALES_PERIOD_FLAGS_SORTED",
+          "recordFormat": "FB",
+          "recordLength": 270
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "PERVAR",
+          "datasetName": "WORKLIB.PERIOD_VARIANCE_ANALYSIS",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-PRD-008",
+          "description": "SQL period variance analysis",
+          "action": "Compute period-over-period percentage variance in revenue."
+        }
+      ]
+    },
+    {
+      "puId": "PU-QAL-001",
+      "sourceStepIds": [
+        "STEP-081"
+      ],
+      "targetProgram": "SORT",
+      "inputs": [
+        {
+          "ddName": "SORTIN",
+          "datasetName": "RAW.SALES",
+          "recordFormat": "FB",
+          "recordLength": 180
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "SORTOUT",
+          "datasetName": "WORKLIB.SALES_DUPLICATE_CHECK",
+          "disposition": "NEW,PASS"
+        },
+        {
+          "ddName": "XSUM",
+          "datasetName": "WORKLIB.SALES_DUPLICATES",
+          "disposition": "NEW,CATLG"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-QAL-SAR012",
+          "description": "PROC SORT NODUPKEY DUPOUT= via DFSORT (SAR-012)",
+          "action": "DFSORT SORT FIELDS=(1,8,CH,A) with SUM FIELDS=NONE and XSUM output DD routing."
+        }
+      ]
+    },
+    {
+      "puId": "PU-QAL-002",
+      "sourceStepIds": [
+        "STEP-082"
+      ],
+      "targetProgram": "CBLSL010",
+      "inputs": [
+        {
+          "ddName": "SALEDUP",
+          "datasetName": "WORKLIB.SALES_DUPLICATE_CHECK",
+          "recordFormat": "FB",
+          "recordLength": 180
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "SALEQAL",
+          "datasetName": "WORKLIB.SALES_QUALITY",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-QAL-SAR009",
+          "description": "Evaluate data quality with 88-level null sentinels (SAR-009)",
+          "action": "Check 88-level sentinels explicitly before testing < 0 to prevent SAS missing value misclassification."
+        }
+      ]
+    },
+    {
+      "puId": "PU-QAL-003",
+      "sourceStepIds": [
+        "STEP-083"
+      ],
+      "targetProgram": "CBLSL010",
+      "inputs": [
+        {
+          "ddName": "SALEQAL",
+          "datasetName": "WORKLIB.SALES_QUALITY",
+          "recordFormat": "FB",
+          "recordLength": 200
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "QALFRQ",
+          "datasetName": "WORKLIB.QUALITY_FLAG_FREQ",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-QAL-003",
+          "description": "PROC FREQ quality flag distribution",
+          "action": "Count occurrence frequencies across quality validation flags."
+        }
+      ]
+    },
+    {
+      "puId": "PU-QAL-010",
+      "sourceStepIds": [
+        "STEP-084"
+      ],
+      "targetProgram": "CBLSL010",
+      "inputs": [
+        {
+          "ddName": "SALEQAL",
+          "datasetName": "WORKLIB.SALES_QUALITY",
+          "recordFormat": "FB",
+          "recordLength": 200
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "QALSUM",
+          "datasetName": "WORKLIB.QUALITY_METRIC_SUMMARY",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-QAL-010",
+          "description": "SQL quality metrics summary",
+          "action": "Calculate defect rate percentage and data quality scorecard."
+        }
+      ]
+    },
+    {
+      "puId": "PU-ACT-001",
+      "sourceStepIds": [
+        "STEP-085"
+      ],
+      "targetProgram": "CBLSL011",
+      "inputs": [
+        {
+          "ddName": "ENRSALE",
+          "datasetName": "WORKLIB.ENRICHED_SALES",
+          "recordFormat": "FB",
+          "recordLength": 260
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "ACTRAW",
+          "datasetName": "WORKLIB.CUSTOMER_ACTIVITY_RAW",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-ACT-001",
+          "description": "SQL customer historical activity aggregation",
+          "action": "Aggregate order counts and lifetime spend per customer."
+        }
+      ]
+    },
+    {
+      "puId": "PU-ACT-002",
+      "sourceStepIds": [
+        "STEP-086"
+      ],
+      "targetProgram": "CBLSL011",
+      "inputs": [
+        {
+          "ddName": "ACTRAW",
+          "datasetName": "WORKLIB.CUSTOMER_ACTIVITY_RAW",
+          "recordFormat": "FB",
+          "recordLength": 180
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "CUSTACT",
+          "datasetName": "WORKLIB.CUSTOMER_ACTIVITY",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-ACT-002",
+          "description": "Evaluate RFM customer activity status",
+          "action": "Classify activity: ACTIVE, AT_RISK, CHURNED based on days since last purchase."
+        }
+      ]
+    },
+    {
+      "puId": "PU-SRT-017",
+      "sourceStepIds": [
+        "STEP-087"
+      ],
+      "targetProgram": "SORT",
+      "inputs": [
+        {
+          "ddName": "SORTIN",
+          "datasetName": "WORKLIB.CUSTOMER_ACTIVITY",
+          "recordFormat": "FB",
+          "recordLength": 190
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "SORTOUT",
+          "datasetName": "WORKLIB.CUSTOMER_ACTIVITY_SORTED",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-SRT-017",
+          "description": "Sort customer activity by customer_id",
+          "action": "DFSORT SORT FIELDS=(1,8,CH,A)"
+        }
+      ]
+    },
+    {
+      "puId": "PU-ACT-003",
+      "sourceStepIds": [
+        "STEP-088"
+      ],
+      "targetProgram": "CBLSL011",
+      "inputs": [
+        {
+          "ddName": "CUSTACT",
+          "datasetName": "WORKLIB.CUSTOMER_ACTIVITY_SORTED",
+          "recordFormat": "FB",
+          "recordLength": 190
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "ACTFRQ",
+          "datasetName": "WORKLIB.ACTIVITY_STATUS_FREQ",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-ACT-003",
+          "description": "PROC FREQ activity status counts",
+          "action": "Count frequency distribution across customer activity segments."
+        }
+      ]
+    },
+    {
+      "puId": "PU-ACT-004",
+      "sourceStepIds": [
+        "STEP-089"
+      ],
+      "targetProgram": "CBLSL011",
+      "inputs": [
+        {
+          "ddName": "CUSTACT",
+          "datasetName": "WORKLIB.CUSTOMER_ACTIVITY_SORTED",
+          "recordFormat": "FB",
+          "recordLength": 190
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "REGACT",
+          "datasetName": "WORKLIB.REGION_ACTIVITY_SUMMARY",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-ACT-004",
+          "description": "PROC SUMMARY regional activity summary",
+          "action": "Control break on region; summarize customer activity metrics."
+        }
+      ]
+    },
+    {
+      "puId": "PU-ACT-005",
+      "sourceStepIds": [
+        "STEP-090"
+      ],
+      "targetProgram": "CBLSL011",
+      "inputs": [
+        {
+          "ddName": "REGACT",
+          "datasetName": "WORKLIB.REGION_ACTIVITY_SUMMARY",
+          "recordFormat": "FB",
+          "recordLength": 160
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "REGCTRL",
+          "datasetName": "WORKLIB.REGION_CONTROLS",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-ACT-005",
+          "description": "Calculate regional control limits",
+          "action": "Compute upper and lower control limits (mean +/- 2*sigma)."
+        }
+      ]
+    },
+    {
+      "puId": "PU-ACT-006",
+      "sourceStepIds": [
+        "STEP-091"
+      ],
+      "targetProgram": "CBLSL011",
+      "inputs": [
+        {
+          "ddName": "REGCTRL",
+          "datasetName": "WORKLIB.REGION_CONTROLS",
+          "recordFormat": "FB",
+          "recordLength": 170
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "CTRLFRQ",
+          "datasetName": "WORKLIB.CONTROL_VIOLATIONS_FREQ",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-ACT-006",
+          "description": "PROC FREQ control violations",
+          "action": "Count occurrences of regional threshold violations."
+        }
+      ]
+    },
+    {
+      "puId": "PU-ACT-007",
+      "sourceStepIds": [
+        "STEP-092"
+      ],
+      "targetProgram": "CBLSL011",
+      "inputs": [
+        {
+          "ddName": "REGCTRL",
+          "datasetName": "WORKLIB.REGION_CONTROLS",
+          "recordFormat": "FB",
+          "recordLength": 170
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "REGVAR",
+          "datasetName": "WORKLIB.REGION_VARIANCE_SUMMARY",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-ACT-007",
+          "description": "SQL region variance aggregation",
+          "action": "Aggregate total control breaches by territory."
+        }
+      ]
+    },
+    {
+      "puId": "PU-ACT-008",
+      "sourceStepIds": [
+        "STEP-093"
+      ],
+      "targetProgram": "CBLSL011",
+      "inputs": [
+        {
+          "ddName": "ENRSALE",
+          "datasetName": "WORKLIB.ENRICHED_SALES",
+          "recordFormat": "FB",
+          "recordLength": 260
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "RUNSALE",
+          "datasetName": "WORKLIB.REGION_RUNNING_SALES",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-ACT-008",
+          "description": "Compute cumulative running totals",
+          "action": "RETAIN WS-RUNNING-TOTAL; ADD NET_AMOUNT TO WS-RUNNING-TOTAL per region."
+        }
+      ]
+    },
+    {
+      "puId": "PU-SRT-018",
+      "sourceStepIds": [
+        "STEP-094"
+      ],
+      "targetProgram": "SORT",
+      "inputs": [
+        {
+          "ddName": "SORTIN",
+          "datasetName": "WORKLIB.REGION_RUNNING_SALES",
+          "recordFormat": "FB",
+          "recordLength": 180
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "SORTOUT",
+          "datasetName": "WORKLIB.REGION_RUNNING_SALES_SORTED",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-SRT-018",
+          "description": "Sort running sales by region, sale_date",
+          "action": "DFSORT SORT FIELDS=(1,20,CH,A,21,8,CH,A)"
+        }
+      ]
+    },
+    {
+      "puId": "PU-ACT-009",
+      "sourceStepIds": [
+        "STEP-095"
+      ],
+      "targetProgram": "CBLSL011",
+      "inputs": [
+        {
+          "ddName": "RUNSRT",
+          "datasetName": "WORKLIB.REGION_RUNNING_SALES_SORTED",
+          "recordFormat": "FB",
+          "recordLength": 180
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "RUNDELTA",
+          "datasetName": "WORKLIB.REGION_RUNNING_SALES_DELTA",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-ACT-009",
+          "description": "Calculate running sales delta",
+          "action": "COMPUTE DELTA = CURRENT_RUNNING - PREVIOUS_RUNNING."
+        },
+        {
+          "ruleId": "R-ACT-TRANSIT-009",
+          "description": "Sequential transit dataset allocation pattern (SAR2-006)",
+          "action": "Target reads WORKLIB.REGION_RUNNING_SALES_SORTED and writes WORKLIB.REGION_RUNNING_SALES_DELTA to avoid sequential in-place file corruption."
+        }
+      ]
+    },
+    {
+      "puId": "PU-ACT-010",
+      "sourceStepIds": [
+        "STEP-096"
+      ],
+      "targetProgram": "CBLSL011",
+      "inputs": [
+        {
+          "ddName": "RUNDELTA",
+          "datasetName": "WORKLIB.REGION_RUNNING_SALES_DELTA",
+          "recordFormat": "FB",
+          "recordLength": 190
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "DELTASUM",
+          "datasetName": "WORKLIB.RUNNING_DELTA_SUMMARY",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-ACT-010",
+          "description": "PROC SUMMARY running delta summary",
+          "action": "Summarize running sales deltas across reporting regions."
+        }
+      ]
+    },
+    {
+      "puId": "PU-FIN-001",
+      "sourceStepIds": [
+        "STEP-097"
+      ],
+      "targetProgram": "CBLSL012",
+      "inputs": [
+        {
+          "ddName": "PRODSRT",
+          "datasetName": "WORKLIB.PRODUCT_SORTED",
+          "recordFormat": "FB",
+          "recordLength": 200
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "LOOKTAB",
+          "datasetName": "WORKLIB.PRODUCT_LOOKUP_TABLE",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-FIN-001",
+          "description": "SQL prepare in-memory product lookup table",
+          "action": "Select product_id, category, and target margin into indexed table."
+        }
+      ]
+    },
+    {
+      "puId": "PU-FIN-002",
+      "sourceStepIds": [
+        "STEP-098"
+      ],
+      "targetProgram": "CBLSL012",
+      "inputs": [
+        {
+          "ddName": "ENRSALE",
+          "datasetName": "WORKLIB.ENRICHED_SALES",
+          "recordFormat": "FB",
+          "recordLength": 260
+        },
+        {
+          "ddName": "LOOKTAB",
+          "datasetName": "WORKLIB.PRODUCT_LOOKUP_TABLE",
+          "recordFormat": "FB",
+          "recordLength": 120
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "SALELKUP",
+          "datasetName": "WORKLIB.SALES_LOOKUP_ENRICHED",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-FIN-002",
+          "description": "Sequential match-merge with in-memory lookup table",
+          "action": "Match sale on product_id; populate target margin and variance."
+        }
+      ]
+    },
+    {
+      "puId": "PU-FIN-003",
+      "sourceStepIds": [
+        "STEP-099"
+      ],
+      "targetProgram": "CBLSL012",
+      "inputs": [
+        {
+          "ddName": "SALELKUP",
+          "datasetName": "WORKLIB.SALES_LOOKUP_ENRICHED",
+          "recordFormat": "FB",
+          "recordLength": 280
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "LKUPFRQ",
+          "datasetName": "WORKLIB.LOOKUP_MATCH_RATE_FREQ",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-FIN-003",
+          "description": "PROC FREQ lookup match rate",
+          "action": "Compute percentage of transactions successfully enriched."
+        }
+      ]
+    },
+    {
+      "puId": "PU-FIN-004",
+      "sourceStepIds": [
+        "STEP-100"
+      ],
+      "targetProgram": "CBLSL012",
+      "inputs": [
+        {
+          "ddName": "ENRSALE",
+          "datasetName": "WORKLIB.ENRICHED_SALES",
+          "recordFormat": "FB",
+          "recordLength": 260
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "EDGECAS",
+          "datasetName": "WORKLIB.SEMANTIC_EDGE_CASES",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-FIN-004",
+          "description": "Evaluate semantic edge case boundaries",
+          "action": "Validate boundary conditions for zero discount, special missings, and max numeric values."
+        }
+      ]
+    },
+    {
+      "puId": "PU-FIN-005",
+      "sourceStepIds": [
+        "STEP-101"
+      ],
+      "targetProgram": "CBLSL012",
+      "inputs": [
+        {
+          "ddName": "EDGECAS",
+          "datasetName": "WORKLIB.SEMANTIC_EDGE_CASES",
+          "recordFormat": "FB",
+          "recordLength": 220
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "EDGEFRQ",
+          "datasetName": "WORKLIB.EDGE_CASE_FREQ",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-FIN-005",
+          "description": "PROC FREQ edge case categories",
+          "action": "Count occurrences of edge-case boundary triggers."
+        }
+      ]
+    },
+    {
+      "puId": "PU-FIN-006",
+      "sourceStepIds": [
+        "STEP-102"
+      ],
+      "targetProgram": "CBLSL012",
+      "inputs": [
+        {
+          "ddName": "ENRSALE",
+          "datasetName": "WORKLIB.ENRICHED_SALES",
+          "recordFormat": "FB",
+          "recordLength": 260
+        },
+        {
+          "ddName": "RECONLED",
+          "datasetName": "WORKLIB.RECONCILIATION",
+          "recordFormat": "FB",
+          "recordLength": 120
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "DASHRAW",
+          "datasetName": "WORKLIB.OPERATIONAL_DASHBOARD_RAW",
+          "disposition": "NEW,PASS"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-FIN-006",
+          "description": "SQL operational dashboard cross-domain rollup",
+          "action": "Consolidate operational metrics, record counts, and reconciliation status."
+        }
+      ]
+    },
+    {
+      "puId": "PU-FIN-007",
+      "sourceStepIds": [
+        "STEP-103"
+      ],
+      "targetProgram": "CBLSL012",
+      "inputs": [
+        {
+          "ddName": "DASHRAW",
+          "datasetName": "WORKLIB.OPERATIONAL_DASHBOARD_RAW",
+          "recordFormat": "FB",
+          "recordLength": 280
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "DASHOUT",
+          "datasetName": "WORKLIB.OPERATIONAL_DASHBOARD",
+          "disposition": "NEW,CATLG"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-FIN-007",
+          "description": "Format operational dashboard scorecard",
+          "action": "Format KPIs, balance check results, and execution telemetry."
+        }
+      ]
+    },
+    {
+      "puId": "PU-FIN-008",
+      "sourceStepIds": [
+        "STEP-104"
+      ],
+      "targetProgram": "CBLSL012",
+      "inputs": [
+        {
+          "ddName": "DASHOUT",
+          "datasetName": "WORKLIB.OPERATIONAL_DASHBOARD",
+          "recordFormat": "FB",
+          "recordLength": 280
+        }
+      ],
+      "outputs": [
+        {
+          "ddName": "SYSPRINT",
+          "datasetName": "SYSOUT",
+          "disposition": "SYSOUT=*"
+        }
+      ],
+      "logicRules": [
+        {
+          "ruleId": "R-FIN-008",
+          "description": "PROC PRINT operational dashboard report",
+          "action": "Write formatted report lines to SYSOUT print stream with page headers."
+        }
+      ]
+    }
+  ]
+}

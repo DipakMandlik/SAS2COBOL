@@ -1,0 +1,6 @@
+000100 * COPYBOOK: CPSEGM79 - FOR WORKLIB.SEGMENT_ROLLUP                
+000200 01  SEGMENT-ROLLUP-RECORD.                                       
+000300     05  SEGMEN-SEGMENT                 PIC X(20).                
+000400     05  SEGMEN-SEGMENT-SALES           PIC S9(9)V99 COMP-3.      
+000500     05  SEGMEN-SEGMENT-RECORDS         PIC S9(9)V99 COMP-3.      
+000600     05  SEGMEN-SEGMENT-UNITS           PIC S9(9)V99 COMP-3.      

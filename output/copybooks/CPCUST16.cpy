@@ -1,0 +1,8 @@
+000100 * COPYBOOK: CPCUST16 - FOR WORKLIB.CUSTOMER_MONTHLY              
+000200 01  CUSTOMER-MONTHLY-RECORD.                                     
+000300     05  CUSTOM-CUSTOMER-ID             PIC S9(9) COMP-3.         
+000400     05  CUSTOM-CUSTOMER-STATUS         PIC X(12).                
+000500     05  CUSTOM-CUSTOMER-SEGMENT        PIC X(20).                
+000600     05  CUSTOM-CUSTOMER-REGION         PIC X(20).                
+000700     05  CUSTOM-CUSTOMER-TOTAL          PIC S9(9)V99 COMP-3.      
+000800     05  CUSTOM-TRANSACTION-COUNT       PIC S9(9) COMP-3.         
