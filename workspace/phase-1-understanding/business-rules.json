@@ -1,0 +1,224 @@
+{
+  "rules": [
+    {
+      "ruleId": "RULE-001",
+      "description": "Filter invalid customer records lacking primary key",
+      "sourceReference": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 46,
+        "endLine": 46,
+        "stepId": "STEP-006"
+      },
+      "ruleType": "RECORD_EXCLUSION",
+      "affectedDatasets": [
+        "WORKLIB.CUSTOMER_BASE"
+      ],
+      "affectedFields": [
+        "customer_id"
+      ],
+      "condition": "missing(customer_id)",
+      "action": "delete observation",
+      "evidence": "if missing(customer_id) then delete;",
+      "confidence": "KNOWN"
+    },
+    {
+      "ruleId": "RULE-002",
+      "description": "Default missing customer attributes",
+      "sourceReference": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 47,
+        "endLine": 48,
+        "stepId": "STEP-006"
+      },
+      "ruleType": "FILTERING",
+      "affectedDatasets": [
+        "WORKLIB.CUSTOMER_BASE"
+      ],
+      "affectedFields": [
+        "status",
+        "region",
+        "segment"
+      ],
+      "condition": "missing(status) or missing(region) or missing(segment)",
+      "action": "status=UNKNOWN, region=UNASSIGNED, segment=UNCLASSIFIED",
+      "evidence": "if missing(status) then status='UNKNOWN'; if missing(region) then region='UNASSIGNED';",
+      "confidence": "KNOWN"
+    },
+    {
+      "ruleId": "RULE-003",
+      "description": "Filter inactive customer records",
+      "sourceReference": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 49,
+        "endLine": 49,
+        "stepId": "STEP-006"
+      },
+      "ruleType": "ELIGIBILITY",
+      "affectedDatasets": [
+        "WORKLIB.CUSTOMER_BASE"
+      ],
+      "affectedFields": [
+        "status"
+      ],
+      "condition": "upcase(status) ne 'INACTIVE'",
+      "action": "Retain only active or unclassified customers",
+      "evidence": "if upcase(status) ne 'INACTIVE';",
+      "confidence": "KNOWN"
+    },
+    {
+      "ruleId": "RULE-004",
+      "description": "Calculate transaction financials and apply minimum threshold",
+      "sourceReference": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 86,
+        "endLine": 92,
+        "stepId": "STEP-010"
+      },
+      "ruleType": "CALCULATION",
+      "affectedDatasets": [
+        "WORKLIB.SALES_BASE"
+      ],
+      "affectedFields": [
+        "gross_amount",
+        "discount_amount",
+        "net_amount"
+      ],
+      "condition": "net_amount >= &MIN_AMOUNT",
+      "action": "gross_amount=quantity*unit_price; discount_amount=gross*(pct/100); net=gross-discount",
+      "evidence": "gross_amount=quantity*unit_price; discount_amount=gross_amount*(discount_pct/100); net_amount=gross_amount-discount_amount;",
+      "confidence": "KNOWN"
+    },
+    {
+      "ruleId": "RULE-005",
+      "description": "Inner match-merge customer and sales transactions",
+      "sourceReference": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 104,
+        "endLine": 104,
+        "stepId": "STEP-012"
+      },
+      "ruleType": "MATCHING",
+      "affectedDatasets": [
+        "WORKLIB.CUSTOMER_SALES"
+      ],
+      "affectedFields": [
+        "customer_id",
+        "in_customer",
+        "in_sale"
+      ],
+      "condition": "in_customer and in_sale",
+      "action": "Output matched customer sales record",
+      "evidence": "if in_customer and in_sale;",
+      "confidence": "KNOWN"
+    },
+    {
+      "ruleId": "RULE-006",
+      "description": "Stateful monthly customer aggregation",
+      "sourceReference": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 118,
+        "endLine": 125,
+        "stepId": "STEP-014"
+      },
+      "ruleType": "STATEFUL_ACCUMULATION",
+      "affectedDatasets": [
+        "WORKLIB.CUSTOMER_MONTHLY"
+      ],
+      "affectedFields": [
+        "customer_total",
+        "transaction_count"
+      ],
+      "condition": "last.customer_id",
+      "action": "Accumulate customer_total and transaction_count per customer, output on boundary",
+      "evidence": "customer_total + net_amount; transaction_count + 1; if last.customer_id then output;",
+      "confidence": "KNOWN"
+    },
+    {
+      "ruleId": "RULE-007",
+      "description": "Classify transaction value and promotional pricing bands",
+      "sourceReference": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 182,
+        "endLine": 191,
+        "stepId": "STEP-019"
+      },
+      "ruleType": "CATEGORIZATION",
+      "affectedDatasets": [
+        "WORKLIB.ENRICHED_SALES"
+      ],
+      "affectedFields": [
+        "value_band",
+        "pricing_band"
+      ],
+      "condition": "CASE WHEN net_amount >= 10000 THEN HIGH ... WHEN discount_pct >= 30 THEN PROMO ...",
+      "action": "Assign value_band and pricing_band",
+      "evidence": "case when s.net_amount >= 10000 then 'HIGH' ... when s.discount_pct >= 30 then 'PROMO'",
+      "confidence": "KNOWN"
+    },
+    {
+      "ruleId": "RULE-008",
+      "description": "Identify high-risk transactions and assign review priorities",
+      "sourceReference": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 206,
+        "endLine": 212,
+        "stepId": "STEP-020"
+      },
+      "ruleType": "THRESHOLD_EXCEPTION",
+      "affectedDatasets": [
+        "WORKLIB.SALES_RULES"
+      ],
+      "affectedFields": [
+        "risk_flag",
+        "priority"
+      ],
+      "condition": "risk_flag ne 'NORMAL' or priority ne 'STANDARD'",
+      "action": "Route transaction to operational review queue",
+      "evidence": "if net_amount > 25000 then risk_flag='LARGE_TRANSACTION'; if quantity >= 100 then priority='BULK';",
+      "confidence": "KNOWN"
+    },
+    {
+      "ruleId": "RULE-009",
+      "description": "Classify customer lifetime tier and loyalty qualification",
+      "sourceReference": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 263,
+        "endLine": 268,
+        "stepId": "STEP-025"
+      },
+      "ruleType": "CATEGORIZATION",
+      "affectedDatasets": [
+        "WORKLIB.CUSTOMER_TIER"
+      ],
+      "affectedFields": [
+        "customer_tier",
+        "loyalty_flag"
+      ],
+      "condition": "total_sales thresholds and transaction_count >= 100",
+      "action": "Assign PLATINUM, GOLD, SILVER, or STANDARD tier and Y/N loyalty flag",
+      "evidence": "if total_sales >= 100000 then customer_tier='PLATINUM'; if transaction_count >= 100 then loyalty_flag='Y';",
+      "confidence": "KNOWN"
+    },
+    {
+      "ruleId": "RULE-010",
+      "description": "Reconcile final control totals against expected benchmarks",
+      "sourceReference": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 407,
+        "endLine": 410,
+        "stepId": "STEP-044"
+      },
+      "ruleType": "THRESHOLD_EXCEPTION",
+      "affectedDatasets": [
+        "WORKLIB.RECONCILIATION"
+      ],
+      "affectedFields": [
+        "reconciliation_status"
+      ],
+      "condition": "row_count=expected_rows and abs(total_sales-expected_sales) < 0.01",
+      "action": "Set status to MATCH, MISMATCH, or BASELINE_REQUIRED",
+      "evidence": "if missing(expected_rows) then reconciliation_status='BASELINE_REQUIRED'; else if row_count=expected_rows and abs(total_sales-expected_sales) < 0.01 then reconciliation_status='MATCH';",
+      "confidence": "KNOWN"
+    }
+  ]
+}

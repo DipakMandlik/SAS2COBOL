@@ -1,0 +1,61 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TargetCobolArchitecture",
+  "type": "object",
+  "required": ["programs", "sharedCopybooks", "jclJobs"],
+  "properties": {
+    "programs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["programId", "programType", "description", "assignedPUs"],
+        "properties": {
+          "programId": { "type": "string", "maxLength": 8 },
+          "programType": { "type": "string", "enum": ["BATCH_MAIN", "SUBPROGRAM", "DFSORT_CONTROL"] },
+          "description": { "type": "string" },
+          "assignedPUs": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "usedCopybooks": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    },
+    "sharedCopybooks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["copybookName", "purpose"],
+        "properties": {
+          "copybookName": { "type": "string" },
+          "purpose": { "type": "string" }
+        }
+      }
+    },
+    "jclJobs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["jobName", "steps"],
+        "properties": {
+          "jobName": { "type": "string", "maxLength": 8 },
+          "steps": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["stepNumber", "stepName", "programOrUtility"],
+              "properties": {
+                "stepNumber": { "type": "integer" },
+                "stepName": { "type": "string" },
+                "programOrUtility": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

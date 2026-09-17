@@ -1,0 +1,2624 @@
+{
+  "datasets": [
+    {
+      "datasetId": "DATA-001",
+      "datasetName": "RAW.CUSTOMERS",
+      "library": "RAW",
+      "isPermanent": true,
+      "schemaStatus": "PARTIAL_SCHEMA_UNKNOWN",
+      "variables": [
+        {
+          "fieldId": "FIELD-001",
+          "name": "customer_id",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-002",
+          "name": "customer_name",
+          "type": "CHAR",
+          "length": 80,
+          "semanticRole": "DIMENSION"
+        },
+        {
+          "fieldId": "FIELD-003",
+          "name": "segment",
+          "type": "CHAR",
+          "length": 20,
+          "semanticRole": "DIMENSION"
+        },
+        {
+          "fieldId": "FIELD-004",
+          "name": "region",
+          "type": "CHAR",
+          "length": 20,
+          "semanticRole": "DIMENSION"
+        },
+        {
+          "fieldId": "FIELD-005",
+          "name": "status",
+          "type": "CHAR",
+          "length": 12,
+          "semanticRole": "FILTER"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-002",
+      "datasetName": "RAW.PRODUCTS",
+      "library": "RAW",
+      "isPermanent": true,
+      "schemaStatus": "PARTIAL_SCHEMA_UNKNOWN",
+      "variables": [
+        {
+          "fieldId": "FIELD-006",
+          "name": "product_id",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-007",
+          "name": "product_name",
+          "type": "CHAR",
+          "length": 100,
+          "semanticRole": "DIMENSION"
+        },
+        {
+          "fieldId": "FIELD-008",
+          "name": "category",
+          "type": "CHAR",
+          "length": 40,
+          "semanticRole": "DIMENSION"
+        },
+        {
+          "fieldId": "FIELD-009",
+          "name": "subcategory",
+          "type": "CHAR",
+          "length": 40,
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-003",
+      "datasetName": "RAW.SALES",
+      "library": "RAW",
+      "isPermanent": true,
+      "schemaStatus": "PARTIAL_SCHEMA_UNKNOWN",
+      "variables": [
+        {
+          "fieldId": "FIELD-010",
+          "name": "sale_id",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-011",
+          "name": "customer_id",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-012",
+          "name": "product_id",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-013",
+          "name": "quantity",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-014",
+          "name": "unit_price",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-015",
+          "name": "discount_pct",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-016",
+          "name": "sale_date",
+          "type": "NUM",
+          "format": "date9.",
+          "semanticRole": "DIMENSION"
+        },
+        {
+          "fieldId": "FIELD-017",
+          "name": "region",
+          "type": "CHAR",
+          "length": 20,
+          "semanticRole": "DIMENSION"
+        },
+        {
+          "fieldId": "FIELD-018",
+          "name": "channel",
+          "type": "CHAR",
+          "length": 20,
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-004",
+      "datasetName": "WORKLIB.ACTIVITY_MATRIX",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-104",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-204",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-304",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-005",
+      "datasetName": "WORKLIB.ACTIVITY_SUMMARY",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-105",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-205",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-305",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-006",
+      "datasetName": "WORKLIB.AUDIT_EXTRACT",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-106",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-206",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-306",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-007",
+      "datasetName": "WORKLIB.CATEGORY_DEMAND_FREQ",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-107",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-207",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-307",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-008",
+      "datasetName": "WORKLIB.CATEGORY_DEMAND_SUMMARY",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-108",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-208",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-308",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-009",
+      "datasetName": "WORKLIB.CHANNEL_FREQ",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-109",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-209",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-309",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-010",
+      "datasetName": "WORKLIB.CUSTOMER_ACTIVITY",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-110",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-210",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-310",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-011",
+      "datasetName": "WORKLIB.CUSTOMER_BASE",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-019",
+          "name": "customer_id",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-020",
+          "name": "customer_name",
+          "type": "CHAR",
+          "length": 80,
+          "semanticRole": "DIMENSION"
+        },
+        {
+          "fieldId": "FIELD-021",
+          "name": "segment",
+          "type": "CHAR",
+          "length": 20,
+          "semanticRole": "DIMENSION"
+        },
+        {
+          "fieldId": "FIELD-022",
+          "name": "region",
+          "type": "CHAR",
+          "length": 20,
+          "semanticRole": "DIMENSION"
+        },
+        {
+          "fieldId": "FIELD-023",
+          "name": "status",
+          "type": "CHAR",
+          "length": 12,
+          "semanticRole": "FILTER"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-012",
+      "datasetName": "WORKLIB.CUSTOMER_FLAGS",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-112",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-212",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-312",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-013",
+      "datasetName": "WORKLIB.CUSTOMER_FLAGS_SORTED",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-113",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-213",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-313",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-014",
+      "datasetName": "WORKLIB.CUSTOMER_KPIS",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-114",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-214",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-314",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-015",
+      "datasetName": "WORKLIB.CUSTOMER_LOOKUP",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-115",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-215",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-315",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-016",
+      "datasetName": "WORKLIB.CUSTOMER_MONTHLY",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-116",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-216",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-316",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-017",
+      "datasetName": "WORKLIB.CUSTOMER_SALES",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-117",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-217",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-317",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-018",
+      "datasetName": "WORKLIB.CUSTOMER_SALES_SORTED",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-118",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-218",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-318",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-019",
+      "datasetName": "WORKLIB.CUSTOMER_SCORING",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-119",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-219",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-319",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-020",
+      "datasetName": "WORKLIB.CUSTOMER_SORTED",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-024",
+          "name": "customer_id",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-025",
+          "name": "customer_name",
+          "type": "CHAR",
+          "length": 80,
+          "semanticRole": "DIMENSION"
+        },
+        {
+          "fieldId": "FIELD-026",
+          "name": "segment",
+          "type": "CHAR",
+          "length": 20,
+          "semanticRole": "DIMENSION"
+        },
+        {
+          "fieldId": "FIELD-027",
+          "name": "region",
+          "type": "CHAR",
+          "length": 20,
+          "semanticRole": "DIMENSION"
+        },
+        {
+          "fieldId": "FIELD-028",
+          "name": "status",
+          "type": "CHAR",
+          "length": 12,
+          "semanticRole": "FILTER"
+        }
+      ],
+      "sortKeys": [
+        {
+          "name": "customer_id",
+          "direction": "ASC"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-021",
+      "datasetName": "WORKLIB.CUSTOMER_TIER",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-121",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-221",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-321",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-022",
+      "datasetName": "WORKLIB.CUSTOMER_TIER_SORTED",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-122",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-222",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-322",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-023",
+      "datasetName": "WORKLIB.DAILY_SALES",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-123",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-223",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-323",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-024",
+      "datasetName": "WORKLIB.DAILY_SALES_PIVOT",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-124",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-224",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-324",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-025",
+      "datasetName": "WORKLIB.DAILY_SALES_SORTED",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-125",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-225",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-325",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-026",
+      "datasetName": "WORKLIB.DELIVERY_MANIFEST",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-126",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-226",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-326",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-027",
+      "datasetName": "WORKLIB.ENGAGEMENT_SUMMARY",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-127",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-227",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-327",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-028",
+      "datasetName": "WORKLIB.ENRICHED_SALES",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-045",
+          "name": "sale_id",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-046",
+          "name": "sale_date",
+          "type": "NUM",
+          "semanticRole": "DIMENSION"
+        },
+        {
+          "fieldId": "FIELD-047",
+          "name": "customer_id",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-048",
+          "name": "customer_name",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        },
+        {
+          "fieldId": "FIELD-049",
+          "name": "segment",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        },
+        {
+          "fieldId": "FIELD-050",
+          "name": "customer_region",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        },
+        {
+          "fieldId": "FIELD-051",
+          "name": "product_id",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-052",
+          "name": "product_name",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        },
+        {
+          "fieldId": "FIELD-053",
+          "name": "category",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        },
+        {
+          "fieldId": "FIELD-054",
+          "name": "subcategory",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        },
+        {
+          "fieldId": "FIELD-055",
+          "name": "quantity",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-056",
+          "name": "unit_price",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-057",
+          "name": "discount_pct",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-058",
+          "name": "gross_amount",
+          "type": "NUM",
+          "semanticRole": "DERIVED_METRIC"
+        },
+        {
+          "fieldId": "FIELD-059",
+          "name": "discount_amount",
+          "type": "NUM",
+          "semanticRole": "DERIVED_METRIC"
+        },
+        {
+          "fieldId": "FIELD-060",
+          "name": "net_amount",
+          "type": "NUM",
+          "semanticRole": "DERIVED_METRIC"
+        },
+        {
+          "fieldId": "FIELD-061",
+          "name": "value_band",
+          "type": "CHAR",
+          "length": 10,
+          "semanticRole": "DIMENSION"
+        },
+        {
+          "fieldId": "FIELD-062",
+          "name": "pricing_band",
+          "type": "CHAR",
+          "length": 12,
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-029",
+      "datasetName": "WORKLIB.EXCEPTION_COUNTS",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-129",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-229",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-329",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-030",
+      "datasetName": "WORKLIB.EXCEPTION_EXTRACT",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-130",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-230",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-330",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-031",
+      "datasetName": "WORKLIB.EXCEPTION_SUMMARY",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-131",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-231",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-331",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-032",
+      "datasetName": "WORKLIB.FINAL_CONTROL_REPORT",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-132",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-232",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-332",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-033",
+      "datasetName": "WORKLIB.FINAL_CONTROL_TOTALS",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-133",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-233",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-333",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-034",
+      "datasetName": "WORKLIB.FINAL_CUSTOMER_PROFILE",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-134",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-234",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-334",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-035",
+      "datasetName": "WORKLIB.FINAL_SALES_EXTRACT",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-135",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-235",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-335",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-036",
+      "datasetName": "WORKLIB.HIGH_VALUE_CUSTOMER",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-136",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-236",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-336",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-037",
+      "datasetName": "WORKLIB.HIGH_VALUE_SALES",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-137",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-237",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-337",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-038",
+      "datasetName": "WORKLIB.LOOKUP_STATUS_COUNTS",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-138",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-238",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-338",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-039",
+      "datasetName": "WORKLIB.MANAGEMENT_SUMMARY",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-139",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-239",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-339",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-040",
+      "datasetName": "WORKLIB.METADATA_SNAPSHOT",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-140",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-240",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-340",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-041",
+      "datasetName": "WORKLIB.MONTH_REGION_RANKED",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-141",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-241",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-341",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-042",
+      "datasetName": "WORKLIB.MONTH_REGION_SUMMARY",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-142",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-242",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-342",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-043",
+      "datasetName": "WORKLIB.OPERATIONAL_DASHBOARD",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-143",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-243",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-343",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-044",
+      "datasetName": "WORKLIB.PRODUCT_BASE",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-029",
+          "name": "product_id",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-030",
+          "name": "product_name",
+          "type": "CHAR",
+          "length": 100,
+          "semanticRole": "DIMENSION"
+        },
+        {
+          "fieldId": "FIELD-031",
+          "name": "category",
+          "type": "CHAR",
+          "length": 40,
+          "semanticRole": "DIMENSION"
+        },
+        {
+          "fieldId": "FIELD-032",
+          "name": "subcategory",
+          "type": "CHAR",
+          "length": 40,
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-045",
+      "datasetName": "WORKLIB.PRODUCT_KPIS",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-145",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-245",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-345",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-046",
+      "datasetName": "WORKLIB.PRODUCT_PERFORMANCE",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-146",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-246",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-346",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-047",
+      "datasetName": "WORKLIB.PRODUCT_SORTED",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-029",
+          "name": "product_id",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-030",
+          "name": "product_name",
+          "type": "CHAR",
+          "length": 100,
+          "semanticRole": "DIMENSION"
+        },
+        {
+          "fieldId": "FIELD-031",
+          "name": "category",
+          "type": "CHAR",
+          "length": 40,
+          "semanticRole": "DIMENSION"
+        },
+        {
+          "fieldId": "FIELD-032",
+          "name": "subcategory",
+          "type": "CHAR",
+          "length": 40,
+          "semanticRole": "DIMENSION"
+        }
+      ],
+      "sortKeys": [
+        {
+          "name": "product_id",
+          "direction": "ASC"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-048",
+      "datasetName": "WORKLIB.QUALITY_CONTROL",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-148",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-248",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-348",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-049",
+      "datasetName": "WORKLIB.QUARTER_REGION_SUMMARY",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-149",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-249",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-349",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-050",
+      "datasetName": "WORKLIB.RECONCILIATION",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-150",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-250",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-350",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-051",
+      "datasetName": "WORKLIB.REGION_CHANGE_SUMMARY",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-151",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-251",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-351",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-052",
+      "datasetName": "WORKLIB.REGION_CHANNEL_FREQ",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-152",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-252",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-352",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-053",
+      "datasetName": "WORKLIB.REGION_CHANNEL_SUMMARY",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-153",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-253",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-353",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-054",
+      "datasetName": "WORKLIB.REGION_CONTROLS",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-154",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-254",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-354",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-055",
+      "datasetName": "WORKLIB.REGION_CONTROL_COUNTS",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-155",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-255",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-355",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-056",
+      "datasetName": "WORKLIB.REGION_CONTROL_DETAIL",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-156",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-256",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-356",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-057",
+      "datasetName": "WORKLIB.REGION_CUSTOMER_SCORE",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-157",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-257",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-357",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-058",
+      "datasetName": "WORKLIB.REGION_CUSTOMER_SCORE_FLAGS",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-158",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-258",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-358",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-059",
+      "datasetName": "WORKLIB.REGION_REPORT",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-159",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-259",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-359",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-060",
+      "datasetName": "WORKLIB.REGION_REPORT_INPUT",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-160",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-260",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-360",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-061",
+      "datasetName": "WORKLIB.REGION_RUNNING_SALES",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-161",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-261",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-361",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-062",
+      "datasetName": "WORKLIB.REGION_SUMMARY",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-162",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-262",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-362",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-063",
+      "datasetName": "WORKLIB.REGION_SUMMARY_WIDE",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-163",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-263",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-363",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-064",
+      "datasetName": "WORKLIB.REGION_TIER_FREQ",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-164",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-264",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-364",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-065",
+      "datasetName": "WORKLIB.REVIEW_QUEUE",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-165",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-265",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-365",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-066",
+      "datasetName": "WORKLIB.REVIEW_QUEUE_FINAL",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-166",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-266",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-366",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-067",
+      "datasetName": "WORKLIB.SALES_BASE",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-033",
+          "name": "sale_id",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-034",
+          "name": "customer_id",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-035",
+          "name": "product_id",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-036",
+          "name": "quantity",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-037",
+          "name": "unit_price",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-038",
+          "name": "discount_pct",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-039",
+          "name": "gross_amount",
+          "type": "NUM",
+          "format": "comma14.2",
+          "semanticRole": "DERIVED_METRIC"
+        },
+        {
+          "fieldId": "FIELD-040",
+          "name": "discount_amount",
+          "type": "NUM",
+          "format": "comma14.2",
+          "semanticRole": "DERIVED_METRIC"
+        },
+        {
+          "fieldId": "FIELD-041",
+          "name": "net_amount",
+          "type": "NUM",
+          "format": "comma14.2",
+          "semanticRole": "DERIVED_METRIC"
+        },
+        {
+          "fieldId": "FIELD-042",
+          "name": "sale_date",
+          "type": "NUM",
+          "format": "date9.",
+          "semanticRole": "DIMENSION"
+        },
+        {
+          "fieldId": "FIELD-043",
+          "name": "region",
+          "type": "CHAR",
+          "length": 20,
+          "semanticRole": "DIMENSION"
+        },
+        {
+          "fieldId": "FIELD-044",
+          "name": "channel",
+          "type": "CHAR",
+          "length": 20,
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-068",
+      "datasetName": "WORKLIB.SALES_DUPLICATES",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-168",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-268",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-368",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-069",
+      "datasetName": "WORKLIB.SALES_DUPLICATE_CHECK",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-169",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-269",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-369",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-070",
+      "datasetName": "WORKLIB.SALES_LOOKUP_ENRICHED",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-170",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-270",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-370",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-071",
+      "datasetName": "WORKLIB.SALES_PERIOD_FLAGS",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-171",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-271",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-371",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-072",
+      "datasetName": "WORKLIB.SALES_QUALITY",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-172",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-272",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-372",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-073",
+      "datasetName": "WORKLIB.SALES_QUALITY_COUNTS",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-173",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-273",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-373",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-074",
+      "datasetName": "WORKLIB.SALES_RULES",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-174",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-274",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-374",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-075",
+      "datasetName": "WORKLIB.SALES_SORTED",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-033",
+          "name": "sale_id",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-034",
+          "name": "customer_id",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-035",
+          "name": "product_id",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-036",
+          "name": "quantity",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-037",
+          "name": "unit_price",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-038",
+          "name": "discount_pct",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-039",
+          "name": "gross_amount",
+          "type": "NUM",
+          "format": "comma14.2",
+          "semanticRole": "DERIVED_METRIC"
+        },
+        {
+          "fieldId": "FIELD-040",
+          "name": "discount_amount",
+          "type": "NUM",
+          "format": "comma14.2",
+          "semanticRole": "DERIVED_METRIC"
+        },
+        {
+          "fieldId": "FIELD-041",
+          "name": "net_amount",
+          "type": "NUM",
+          "format": "comma14.2",
+          "semanticRole": "DERIVED_METRIC"
+        },
+        {
+          "fieldId": "FIELD-042",
+          "name": "sale_date",
+          "type": "NUM",
+          "format": "date9.",
+          "semanticRole": "DIMENSION"
+        },
+        {
+          "fieldId": "FIELD-043",
+          "name": "region",
+          "type": "CHAR",
+          "length": 20,
+          "semanticRole": "DIMENSION"
+        },
+        {
+          "fieldId": "FIELD-044",
+          "name": "channel",
+          "type": "CHAR",
+          "length": 20,
+          "semanticRole": "DIMENSION"
+        }
+      ],
+      "sortKeys": [
+        {
+          "name": "customer_id",
+          "direction": "ASC"
+        },
+        {
+          "name": "sale_date",
+          "direction": "ASC"
+        },
+        {
+          "name": "sale_id",
+          "direction": "ASC"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-076",
+      "datasetName": "WORKLIB.SCORE_DISTRIBUTION",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-176",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-276",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-376",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-077",
+      "datasetName": "WORKLIB.SCORE_SUMMARY",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-177",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-277",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-377",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-078",
+      "datasetName": "WORKLIB.SEGMENT_RANKED",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-178",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-278",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-378",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-079",
+      "datasetName": "WORKLIB.SEGMENT_ROLLUP",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-179",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-279",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-379",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-080",
+      "datasetName": "WORKLIB.SEGMENT_ROLLUP_SORTED",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-180",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-280",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-380",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-081",
+      "datasetName": "WORKLIB.SEMANTIC_EDGE_CASES",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-181",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-281",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-381",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-082",
+      "datasetName": "WORKLIB.SEMANTIC_EDGE_COUNTS",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-182",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-282",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-382",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-083",
+      "datasetName": "WORKLIB.TIER_ACTIVITY_FREQ",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-183",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-283",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-383",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    },
+    {
+      "datasetId": "DATA-084",
+      "datasetName": "WORKLIB.TIER_SUMMARY",
+      "library": "WORKLIB",
+      "isPermanent": false,
+      "schemaStatus": "COMPLETE",
+      "variables": [
+        {
+          "fieldId": "FIELD-184",
+          "name": "primary_key",
+          "type": "NUM",
+          "semanticRole": "BUSINESS_IDENTIFIER"
+        },
+        {
+          "fieldId": "FIELD-284",
+          "name": "metric_value",
+          "type": "NUM",
+          "semanticRole": "MEASURE"
+        },
+        {
+          "fieldId": "FIELD-384",
+          "name": "classification_tag",
+          "type": "CHAR",
+          "semanticRole": "DIMENSION"
+        }
+      ]
+    }
+  ]
+}

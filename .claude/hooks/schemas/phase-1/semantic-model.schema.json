@@ -1,0 +1,75 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SemanticIntermediateModel",
+  "type": "object",
+  "required": ["modelId", "operations"],
+  "properties": {
+    "modelId": { "type": "string" },
+    "operations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["operationId", "stepId", "type", "inputs", "outputs", "sourceReference", "uncertaintyStatus"],
+        "properties": {
+          "operationId": { "type": "string", "pattern": "^SEM-[0-9A-Za-z_-]+$" },
+          "stepId": { "type": "string" },
+          "type": {
+            "type": "string",
+            "enum": [
+              "SORT_OPERATION",
+              "GROUP_AGGREGATION",
+              "DATA_TRANSFORMATION",
+              "SEQUENTIAL_MERGE",
+              "WIDE_TO_LONG_RESHAPE",
+              "LONG_TO_WIDE_RESHAPE",
+              "RELATIONAL_QUERY",
+              "FREQUENCY_COUNTING",
+              "FILE_CONCATENATION",
+              "FILTER_SUBSET"
+            ]
+          },
+          "inputs": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "outputs": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "groupKeys": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "measurements": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["variable", "metric"],
+              "properties": {
+                "variable": { "type": "string" },
+                "metric": { "type": "string" }
+              }
+            }
+          },
+          "businessRuleIds": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "sourceReference": {
+            "type": "object",
+            "required": ["file", "startLine", "endLine"],
+            "properties": {
+              "file": { "type": "string" },
+              "startLine": { "type": "integer", "minimum": 1 },
+              "endLine": { "type": "integer", "minimum": 1 }
+            }
+          },
+          "uncertaintyStatus": {
+            "type": "string",
+            "enum": ["KNOWN", "INFERRED", "REQUIRES_REVIEW", "UNKNOWN"]
+          }
+        }
+      }
+    }
+  }
+}

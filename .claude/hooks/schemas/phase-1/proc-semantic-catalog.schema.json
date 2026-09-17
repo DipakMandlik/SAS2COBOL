@@ -1,0 +1,71 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ProcSemanticCatalog",
+  "type": "object",
+  "required": ["procs"],
+  "properties": {
+    "procs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["procId", "stepId", "procName", "inputDatasets", "outputDatasets", "semanticOperations"],
+        "properties": {
+          "procId": { "type": "string", "pattern": "^PROC-[0-9A-Za-z_-]+$" },
+          "stepId": { "type": "string" },
+          "procName": { "type": "string" },
+          "inputDatasets": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "outputDatasets": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "semanticOperations": {
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "SORTING",
+                "GROUPING",
+                "AGGREGATION",
+                "RESHAPING",
+                "JOINING",
+                "FILTERING",
+                "FREQUENCY_ANALYSIS",
+                "REPORTING",
+                "SQL_PROCESSING"
+              ]
+            }
+          },
+          "byVariables": { "type": "array", "items": { "type": "string" } },
+          "classVariables": { "type": "array", "items": { "type": "string" } },
+          "varVariables": { "type": "array", "items": { "type": "string" } },
+          "options": { "type": "object" },
+          "statisticalMetrics": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["metric", "variable"],
+              "properties": {
+                "metric": { "type": "string" },
+                "variable": { "type": "string" }
+              }
+            }
+          },
+          "shapeTransformation": {
+            "type": "string",
+            "enum": [
+              "SAME_SHAPE",
+              "REORDERED",
+              "MANY_TO_FEW_AGGREGATED",
+              "WIDE_TO_LONG",
+              "LONG_TO_WIDE",
+              "FILTERED_SUBSET"
+            ]
+          }
+        }
+      }
+    }
+  }
+}

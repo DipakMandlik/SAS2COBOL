@@ -1,0 +1,28 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "StaticAnalysis",
+  "type": "object",
+  "required": ["files", "verdict"],
+  "properties": {
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["file", "areaAViolations", "areaBViolations", "fileStatusChecks", "compliant"],
+        "properties": {
+          "file": { "type": "string" },
+          "areaAViolations": { "type": "integer" },
+          "areaBViolations": { "type": "integer" },
+          "fileStatusChecks": { "type": "integer" },
+          "missingFileStatusChecks": { "type": "integer" },
+          "compliant": { "type": "boolean" },
+          "findings": {
+            "type": "array",
+            "items": { "type": "string" }
+          }
+        }
+      }
+    },
+    "verdict": { "type": "string", "enum": ["PASSED", "FAILED"] }
+  }
+}

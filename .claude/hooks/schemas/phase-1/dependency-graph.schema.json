@@ -1,0 +1,37 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DependencyGraph",
+  "type": "object",
+  "required": ["nodes", "edges", "executionSequence"],
+  "properties": {
+    "nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "type", "label"],
+        "properties": {
+          "id": { "type": "string" },
+          "type": { "type": "string", "enum": ["STEP", "DATASET", "EXTERNAL_FILE"] },
+          "label": { "type": "string" }
+        }
+      }
+    },
+    "edges": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["edgeId", "from", "to", "relation"],
+        "properties": {
+          "edgeId": { "type": "string", "pattern": "^DEP-[0-9A-Za-z_-]+$" },
+          "from": { "type": "string" },
+          "to": { "type": "string" },
+          "relation": { "type": "string", "enum": ["READS", "WRITES", "INVOKES"] }
+        }
+      }
+    },
+    "executionSequence": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  }
+}

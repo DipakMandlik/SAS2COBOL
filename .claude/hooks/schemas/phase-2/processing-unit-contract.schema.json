@@ -1,0 +1,60 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ProcessingUnitContracts",
+  "type": "object",
+  "required": ["processingUnits"],
+  "properties": {
+    "processingUnits": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["puId", "sourceStepIds", "targetProgram", "inputs", "outputs", "logicRules"],
+        "properties": {
+          "puId": { "type": "string" },
+          "sourceStepIds": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "targetProgram": { "type": "string" },
+          "inputs": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["ddName", "datasetName"],
+              "properties": {
+                "ddName": { "type": "string" },
+                "datasetName": { "type": "string" },
+                "recordFormat": { "type": "string" },
+                "recordLength": { "type": "integer" }
+              }
+            }
+          },
+          "outputs": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["ddName", "datasetName"],
+              "properties": {
+                "ddName": { "type": "string" },
+                "datasetName": { "type": "string" },
+                "disposition": { "type": "string" }
+              }
+            }
+          },
+          "logicRules": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["ruleId", "description", "action"],
+              "properties": {
+                "ruleId": { "type": "string" },
+                "description": { "type": "string" },
+                "action": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

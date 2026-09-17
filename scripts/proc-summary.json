@@ -1,0 +1,482 @@
+[
+  {
+    "index": 1,
+    "stepId": "STEP-007",
+    "name": "SORT",
+    "startLine": 55,
+    "endLine": 58,
+    "text": "proc sort data=WORKLIB.customer_base out=WORKLIB.customer_sorted; by customer_id; run;"
+  },
+  {
+    "index": 2,
+    "stepId": "STEP-009",
+    "name": "SORT",
+    "startLine": 69,
+    "endLine": 72,
+    "text": "proc sort data=WORKLIB.product_base out=WORKLIB.product_sorted; by product_id; run;"
+  },
+  {
+    "index": 3,
+    "stepId": "STEP-011",
+    "name": "SORT",
+    "startLine": 95,
+    "endLine": 98,
+    "text": "proc sort data=WORKLIB.sales_base out=WORKLIB.sales_sorted; by customer_id sale_date sale_id; run;"
+  },
+  {
+    "index": 4,
+    "stepId": "STEP-013",
+    "name": "SORT",
+    "startLine": 110,
+    "endLine": 113,
+    "text": "proc sort data=WORKLIB.customer_sales out=WORKLIB.customer_sales_sorted; by customer_id sale_date; run;"
+  },
+  {
+    "index": 5,
+    "stepId": "STEP-015",
+    "name": "SUMMARY",
+    "startLine": 130,
+    "endLine": 141,
+    "text": "proc summary data=WORKLIB.sales_sorted nway; class region channel; var gross_amount discount_amount net_amount quantity; output out=WORKLIB.region_channel_summary sum(gross_amount)=gross_sales sum(discount_amount)=discount_total sum(net_amount)=net_sales sum(quantity)=units mean(net_amount)=avg_ticket max(net_amount)=max_ticket min(net_amount)=min_ticket; run;"
+  },
+  {
+    "index": 6,
+    "stepId": "STEP-016",
+    "name": "MEANS",
+    "startLine": 143,
+    "endLine": 151,
+    "text": "proc means data=WORKLIB.sales_sorted nway; class region; var net_amount quantity; output out=WORKLIB.region_summary sum(net_amount)=regional_sales sum(quantity)=regional_units mean(net_amount)=regional_avg max(net_amount)=regional_max; run;"
+  },
+  {
+    "index": 7,
+    "stepId": "STEP-017",
+    "name": "FREQ",
+    "startLine": 153,
+    "endLine": 156,
+    "text": "proc freq data=WORKLIB.sales_sorted; tables region*channel / missing out=WORKLIB.region_channel_freq; tables channel / missing out=WORKLIB.channel_freq; run;"
+  },
+  {
+    "index": 8,
+    "stepId": "STEP-018",
+    "name": "TRANSPOSE",
+    "startLine": 158,
+    "endLine": 162,
+    "text": "proc transpose data=WORKLIB.region_summary out=WORKLIB.region_summary_wide prefix=metric_; id region; var regional_sales regional_units regional_avg regional_max; run;"
+  },
+  {
+    "index": 9,
+    "stepId": "STEP-019",
+    "name": "SQL",
+    "startLine": 164,
+    "endLine": 199,
+    "text": "proc sql; create table WORKLIB.enriched_sales as select s.sale_id, s.sale_date, s.customer_id, c.customer_name, c.segment, c.region as customer_region, s.product_id, p.product_name, p.category, p.subcategory, s.quantity, s.unit_price, s.discount_pct, s.gross_amount, s.discount_amount, s.net_amount, case when s.net_amount >= 10000 then 'HIGH' when s.net_amount >= 5000 then 'MEDIUM' else 'STANDARD' end as value_band length=10, case when s.discount_pct >= 30 then 'PROMO' when s.discount_pct > 0 then 'DISCOUNTED' else 'FULL_PRICE' end as pricing_band length=12 from WORKLIB.sales_sorted as s left join WORKLIB.customer_sorted as c on s.customer_id=c.customer_id left join WORKLIB.product_sorted as p on s.product_id=p.product_id where s.net_amount > 0 order by s.customer_id, s.sale_date, s.sale_id; quit;"
+  },
+  {
+    "index": 10,
+    "stepId": "STEP-021",
+    "name": "SORT",
+    "startLine": 215,
+    "endLine": 217,
+    "text": "proc sort data=WORKLIB.sales_rules out=WORKLIB.review_queue; by descending net_amount customer_id sale_date; run;"
+  },
+  {
+    "index": 11,
+    "stepId": "STEP-023",
+    "name": "SQL",
+    "startLine": 232,
+    "endLine": 245,
+    "text": "proc sql; create table WORKLIB.customer_kpis as select customer_id, max(customer_name) as customer_name, max(customer_region) as region, max(customer_segment) as segment, sum(net_amount) as total_sales, count(*) as transaction_count, mean(net_amount) as average_transaction, max(net_amount) as maximum_transaction from WORKLIB.enriched_sales group by customer_id having calculated total_sales > 0; quit;"
+  },
+  {
+    "index": 12,
+    "stepId": "STEP-024",
+    "name": "SQL",
+    "startLine": 247,
+    "endLine": 258,
+    "text": "proc sql; create table WORKLIB.product_kpis as select product_id, max(product_name) as product_name, max(category) as category, max(subcategory) as subcategory, sum(quantity) as units_sold, sum(net_amount) as net_sales, mean(net_amount) as average_sale from WORKLIB.enriched_sales group by product_id; quit;"
+  },
+  {
+    "index": 13,
+    "stepId": "STEP-026",
+    "name": "SORT",
+    "startLine": 271,
+    "endLine": 273,
+    "text": "proc sort data=WORKLIB.customer_tier out=WORKLIB.customer_tier_sorted; by descending total_sales customer_id; run;"
+  },
+  {
+    "index": 14,
+    "stepId": "STEP-028",
+    "name": "SORT",
+    "startLine": 289,
+    "endLine": 291,
+    "text": "proc sort data=WORKLIB.daily_sales out=WORKLIB.daily_sales_sorted; by sale_date; run;"
+  },
+  {
+    "index": 15,
+    "stepId": "STEP-029",
+    "name": "TRANSPOSE",
+    "startLine": 293,
+    "endLine": 297,
+    "text": "proc transpose data=WORKLIB.daily_sales_sorted out=WORKLIB.daily_sales_pivot prefix=day_; id sale_date; var daily_sales daily_units; run;"
+  },
+  {
+    "index": 16,
+    "stepId": "STEP-031",
+    "name": "SORT",
+    "startLine": 311,
+    "endLine": 314,
+    "text": "proc sort data=WORKLIB.customer_flags out=WORKLIB.customer_flags_sorted; by region customer_tier descending total_sales; run;"
+  },
+  {
+    "index": 17,
+    "stepId": "STEP-032",
+    "name": "SUMMARY",
+    "startLine": 316,
+    "endLine": 324,
+    "text": "proc summary data=WORKLIB.customer_flags_sorted nway; class region customer_tier; var total_sales transaction_count customer_total; output out=WORKLIB.tier_summary sum(total_sales)=tier_sales sum(transaction_count)=tier_transactions mean(total_sales)=avg_customer_sales max(total_sales)=top_customer_sales; run;"
+  },
+  {
+    "index": 18,
+    "stepId": "STEP-033",
+    "name": "FREQ",
+    "startLine": 326,
+    "endLine": 329,
+    "text": "proc freq data=WORKLIB.customer_flags_sorted; tables customer_tier*activity_flag / missing out=WORKLIB.tier_activity_freq; tables region*customer_tier / missing out=WORKLIB.region_tier_freq; run;"
+  },
+  {
+    "index": 19,
+    "stepId": "STEP-038",
+    "name": "SQL",
+    "startLine": 347,
+    "endLine": 357,
+    "text": "proc sql; create table WORKLIB.region_report as select customer_region, count(*) as transactions, sum(net_amount) as sales, mean(net_amount) as average_sale, sum(quantity) as units from WORKLIB.region_report_input group by customer_region order by sales desc; quit;"
+  },
+  {
+    "index": 20,
+    "stepId": "STEP-040",
+    "name": "SORT",
+    "startLine": 372,
+    "endLine": 374,
+    "text": "proc sort data=WORKLIB.final_sales_extract; by descending sales; run;"
+  },
+  {
+    "index": 21,
+    "stepId": "STEP-041",
+    "name": "DATASETS",
+    "startLine": 376,
+    "endLine": 378,
+    "text": "proc datasets library=WORKLIB nolist; contents data=_all_ out=WORKLIB.metadata_snapshot; quit;"
+  },
+  {
+    "index": 22,
+    "stepId": "STEP-043",
+    "name": "SQL",
+    "startLine": 392,
+    "endLine": 398,
+    "text": "proc sql; create table WORKLIB.final_control_totals as select count(*) as row_count, sum(sales) as total_sales, sum(transactions) as total_transactions from WORKLIB.audit_extract; quit;"
+  },
+  {
+    "index": 23,
+    "stepId": "STEP-046",
+    "name": "SORT",
+    "startLine": 430,
+    "endLine": 432,
+    "text": "proc sort data=WORKLIB.segment_rollup out=WORKLIB.segment_rollup_sorted; by region descending segment_sales; run;"
+  },
+  {
+    "index": 24,
+    "stepId": "STEP-047",
+    "name": "SQL",
+    "startLine": 434,
+    "endLine": 440,
+    "text": "proc sql; create table WORKLIB.segment_ranked as select *, monotonic() as generated_rank from WORKLIB.segment_rollup_sorted order by region, calculated generated_rank; quit;"
+  },
+  {
+    "index": 25,
+    "stepId": "STEP-049",
+    "name": "FREQ",
+    "startLine": 453,
+    "endLine": 455,
+    "text": "proc freq data=WORKLIB.exception_extract; tables exception_code / missing out=WORKLIB.exception_counts; run;"
+  },
+  {
+    "index": 26,
+    "stepId": "STEP-051",
+    "name": "SQL",
+    "startLine": 465,
+    "endLine": 477,
+    "text": "proc sql; create table WORKLIB.management_summary as select a.region, a.customer_tier, a.tier_sales, a.tier_transactions, b.severity, b.count as exception_count from WORKLIB.tier_summary as a left join WORKLIB.exception_summary as b on 1=1 order by a.region, a.tier_sales desc; quit;"
+  },
+  {
+    "index": 27,
+    "stepId": "STEP-053",
+    "name": "SORT",
+    "startLine": 488,
+    "endLine": 490,
+    "text": "proc sort data=WORKLIB.delivery_manifest; by delivery_status region descending tier_sales; run;"
+  },
+  {
+    "index": 28,
+    "stepId": "STEP-056",
+    "name": "SQL",
+    "startLine": 507,
+    "endLine": 515,
+    "text": "proc sql; create table WORKLIB.high_value_customer as select customer_id, count(*) as high_value_transactions, sum(net_amount) as high_value_sales from WORKLIB.high_value_sales group by customer_id order by calculated high_value_sales desc; quit;"
+  },
+  {
+    "index": 29,
+    "stepId": "STEP-058",
+    "name": "SORT",
+    "startLine": 530,
+    "endLine": 532,
+    "text": "proc sort data=WORKLIB.final_customer_profile; by descending high_value_sales customer_id; run;"
+  },
+  {
+    "index": 30,
+    "stepId": "STEP-060",
+    "name": "SUMMARY",
+    "startLine": 541,
+    "endLine": 548,
+    "text": "proc summary data=WORKLIB.final_customer_profile nway; class engagement_level; var high_value_sales total_sales; output out=WORKLIB.engagement_summary sum(high_value_sales)=engagement_sales sum(total_sales)=total_customer_sales mean(high_value_sales)=avg_engagement_sales; run;"
+  },
+  {
+    "index": 31,
+    "stepId": "STEP-061",
+    "name": "SQL",
+    "startLine": 550,
+    "endLine": 563,
+    "text": "proc sql; create table WORKLIB.final_control_report as select engagement_level, engagement_sales, total_customer_sales, avg_engagement_sales, case when engagement_sales >= 500000 then 'GREEN' when engagement_sales >= 100000 then 'AMBER' else 'RED' end as control_status length=10 from WORKLIB.engagement_summary order by engagement_sales desc; quit;"
+  },
+  {
+    "index": 32,
+    "stepId": "STEP-063",
+    "name": "SORT",
+    "startLine": 596,
+    "endLine": 598,
+    "text": "proc sort data=WORKLIB.customer_scoring; by score_band descending score customer_id; run;"
+  },
+  {
+    "index": 33,
+    "stepId": "STEP-064",
+    "name": "FREQ",
+    "startLine": 600,
+    "endLine": 602,
+    "text": "proc freq data=WORKLIB.customer_scoring; tables score_band*engagement_level / missing out=WORKLIB.score_distribution; run;"
+  },
+  {
+    "index": 34,
+    "stepId": "STEP-065",
+    "name": "SUMMARY",
+    "startLine": 604,
+    "endLine": 614,
+    "text": "proc summary data=WORKLIB.customer_scoring nway; class score_band; var total_sales transaction_count high_value_sales score; output out=WORKLIB.score_summary sum(total_sales)=sales sum(transaction_count)=transactions sum(high_value_sales)=high_value_sales mean(score)=average_score max(score)=maximum_score min(score)=minimum_score; run;"
+  },
+  {
+    "index": 35,
+    "stepId": "STEP-067",
+    "name": "SQL",
+    "startLine": 624,
+    "endLine": 635,
+    "text": "proc sql; create table WORKLIB.region_customer_score as select region, score_band, count(*) as customer_count, sum(total_sales) as region_sales, mean(score) as avg_score, max(score) as max_score from WORKLIB.customer_scoring group by region, score_band order by region, calculated region_sales desc; quit;"
+  },
+  {
+    "index": 36,
+    "stepId": "STEP-069",
+    "name": "SORT",
+    "startLine": 645,
+    "endLine": 647,
+    "text": "proc sort data=WORKLIB.region_customer_score_flags; by region action_flag descending region_sales; run;"
+  },
+  {
+    "index": 37,
+    "stepId": "STEP-070",
+    "name": "SQL",
+    "startLine": 653,
+    "endLine": 668,
+    "text": "proc sql; create table WORKLIB.product_performance as select p.product_id, p.product_name, p.category, p.subcategory, sum(e.quantity) as units, sum(e.net_amount) as sales, mean(e.net_amount) as average_sale, count(e.sale_id) as transactions, max(e.sale_date) as last_sale_date format=date9. from WORKLIB.product_sorted as p left join WORKLIB.enriched_sales as e on p.product_id=e.product_id group by p.product_id, p.product_name, p.category, p.subcategory; quit;"
+  },
+  {
+    "index": 38,
+    "stepId": "STEP-072",
+    "name": "SORT",
+    "startLine": 682,
+    "endLine": 684,
+    "text": "proc sort data=WORKLIB.product_performance; by category descending sales product_id; run;"
+  },
+  {
+    "index": 39,
+    "stepId": "STEP-073",
+    "name": "SUMMARY",
+    "startLine": 686,
+    "endLine": 693,
+    "text": "proc summary data=WORKLIB.product_performance nway; class category demand_band; var sales units transactions; output out=WORKLIB.category_demand_summary sum(sales)=category_sales sum(units)=category_units sum(transactions)=category_transactions; run;"
+  },
+  {
+    "index": 40,
+    "stepId": "STEP-074",
+    "name": "FREQ",
+    "startLine": 695,
+    "endLine": 697,
+    "text": "proc freq data=WORKLIB.product_performance; tables category*demand_band / missing out=WORKLIB.category_demand_freq; run;"
+  },
+  {
+    "index": 41,
+    "stepId": "STEP-076",
+    "name": "SORT",
+    "startLine": 717,
+    "endLine": 719,
+    "text": "proc sort data=WORKLIB.sales_period_flags; by month_start region customer_id sale_date; run;"
+  },
+  {
+    "index": 42,
+    "stepId": "STEP-077",
+    "name": "SUMMARY",
+    "startLine": 721,
+    "endLine": 728,
+    "text": "proc summary data=WORKLIB.sales_period_flags nway; class month_start region; var net_amount quantity; output out=WORKLIB.month_region_summary sum(net_amount)=monthly_sales sum(quantity)=monthly_units mean(net_amount)=monthly_average; run;"
+  },
+  {
+    "index": 43,
+    "stepId": "STEP-078",
+    "name": "SUMMARY",
+    "startLine": 730,
+    "endLine": 737,
+    "text": "proc summary data=WORKLIB.sales_period_flags nway; class quarter_start region; var net_amount quantity; output out=WORKLIB.quarter_region_summary sum(net_amount)=quarter_sales sum(quantity)=quarter_units mean(net_amount)=quarter_average; run;"
+  },
+  {
+    "index": 44,
+    "stepId": "STEP-079",
+    "name": "SQL",
+    "startLine": 739,
+    "endLine": 750,
+    "text": "proc sql; create table WORKLIB.month_region_ranked as select *, case when monthly_sales >= 1000000 then 'A' when monthly_sales >= 500000 then 'B' when monthly_sales >= 100000 then 'C' else 'D' end as performance_band length=1 from WORKLIB.month_region_summary order by month_start, monthly_sales desc; quit;"
+  },
+  {
+    "index": 45,
+    "stepId": "STEP-080",
+    "name": "SORT",
+    "startLine": 756,
+    "endLine": 761,
+    "text": "proc sort data=RAW.sales out=WORKLIB.sales_duplicate_check nodupkey dupout=WORKLIB.sales_duplicates; by sale_id; run;"
+  },
+  {
+    "index": 46,
+    "stepId": "STEP-082",
+    "name": "FREQ",
+    "startLine": 794,
+    "endLine": 796,
+    "text": "proc freq data=WORKLIB.sales_quality; tables quality_status / missing out=WORKLIB.sales_quality_counts; run;"
+  },
+  {
+    "index": 47,
+    "stepId": "STEP-083",
+    "name": "SQL",
+    "startLine": 798,
+    "endLine": 807,
+    "text": "proc sql; create table WORKLIB.quality_control as select quality_status, count(*) as records, calculated records / (select count(*) from WORKLIB.sales_quality) * 100 as record_pct from WORKLIB.sales_quality group by quality_status order by records desc; quit;"
+  },
+  {
+    "index": 48,
+    "stepId": "STEP-084",
+    "name": "SQL",
+    "startLine": 813,
+    "endLine": 823,
+    "text": "proc sql; create table WORKLIB.customer_activity as select customer_id, min(sale_date) as first_sale format=date9., max(sale_date) as last_sale format=date9., intck('day',calculated first_sale,calculated last_sale) as active_days, count(*) as transaction_count, sum(net_amount) as sales from WORKLIB.enriched_sales group by customer_id; quit;"
+  },
+  {
+    "index": 49,
+    "stepId": "STEP-086",
+    "name": "SORT",
+    "startLine": 837,
+    "endLine": 839,
+    "text": "proc sort data=WORKLIB.customer_activity; by recency_band descending sales; run;"
+  },
+  {
+    "index": 50,
+    "stepId": "STEP-087",
+    "name": "FREQ",
+    "startLine": 841,
+    "endLine": 843,
+    "text": "proc freq data=WORKLIB.customer_activity; tables activity_band*recency_band / missing out=WORKLIB.activity_matrix; run;"
+  },
+  {
+    "index": 51,
+    "stepId": "STEP-088",
+    "name": "SUMMARY",
+    "startLine": 845,
+    "endLine": 852,
+    "text": "proc summary data=WORKLIB.customer_activity nway; class activity_band recency_band; var sales transaction_count active_days; output out=WORKLIB.activity_summary sum(sales)=sales sum(transaction_count)=transactions mean(active_days)=average_active_days; run;"
+  },
+  {
+    "index": 52,
+    "stepId": "STEP-090",
+    "name": "FREQ",
+    "startLine": 877,
+    "endLine": 879,
+    "text": "proc freq data=WORKLIB.region_controls; tables control_flag / missing out=WORKLIB.region_control_counts; run;"
+  },
+  {
+    "index": 53,
+    "stepId": "STEP-091",
+    "name": "SQL",
+    "startLine": 881,
+    "endLine": 892,
+    "text": "proc sql; create table WORKLIB.region_control_detail as select r.region, r.sales, r.transactions, r.average_sale, c.control_flag, c.control_reason from WORKLIB.region_report as r left join WORKLIB.region_controls as c on r.customer_region=c.customer_region; quit;"
+  },
+  {
+    "index": 54,
+    "stepId": "STEP-093",
+    "name": "SORT",
+    "startLine": 912,
+    "endLine": 914,
+    "text": "proc sort data=WORKLIB.region_running_sales; by region sale_date; run;"
+  },
+  {
+    "index": 55,
+    "stepId": "STEP-095",
+    "name": "SUMMARY",
+    "startLine": 925,
+    "endLine": 932,
+    "text": "proc summary data=WORKLIB.region_running_sales nway; class region; var sales_change; output out=WORKLIB.region_change_summary sum(sales_change)=net_change max(sales_change)=maximum_change min(sales_change)=minimum_change; run;"
+  },
+  {
+    "index": 56,
+    "stepId": "STEP-096",
+    "name": "SQL",
+    "startLine": 938,
+    "endLine": 946,
+    "text": "proc sql; create table WORKLIB.customer_lookup as select customer_id, max(customer_name) as customer_name, max(region) as region, max(segment) as segment from WORKLIB.customer_sorted group by customer_id; quit;"
+  },
+  {
+    "index": 57,
+    "stepId": "STEP-098",
+    "name": "FREQ",
+    "startLine": 967,
+    "endLine": 969,
+    "text": "proc freq data=WORKLIB.sales_lookup_enriched; tables lookup_status / missing out=WORKLIB.lookup_status_counts; run;"
+  },
+  {
+    "index": 58,
+    "stepId": "STEP-100",
+    "name": "FREQ",
+    "startLine": 988,
+    "endLine": 990,
+    "text": "proc freq data=WORKLIB.semantic_edge_cases; tables missing_class*conversion_flag / missing out=WORKLIB.semantic_edge_counts; run;"
+  },
+  {
+    "index": 59,
+    "stepId": "STEP-101",
+    "name": "SQL",
+    "startLine": 996,
+    "endLine": 1006,
+    "text": "proc sql; create table WORKLIB.operational_dashboard as select (select count(*) from WORKLIB.enriched_sales) as sales_rows, (select sum(net_amount) from WORKLIB.enriched_sales) as total_sales, (select count(distinct customer_id) from WORKLIB.enriched_sales) as customers, (select count(distinct product_id) from WORKLIB.enriched_sales) as products, (select count(*) from WORKLIB.review_queue_final) as review_items, (select count(*) from WORKLIB.sales_duplicates) as duplicate_sales, (select count(*) from WORKLIB.sales_quality where quality_status='INVALID') as invalid_sales; quit;"
+  },
+  {
+    "index": 60,
+    "stepId": "STEP-103",
+    "name": "PRINT",
+    "startLine": 1018,
+    "endLine": 1019,
+    "text": "proc print data=WORKLIB.operational_dashboard; run;"
+  }
+]

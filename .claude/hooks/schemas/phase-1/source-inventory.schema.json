@@ -1,0 +1,49 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SASSourceInventory",
+  "type": "object",
+  "required": ["files", "totals"],
+  "properties": {
+    "files": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["fileId", "filePath", "linesOfCode", "sha256", "steps"],
+        "properties": {
+          "fileId": { "type": "string", "pattern": "^SRC-[0-9A-Za-z_-]+$" },
+          "filePath": { "type": "string" },
+          "linesOfCode": { "type": "integer", "minimum": 1 },
+          "sha256": { "type": "string" },
+          "macroDefinitions": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "steps": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["stepId", "type", "startLine", "endLine"],
+              "properties": {
+                "stepId": { "type": "string", "pattern": "^(STEP|PROC|DATA)-[0-9A-Za-z_-]+$" },
+                "type": { "type": "string", "enum": ["DATA", "PROC", "MACRO_CALL", "GLOBAL"] },
+                "name": { "type": "string" },
+                "startLine": { "type": "integer", "minimum": 1 },
+                "endLine": { "type": "integer", "minimum": 1 }
+              }
+            }
+          }
+        }
+      }
+    },
+    "totals": {
+      "type": "object",
+      "required": ["totalFiles", "totalLines", "totalDataSteps", "totalProcSteps"],
+      "properties": {
+        "totalFiles": { "type": "integer", "minimum": 1 },
+        "totalLines": { "type": "integer", "minimum": 1 },
+        "totalDataSteps": { "type": "integer", "minimum": 0 },
+        "totalProcSteps": { "type": "integer", "minimum": 0 }
+      }
+    }
+  }
+}

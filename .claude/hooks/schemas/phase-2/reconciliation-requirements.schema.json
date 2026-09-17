@@ -1,0 +1,26 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ReconciliationRequirements",
+  "type": "object",
+  "required": ["controls"],
+  "properties": {
+    "controls": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["controlId", "sourceEntity", "targetEntity", "metricType"],
+        "properties": {
+          "controlId": { "type": "string" },
+          "sourceEntity": { "type": "string" },
+          "targetEntity": { "type": "string" },
+          "metricType": {
+            "type": "string",
+            "enum": ["RECORD_COUNT", "COLUMN_SUM", "HASH_TOTAL", "BALANCING_CHECK"]
+          },
+          "targetField": { "type": "string" },
+          "tolerance": { "type": "number" }
+        }
+      }
+    }
+  }
+}

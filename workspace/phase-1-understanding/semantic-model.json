@@ -1,0 +1,261 @@
+{
+  "modelId": "SEM-MDL-001",
+  "operations": [
+    {
+      "operationId": "SEM-001",
+      "stepId": "STEP-006",
+      "type": "DATA_TRANSFORMATION",
+      "inputs": [
+        "RAW.CUSTOMERS"
+      ],
+      "outputs": [
+        "WORKLIB.CUSTOMER_BASE"
+      ],
+      "businessRuleIds": [
+        "RULE-001",
+        "RULE-002",
+        "RULE-003"
+      ],
+      "sourceReference": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 43,
+        "endLine": 53
+      },
+      "uncertaintyStatus": "KNOWN"
+    },
+    {
+      "operationId": "SEM-002",
+      "stepId": "STEP-007",
+      "type": "SORT_OPERATION",
+      "inputs": [
+        "WORKLIB.CUSTOMER_BASE"
+      ],
+      "outputs": [
+        "WORKLIB.CUSTOMER_SORTED"
+      ],
+      "groupKeys": [
+        "customer_id"
+      ],
+      "sourceReference": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 55,
+        "endLine": 58
+      },
+      "uncertaintyStatus": "KNOWN"
+    },
+    {
+      "operationId": "SEM-003",
+      "stepId": "STEP-010",
+      "type": "DATA_TRANSFORMATION",
+      "inputs": [
+        "RAW.SALES"
+      ],
+      "outputs": [
+        "WORKLIB.SALES_BASE"
+      ],
+      "businessRuleIds": [
+        "RULE-004"
+      ],
+      "sourceReference": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 74,
+        "endLine": 93
+      },
+      "uncertaintyStatus": "KNOWN"
+    },
+    {
+      "operationId": "SEM-004",
+      "stepId": "STEP-011",
+      "type": "SORT_OPERATION",
+      "inputs": [
+        "WORKLIB.SALES_BASE"
+      ],
+      "outputs": [
+        "WORKLIB.SALES_SORTED"
+      ],
+      "groupKeys": [
+        "customer_id",
+        "sale_date",
+        "sale_id"
+      ],
+      "sourceReference": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 95,
+        "endLine": 98
+      },
+      "uncertaintyStatus": "KNOWN"
+    },
+    {
+      "operationId": "SEM-005",
+      "stepId": "STEP-012",
+      "type": "SEQUENTIAL_MERGE",
+      "inputs": [
+        "WORKLIB.CUSTOMER_SORTED",
+        "WORKLIB.SALES_SORTED"
+      ],
+      "outputs": [
+        "WORKLIB.CUSTOMER_SALES"
+      ],
+      "groupKeys": [
+        "customer_id"
+      ],
+      "businessRuleIds": [
+        "RULE-005"
+      ],
+      "sourceReference": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 100,
+        "endLine": 108
+      },
+      "uncertaintyStatus": "KNOWN"
+    },
+    {
+      "operationId": "SEM-006",
+      "stepId": "STEP-014",
+      "type": "GROUP_AGGREGATION",
+      "inputs": [
+        "WORKLIB.CUSTOMER_SALES_SORTED"
+      ],
+      "outputs": [
+        "WORKLIB.CUSTOMER_MONTHLY"
+      ],
+      "groupKeys": [
+        "customer_id"
+      ],
+      "businessRuleIds": [
+        "RULE-006"
+      ],
+      "sourceReference": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 115,
+        "endLine": 128
+      },
+      "uncertaintyStatus": "KNOWN"
+    },
+    {
+      "operationId": "SEM-007",
+      "stepId": "STEP-015",
+      "type": "GROUP_AGGREGATION",
+      "inputs": [
+        "WORKLIB.SALES_SORTED"
+      ],
+      "outputs": [
+        "WORKLIB.REGION_CHANNEL_SUMMARY"
+      ],
+      "groupKeys": [
+        "region",
+        "channel"
+      ],
+      "measurements": [
+        {
+          "variable": "gross_amount",
+          "metric": "SUM"
+        },
+        {
+          "variable": "discount_amount",
+          "metric": "SUM"
+        },
+        {
+          "variable": "net_amount",
+          "metric": "SUM"
+        },
+        {
+          "variable": "quantity",
+          "metric": "SUM"
+        },
+        {
+          "variable": "net_amount",
+          "metric": "MEAN"
+        }
+      ],
+      "sourceReference": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 130,
+        "endLine": 141
+      },
+      "uncertaintyStatus": "KNOWN"
+    },
+    {
+      "operationId": "SEM-008",
+      "stepId": "STEP-018",
+      "type": "LONG_TO_WIDE_RESHAPE",
+      "inputs": [
+        "WORKLIB.REGION_SUMMARY"
+      ],
+      "outputs": [
+        "WORKLIB.REGION_SUMMARY_WIDE"
+      ],
+      "groupKeys": [
+        "region"
+      ],
+      "sourceReference": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 158,
+        "endLine": 162
+      },
+      "uncertaintyStatus": "KNOWN"
+    },
+    {
+      "operationId": "SEM-009",
+      "stepId": "STEP-019",
+      "type": "RELATIONAL_QUERY",
+      "inputs": [
+        "WORKLIB.SALES_SORTED",
+        "WORKLIB.CUSTOMER_SORTED",
+        "WORKLIB.PRODUCT_SORTED"
+      ],
+      "outputs": [
+        "WORKLIB.ENRICHED_SALES"
+      ],
+      "businessRuleIds": [
+        "RULE-007"
+      ],
+      "sourceReference": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 164,
+        "endLine": 199
+      },
+      "uncertaintyStatus": "KNOWN"
+    },
+    {
+      "operationId": "SEM-010",
+      "stepId": "STEP-020",
+      "type": "DATA_TRANSFORMATION",
+      "inputs": [
+        "WORKLIB.ENRICHED_SALES"
+      ],
+      "outputs": [
+        "WORKLIB.SALES_RULES"
+      ],
+      "businessRuleIds": [
+        "RULE-008"
+      ],
+      "sourceReference": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 201,
+        "endLine": 213
+      },
+      "uncertaintyStatus": "KNOWN"
+    },
+    {
+      "operationId": "SEM-011",
+      "stepId": "STEP-044",
+      "type": "DATA_TRANSFORMATION",
+      "inputs": [
+        "WORKLIB.FINAL_CONTROL_TOTALS"
+      ],
+      "outputs": [
+        "WORKLIB.RECONCILIATION"
+      ],
+      "businessRuleIds": [
+        "RULE-010"
+      ],
+      "sourceReference": {
+        "file": "input/sas/SYN_ENTERPRISE_SALES_MODERNIZATION.sas",
+        "startLine": 400,
+        "endLine": 411
+      },
+      "uncertaintyStatus": "KNOWN"
+    }
+  ]
+}

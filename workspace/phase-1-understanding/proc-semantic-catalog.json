@@ -1,0 +1,1385 @@
+{
+  "procs": [
+    {
+      "procId": "PROC-001",
+      "stepId": "STEP-007",
+      "procName": "SORT",
+      "inputDatasets": [
+        "WORKLIB.CUSTOMER_BASE"
+      ],
+      "outputDatasets": [
+        "WORKLIB.CUSTOMER_SORTED"
+      ],
+      "semanticOperations": [
+        "SORTING"
+      ],
+      "byVariables": [
+        "customer_id"
+      ],
+      "shapeTransformation": "REORDERED"
+    },
+    {
+      "procId": "PROC-002",
+      "stepId": "STEP-009",
+      "procName": "SORT",
+      "inputDatasets": [
+        "WORKLIB.PRODUCT_BASE"
+      ],
+      "outputDatasets": [
+        "WORKLIB.PRODUCT_SORTED"
+      ],
+      "semanticOperations": [
+        "SORTING"
+      ],
+      "byVariables": [
+        "product_id"
+      ],
+      "shapeTransformation": "REORDERED"
+    },
+    {
+      "procId": "PROC-003",
+      "stepId": "STEP-011",
+      "procName": "SORT",
+      "inputDatasets": [
+        "WORKLIB.SALES_BASE"
+      ],
+      "outputDatasets": [
+        "WORKLIB.SALES_SORTED"
+      ],
+      "semanticOperations": [
+        "SORTING"
+      ],
+      "byVariables": [
+        "customer_id",
+        "sale_date",
+        "sale_id"
+      ],
+      "shapeTransformation": "REORDERED"
+    },
+    {
+      "procId": "PROC-004",
+      "stepId": "STEP-013",
+      "procName": "SORT",
+      "inputDatasets": [
+        "WORKLIB.CUSTOMER_SALES"
+      ],
+      "outputDatasets": [
+        "WORKLIB.CUSTOMER_SALES_SORTED"
+      ],
+      "semanticOperations": [
+        "SORTING"
+      ],
+      "byVariables": [
+        "customer_id",
+        "sale_date"
+      ],
+      "shapeTransformation": "REORDERED"
+    },
+    {
+      "procId": "PROC-005",
+      "stepId": "STEP-015",
+      "procName": "SUMMARY",
+      "inputDatasets": [
+        "WORKLIB.SALES_SORTED"
+      ],
+      "outputDatasets": [
+        "WORKLIB.REGION_CHANNEL_SUMMARY"
+      ],
+      "semanticOperations": [
+        "GROUPING",
+        "AGGREGATION"
+      ],
+      "classVariables": [
+        "region",
+        "channel"
+      ],
+      "varVariables": [
+        "gross_amount",
+        "discount_amount",
+        "net_amount",
+        "quantity"
+      ],
+      "options": {
+        "nway": true
+      },
+      "statisticalMetrics": [
+        {
+          "metric": "SUM",
+          "variable": "gross_amount"
+        },
+        {
+          "metric": "SUM",
+          "variable": "discount_amount"
+        },
+        {
+          "metric": "SUM",
+          "variable": "net_amount"
+        },
+        {
+          "metric": "SUM",
+          "variable": "quantity"
+        },
+        {
+          "metric": "MEAN",
+          "variable": "net_amount"
+        },
+        {
+          "metric": "MAX",
+          "variable": "net_amount"
+        },
+        {
+          "metric": "MIN",
+          "variable": "net_amount"
+        }
+      ],
+      "shapeTransformation": "MANY_TO_FEW_AGGREGATED"
+    },
+    {
+      "procId": "PROC-006",
+      "stepId": "STEP-016",
+      "procName": "MEANS",
+      "inputDatasets": [
+        "WORKLIB.SALES_SORTED"
+      ],
+      "outputDatasets": [
+        "WORKLIB.REGION_SUMMARY"
+      ],
+      "semanticOperations": [
+        "GROUPING",
+        "AGGREGATION"
+      ],
+      "classVariables": [
+        "region"
+      ],
+      "varVariables": [
+        "net_amount",
+        "quantity"
+      ],
+      "options": {
+        "nway": true
+      },
+      "statisticalMetrics": [
+        {
+          "metric": "SUM",
+          "variable": "net_amount"
+        },
+        {
+          "metric": "SUM",
+          "variable": "quantity"
+        },
+        {
+          "metric": "MEAN",
+          "variable": "net_amount"
+        },
+        {
+          "metric": "MAX",
+          "variable": "net_amount"
+        }
+      ],
+      "shapeTransformation": "MANY_TO_FEW_AGGREGATED"
+    },
+    {
+      "procId": "PROC-007",
+      "stepId": "STEP-017",
+      "procName": "FREQ",
+      "inputDatasets": [
+        "WORKLIB.SALES_SORTED"
+      ],
+      "outputDatasets": [
+        "WORKLIB.REGION_CHANNEL_FREQ",
+        "WORKLIB.CHANNEL_FREQ"
+      ],
+      "semanticOperations": [
+        "FREQUENCY_ANALYSIS"
+      ],
+      "options": {
+        "missing": true
+      },
+      "shapeTransformation": "MANY_TO_FEW_AGGREGATED"
+    },
+    {
+      "procId": "PROC-008",
+      "stepId": "STEP-018",
+      "procName": "TRANSPOSE",
+      "inputDatasets": [
+        "WORKLIB.REGION_SUMMARY"
+      ],
+      "outputDatasets": [
+        "WORKLIB.REGION_SUMMARY_WIDE"
+      ],
+      "semanticOperations": [
+        "RESHAPING"
+      ],
+      "varVariables": [
+        "regional_sales",
+        "regional_units",
+        "regional_avg",
+        "regional_max"
+      ],
+      "options": {
+        "prefix": "metric_",
+        "id": "region"
+      },
+      "shapeTransformation": "LONG_TO_WIDE"
+    },
+    {
+      "procId": "PROC-009",
+      "stepId": "STEP-019",
+      "procName": "SQL",
+      "inputDatasets": [
+        "WORKLIB.SALES_SORTED",
+        "WORKLIB.CUSTOMER_SORTED",
+        "WORKLIB.PRODUCT_SORTED"
+      ],
+      "outputDatasets": [
+        "WORKLIB.ENRICHED_SALES"
+      ],
+      "semanticOperations": [
+        "SQL_PROCESSING",
+        "JOINING",
+        "FILTERING",
+        "SORTING"
+      ],
+      "shapeTransformation": "SAME_SHAPE"
+    },
+    {
+      "procId": "PROC-010",
+      "stepId": "STEP-021",
+      "procName": "SORT",
+      "inputDatasets": [
+        "WORKLIB.SALES_RULES"
+      ],
+      "outputDatasets": [
+        "WORKLIB.REVIEW_QUEUE"
+      ],
+      "semanticOperations": [
+        "SORTING"
+      ],
+      "byVariables": [
+        "descending net_amount",
+        "customer_id",
+        "sale_date"
+      ],
+      "shapeTransformation": "REORDERED"
+    },
+    {
+      "procId": "PROC-011",
+      "stepId": "STEP-023",
+      "procName": "SQL",
+      "inputDatasets": [
+        "WORKLIB.ENRICHED_SALES"
+      ],
+      "outputDatasets": [
+        "WORKLIB.CUSTOMER_KPIS"
+      ],
+      "semanticOperations": [
+        "SQL_PROCESSING",
+        "GROUPING",
+        "AGGREGATION",
+        "FILTERING"
+      ],
+      "shapeTransformation": "MANY_TO_FEW_AGGREGATED"
+    },
+    {
+      "procId": "PROC-012",
+      "stepId": "STEP-024",
+      "procName": "SQL",
+      "inputDatasets": [
+        "WORKLIB.ENRICHED_SALES"
+      ],
+      "outputDatasets": [
+        "WORKLIB.PRODUCT_KPIS"
+      ],
+      "semanticOperations": [
+        "SQL_PROCESSING",
+        "GROUPING",
+        "AGGREGATION"
+      ],
+      "shapeTransformation": "MANY_TO_FEW_AGGREGATED"
+    },
+    {
+      "procId": "PROC-013",
+      "stepId": "STEP-026",
+      "procName": "SORT",
+      "inputDatasets": [
+        "WORKLIB.CUSTOMER_TIER"
+      ],
+      "outputDatasets": [
+        "WORKLIB.CUSTOMER_TIER_SORTED"
+      ],
+      "semanticOperations": [
+        "SORTING"
+      ],
+      "byVariables": [
+        "descending total_sales",
+        "customer_id"
+      ],
+      "shapeTransformation": "REORDERED"
+    },
+    {
+      "procId": "PROC-014",
+      "stepId": "STEP-028",
+      "procName": "SORT",
+      "inputDatasets": [
+        "WORKLIB.DAILY_SALES"
+      ],
+      "outputDatasets": [
+        "WORKLIB.DAILY_SALES_SORTED"
+      ],
+      "semanticOperations": [
+        "SORTING"
+      ],
+      "byVariables": [
+        "sale_date"
+      ],
+      "shapeTransformation": "REORDERED"
+    },
+    {
+      "procId": "PROC-015",
+      "stepId": "STEP-029",
+      "procName": "TRANSPOSE",
+      "inputDatasets": [
+        "WORKLIB.DAILY_SALES_SORTED"
+      ],
+      "outputDatasets": [
+        "WORKLIB.DAILY_SALES_PIVOT"
+      ],
+      "semanticOperations": [
+        "RESHAPING"
+      ],
+      "varVariables": [
+        "daily_sales",
+        "daily_units"
+      ],
+      "options": {
+        "prefix": "day_",
+        "id": "sale_date"
+      },
+      "shapeTransformation": "LONG_TO_WIDE"
+    },
+    {
+      "procId": "PROC-016",
+      "stepId": "STEP-031",
+      "procName": "SORT",
+      "inputDatasets": [
+        "WORKLIB.CUSTOMER_FLAGS"
+      ],
+      "outputDatasets": [
+        "WORKLIB.CUSTOMER_FLAGS_SORTED"
+      ],
+      "semanticOperations": [
+        "SORTING"
+      ],
+      "byVariables": [
+        "region",
+        "customer_tier",
+        "descending total_sales"
+      ],
+      "shapeTransformation": "REORDERED"
+    },
+    {
+      "procId": "PROC-017",
+      "stepId": "STEP-032",
+      "procName": "SUMMARY",
+      "inputDatasets": [
+        "WORKLIB.CUSTOMER_FLAGS_SORTED"
+      ],
+      "outputDatasets": [
+        "WORKLIB.TIER_SUMMARY"
+      ],
+      "semanticOperations": [
+        "GROUPING",
+        "AGGREGATION"
+      ],
+      "classVariables": [
+        "region",
+        "customer_tier"
+      ],
+      "varVariables": [
+        "total_sales",
+        "transaction_count",
+        "customer_total"
+      ],
+      "options": {
+        "nway": true
+      },
+      "statisticalMetrics": [
+        {
+          "metric": "SUM",
+          "variable": "total_sales"
+        },
+        {
+          "metric": "SUM",
+          "variable": "transaction_count"
+        },
+        {
+          "metric": "MEAN",
+          "variable": "total_sales"
+        },
+        {
+          "metric": "MAX",
+          "variable": "total_sales"
+        }
+      ],
+      "shapeTransformation": "MANY_TO_FEW_AGGREGATED"
+    },
+    {
+      "procId": "PROC-018",
+      "stepId": "STEP-033",
+      "procName": "FREQ",
+      "inputDatasets": [
+        "WORKLIB.CUSTOMER_FLAGS_SORTED"
+      ],
+      "outputDatasets": [
+        "WORKLIB.TIER_ACTIVITY_FREQ",
+        "WORKLIB.REGION_TIER_FREQ"
+      ],
+      "semanticOperations": [
+        "FREQUENCY_ANALYSIS"
+      ],
+      "options": {
+        "missing": true
+      },
+      "shapeTransformation": "MANY_TO_FEW_AGGREGATED"
+    },
+    {
+      "procId": "PROC-019",
+      "stepId": "STEP-038",
+      "procName": "SQL",
+      "inputDatasets": [
+        "WORKLIB.REGION_REPORT_INPUT"
+      ],
+      "outputDatasets": [
+        "WORKLIB.REGION_REPORT"
+      ],
+      "semanticOperations": [
+        "SQL_PROCESSING",
+        "GROUPING",
+        "AGGREGATION",
+        "SORTING"
+      ],
+      "shapeTransformation": "MANY_TO_FEW_AGGREGATED"
+    },
+    {
+      "procId": "PROC-020",
+      "stepId": "STEP-040",
+      "procName": "SORT",
+      "inputDatasets": [
+        "WORKLIB.FINAL_SALES_EXTRACT"
+      ],
+      "outputDatasets": [
+        "WORKLIB.FINAL_SALES_EXTRACT"
+      ],
+      "semanticOperations": [
+        "SORTING"
+      ],
+      "byVariables": [
+        "descending sales"
+      ],
+      "shapeTransformation": "REORDERED"
+    },
+    {
+      "procId": "PROC-021",
+      "stepId": "STEP-041",
+      "procName": "DATASETS",
+      "inputDatasets": [
+        "WORKLIB.FINAL_SALES_EXTRACT"
+      ],
+      "outputDatasets": [
+        "WORKLIB.METADATA_SNAPSHOT"
+      ],
+      "semanticOperations": [
+        "REPORTING"
+      ],
+      "options": {
+        "nolist": true,
+        "contents": true
+      },
+      "shapeTransformation": "MANY_TO_FEW_AGGREGATED"
+    },
+    {
+      "procId": "PROC-022",
+      "stepId": "STEP-043",
+      "procName": "SQL",
+      "inputDatasets": [
+        "WORKLIB.AUDIT_EXTRACT"
+      ],
+      "outputDatasets": [
+        "WORKLIB.FINAL_CONTROL_TOTALS"
+      ],
+      "semanticOperations": [
+        "SQL_PROCESSING",
+        "AGGREGATION"
+      ],
+      "shapeTransformation": "MANY_TO_FEW_AGGREGATED"
+    },
+    {
+      "procId": "PROC-023",
+      "stepId": "STEP-046",
+      "procName": "SORT",
+      "inputDatasets": [
+        "WORKLIB.SEGMENT_ROLLUP"
+      ],
+      "outputDatasets": [
+        "WORKLIB.SEGMENT_ROLLUP_SORTED"
+      ],
+      "semanticOperations": [
+        "SORTING"
+      ],
+      "byVariables": [
+        "region",
+        "descending segment_sales"
+      ],
+      "shapeTransformation": "REORDERED"
+    },
+    {
+      "procId": "PROC-024",
+      "stepId": "STEP-047",
+      "procName": "SQL",
+      "inputDatasets": [
+        "WORKLIB.SEGMENT_ROLLUP_SORTED"
+      ],
+      "outputDatasets": [
+        "WORKLIB.SEGMENT_RANKED"
+      ],
+      "semanticOperations": [
+        "SQL_PROCESSING",
+        "SORTING"
+      ],
+      "shapeTransformation": "SAME_SHAPE"
+    },
+    {
+      "procId": "PROC-025",
+      "stepId": "STEP-049",
+      "procName": "FREQ",
+      "inputDatasets": [
+        "WORKLIB.EXCEPTION_EXTRACT"
+      ],
+      "outputDatasets": [
+        "WORKLIB.EXCEPTION_COUNTS"
+      ],
+      "semanticOperations": [
+        "FREQUENCY_ANALYSIS"
+      ],
+      "options": {
+        "missing": true
+      },
+      "shapeTransformation": "MANY_TO_FEW_AGGREGATED"
+    },
+    {
+      "procId": "PROC-026",
+      "stepId": "STEP-051",
+      "procName": "SQL",
+      "inputDatasets": [
+        "WORKLIB.TIER_SUMMARY",
+        "WORKLIB.EXCEPTION_SUMMARY"
+      ],
+      "outputDatasets": [
+        "WORKLIB.MANAGEMENT_SUMMARY"
+      ],
+      "semanticOperations": [
+        "SQL_PROCESSING",
+        "JOINING",
+        "SORTING"
+      ],
+      "shapeTransformation": "MANY_TO_FEW_AGGREGATED"
+    },
+    {
+      "procId": "PROC-027",
+      "stepId": "STEP-053",
+      "procName": "SORT",
+      "inputDatasets": [
+        "WORKLIB.DELIVERY_MANIFEST"
+      ],
+      "outputDatasets": [
+        "WORKLIB.DELIVERY_MANIFEST"
+      ],
+      "semanticOperations": [
+        "SORTING"
+      ],
+      "byVariables": [
+        "delivery_status",
+        "region",
+        "descending tier_sales"
+      ],
+      "shapeTransformation": "REORDERED"
+    },
+    {
+      "procId": "PROC-028",
+      "stepId": "STEP-057",
+      "procName": "SQL",
+      "inputDatasets": [
+        "WORKLIB.HIGH_VALUE_SALES"
+      ],
+      "outputDatasets": [
+        "WORKLIB.HIGH_VALUE_CUSTOMER"
+      ],
+      "semanticOperations": [
+        "SQL_PROCESSING",
+        "GROUPING",
+        "AGGREGATION",
+        "SORTING"
+      ],
+      "shapeTransformation": "MANY_TO_FEW_AGGREGATED"
+    },
+    {
+      "procId": "PROC-029",
+      "stepId": "STEP-059",
+      "procName": "SORT",
+      "inputDatasets": [
+        "WORKLIB.FINAL_CUSTOMER_PROFILE"
+      ],
+      "outputDatasets": [
+        "WORKLIB.FINAL_CUSTOMER_PROFILE"
+      ],
+      "semanticOperations": [
+        "SORTING"
+      ],
+      "byVariables": [
+        "descending high_value_sales",
+        "customer_id"
+      ],
+      "shapeTransformation": "REORDERED"
+    },
+    {
+      "procId": "PROC-030",
+      "stepId": "STEP-061",
+      "procName": "SUMMARY",
+      "inputDatasets": [
+        "WORKLIB.FINAL_CUSTOMER_PROFILE"
+      ],
+      "outputDatasets": [
+        "WORKLIB.ENGAGEMENT_SUMMARY"
+      ],
+      "semanticOperations": [
+        "GROUPING",
+        "AGGREGATION"
+      ],
+      "classVariables": [
+        "engagement_level"
+      ],
+      "varVariables": [
+        "high_value_sales",
+        "total_sales"
+      ],
+      "options": {
+        "nway": true
+      },
+      "statisticalMetrics": [
+        {
+          "metric": "SUM",
+          "variable": "high_value_sales"
+        },
+        {
+          "metric": "SUM",
+          "variable": "total_sales"
+        },
+        {
+          "metric": "MEAN",
+          "variable": "high_value_sales"
+        }
+      ],
+      "shapeTransformation": "MANY_TO_FEW_AGGREGATED"
+    },
+    {
+      "procId": "PROC-031",
+      "stepId": "STEP-062",
+      "procName": "SQL",
+      "inputDatasets": [
+        "WORKLIB.ENGAGEMENT_SUMMARY"
+      ],
+      "outputDatasets": [
+        "WORKLIB.FINAL_CONTROL_REPORT"
+      ],
+      "semanticOperations": [
+        "SQL_PROCESSING",
+        "SORTING"
+      ],
+      "shapeTransformation": "SAME_SHAPE"
+    },
+    {
+      "procId": "PROC-032",
+      "stepId": "STEP-064",
+      "procName": "SORT",
+      "inputDatasets": [
+        "WORKLIB.CUSTOMER_SCORING"
+      ],
+      "outputDatasets": [
+        "WORKLIB.CUSTOMER_SCORING"
+      ],
+      "semanticOperations": [
+        "SORTING"
+      ],
+      "byVariables": [
+        "score_band",
+        "descending score",
+        "customer_id"
+      ],
+      "shapeTransformation": "REORDERED"
+    },
+    {
+      "procId": "PROC-033",
+      "stepId": "STEP-065",
+      "procName": "FREQ",
+      "inputDatasets": [
+        "WORKLIB.CUSTOMER_SCORING"
+      ],
+      "outputDatasets": [
+        "WORKLIB.SCORE_DISTRIBUTION"
+      ],
+      "semanticOperations": [
+        "FREQUENCY_ANALYSIS"
+      ],
+      "options": {
+        "missing": true
+      },
+      "shapeTransformation": "MANY_TO_FEW_AGGREGATED"
+    },
+    {
+      "procId": "PROC-034",
+      "stepId": "STEP-066",
+      "procName": "SUMMARY",
+      "inputDatasets": [
+        "WORKLIB.CUSTOMER_SCORING"
+      ],
+      "outputDatasets": [
+        "WORKLIB.SCORE_SUMMARY"
+      ],
+      "semanticOperations": [
+        "GROUPING",
+        "AGGREGATION"
+      ],
+      "classVariables": [
+        "score_band"
+      ],
+      "varVariables": [
+        "total_sales",
+        "transaction_count",
+        "high_value_sales",
+        "score"
+      ],
+      "options": {
+        "nway": true
+      },
+      "statisticalMetrics": [
+        {
+          "metric": "SUM",
+          "variable": "total_sales"
+        },
+        {
+          "metric": "SUM",
+          "variable": "transaction_count"
+        },
+        {
+          "metric": "SUM",
+          "variable": "high_value_sales"
+        },
+        {
+          "metric": "MEAN",
+          "variable": "score"
+        },
+        {
+          "metric": "MAX",
+          "variable": "score"
+        },
+        {
+          "metric": "MIN",
+          "variable": "score"
+        }
+      ],
+      "shapeTransformation": "MANY_TO_FEW_AGGREGATED"
+    },
+    {
+      "procId": "PROC-035",
+      "stepId": "STEP-068",
+      "procName": "SQL",
+      "inputDatasets": [
+        "WORKLIB.CUSTOMER_SCORING"
+      ],
+      "outputDatasets": [
+        "WORKLIB.REGION_CUSTOMER_SCORE"
+      ],
+      "semanticOperations": [
+        "SQL_PROCESSING",
+        "GROUPING",
+        "AGGREGATION",
+        "SORTING"
+      ],
+      "shapeTransformation": "MANY_TO_FEW_AGGREGATED"
+    },
+    {
+      "procId": "PROC-036",
+      "stepId": "STEP-070",
+      "procName": "SORT",
+      "inputDatasets": [
+        "WORKLIB.REGION_CUSTOMER_SCORE_FLAGS"
+      ],
+      "outputDatasets": [
+        "WORKLIB.REGION_CUSTOMER_SCORE_FLAGS"
+      ],
+      "semanticOperations": [
+        "SORTING"
+      ],
+      "byVariables": [
+        "region",
+        "action_flag",
+        "descending region_sales"
+      ],
+      "shapeTransformation": "REORDERED"
+    },
+    {
+      "procId": "PROC-037",
+      "stepId": "STEP-071",
+      "procName": "SQL",
+      "inputDatasets": [
+        "WORKLIB.PRODUCT_SORTED",
+        "WORKLIB.ENRICHED_SALES"
+      ],
+      "outputDatasets": [
+        "WORKLIB.PRODUCT_PERFORMANCE"
+      ],
+      "semanticOperations": [
+        "SQL_PROCESSING",
+        "JOINING",
+        "GROUPING",
+        "AGGREGATION"
+      ],
+      "shapeTransformation": "MANY_TO_FEW_AGGREGATED"
+    },
+    {
+      "procId": "PROC-038",
+      "stepId": "STEP-073",
+      "procName": "SORT",
+      "inputDatasets": [
+        "WORKLIB.PRODUCT_PERFORMANCE"
+      ],
+      "outputDatasets": [
+        "WORKLIB.PRODUCT_PERFORMANCE"
+      ],
+      "semanticOperations": [
+        "SORTING"
+      ],
+      "byVariables": [
+        "category",
+        "descending sales",
+        "product_id"
+      ],
+      "shapeTransformation": "REORDERED"
+    },
+    {
+      "procId": "PROC-039",
+      "stepId": "STEP-074",
+      "procName": "SUMMARY",
+      "inputDatasets": [
+        "WORKLIB.PRODUCT_PERFORMANCE"
+      ],
+      "outputDatasets": [
+        "WORKLIB.CATEGORY_DEMAND_SUMMARY"
+      ],
+      "semanticOperations": [
+        "GROUPING",
+        "AGGREGATION"
+      ],
+      "classVariables": [
+        "category",
+        "demand_band"
+      ],
+      "varVariables": [
+        "sales",
+        "units",
+        "transactions"
+      ],
+      "options": {
+        "nway": true
+      },
+      "statisticalMetrics": [
+        {
+          "metric": "SUM",
+          "variable": "sales"
+        },
+        {
+          "metric": "SUM",
+          "variable": "units"
+        },
+        {
+          "metric": "SUM",
+          "variable": "transactions"
+        }
+      ],
+      "shapeTransformation": "MANY_TO_FEW_AGGREGATED"
+    },
+    {
+      "procId": "PROC-040",
+      "stepId": "STEP-075",
+      "procName": "FREQ",
+      "inputDatasets": [
+        "WORKLIB.PRODUCT_PERFORMANCE"
+      ],
+      "outputDatasets": [
+        "WORKLIB.CATEGORY_DEMAND_FREQ"
+      ],
+      "semanticOperations": [
+        "FREQUENCY_ANALYSIS"
+      ],
+      "options": {
+        "missing": true
+      },
+      "shapeTransformation": "MANY_TO_FEW_AGGREGATED"
+    },
+    {
+      "procId": "PROC-041",
+      "stepId": "STEP-077",
+      "procName": "SORT",
+      "inputDatasets": [
+        "WORKLIB.SALES_PERIOD_FLAGS"
+      ],
+      "outputDatasets": [
+        "WORKLIB.SALES_PERIOD_FLAGS"
+      ],
+      "semanticOperations": [
+        "SORTING"
+      ],
+      "byVariables": [
+        "month_start",
+        "region",
+        "customer_id",
+        "sale_date"
+      ],
+      "shapeTransformation": "REORDERED"
+    },
+    {
+      "procId": "PROC-042",
+      "stepId": "STEP-078",
+      "procName": "SUMMARY",
+      "inputDatasets": [
+        "WORKLIB.SALES_PERIOD_FLAGS"
+      ],
+      "outputDatasets": [
+        "WORKLIB.MONTH_REGION_SUMMARY"
+      ],
+      "semanticOperations": [
+        "GROUPING",
+        "AGGREGATION"
+      ],
+      "classVariables": [
+        "month_start",
+        "region"
+      ],
+      "varVariables": [
+        "net_amount",
+        "quantity"
+      ],
+      "options": {
+        "nway": true
+      },
+      "statisticalMetrics": [
+        {
+          "metric": "SUM",
+          "variable": "net_amount"
+        },
+        {
+          "metric": "SUM",
+          "variable": "quantity"
+        },
+        {
+          "metric": "MEAN",
+          "variable": "net_amount"
+        }
+      ],
+      "shapeTransformation": "MANY_TO_FEW_AGGREGATED"
+    },
+    {
+      "procId": "PROC-043",
+      "stepId": "STEP-079",
+      "procName": "SUMMARY",
+      "inputDatasets": [
+        "WORKLIB.SALES_PERIOD_FLAGS"
+      ],
+      "outputDatasets": [
+        "WORKLIB.QUARTER_REGION_SUMMARY"
+      ],
+      "semanticOperations": [
+        "GROUPING",
+        "AGGREGATION"
+      ],
+      "classVariables": [
+        "quarter_start",
+        "region"
+      ],
+      "varVariables": [
+        "net_amount",
+        "quantity"
+      ],
+      "options": {
+        "nway": true
+      },
+      "statisticalMetrics": [
+        {
+          "metric": "SUM",
+          "variable": "net_amount"
+        },
+        {
+          "metric": "SUM",
+          "variable": "quantity"
+        },
+        {
+          "metric": "MEAN",
+          "variable": "net_amount"
+        }
+      ],
+      "shapeTransformation": "MANY_TO_FEW_AGGREGATED"
+    },
+    {
+      "procId": "PROC-044",
+      "stepId": "STEP-080",
+      "procName": "SQL",
+      "inputDatasets": [
+        "WORKLIB.MONTH_REGION_SUMMARY"
+      ],
+      "outputDatasets": [
+        "WORKLIB.MONTH_REGION_RANKED"
+      ],
+      "semanticOperations": [
+        "SQL_PROCESSING",
+        "SORTING"
+      ],
+      "shapeTransformation": "SAME_SHAPE"
+    },
+    {
+      "procId": "PROC-045",
+      "stepId": "STEP-081",
+      "procName": "SORT",
+      "inputDatasets": [
+        "RAW.SALES"
+      ],
+      "outputDatasets": [
+        "WORKLIB.SALES_DUPLICATE_CHECK",
+        "WORKLIB.SALES_DUPLICATES"
+      ],
+      "semanticOperations": [
+        "SORTING",
+        "FILTERING"
+      ],
+      "byVariables": [
+        "sale_id"
+      ],
+      "options": {
+        "nodupkey": true,
+        "dupout": "WORKLIB.sales_duplicates"
+      },
+      "shapeTransformation": "REORDERED"
+    },
+    {
+      "procId": "PROC-046",
+      "stepId": "STEP-083",
+      "procName": "FREQ",
+      "inputDatasets": [
+        "WORKLIB.SALES_QUALITY"
+      ],
+      "outputDatasets": [
+        "WORKLIB.SALES_QUALITY_COUNTS"
+      ],
+      "semanticOperations": [
+        "FREQUENCY_ANALYSIS"
+      ],
+      "options": {
+        "missing": true
+      },
+      "shapeTransformation": "MANY_TO_FEW_AGGREGATED"
+    },
+    {
+      "procId": "PROC-047",
+      "stepId": "STEP-084",
+      "procName": "SQL",
+      "inputDatasets": [
+        "WORKLIB.SALES_QUALITY"
+      ],
+      "outputDatasets": [
+        "WORKLIB.QUALITY_CONTROL"
+      ],
+      "semanticOperations": [
+        "SQL_PROCESSING",
+        "GROUPING",
+        "AGGREGATION",
+        "SORTING"
+      ],
+      "shapeTransformation": "MANY_TO_FEW_AGGREGATED"
+    },
+    {
+      "procId": "PROC-048",
+      "stepId": "STEP-085",
+      "procName": "SQL",
+      "inputDatasets": [
+        "WORKLIB.ENRICHED_SALES"
+      ],
+      "outputDatasets": [
+        "WORKLIB.CUSTOMER_ACTIVITY"
+      ],
+      "semanticOperations": [
+        "SQL_PROCESSING",
+        "GROUPING",
+        "AGGREGATION"
+      ],
+      "shapeTransformation": "MANY_TO_FEW_AGGREGATED"
+    },
+    {
+      "procId": "PROC-049",
+      "stepId": "STEP-087",
+      "procName": "SORT",
+      "inputDatasets": [
+        "WORKLIB.CUSTOMER_ACTIVITY"
+      ],
+      "outputDatasets": [
+        "WORKLIB.CUSTOMER_ACTIVITY"
+      ],
+      "semanticOperations": [
+        "SORTING"
+      ],
+      "byVariables": [
+        "recency_band",
+        "descending sales"
+      ],
+      "shapeTransformation": "REORDERED"
+    },
+    {
+      "procId": "PROC-050",
+      "stepId": "STEP-088",
+      "procName": "FREQ",
+      "inputDatasets": [
+        "WORKLIB.CUSTOMER_ACTIVITY"
+      ],
+      "outputDatasets": [
+        "WORKLIB.ACTIVITY_MATRIX"
+      ],
+      "semanticOperations": [
+        "FREQUENCY_ANALYSIS"
+      ],
+      "options": {
+        "missing": true
+      },
+      "shapeTransformation": "MANY_TO_FEW_AGGREGATED"
+    },
+    {
+      "procId": "PROC-051",
+      "stepId": "STEP-089",
+      "procName": "SUMMARY",
+      "inputDatasets": [
+        "WORKLIB.CUSTOMER_ACTIVITY"
+      ],
+      "outputDatasets": [
+        "WORKLIB.ACTIVITY_SUMMARY"
+      ],
+      "semanticOperations": [
+        "GROUPING",
+        "AGGREGATION"
+      ],
+      "classVariables": [
+        "activity_band",
+        "recency_band"
+      ],
+      "varVariables": [
+        "sales",
+        "transaction_count",
+        "active_days"
+      ],
+      "options": {
+        "nway": true
+      },
+      "statisticalMetrics": [
+        {
+          "metric": "SUM",
+          "variable": "sales"
+        },
+        {
+          "metric": "SUM",
+          "variable": "transaction_count"
+        },
+        {
+          "metric": "MEAN",
+          "variable": "active_days"
+        }
+      ],
+      "shapeTransformation": "MANY_TO_FEW_AGGREGATED"
+    },
+    {
+      "procId": "PROC-052",
+      "stepId": "STEP-091",
+      "procName": "FREQ",
+      "inputDatasets": [
+        "WORKLIB.REGION_CONTROLS"
+      ],
+      "outputDatasets": [
+        "WORKLIB.REGION_CONTROL_COUNTS"
+      ],
+      "semanticOperations": [
+        "FREQUENCY_ANALYSIS"
+      ],
+      "options": {
+        "missing": true
+      },
+      "shapeTransformation": "MANY_TO_FEW_AGGREGATED"
+    },
+    {
+      "procId": "PROC-053",
+      "stepId": "STEP-092",
+      "procName": "SQL",
+      "inputDatasets": [
+        "WORKLIB.REGION_REPORT",
+        "WORKLIB.REGION_CONTROLS"
+      ],
+      "outputDatasets": [
+        "WORKLIB.REGION_CONTROL_DETAIL"
+      ],
+      "semanticOperations": [
+        "SQL_PROCESSING",
+        "JOINING"
+      ],
+      "shapeTransformation": "SAME_SHAPE"
+    },
+    {
+      "procId": "PROC-054",
+      "stepId": "STEP-094",
+      "procName": "SORT",
+      "inputDatasets": [
+        "WORKLIB.REGION_RUNNING_SALES"
+      ],
+      "outputDatasets": [
+        "WORKLIB.REGION_RUNNING_SALES"
+      ],
+      "semanticOperations": [
+        "SORTING"
+      ],
+      "byVariables": [
+        "region",
+        "sale_date"
+      ],
+      "shapeTransformation": "REORDERED"
+    },
+    {
+      "procId": "PROC-055",
+      "stepId": "STEP-096",
+      "procName": "SUMMARY",
+      "inputDatasets": [
+        "WORKLIB.REGION_RUNNING_SALES"
+      ],
+      "outputDatasets": [
+        "WORKLIB.REGION_CHANGE_SUMMARY"
+      ],
+      "semanticOperations": [
+        "GROUPING",
+        "AGGREGATION"
+      ],
+      "classVariables": [
+        "region"
+      ],
+      "varVariables": [
+        "sales_change"
+      ],
+      "options": {
+        "nway": true
+      },
+      "statisticalMetrics": [
+        {
+          "metric": "SUM",
+          "variable": "sales_change"
+        },
+        {
+          "metric": "MAX",
+          "variable": "sales_change"
+        },
+        {
+          "metric": "MIN",
+          "variable": "sales_change"
+        }
+      ],
+      "shapeTransformation": "MANY_TO_FEW_AGGREGATED"
+    },
+    {
+      "procId": "PROC-056",
+      "stepId": "STEP-097",
+      "procName": "SQL",
+      "inputDatasets": [
+        "WORKLIB.CUSTOMER_SORTED"
+      ],
+      "outputDatasets": [
+        "WORKLIB.CUSTOMER_LOOKUP"
+      ],
+      "semanticOperations": [
+        "SQL_PROCESSING",
+        "GROUPING",
+        "AGGREGATION"
+      ],
+      "shapeTransformation": "MANY_TO_FEW_AGGREGATED"
+    },
+    {
+      "procId": "PROC-057",
+      "stepId": "STEP-099",
+      "procName": "FREQ",
+      "inputDatasets": [
+        "WORKLIB.SALES_LOOKUP_ENRICHED"
+      ],
+      "outputDatasets": [
+        "WORKLIB.LOOKUP_STATUS_COUNTS"
+      ],
+      "semanticOperations": [
+        "FREQUENCY_ANALYSIS"
+      ],
+      "options": {
+        "missing": true
+      },
+      "shapeTransformation": "MANY_TO_FEW_AGGREGATED"
+    },
+    {
+      "procId": "PROC-058",
+      "stepId": "STEP-101",
+      "procName": "FREQ",
+      "inputDatasets": [
+        "WORKLIB.SEMANTIC_EDGE_CASES"
+      ],
+      "outputDatasets": [
+        "WORKLIB.SEMANTIC_EDGE_COUNTS"
+      ],
+      "semanticOperations": [
+        "FREQUENCY_ANALYSIS"
+      ],
+      "options": {
+        "missing": true
+      },
+      "shapeTransformation": "MANY_TO_FEW_AGGREGATED"
+    },
+    {
+      "procId": "PROC-059",
+      "stepId": "STEP-102",
+      "procName": "SQL",
+      "inputDatasets": [
+        "WORKLIB.ENRICHED_SALES",
+        "WORKLIB.REVIEW_QUEUE_FINAL",
+        "WORKLIB.SALES_DUPLICATES",
+        "WORKLIB.SALES_QUALITY"
+      ],
+      "outputDatasets": [
+        "WORKLIB.OPERATIONAL_DASHBOARD"
+      ],
+      "semanticOperations": [
+        "SQL_PROCESSING",
+        "AGGREGATION"
+      ],
+      "shapeTransformation": "MANY_TO_FEW_AGGREGATED"
+    },
+    {
+      "procId": "PROC-060",
+      "stepId": "STEP-104",
+      "procName": "PRINT",
+      "inputDatasets": [
+        "WORKLIB.OPERATIONAL_DASHBOARD"
+      ],
+      "outputDatasets": [
+        "WORKLIB.OPERATIONAL_DASHBOARD"
+      ],
+      "semanticOperations": [
+        "REPORTING"
+      ],
+      "shapeTransformation": "SAME_SHAPE"
+    }
+  ]
+}

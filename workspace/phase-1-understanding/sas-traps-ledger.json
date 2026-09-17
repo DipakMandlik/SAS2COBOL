@@ -1,0 +1,156 @@
+{
+  "traps": [
+    {
+      "trapId": "TRAP-001",
+      "stepId": "STEP-010",
+      "category": "MISSING_VALUE_COMPARISON",
+      "line": 83,
+      "description": "SAS numeric missing (.) is mathematically smaller than negative infinity; quantity < 0 evaluates to TRUE when missing.",
+      "mitigation": "In COBOL, explicitly check for missing/null status before evaluating numeric inequalities."
+    },
+    {
+      "trapId": "TRAP-002",
+      "stepId": "STEP-100",
+      "category": "SPECIAL_MISSING_VALUES",
+      "line": 978,
+      "description": "Special missing values .A and .Z are checked in discount_pct classification; COBOL standard lacks native special missings.",
+      "mitigation": "Map special missing values to distinct high-value/low-value alphanumeric flags or dedicated 88-level indicators."
+    },
+    {
+      "trapId": "TRAP-003",
+      "stepId": "STEP-014",
+      "category": "IMPLICIT_RETAIN",
+      "line": 123,
+      "description": "SUM statement (customer_total + net_amount) automatically creates an implicit RETAIN and initializes to zero across DATA step iterations.",
+      "mitigation": "Declare explicit accumulator in WORKING-STORAGE and initialize to zero at control break."
+    },
+    {
+      "trapId": "TRAP-004",
+      "stepId": "STEP-100",
+      "category": "TYPE_COERCION",
+      "line": 983,
+      "description": "Explicit PUT and INPUT functions coerce numeric to formatted string and text back to numeric.",
+      "mitigation": "Utilize COBOL edited PIC clauses (e.g. ZZ,ZZZ,ZZ9.99) and intrinsic FUNCTION NUMVAL-C."
+    },
+    {
+      "trapId": "TRAP-005",
+      "stepId": "STEP-012",
+      "category": "MERGE_WITHOUT_BY",
+      "line": 101,
+      "description": "Verify BY statement presence on MERGE; WORKLIB.customer_sales correctly uses BY customer_id.",
+      "mitigation": "Implement two-file sequential match-merge algorithm using HIGH-VALUES sentinel key handling."
+    },
+    {
+      "trapId": "TRAP-006",
+      "stepId": "STEP-012",
+      "category": "DUPLICATE_KEY_CARDINALITY",
+      "line": 101,
+      "description": "One-to-many relationship between customer and sales preserves customer fields across multiple sales records in SAS PDV.",
+      "mitigation": "Implement master-transaction loop maintaining master record in storage across transaction stream."
+    },
+    {
+      "trapId": "TRAP-007",
+      "stepId": "STEP-012",
+      "category": "IN_FLAG_INDICATORS",
+      "line": 104,
+      "description": "IN= variables (in_customer, in_sale) emulate inner join filter (if in_customer and in_sale).",
+      "mitigation": "Evaluate match status in match-merge loop: process output only when master-key = transaction-key."
+    },
+    {
+      "trapId": "TRAP-008",
+      "stepId": "STEP-014",
+      "category": "PDV_RESET_ANOMALY",
+      "line": 118,
+      "description": "RETAIN variables customer_total and transaction_count persist across observations until explicit reset on FIRST.customer_id.",
+      "mitigation": "Structure control-break logic: perform group-header reset before processing detail records."
+    },
+    {
+      "trapId": "TRAP-009",
+      "stepId": "STEP-001",
+      "category": "DATE_EPOCH_OFFSET",
+      "line": 9,
+      "description": "SAS date values are integer offsets since Jan 1, 1960; date functions intnx and intck operate on this epoch.",
+      "mitigation": "Convert SAS date integers to Gregorian YYYYMMDD or Lilian dates via mainframe date routines (CEELOCT/CEEDAYS)."
+    },
+    {
+      "trapId": "TRAP-010",
+      "stepId": "STEP-006",
+      "category": "FIRST_LAST_GROUPING",
+      "line": 50,
+      "description": "FIRST.customer_id evaluated without BY statement; in standard SAS this produces error/warning or unexpected behavior.",
+      "mitigation": "Enforce sorted prerequisite and previous-key comparison registers in COBOL control break."
+    },
+    {
+      "trapId": "TRAP-011",
+      "stepId": "STEP-044",
+      "category": "MULTIPLE_SET_STATEMENTS",
+      "line": 401,
+      "description": "Conditional SET executed only on _N_=1 (if _n_=1 then set WORKLIB.final_control_totals); values remain in PDV for all iterations.",
+      "mitigation": "Read one-time control record during initialization paragraph into static WORKING-STORAGE block."
+    },
+    {
+      "trapId": "TRAP-012",
+      "stepId": "STEP-044",
+      "category": "AUTOMATIC_VARIABLES",
+      "line": 401,
+      "description": "_N_ iteration counter used to trigger header record loading; _N_ is dropped from output dataset automatically.",
+      "mitigation": "Implement internal record counter in WORKING-STORAGE."
+    },
+    {
+      "trapId": "TRAP-013",
+      "stepId": "STEP-014",
+      "category": "IMPLICIT_VS_EXPLICIT_OUTPUT",
+      "line": 125,
+      "description": "Explicit OUTPUT on LAST.customer_id suppresses default implicit output at bottom of DATA step, writing only summary rows.",
+      "mitigation": "Emit summary record only inside control-break finalization paragraph; omit record emission in detail paragraph."
+    },
+    {
+      "trapId": "TRAP-014",
+      "stepId": "STEP-010",
+      "category": "FORMAT_VS_INFORMAT_CONVERSION",
+      "line": 78,
+      "description": "Variables formatted with comma14.2 and date9. alter display representation without altering internal binary/float representation.",
+      "mitigation": "Store numeric values in COMP-3 (packed decimal) and format into display structures for output."
+    },
+    {
+      "trapId": "TRAP-015",
+      "stepId": "STEP-060",
+      "category": "WORK_DATASET_OVERWRITE",
+      "line": 534,
+      "description": "WORKLIB.final_customer_profile overwrites itself in-place across successive DATA steps.",
+      "mitigation": "Assign separate physical intermediate DD names (e.g. CUSTPRF1, CUSTPRF2) in JCL job stream."
+    },
+    {
+      "trapId": "TRAP-016",
+      "stepId": "STEP-015",
+      "category": "PROC_GENERATED_VARIABLES",
+      "line": 130,
+      "description": "PROC SUMMARY and FREQ generate automatic columns (_TYPE_, _FREQ_, COUNT, PERCENT) in output tables.",
+      "mitigation": "Explicitly specify record layout in output copybook including count and frequency accumulators."
+    },
+    {
+      "trapId": "TRAP-017",
+      "stepId": "STEP-019",
+      "category": "SQL_NULL_VS_MISSING",
+      "line": 193,
+      "description": "LEFT JOIN in PROC SQL produces SQL NULLs for unmatched rows, which convert to SAS missing (.) or spaces.",
+      "mitigation": "Use DB2 SQL indicator variables (:VAR :VAR-IND) or COBOL 88-level null sentinels."
+    },
+    {
+      "trapId": "TRAP-018",
+      "stepId": "STEP-034",
+      "category": "MACRO_DYNAMIC_EXECUTION",
+      "line": 331,
+      "description": "Macro %build_region_report dynamically generates alternative DATA step code paths based on &region parameter.",
+      "mitigation": "Static COBOL programs must handle parameter filtering via run-time linkage-section or PARM evaluation."
+    },
+    {
+      "trapId": "TRAP-019",
+      "stepId": "STEP-001",
+      "category": "EXTERNAL_DATA_BOUNDARY",
+      "line": 13,
+      "description": "LIBNAME RAW points to Unix path /data/raw/sales with unmanaged physical schema.",
+      "mitigation": "Map SAS external datasets to mainframe QSAM files / VSAM datasets defined in JCL DD statements."
+    }
+  ]
+}

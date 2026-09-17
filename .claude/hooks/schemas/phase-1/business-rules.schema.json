@@ -1,0 +1,64 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "BusinessProcessingRules",
+  "type": "object",
+  "required": ["rules"],
+  "properties": {
+    "rules": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["ruleId", "description", "sourceReference", "ruleType", "affectedDatasets", "condition", "action", "confidence"],
+        "properties": {
+          "ruleId": { "type": "string", "pattern": "^RULE-[0-9A-Za-z_-]+$" },
+          "description": { "type": "string" },
+          "sourceReference": {
+            "type": "object",
+            "required": ["file", "startLine", "endLine", "stepId"],
+            "properties": {
+              "file": { "type": "string" },
+              "startLine": { "type": "integer", "minimum": 1 },
+              "endLine": { "type": "integer", "minimum": 1 },
+              "stepId": { "type": "string" }
+            }
+          },
+          "ruleType": {
+            "type": "string",
+            "enum": [
+              "ELIGIBILITY",
+              "FILTERING",
+              "CALCULATION",
+              "AGGREGATION",
+              "CATEGORIZATION",
+              "DEDUPLICATION",
+              "MATCHING",
+              "JOINING",
+              "SORTING",
+              "CONDITIONAL_OUTPUT",
+              "DATE_LOGIC",
+              "THRESHOLD_EXCEPTION",
+              "STATEFUL_ACCUMULATION",
+              "RECORD_SELECTION",
+              "RECORD_EXCLUSION"
+            ]
+          },
+          "affectedDatasets": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "affectedFields": {
+            "type": "array",
+            "items": { "type": "string" }
+          },
+          "condition": { "type": "string" },
+          "action": { "type": "string" },
+          "evidence": { "type": "string" },
+          "confidence": {
+            "type": "string",
+            "enum": ["KNOWN", "INFERRED", "UNKNOWN", "ASSUMPTION", "REQUIRES_REVIEW"]
+          }
+        }
+      }
+    }
+  }
+}

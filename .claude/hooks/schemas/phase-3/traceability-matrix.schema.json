@@ -1,0 +1,58 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "TraceabilityMatrix",
+  "type": "object",
+  "required": ["mappings", "metrics"],
+  "properties": {
+    "mappings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["mappingId", "source", "architecture", "target"],
+        "properties": {
+          "mappingId": { "type": "string" },
+          "source": {
+            "type": "object",
+            "required": ["file", "startLine", "endLine", "stepId"],
+            "properties": {
+              "file": { "type": "string" },
+              "startLine": { "type": "integer" },
+              "endLine": { "type": "integer" },
+              "stepId": { "type": "string" },
+              "snippet": { "type": "string" }
+            }
+          },
+          "architecture": {
+            "type": "object",
+            "required": ["puId", "decisionId"],
+            "properties": {
+              "puId": { "type": "string" },
+              "decisionId": { "type": "string" }
+            }
+          },
+          "target": {
+            "type": "object",
+            "required": ["file", "element"],
+            "properties": {
+              "file": { "type": "string" },
+              "element": { "type": "string" },
+              "startLine": { "type": "integer" },
+              "endLine": { "type": "integer" }
+            }
+          }
+        }
+      }
+    },
+    "metrics": {
+      "type": "object",
+      "required": ["totalSourceStatements", "mappedSourceStatements", "coveragePercentage", "sourceOrphans", "targetOrphans"],
+      "properties": {
+        "totalSourceStatements": { "type": "integer" },
+        "mappedSourceStatements": { "type": "integer" },
+        "coveragePercentage": { "type": "number", "minimum": 0, "maximum": 100 },
+        "sourceOrphans": { "type": "integer" },
+        "targetOrphans": { "type": "integer" }
+      }
+    }
+  }
+}

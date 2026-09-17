@@ -1,0 +1,33 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "DataModelCopybooks",
+  "type": "object",
+  "required": ["copybooks"],
+  "properties": {
+    "copybooks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["copybookName", "recordName", "fields"],
+        "properties": {
+          "copybookName": { "type": "string" },
+          "recordName": { "type": "string" },
+          "fields": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["level", "name", "picClause"],
+              "properties": {
+                "level": { "type": "string" },
+                "name": { "type": "string" },
+                "picClause": { "type": "string" },
+                "usage": { "type": "string" },
+                "sourceVariable": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

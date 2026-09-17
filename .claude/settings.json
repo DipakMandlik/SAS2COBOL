@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(node .claude/hooks/gate-validator.js*)",
+      "PowerShell(node --test*)",
+      "Bash(node .claude/hooks/gate-validator.js*)",
+      "Bash(node --test*)"
+    ]
+  }
+}

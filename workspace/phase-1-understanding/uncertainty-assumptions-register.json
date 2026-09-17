@@ -1,0 +1,60 @@
+{
+  "items": [
+    {
+      "id": "UNC-001",
+      "kind": "PARTIAL_SCHEMA_UNKNOWN",
+      "stepId": "STEP-006",
+      "description": "External RAW.customers physical layout is unmanaged in SAS code; field types and lengths inferred from SET statement.",
+      "impact": "MEDIUM",
+      "status": "INFERRED"
+    },
+    {
+      "id": "UNC-002",
+      "kind": "PARTIAL_SCHEMA_UNKNOWN",
+      "stepId": "STEP-008",
+      "description": "External RAW.products physical layout is unmanaged; field types and lengths inferred from SET statement.",
+      "impact": "MEDIUM",
+      "status": "INFERRED"
+    },
+    {
+      "id": "UNC-003",
+      "kind": "PARTIAL_SCHEMA_UNKNOWN",
+      "stepId": "STEP-010",
+      "description": "External RAW.sales physical layout is unmanaged; field types and formats inferred from LENGTH and FORMAT statements.",
+      "impact": "MEDIUM",
+      "status": "INFERRED"
+    },
+    {
+      "id": "UNC-004",
+      "kind": "DYNAMIC_UNRESOLVED",
+      "stepId": "STEP-037",
+      "description": "Macro %build_region_report dynamically conditions on &RUN_REGION; in production this parameter may be injected via scheduler.",
+      "impact": "LOW",
+      "status": "CONFIRMED"
+    },
+    {
+      "id": "UNC-005",
+      "kind": "DYNAMIC_UNRESOLVED",
+      "stepId": "STEP-056",
+      "description": "Macro %parameterized_filter dynamic table substitution (&output) resolved statically to WORKLIB.high_value_sales.",
+      "impact": "LOW",
+      "status": "CONFIRMED"
+    },
+    {
+      "id": "ASM-001",
+      "kind": "ASSUMPTION",
+      "stepId": "STEP-001",
+      "description": "Source system operates in single-byte character encoding (ASCII/EBCDIC standard).",
+      "impact": "LOW",
+      "status": "RESOLVED"
+    },
+    {
+      "id": "ASM-002",
+      "kind": "ASSUMPTION",
+      "stepId": "STEP-044",
+      "description": "Reconciliation baseline expected_rows and expected_sales require pre-migration historical baseline inputs.",
+      "impact": "MEDIUM",
+      "status": "RESOLVED"
+    }
+  ]
+}

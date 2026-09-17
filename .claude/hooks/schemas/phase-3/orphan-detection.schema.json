@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "OrphanDetection",
+  "type": "object",
+  "required": ["sourceOrphans", "targetOrphans", "verdict"],
+  "properties": {
+    "sourceOrphans": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["stepId", "file", "startLine", "endLine", "description"],
+        "properties": {
+          "stepId": { "type": "string" },
+          "file": { "type": "string" },
+          "startLine": { "type": "integer" },
+          "endLine": { "type": "integer" },
+          "description": { "type": "string" }
+        }
+      }
+    },
+    "targetOrphans": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["file", "element", "description"],
+        "properties": {
+          "file": { "type": "string" },
+          "element": { "type": "string" },
+          "description": { "type": "string" }
+        }
+      }
+    },
+    "verdict": { "type": "string", "enum": ["CLEAN", "ORPHANS_FOUND"] }
+  }
+}

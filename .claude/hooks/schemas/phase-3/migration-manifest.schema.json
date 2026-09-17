@@ -1,0 +1,35 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "MigrationManifest",
+  "type": "object",
+  "required": ["packageId", "timestamp", "artifacts", "certification"],
+  "properties": {
+    "packageId": { "type": "string" },
+    "timestamp": { "type": "string" },
+    "artifacts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["path", "category", "sha256"],
+        "properties": {
+          "path": { "type": "string" },
+          "category": {
+            "type": "string",
+            "enum": ["COBOL", "COPYBOOK", "JCL", "SQL", "DATA", "DOCUMENTATION", "TRACEABILITY", "RECONCILIATION", "REVIEW"]
+          },
+          "sha256": { "type": "string" }
+        }
+      }
+    },
+    "certification": {
+      "type": "object",
+      "required": ["gate1", "gate2", "gate3", "certifiedBy"],
+      "properties": {
+        "gate1": { "type": "string", "enum": ["PASSED", "FAILED"] },
+        "gate2": { "type": "string", "enum": ["PASSED", "FAILED"] },
+        "gate3": { "type": "string", "enum": ["PASSED", "FAILED"] },
+        "certifiedBy": { "type": "string" }
+      }
+    }
+  }
+}

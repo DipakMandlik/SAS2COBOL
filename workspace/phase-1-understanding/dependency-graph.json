@@ -1,0 +1,1838 @@
+{
+  "nodes": [
+    {
+      "id": "RAW.CUSTOMERS",
+      "type": "DATASET",
+      "label": "RAW.CUSTOMERS"
+    },
+    {
+      "id": "RAW.PRODUCTS",
+      "type": "DATASET",
+      "label": "RAW.PRODUCTS"
+    },
+    {
+      "id": "RAW.SALES",
+      "type": "DATASET",
+      "label": "RAW.SALES"
+    },
+    {
+      "id": "WORKLIB.ACTIVITY_MATRIX",
+      "type": "DATASET",
+      "label": "WORKLIB.ACTIVITY_MATRIX"
+    },
+    {
+      "id": "WORKLIB.ACTIVITY_SUMMARY",
+      "type": "DATASET",
+      "label": "WORKLIB.ACTIVITY_SUMMARY"
+    },
+    {
+      "id": "WORKLIB.AUDIT_EXTRACT",
+      "type": "DATASET",
+      "label": "WORKLIB.AUDIT_EXTRACT"
+    },
+    {
+      "id": "WORKLIB.CATEGORY_DEMAND_FREQ",
+      "type": "DATASET",
+      "label": "WORKLIB.CATEGORY_DEMAND_FREQ"
+    },
+    {
+      "id": "WORKLIB.CATEGORY_DEMAND_SUMMARY",
+      "type": "DATASET",
+      "label": "WORKLIB.CATEGORY_DEMAND_SUMMARY"
+    },
+    {
+      "id": "WORKLIB.CHANNEL_FREQ",
+      "type": "DATASET",
+      "label": "WORKLIB.CHANNEL_FREQ"
+    },
+    {
+      "id": "WORKLIB.CUSTOMER_ACTIVITY",
+      "type": "DATASET",
+      "label": "WORKLIB.CUSTOMER_ACTIVITY"
+    },
+    {
+      "id": "WORKLIB.CUSTOMER_BASE",
+      "type": "DATASET",
+      "label": "WORKLIB.CUSTOMER_BASE"
+    },
+    {
+      "id": "WORKLIB.CUSTOMER_FLAGS",
+      "type": "DATASET",
+      "label": "WORKLIB.CUSTOMER_FLAGS"
+    },
+    {
+      "id": "WORKLIB.CUSTOMER_FLAGS_SORTED",
+      "type": "DATASET",
+      "label": "WORKLIB.CUSTOMER_FLAGS_SORTED"
+    },
+    {
+      "id": "WORKLIB.CUSTOMER_KPIS",
+      "type": "DATASET",
+      "label": "WORKLIB.CUSTOMER_KPIS"
+    },
+    {
+      "id": "WORKLIB.CUSTOMER_LOOKUP",
+      "type": "DATASET",
+      "label": "WORKLIB.CUSTOMER_LOOKUP"
+    },
+    {
+      "id": "WORKLIB.CUSTOMER_MONTHLY",
+      "type": "DATASET",
+      "label": "WORKLIB.CUSTOMER_MONTHLY"
+    },
+    {
+      "id": "WORKLIB.CUSTOMER_SALES",
+      "type": "DATASET",
+      "label": "WORKLIB.CUSTOMER_SALES"
+    },
+    {
+      "id": "WORKLIB.CUSTOMER_SALES_SORTED",
+      "type": "DATASET",
+      "label": "WORKLIB.CUSTOMER_SALES_SORTED"
+    },
+    {
+      "id": "WORKLIB.CUSTOMER_SCORING",
+      "type": "DATASET",
+      "label": "WORKLIB.CUSTOMER_SCORING"
+    },
+    {
+      "id": "WORKLIB.CUSTOMER_SORTED",
+      "type": "DATASET",
+      "label": "WORKLIB.CUSTOMER_SORTED"
+    },
+    {
+      "id": "WORKLIB.CUSTOMER_TIER",
+      "type": "DATASET",
+      "label": "WORKLIB.CUSTOMER_TIER"
+    },
+    {
+      "id": "WORKLIB.CUSTOMER_TIER_SORTED",
+      "type": "DATASET",
+      "label": "WORKLIB.CUSTOMER_TIER_SORTED"
+    },
+    {
+      "id": "WORKLIB.DAILY_SALES",
+      "type": "DATASET",
+      "label": "WORKLIB.DAILY_SALES"
+    },
+    {
+      "id": "WORKLIB.DAILY_SALES_PIVOT",
+      "type": "DATASET",
+      "label": "WORKLIB.DAILY_SALES_PIVOT"
+    },
+    {
+      "id": "WORKLIB.DAILY_SALES_SORTED",
+      "type": "DATASET",
+      "label": "WORKLIB.DAILY_SALES_SORTED"
+    },
+    {
+      "id": "WORKLIB.DELIVERY_MANIFEST",
+      "type": "DATASET",
+      "label": "WORKLIB.DELIVERY_MANIFEST"
+    },
+    {
+      "id": "WORKLIB.ENGAGEMENT_SUMMARY",
+      "type": "DATASET",
+      "label": "WORKLIB.ENGAGEMENT_SUMMARY"
+    },
+    {
+      "id": "WORKLIB.ENRICHED_SALES",
+      "type": "DATASET",
+      "label": "WORKLIB.ENRICHED_SALES"
+    },
+    {
+      "id": "WORKLIB.EXCEPTION_COUNTS",
+      "type": "DATASET",
+      "label": "WORKLIB.EXCEPTION_COUNTS"
+    },
+    {
+      "id": "WORKLIB.EXCEPTION_EXTRACT",
+      "type": "DATASET",
+      "label": "WORKLIB.EXCEPTION_EXTRACT"
+    },
+    {
+      "id": "WORKLIB.EXCEPTION_SUMMARY",
+      "type": "DATASET",
+      "label": "WORKLIB.EXCEPTION_SUMMARY"
+    },
+    {
+      "id": "WORKLIB.FINAL_CONTROL_REPORT",
+      "type": "DATASET",
+      "label": "WORKLIB.FINAL_CONTROL_REPORT"
+    },
+    {
+      "id": "WORKLIB.FINAL_CONTROL_TOTALS",
+      "type": "DATASET",
+      "label": "WORKLIB.FINAL_CONTROL_TOTALS"
+    },
+    {
+      "id": "WORKLIB.FINAL_CUSTOMER_PROFILE",
+      "type": "DATASET",
+      "label": "WORKLIB.FINAL_CUSTOMER_PROFILE"
+    },
+    {
+      "id": "WORKLIB.FINAL_SALES_EXTRACT",
+      "type": "DATASET",
+      "label": "WORKLIB.FINAL_SALES_EXTRACT"
+    },
+    {
+      "id": "WORKLIB.HIGH_VALUE_CUSTOMER",
+      "type": "DATASET",
+      "label": "WORKLIB.HIGH_VALUE_CUSTOMER"
+    },
+    {
+      "id": "WORKLIB.HIGH_VALUE_SALES",
+      "type": "DATASET",
+      "label": "WORKLIB.HIGH_VALUE_SALES"
+    },
+    {
+      "id": "WORKLIB.LOOKUP_STATUS_COUNTS",
+      "type": "DATASET",
+      "label": "WORKLIB.LOOKUP_STATUS_COUNTS"
+    },
+    {
+      "id": "WORKLIB.MANAGEMENT_SUMMARY",
+      "type": "DATASET",
+      "label": "WORKLIB.MANAGEMENT_SUMMARY"
+    },
+    {
+      "id": "WORKLIB.METADATA_SNAPSHOT",
+      "type": "DATASET",
+      "label": "WORKLIB.METADATA_SNAPSHOT"
+    },
+    {
+      "id": "WORKLIB.MONTH_REGION_RANKED",
+      "type": "DATASET",
+      "label": "WORKLIB.MONTH_REGION_RANKED"
+    },
+    {
+      "id": "WORKLIB.MONTH_REGION_SUMMARY",
+      "type": "DATASET",
+      "label": "WORKLIB.MONTH_REGION_SUMMARY"
+    },
+    {
+      "id": "WORKLIB.OPERATIONAL_DASHBOARD",
+      "type": "DATASET",
+      "label": "WORKLIB.OPERATIONAL_DASHBOARD"
+    },
+    {
+      "id": "WORKLIB.PRODUCT_BASE",
+      "type": "DATASET",
+      "label": "WORKLIB.PRODUCT_BASE"
+    },
+    {
+      "id": "WORKLIB.PRODUCT_KPIS",
+      "type": "DATASET",
+      "label": "WORKLIB.PRODUCT_KPIS"
+    },
+    {
+      "id": "WORKLIB.PRODUCT_PERFORMANCE",
+      "type": "DATASET",
+      "label": "WORKLIB.PRODUCT_PERFORMANCE"
+    },
+    {
+      "id": "WORKLIB.PRODUCT_SORTED",
+      "type": "DATASET",
+      "label": "WORKLIB.PRODUCT_SORTED"
+    },
+    {
+      "id": "WORKLIB.QUALITY_CONTROL",
+      "type": "DATASET",
+      "label": "WORKLIB.QUALITY_CONTROL"
+    },
+    {
+      "id": "WORKLIB.QUARTER_REGION_SUMMARY",
+      "type": "DATASET",
+      "label": "WORKLIB.QUARTER_REGION_SUMMARY"
+    },
+    {
+      "id": "WORKLIB.RECONCILIATION",
+      "type": "DATASET",
+      "label": "WORKLIB.RECONCILIATION"
+    },
+    {
+      "id": "WORKLIB.REGION_CHANGE_SUMMARY",
+      "type": "DATASET",
+      "label": "WORKLIB.REGION_CHANGE_SUMMARY"
+    },
+    {
+      "id": "WORKLIB.REGION_CHANNEL_FREQ",
+      "type": "DATASET",
+      "label": "WORKLIB.REGION_CHANNEL_FREQ"
+    },
+    {
+      "id": "WORKLIB.REGION_CHANNEL_SUMMARY",
+      "type": "DATASET",
+      "label": "WORKLIB.REGION_CHANNEL_SUMMARY"
+    },
+    {
+      "id": "WORKLIB.REGION_CONTROLS",
+      "type": "DATASET",
+      "label": "WORKLIB.REGION_CONTROLS"
+    },
+    {
+      "id": "WORKLIB.REGION_CONTROL_COUNTS",
+      "type": "DATASET",
+      "label": "WORKLIB.REGION_CONTROL_COUNTS"
+    },
+    {
+      "id": "WORKLIB.REGION_CONTROL_DETAIL",
+      "type": "DATASET",
+      "label": "WORKLIB.REGION_CONTROL_DETAIL"
+    },
+    {
+      "id": "WORKLIB.REGION_CUSTOMER_SCORE",
+      "type": "DATASET",
+      "label": "WORKLIB.REGION_CUSTOMER_SCORE"
+    },
+    {
+      "id": "WORKLIB.REGION_CUSTOMER_SCORE_FLAGS",
+      "type": "DATASET",
+      "label": "WORKLIB.REGION_CUSTOMER_SCORE_FLAGS"
+    },
+    {
+      "id": "WORKLIB.REGION_REPORT",
+      "type": "DATASET",
+      "label": "WORKLIB.REGION_REPORT"
+    },
+    {
+      "id": "WORKLIB.REGION_REPORT_INPUT",
+      "type": "DATASET",
+      "label": "WORKLIB.REGION_REPORT_INPUT"
+    },
+    {
+      "id": "WORKLIB.REGION_RUNNING_SALES",
+      "type": "DATASET",
+      "label": "WORKLIB.REGION_RUNNING_SALES"
+    },
+    {
+      "id": "WORKLIB.REGION_SUMMARY",
+      "type": "DATASET",
+      "label": "WORKLIB.REGION_SUMMARY"
+    },
+    {
+      "id": "WORKLIB.REGION_SUMMARY_WIDE",
+      "type": "DATASET",
+      "label": "WORKLIB.REGION_SUMMARY_WIDE"
+    },
+    {
+      "id": "WORKLIB.REGION_TIER_FREQ",
+      "type": "DATASET",
+      "label": "WORKLIB.REGION_TIER_FREQ"
+    },
+    {
+      "id": "WORKLIB.REVIEW_QUEUE",
+      "type": "DATASET",
+      "label": "WORKLIB.REVIEW_QUEUE"
+    },
+    {
+      "id": "WORKLIB.REVIEW_QUEUE_FINAL",
+      "type": "DATASET",
+      "label": "WORKLIB.REVIEW_QUEUE_FINAL"
+    },
+    {
+      "id": "WORKLIB.SALES_BASE",
+      "type": "DATASET",
+      "label": "WORKLIB.SALES_BASE"
+    },
+    {
+      "id": "WORKLIB.SALES_DUPLICATES",
+      "type": "DATASET",
+      "label": "WORKLIB.SALES_DUPLICATES"
+    },
+    {
+      "id": "WORKLIB.SALES_DUPLICATE_CHECK",
+      "type": "DATASET",
+      "label": "WORKLIB.SALES_DUPLICATE_CHECK"
+    },
+    {
+      "id": "WORKLIB.SALES_LOOKUP_ENRICHED",
+      "type": "DATASET",
+      "label": "WORKLIB.SALES_LOOKUP_ENRICHED"
+    },
+    {
+      "id": "WORKLIB.SALES_PERIOD_FLAGS",
+      "type": "DATASET",
+      "label": "WORKLIB.SALES_PERIOD_FLAGS"
+    },
+    {
+      "id": "WORKLIB.SALES_QUALITY",
+      "type": "DATASET",
+      "label": "WORKLIB.SALES_QUALITY"
+    },
+    {
+      "id": "WORKLIB.SALES_QUALITY_COUNTS",
+      "type": "DATASET",
+      "label": "WORKLIB.SALES_QUALITY_COUNTS"
+    },
+    {
+      "id": "WORKLIB.SALES_RULES",
+      "type": "DATASET",
+      "label": "WORKLIB.SALES_RULES"
+    },
+    {
+      "id": "WORKLIB.SALES_SORTED",
+      "type": "DATASET",
+      "label": "WORKLIB.SALES_SORTED"
+    },
+    {
+      "id": "WORKLIB.SCORE_DISTRIBUTION",
+      "type": "DATASET",
+      "label": "WORKLIB.SCORE_DISTRIBUTION"
+    },
+    {
+      "id": "WORKLIB.SCORE_SUMMARY",
+      "type": "DATASET",
+      "label": "WORKLIB.SCORE_SUMMARY"
+    },
+    {
+      "id": "WORKLIB.SEGMENT_RANKED",
+      "type": "DATASET",
+      "label": "WORKLIB.SEGMENT_RANKED"
+    },
+    {
+      "id": "WORKLIB.SEGMENT_ROLLUP",
+      "type": "DATASET",
+      "label": "WORKLIB.SEGMENT_ROLLUP"
+    },
+    {
+      "id": "WORKLIB.SEGMENT_ROLLUP_SORTED",
+      "type": "DATASET",
+      "label": "WORKLIB.SEGMENT_ROLLUP_SORTED"
+    },
+    {
+      "id": "WORKLIB.SEMANTIC_EDGE_CASES",
+      "type": "DATASET",
+      "label": "WORKLIB.SEMANTIC_EDGE_CASES"
+    },
+    {
+      "id": "WORKLIB.SEMANTIC_EDGE_COUNTS",
+      "type": "DATASET",
+      "label": "WORKLIB.SEMANTIC_EDGE_COUNTS"
+    },
+    {
+      "id": "WORKLIB.TIER_ACTIVITY_FREQ",
+      "type": "DATASET",
+      "label": "WORKLIB.TIER_ACTIVITY_FREQ"
+    },
+    {
+      "id": "WORKLIB.TIER_SUMMARY",
+      "type": "DATASET",
+      "label": "WORKLIB.TIER_SUMMARY"
+    },
+    {
+      "id": "STEP-001",
+      "type": "STEP",
+      "label": "GLOBAL GLOBAL_OPTIONS"
+    },
+    {
+      "id": "STEP-002",
+      "type": "STEP",
+      "label": "GLOBAL MACRO_DEF_SET_RUN_CONTEXT"
+    },
+    {
+      "id": "STEP-003",
+      "type": "STEP",
+      "label": "GLOBAL MACRO_DEF_CHOOSE_PERIOD"
+    },
+    {
+      "id": "STEP-004",
+      "type": "STEP",
+      "label": "MACRO_CALL %set_run_context(region=ALL,min_amount=100)"
+    },
+    {
+      "id": "STEP-005",
+      "type": "STEP",
+      "label": "MACRO_CALL %choose_period(period=MONTHLY)"
+    },
+    {
+      "id": "STEP-006",
+      "type": "STEP",
+      "label": "DATA WORKLIB.customer_base"
+    },
+    {
+      "id": "STEP-007",
+      "type": "STEP",
+      "label": "PROC SORT"
+    },
+    {
+      "id": "STEP-008",
+      "type": "STEP",
+      "label": "DATA WORKLIB.product_base"
+    },
+    {
+      "id": "STEP-009",
+      "type": "STEP",
+      "label": "PROC SORT"
+    },
+    {
+      "id": "STEP-010",
+      "type": "STEP",
+      "label": "DATA WORKLIB.sales_base"
+    },
+    {
+      "id": "STEP-011",
+      "type": "STEP",
+      "label": "PROC SORT"
+    },
+    {
+      "id": "STEP-012",
+      "type": "STEP",
+      "label": "DATA WORKLIB.customer_sales"
+    },
+    {
+      "id": "STEP-013",
+      "type": "STEP",
+      "label": "PROC SORT"
+    },
+    {
+      "id": "STEP-014",
+      "type": "STEP",
+      "label": "DATA WORKLIB.customer_monthly"
+    },
+    {
+      "id": "STEP-015",
+      "type": "STEP",
+      "label": "PROC SUMMARY"
+    },
+    {
+      "id": "STEP-016",
+      "type": "STEP",
+      "label": "PROC MEANS"
+    },
+    {
+      "id": "STEP-017",
+      "type": "STEP",
+      "label": "PROC FREQ"
+    },
+    {
+      "id": "STEP-018",
+      "type": "STEP",
+      "label": "PROC TRANSPOSE"
+    },
+    {
+      "id": "STEP-019",
+      "type": "STEP",
+      "label": "PROC SQL"
+    },
+    {
+      "id": "STEP-020",
+      "type": "STEP",
+      "label": "DATA WORKLIB.sales_rules"
+    },
+    {
+      "id": "STEP-021",
+      "type": "STEP",
+      "label": "PROC SORT"
+    },
+    {
+      "id": "STEP-022",
+      "type": "STEP",
+      "label": "DATA WORKLIB.review_queue_final"
+    },
+    {
+      "id": "STEP-023",
+      "type": "STEP",
+      "label": "PROC SQL"
+    },
+    {
+      "id": "STEP-024",
+      "type": "STEP",
+      "label": "PROC SQL"
+    },
+    {
+      "id": "STEP-025",
+      "type": "STEP",
+      "label": "DATA WORKLIB.customer_tier"
+    },
+    {
+      "id": "STEP-026",
+      "type": "STEP",
+      "label": "PROC SORT"
+    },
+    {
+      "id": "STEP-027",
+      "type": "STEP",
+      "label": "DATA WORKLIB.daily_sales"
+    },
+    {
+      "id": "STEP-028",
+      "type": "STEP",
+      "label": "PROC SORT"
+    },
+    {
+      "id": "STEP-029",
+      "type": "STEP",
+      "label": "PROC TRANSPOSE"
+    },
+    {
+      "id": "STEP-030",
+      "type": "STEP",
+      "label": "DATA WORKLIB.customer_flags"
+    },
+    {
+      "id": "STEP-031",
+      "type": "STEP",
+      "label": "PROC SORT"
+    },
+    {
+      "id": "STEP-032",
+      "type": "STEP",
+      "label": "PROC SUMMARY"
+    },
+    {
+      "id": "STEP-033",
+      "type": "STEP",
+      "label": "PROC FREQ"
+    },
+    {
+      "id": "STEP-034",
+      "type": "STEP",
+      "label": "GLOBAL MACRO_DEF_BUILD_REGION_REPORT"
+    },
+    {
+      "id": "STEP-035",
+      "type": "STEP",
+      "label": "DATA WORKLIB.region_report_input_all"
+    },
+    {
+      "id": "STEP-036",
+      "type": "STEP",
+      "label": "DATA WORKLIB.region_report_input_filtered"
+    },
+    {
+      "id": "STEP-037",
+      "type": "STEP",
+      "label": "MACRO_CALL %build_region_report(region=&RUN_REGION)"
+    },
+    {
+      "id": "STEP-038",
+      "type": "STEP",
+      "label": "PROC SQL"
+    },
+    {
+      "id": "STEP-039",
+      "type": "STEP",
+      "label": "DATA WORKLIB.final_sales_extract"
+    },
+    {
+      "id": "STEP-040",
+      "type": "STEP",
+      "label": "PROC SORT"
+    },
+    {
+      "id": "STEP-041",
+      "type": "STEP",
+      "label": "PROC DATASETS"
+    },
+    {
+      "id": "STEP-042",
+      "type": "STEP",
+      "label": "DATA WORKLIB.audit_extract"
+    },
+    {
+      "id": "STEP-043",
+      "type": "STEP",
+      "label": "PROC SQL"
+    },
+    {
+      "id": "STEP-044",
+      "type": "STEP",
+      "label": "DATA WORKLIB.reconciliation"
+    },
+    {
+      "id": "STEP-045",
+      "type": "STEP",
+      "label": "DATA WORKLIB.segment_rollup"
+    },
+    {
+      "id": "STEP-046",
+      "type": "STEP",
+      "label": "PROC SORT"
+    },
+    {
+      "id": "STEP-047",
+      "type": "STEP",
+      "label": "PROC SQL"
+    },
+    {
+      "id": "STEP-048",
+      "type": "STEP",
+      "label": "DATA WORKLIB.exception_extract"
+    },
+    {
+      "id": "STEP-049",
+      "type": "STEP",
+      "label": "PROC FREQ"
+    },
+    {
+      "id": "STEP-050",
+      "type": "STEP",
+      "label": "DATA WORKLIB.exception_summary"
+    },
+    {
+      "id": "STEP-051",
+      "type": "STEP",
+      "label": "PROC SQL"
+    },
+    {
+      "id": "STEP-052",
+      "type": "STEP",
+      "label": "DATA WORKLIB.delivery_manifest"
+    },
+    {
+      "id": "STEP-053",
+      "type": "STEP",
+      "label": "PROC SORT"
+    },
+    {
+      "id": "STEP-054",
+      "type": "STEP",
+      "label": "GLOBAL MACRO_DEF_PARAMETERIZED_FILTER"
+    },
+    {
+      "id": "STEP-055",
+      "type": "STEP",
+      "label": "DATA WORKLIB.high_value_sales_def"
+    },
+    {
+      "id": "STEP-056",
+      "type": "STEP",
+      "label": "MACRO_CALL %parameterized_filter(input=WORKLIB.enriched_sales, output=WORKLIB.high_value_sales, threshold=10000)"
+    },
+    {
+      "id": "STEP-057",
+      "type": "STEP",
+      "label": "PROC SQL"
+    },
+    {
+      "id": "STEP-058",
+      "type": "STEP",
+      "label": "DATA WORKLIB.final_customer_profile"
+    },
+    {
+      "id": "STEP-059",
+      "type": "STEP",
+      "label": "PROC SORT"
+    },
+    {
+      "id": "STEP-060",
+      "type": "STEP",
+      "label": "DATA WORKLIB.final_customer_profile_seq"
+    },
+    {
+      "id": "STEP-061",
+      "type": "STEP",
+      "label": "PROC SUMMARY"
+    },
+    {
+      "id": "STEP-062",
+      "type": "STEP",
+      "label": "PROC SQL"
+    },
+    {
+      "id": "STEP-063",
+      "type": "STEP",
+      "label": "DATA WORKLIB.customer_scoring"
+    },
+    {
+      "id": "STEP-064",
+      "type": "STEP",
+      "label": "PROC SORT"
+    },
+    {
+      "id": "STEP-065",
+      "type": "STEP",
+      "label": "PROC FREQ"
+    },
+    {
+      "id": "STEP-066",
+      "type": "STEP",
+      "label": "PROC SUMMARY"
+    },
+    {
+      "id": "STEP-067",
+      "type": "STEP",
+      "label": "DATA WORKLIB.score_summary"
+    },
+    {
+      "id": "STEP-068",
+      "type": "STEP",
+      "label": "PROC SQL"
+    },
+    {
+      "id": "STEP-069",
+      "type": "STEP",
+      "label": "DATA WORKLIB.region_customer_score_flags"
+    },
+    {
+      "id": "STEP-070",
+      "type": "STEP",
+      "label": "PROC SORT"
+    },
+    {
+      "id": "STEP-071",
+      "type": "STEP",
+      "label": "PROC SQL"
+    },
+    {
+      "id": "STEP-072",
+      "type": "STEP",
+      "label": "DATA WORKLIB.product_performance"
+    },
+    {
+      "id": "STEP-073",
+      "type": "STEP",
+      "label": "PROC SORT"
+    },
+    {
+      "id": "STEP-074",
+      "type": "STEP",
+      "label": "PROC SUMMARY"
+    },
+    {
+      "id": "STEP-075",
+      "type": "STEP",
+      "label": "PROC FREQ"
+    },
+    {
+      "id": "STEP-076",
+      "type": "STEP",
+      "label": "DATA WORKLIB.sales_period_flags"
+    },
+    {
+      "id": "STEP-077",
+      "type": "STEP",
+      "label": "PROC SORT"
+    },
+    {
+      "id": "STEP-078",
+      "type": "STEP",
+      "label": "PROC SUMMARY"
+    },
+    {
+      "id": "STEP-079",
+      "type": "STEP",
+      "label": "PROC SUMMARY"
+    },
+    {
+      "id": "STEP-080",
+      "type": "STEP",
+      "label": "PROC SQL"
+    },
+    {
+      "id": "STEP-081",
+      "type": "STEP",
+      "label": "PROC SORT"
+    },
+    {
+      "id": "STEP-082",
+      "type": "STEP",
+      "label": "DATA WORKLIB.sales_quality"
+    },
+    {
+      "id": "STEP-083",
+      "type": "STEP",
+      "label": "PROC FREQ"
+    },
+    {
+      "id": "STEP-084",
+      "type": "STEP",
+      "label": "PROC SQL"
+    },
+    {
+      "id": "STEP-085",
+      "type": "STEP",
+      "label": "PROC SQL"
+    },
+    {
+      "id": "STEP-086",
+      "type": "STEP",
+      "label": "DATA WORKLIB.customer_activity"
+    },
+    {
+      "id": "STEP-087",
+      "type": "STEP",
+      "label": "PROC SORT"
+    },
+    {
+      "id": "STEP-088",
+      "type": "STEP",
+      "label": "PROC FREQ"
+    },
+    {
+      "id": "STEP-089",
+      "type": "STEP",
+      "label": "PROC SUMMARY"
+    },
+    {
+      "id": "STEP-090",
+      "type": "STEP",
+      "label": "DATA WORKLIB.region_controls"
+    },
+    {
+      "id": "STEP-091",
+      "type": "STEP",
+      "label": "PROC FREQ"
+    },
+    {
+      "id": "STEP-092",
+      "type": "STEP",
+      "label": "PROC SQL"
+    },
+    {
+      "id": "STEP-093",
+      "type": "STEP",
+      "label": "DATA WORKLIB.region_running_sales"
+    },
+    {
+      "id": "STEP-094",
+      "type": "STEP",
+      "label": "PROC SORT"
+    },
+    {
+      "id": "STEP-095",
+      "type": "STEP",
+      "label": "DATA WORKLIB.region_running_sales_delta"
+    },
+    {
+      "id": "STEP-096",
+      "type": "STEP",
+      "label": "PROC SUMMARY"
+    },
+    {
+      "id": "STEP-097",
+      "type": "STEP",
+      "label": "PROC SQL"
+    },
+    {
+      "id": "STEP-098",
+      "type": "STEP",
+      "label": "DATA WORKLIB.sales_lookup_enriched"
+    },
+    {
+      "id": "STEP-099",
+      "type": "STEP",
+      "label": "PROC FREQ"
+    },
+    {
+      "id": "STEP-100",
+      "type": "STEP",
+      "label": "DATA WORKLIB.semantic_edge_cases"
+    },
+    {
+      "id": "STEP-101",
+      "type": "STEP",
+      "label": "PROC FREQ"
+    },
+    {
+      "id": "STEP-102",
+      "type": "STEP",
+      "label": "PROC SQL"
+    },
+    {
+      "id": "STEP-103",
+      "type": "STEP",
+      "label": "DATA WORKLIB.operational_dashboard"
+    },
+    {
+      "id": "STEP-104",
+      "type": "STEP",
+      "label": "PROC PRINT"
+    }
+  ],
+  "edges": [
+    {
+      "edgeId": "DEP-001",
+      "from": "WORKLIB.CUSTOMER_BASE",
+      "to": "STEP-007",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-002",
+      "from": "STEP-007",
+      "to": "WORKLIB.CUSTOMER_SORTED",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-003",
+      "from": "WORKLIB.PRODUCT_BASE",
+      "to": "STEP-009",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-004",
+      "from": "STEP-009",
+      "to": "WORKLIB.PRODUCT_SORTED",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-005",
+      "from": "WORKLIB.SALES_BASE",
+      "to": "STEP-011",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-006",
+      "from": "STEP-011",
+      "to": "WORKLIB.SALES_SORTED",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-007",
+      "from": "WORKLIB.CUSTOMER_SALES",
+      "to": "STEP-013",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-008",
+      "from": "STEP-013",
+      "to": "WORKLIB.CUSTOMER_SALES_SORTED",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-009",
+      "from": "WORKLIB.SALES_SORTED",
+      "to": "STEP-015",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-010",
+      "from": "STEP-015",
+      "to": "WORKLIB.REGION_CHANNEL_SUMMARY",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-011",
+      "from": "WORKLIB.SALES_SORTED",
+      "to": "STEP-016",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-012",
+      "from": "STEP-016",
+      "to": "WORKLIB.REGION_SUMMARY",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-013",
+      "from": "WORKLIB.SALES_SORTED",
+      "to": "STEP-017",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-014",
+      "from": "STEP-017",
+      "to": "WORKLIB.REGION_CHANNEL_FREQ",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-015",
+      "from": "STEP-017",
+      "to": "WORKLIB.CHANNEL_FREQ",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-016",
+      "from": "WORKLIB.REGION_SUMMARY",
+      "to": "STEP-018",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-017",
+      "from": "STEP-018",
+      "to": "WORKLIB.REGION_SUMMARY_WIDE",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-018",
+      "from": "WORKLIB.SALES_SORTED",
+      "to": "STEP-019",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-019",
+      "from": "WORKLIB.CUSTOMER_SORTED",
+      "to": "STEP-019",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-020",
+      "from": "WORKLIB.PRODUCT_SORTED",
+      "to": "STEP-019",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-021",
+      "from": "STEP-019",
+      "to": "WORKLIB.ENRICHED_SALES",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-022",
+      "from": "WORKLIB.SALES_RULES",
+      "to": "STEP-021",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-023",
+      "from": "STEP-021",
+      "to": "WORKLIB.REVIEW_QUEUE",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-024",
+      "from": "WORKLIB.ENRICHED_SALES",
+      "to": "STEP-023",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-025",
+      "from": "STEP-023",
+      "to": "WORKLIB.CUSTOMER_KPIS",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-026",
+      "from": "WORKLIB.ENRICHED_SALES",
+      "to": "STEP-024",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-027",
+      "from": "STEP-024",
+      "to": "WORKLIB.PRODUCT_KPIS",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-028",
+      "from": "WORKLIB.CUSTOMER_TIER",
+      "to": "STEP-026",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-029",
+      "from": "STEP-026",
+      "to": "WORKLIB.CUSTOMER_TIER_SORTED",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-030",
+      "from": "WORKLIB.DAILY_SALES",
+      "to": "STEP-028",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-031",
+      "from": "STEP-028",
+      "to": "WORKLIB.DAILY_SALES_SORTED",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-032",
+      "from": "WORKLIB.DAILY_SALES_SORTED",
+      "to": "STEP-029",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-033",
+      "from": "STEP-029",
+      "to": "WORKLIB.DAILY_SALES_PIVOT",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-034",
+      "from": "WORKLIB.CUSTOMER_FLAGS",
+      "to": "STEP-031",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-035",
+      "from": "STEP-031",
+      "to": "WORKLIB.CUSTOMER_FLAGS_SORTED",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-036",
+      "from": "WORKLIB.CUSTOMER_FLAGS_SORTED",
+      "to": "STEP-032",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-037",
+      "from": "STEP-032",
+      "to": "WORKLIB.TIER_SUMMARY",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-038",
+      "from": "WORKLIB.CUSTOMER_FLAGS_SORTED",
+      "to": "STEP-033",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-039",
+      "from": "STEP-033",
+      "to": "WORKLIB.TIER_ACTIVITY_FREQ",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-040",
+      "from": "STEP-033",
+      "to": "WORKLIB.REGION_TIER_FREQ",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-041",
+      "from": "WORKLIB.REGION_REPORT_INPUT",
+      "to": "STEP-038",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-042",
+      "from": "STEP-038",
+      "to": "WORKLIB.REGION_REPORT",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-043",
+      "from": "WORKLIB.FINAL_SALES_EXTRACT",
+      "to": "STEP-040",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-044",
+      "from": "STEP-040",
+      "to": "WORKLIB.FINAL_SALES_EXTRACT",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-045",
+      "from": "WORKLIB.FINAL_SALES_EXTRACT",
+      "to": "STEP-041",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-046",
+      "from": "STEP-041",
+      "to": "WORKLIB.METADATA_SNAPSHOT",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-047",
+      "from": "WORKLIB.AUDIT_EXTRACT",
+      "to": "STEP-043",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-048",
+      "from": "STEP-043",
+      "to": "WORKLIB.FINAL_CONTROL_TOTALS",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-049",
+      "from": "WORKLIB.SEGMENT_ROLLUP",
+      "to": "STEP-046",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-050",
+      "from": "STEP-046",
+      "to": "WORKLIB.SEGMENT_ROLLUP_SORTED",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-051",
+      "from": "WORKLIB.SEGMENT_ROLLUP_SORTED",
+      "to": "STEP-047",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-052",
+      "from": "STEP-047",
+      "to": "WORKLIB.SEGMENT_RANKED",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-053",
+      "from": "WORKLIB.EXCEPTION_EXTRACT",
+      "to": "STEP-049",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-054",
+      "from": "STEP-049",
+      "to": "WORKLIB.EXCEPTION_COUNTS",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-055",
+      "from": "WORKLIB.TIER_SUMMARY",
+      "to": "STEP-051",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-056",
+      "from": "WORKLIB.EXCEPTION_SUMMARY",
+      "to": "STEP-051",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-057",
+      "from": "STEP-051",
+      "to": "WORKLIB.MANAGEMENT_SUMMARY",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-058",
+      "from": "WORKLIB.DELIVERY_MANIFEST",
+      "to": "STEP-053",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-059",
+      "from": "STEP-053",
+      "to": "WORKLIB.DELIVERY_MANIFEST",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-060",
+      "from": "WORKLIB.HIGH_VALUE_SALES",
+      "to": "STEP-057",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-061",
+      "from": "STEP-057",
+      "to": "WORKLIB.HIGH_VALUE_CUSTOMER",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-062",
+      "from": "WORKLIB.FINAL_CUSTOMER_PROFILE",
+      "to": "STEP-059",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-063",
+      "from": "STEP-059",
+      "to": "WORKLIB.FINAL_CUSTOMER_PROFILE",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-064",
+      "from": "WORKLIB.FINAL_CUSTOMER_PROFILE",
+      "to": "STEP-061",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-065",
+      "from": "STEP-061",
+      "to": "WORKLIB.ENGAGEMENT_SUMMARY",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-066",
+      "from": "WORKLIB.ENGAGEMENT_SUMMARY",
+      "to": "STEP-062",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-067",
+      "from": "STEP-062",
+      "to": "WORKLIB.FINAL_CONTROL_REPORT",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-068",
+      "from": "WORKLIB.CUSTOMER_SCORING",
+      "to": "STEP-064",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-069",
+      "from": "STEP-064",
+      "to": "WORKLIB.CUSTOMER_SCORING",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-070",
+      "from": "WORKLIB.CUSTOMER_SCORING",
+      "to": "STEP-065",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-071",
+      "from": "STEP-065",
+      "to": "WORKLIB.SCORE_DISTRIBUTION",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-072",
+      "from": "WORKLIB.CUSTOMER_SCORING",
+      "to": "STEP-066",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-073",
+      "from": "STEP-066",
+      "to": "WORKLIB.SCORE_SUMMARY",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-074",
+      "from": "WORKLIB.CUSTOMER_SCORING",
+      "to": "STEP-068",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-075",
+      "from": "STEP-068",
+      "to": "WORKLIB.REGION_CUSTOMER_SCORE",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-076",
+      "from": "WORKLIB.REGION_CUSTOMER_SCORE_FLAGS",
+      "to": "STEP-070",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-077",
+      "from": "STEP-070",
+      "to": "WORKLIB.REGION_CUSTOMER_SCORE_FLAGS",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-078",
+      "from": "WORKLIB.PRODUCT_SORTED",
+      "to": "STEP-071",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-079",
+      "from": "WORKLIB.ENRICHED_SALES",
+      "to": "STEP-071",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-080",
+      "from": "STEP-071",
+      "to": "WORKLIB.PRODUCT_PERFORMANCE",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-081",
+      "from": "WORKLIB.PRODUCT_PERFORMANCE",
+      "to": "STEP-073",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-082",
+      "from": "STEP-073",
+      "to": "WORKLIB.PRODUCT_PERFORMANCE",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-083",
+      "from": "WORKLIB.PRODUCT_PERFORMANCE",
+      "to": "STEP-074",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-084",
+      "from": "STEP-074",
+      "to": "WORKLIB.CATEGORY_DEMAND_SUMMARY",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-085",
+      "from": "WORKLIB.PRODUCT_PERFORMANCE",
+      "to": "STEP-075",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-086",
+      "from": "STEP-075",
+      "to": "WORKLIB.CATEGORY_DEMAND_FREQ",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-087",
+      "from": "WORKLIB.SALES_PERIOD_FLAGS",
+      "to": "STEP-077",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-088",
+      "from": "STEP-077",
+      "to": "WORKLIB.SALES_PERIOD_FLAGS",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-089",
+      "from": "WORKLIB.SALES_PERIOD_FLAGS",
+      "to": "STEP-078",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-090",
+      "from": "STEP-078",
+      "to": "WORKLIB.MONTH_REGION_SUMMARY",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-091",
+      "from": "WORKLIB.SALES_PERIOD_FLAGS",
+      "to": "STEP-079",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-092",
+      "from": "STEP-079",
+      "to": "WORKLIB.QUARTER_REGION_SUMMARY",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-093",
+      "from": "WORKLIB.MONTH_REGION_SUMMARY",
+      "to": "STEP-080",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-094",
+      "from": "STEP-080",
+      "to": "WORKLIB.MONTH_REGION_RANKED",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-095",
+      "from": "RAW.SALES",
+      "to": "STEP-081",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-096",
+      "from": "STEP-081",
+      "to": "WORKLIB.SALES_DUPLICATE_CHECK",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-097",
+      "from": "STEP-081",
+      "to": "WORKLIB.SALES_DUPLICATES",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-098",
+      "from": "WORKLIB.SALES_QUALITY",
+      "to": "STEP-083",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-099",
+      "from": "STEP-083",
+      "to": "WORKLIB.SALES_QUALITY_COUNTS",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-100",
+      "from": "WORKLIB.SALES_QUALITY",
+      "to": "STEP-084",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-101",
+      "from": "STEP-084",
+      "to": "WORKLIB.QUALITY_CONTROL",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-102",
+      "from": "WORKLIB.ENRICHED_SALES",
+      "to": "STEP-085",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-103",
+      "from": "STEP-085",
+      "to": "WORKLIB.CUSTOMER_ACTIVITY",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-104",
+      "from": "WORKLIB.CUSTOMER_ACTIVITY",
+      "to": "STEP-087",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-105",
+      "from": "STEP-087",
+      "to": "WORKLIB.CUSTOMER_ACTIVITY",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-106",
+      "from": "WORKLIB.CUSTOMER_ACTIVITY",
+      "to": "STEP-088",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-107",
+      "from": "STEP-088",
+      "to": "WORKLIB.ACTIVITY_MATRIX",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-108",
+      "from": "WORKLIB.CUSTOMER_ACTIVITY",
+      "to": "STEP-089",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-109",
+      "from": "STEP-089",
+      "to": "WORKLIB.ACTIVITY_SUMMARY",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-110",
+      "from": "WORKLIB.REGION_CONTROLS",
+      "to": "STEP-091",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-111",
+      "from": "STEP-091",
+      "to": "WORKLIB.REGION_CONTROL_COUNTS",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-112",
+      "from": "WORKLIB.REGION_REPORT",
+      "to": "STEP-092",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-113",
+      "from": "WORKLIB.REGION_CONTROLS",
+      "to": "STEP-092",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-114",
+      "from": "STEP-092",
+      "to": "WORKLIB.REGION_CONTROL_DETAIL",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-115",
+      "from": "WORKLIB.REGION_RUNNING_SALES",
+      "to": "STEP-094",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-116",
+      "from": "STEP-094",
+      "to": "WORKLIB.REGION_RUNNING_SALES",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-117",
+      "from": "WORKLIB.REGION_RUNNING_SALES",
+      "to": "STEP-096",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-118",
+      "from": "STEP-096",
+      "to": "WORKLIB.REGION_CHANGE_SUMMARY",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-119",
+      "from": "WORKLIB.CUSTOMER_SORTED",
+      "to": "STEP-097",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-120",
+      "from": "STEP-097",
+      "to": "WORKLIB.CUSTOMER_LOOKUP",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-121",
+      "from": "WORKLIB.SALES_LOOKUP_ENRICHED",
+      "to": "STEP-099",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-122",
+      "from": "STEP-099",
+      "to": "WORKLIB.LOOKUP_STATUS_COUNTS",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-123",
+      "from": "WORKLIB.SEMANTIC_EDGE_CASES",
+      "to": "STEP-101",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-124",
+      "from": "STEP-101",
+      "to": "WORKLIB.SEMANTIC_EDGE_COUNTS",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-125",
+      "from": "WORKLIB.ENRICHED_SALES",
+      "to": "STEP-102",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-126",
+      "from": "WORKLIB.REVIEW_QUEUE_FINAL",
+      "to": "STEP-102",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-127",
+      "from": "WORKLIB.SALES_DUPLICATES",
+      "to": "STEP-102",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-128",
+      "from": "WORKLIB.SALES_QUALITY",
+      "to": "STEP-102",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-129",
+      "from": "STEP-102",
+      "to": "WORKLIB.OPERATIONAL_DASHBOARD",
+      "relation": "WRITES"
+    },
+    {
+      "edgeId": "DEP-130",
+      "from": "WORKLIB.OPERATIONAL_DASHBOARD",
+      "to": "STEP-104",
+      "relation": "READS"
+    },
+    {
+      "edgeId": "DEP-131",
+      "from": "STEP-104",
+      "to": "WORKLIB.OPERATIONAL_DASHBOARD",
+      "relation": "WRITES"
+    }
+  ],
+  "executionSequence": [
+    "STEP-001",
+    "STEP-002",
+    "STEP-003",
+    "STEP-004",
+    "STEP-005",
+    "STEP-006",
+    "STEP-007",
+    "STEP-008",
+    "STEP-009",
+    "STEP-010",
+    "STEP-011",
+    "STEP-012",
+    "STEP-013",
+    "STEP-014",
+    "STEP-015",
+    "STEP-016",
+    "STEP-017",
+    "STEP-018",
+    "STEP-019",
+    "STEP-020",
+    "STEP-021",
+    "STEP-022",
+    "STEP-023",
+    "STEP-024",
+    "STEP-025",
+    "STEP-026",
+    "STEP-027",
+    "STEP-028",
+    "STEP-029",
+    "STEP-030",
+    "STEP-031",
+    "STEP-032",
+    "STEP-033",
+    "STEP-034",
+    "STEP-035",
+    "STEP-036",
+    "STEP-037",
+    "STEP-038",
+    "STEP-039",
+    "STEP-040",
+    "STEP-041",
+    "STEP-042",
+    "STEP-043",
+    "STEP-044",
+    "STEP-045",
+    "STEP-046",
+    "STEP-047",
+    "STEP-048",
+    "STEP-049",
+    "STEP-050",
+    "STEP-051",
+    "STEP-052",
+    "STEP-053",
+    "STEP-054",
+    "STEP-055",
+    "STEP-056",
+    "STEP-057",
+    "STEP-058",
+    "STEP-059",
+    "STEP-060",
+    "STEP-061",
+    "STEP-062",
+    "STEP-063",
+    "STEP-064",
+    "STEP-065",
+    "STEP-066",
+    "STEP-067",
+    "STEP-068",
+    "STEP-069",
+    "STEP-070",
+    "STEP-071",
+    "STEP-072",
+    "STEP-073",
+    "STEP-074",
+    "STEP-075",
+    "STEP-076",
+    "STEP-077",
+    "STEP-078",
+    "STEP-079",
+    "STEP-080",
+    "STEP-081",
+    "STEP-082",
+    "STEP-083",
+    "STEP-084",
+    "STEP-085",
+    "STEP-086",
+    "STEP-087",
+    "STEP-088",
+    "STEP-089",
+    "STEP-090",
+    "STEP-091",
+    "STEP-092",
+    "STEP-093",
+    "STEP-094",
+    "STEP-095",
+    "STEP-096",
+    "STEP-097",
+    "STEP-098",
+    "STEP-099",
+    "STEP-100",
+    "STEP-101",
+    "STEP-102",
+    "STEP-103",
+    "STEP-104"
+  ]
+}

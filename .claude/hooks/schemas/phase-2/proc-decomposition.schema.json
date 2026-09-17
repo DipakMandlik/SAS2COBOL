@@ -1,0 +1,43 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ProcDecomposition",
+  "type": "object",
+  "required": ["decompositions"],
+  "properties": {
+    "decompositions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["stepId", "procName", "targetPattern", "stages"],
+        "properties": {
+          "stepId": { "type": "string" },
+          "procName": { "type": "string" },
+          "targetPattern": {
+            "type": "string",
+            "enum": [
+              "DFSORT_STEP",
+              "COBOL_CONTROL_BREAK",
+              "COBOL_OCCURS_PIVOT",
+              "DB2_SQL_AGGREGATION",
+              "SEQUENTIAL_MERGE"
+            ]
+          },
+          "stages": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["stageOrder", "stageName", "operation", "targetArtifact"],
+              "properties": {
+                "stageOrder": { "type": "integer", "minimum": 1 },
+                "stageName": { "type": "string" },
+                "operation": { "type": "string" },
+                "intermediateFile": { "type": "string" },
+                "targetArtifact": { "type": "string" }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

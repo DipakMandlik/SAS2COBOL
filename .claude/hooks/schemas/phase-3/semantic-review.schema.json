@@ -1,0 +1,24 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "SemanticReview",
+  "type": "object",
+  "required": ["evaluations", "semanticFidelityVerdict"],
+  "properties": {
+    "evaluations": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["stepId", "puId", "fidelityRating", "reviewNotes"],
+        "properties": {
+          "stepId": { "type": "string" },
+          "puId": { "type": "string" },
+          "fidelityRating": { "type": "string", "enum": ["EXACT", "EQUIVALENT", "APPROXIMATED", "DEVIATION"] },
+          "businessRulesPreserved": { "type": "boolean" },
+          "missingValueHandlingConfirmed": { "type": "boolean" },
+          "reviewNotes": { "type": "string" }
+        }
+      }
+    },
+    "semanticFidelityVerdict": { "type": "string", "enum": ["PASSED", "FAILED"] }
+  }
+}

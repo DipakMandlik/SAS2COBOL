@@ -1,0 +1,66 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "PhysicalDataModel",
+  "type": "object",
+  "required": ["datasets"],
+  "properties": {
+    "datasets": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["datasetId", "datasetName", "isPermanent", "variables"],
+        "properties": {
+          "datasetId": { "type": "string", "pattern": "^DATA-[0-9A-Za-z_-]+$" },
+          "datasetName": { "type": "string" },
+          "library": { "type": "string" },
+          "isPermanent": { "type": "boolean" },
+          "schemaStatus": {
+            "type": "string",
+            "enum": ["COMPLETE", "PARTIAL_SCHEMA_UNKNOWN", "EXTERNAL_BOUNDARY"]
+          },
+          "producerStepId": { "type": "string" },
+          "variables": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["fieldId", "name", "type"],
+              "properties": {
+                "fieldId": { "type": "string", "pattern": "^FIELD-[0-9A-Za-z_-]+$" },
+                "name": { "type": "string" },
+                "type": { "type": "string", "enum": ["CHAR", "NUM"] },
+                "semanticRole": {
+                  "type": "string",
+                  "enum": [
+                    "BUSINESS_IDENTIFIER",
+                    "DIMENSION",
+                    "MEASURE",
+                    "FILTER",
+                    "ACCUMULATOR",
+                    "DERIVED_METRIC",
+                    "UNKNOWN"
+                  ]
+                },
+                "length": { "type": "integer" },
+                "format": { "type": "string" },
+                "informat": { "type": "string" },
+                "label": { "type": "string" },
+                "nullable": { "type": "boolean" }
+              }
+            }
+          },
+          "sortKeys": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["name", "direction"],
+              "properties": {
+                "name": { "type": "string" },
+                "direction": { "type": "string", "enum": ["ASC", "DESC"] }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
